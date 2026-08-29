@@ -1,0 +1,276 @@
+/* ==========================================================================
+   DE.RISEN — MODERN CREATIVE AGENCY DESIGN SYSTEM
+   Brand Colors, Typography Tokens, Global Reset & Base Styles
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap');
+
+:root {
+  /* Brand Core Colors */
+  --brand-navy-dark: #12092c;
+  --brand-indigo-dark: #180D38;
+  --brand-card-dark: #1E1147;
+  --brand-card-dark-hover: #27175c;
+  --brand-purple: #6320EE;
+  --brand-purple-hover: #5214db;
+  --brand-violet: #7C3AED;
+  --brand-violet-light: #8B5CF6;
+  --brand-electric: #7000FF;
+  --brand-cyan: #38BDF8;
+  
+  /* Tints & Background Accents */
+  --brand-lilac: #EDE9FE;
+  --brand-lilac-soft: #F5F3FF;
+  --brand-lilac-border: #DDD6FE;
+  --bg-canvas: #FFFFFF;
+  --bg-subtle: #F8F9FD;
+  --bg-subtle-alt: #F3F4F8;
+  
+  /* Text Colors */
+  --text-main: #111827;
+  --text-navy: #180D38;
+  --text-muted: #4B5563;
+  --text-dim: #6B7280;
+  --text-light-dim: #D1D5DB;
+  --text-white: #FFFFFF;
+  --text-purple: #6320EE;
+
+  /* Borders & Lines */
+  --border-light: #E5E7EB;
+  --border-subtle: #EFF1F5;
+  --border-focus: #7C3AED;
+  --border-dark-card: rgba(255, 255, 255, 0.12);
+
+  /* Gradients */
+  --grad-brand: linear-gradient(135deg, #180D38 0%, #6320EE 60%, #9333EA 100%);
+  --grad-text: linear-gradient(135deg, #180D38 0%, #6320EE 55%, #8B5CF6 100%);
+  --grad-text-light: linear-gradient(135deg, #FFFFFF 0%, #EDE9FE 100%);
+  --grad-badge: linear-gradient(135deg, #6320EE 0%, #7C3AED 100%);
+  --grad-badge-hover: linear-gradient(135deg, #7C3AED 0%, #9333EA 100%);
+  --grad-accent-bar: linear-gradient(90deg, #6320EE 0%, #A855F7 100%);
+  --grad-dark-card: linear-gradient(145deg, #1E1147 0%, #150A33 100%);
+  --grad-hero-sphere: radial-gradient(circle at 35% 35%, #C4B5FD 0%, #7C3AED 50%, #1E1147 100%);
+  
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 14px rgba(24, 13, 56, 0.08);
+  --shadow-lg: 0 10px 30px rgba(24, 13, 56, 0.12);
+  --shadow-xl: 0 20px 40px rgba(24, 13, 56, 0.18);
+  --shadow-glow: 0 0 25px rgba(99, 32, 238, 0.35);
+  --shadow-dark-card: 0 15px 35px rgba(18, 9, 44, 0.25);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Typography Settings */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Container */
+  --container-max: 1320px;
+  --header-height: 84px;
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography Base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-muted);
+  font-size: 0.975rem;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding-top: clamp(4.5rem, 7.5vw, 6.5rem);
+  padding-bottom: clamp(4.5rem, 7.5vw, 6.5rem);
+  position: relative;
+}
+
+.section-subtle {
+  background-color: var(--bg-subtle);
+}
+
+.section-alt {
+  background-color: #FAFBFF;
+}
+
+/* Section Headers */
+.section-header {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto clamp(2.5rem, 4vw, 3.75rem) auto;
+}
+
+.section-header.text-left {
+  text-align: left;
+  margin-left: 0;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brand-purple);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-dark {
+  color: var(--brand-lilac);
+}
+
+.section-title {
+  color: var(--brand-navy-dark);
+  margin-bottom: 0.85rem;
+}
+
+.section-title.light {
+  color: var(--text-white);
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  color: var(--text-muted);
+}
+
+.section-subtitle.light {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.accent-bar {
+  width: 64px;
+  height: 4px;
+  background: var(--grad-accent-bar);
+  border-radius: var(--radius-full);
+  margin: 1rem auto 0 auto;
+}
+
+.accent-bar.left {
+  margin-left: 0;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-light {
+  background: var(--grad-text-light);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dot Matrix Ambient Background */
+.dot-pattern {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background-image: radial-gradient(#6320EE 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dot-pattern-top-left {
+  top: 2rem;
+  left: 2rem;
+}
+
+.dot-pattern-top-right {
+  top: 2rem;
+  right: 2rem;
+}
+
+.dot-pattern-bottom-right {
+  bottom: 2rem;
+  right: 2rem;
+}

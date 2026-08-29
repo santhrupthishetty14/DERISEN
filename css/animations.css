@@ -1,0 +1,303 @@
+/* ==========================================================================
+   DE.RISEN — MOTION DESIGN & RESPONSIVENESS
+   Hero Layer Keyframe Animations, Parallax Physics, Micro-interactions & Media Queries
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes waveFlow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 48; }
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-8px) scaleY(1.04); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-12px) rotate(3deg) scale(1.05); }
+}
+
+@keyframes floatSphere1 {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-14px) translateX(6px) scale(1.04); }
+}
+
+@keyframes floatSphere2 {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(12px) translateX(-5px) scale(0.96); }
+}
+
+@keyframes floatSphere3 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.08); }
+}
+
+@keyframes spinUltraSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 32, 238, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(124, 58, 237, 0.6);
+  }
+}
+
+.animate-wave-flow {
+  animation: waveFlow 4s linear infinite;
+}
+
+.animate-wave-float {
+  animation: waveFloat 6s ease-in-out infinite alternate;
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-1 {
+  animation: floatSphere1 5.5s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-2 {
+  animation: floatSphere2 6.5s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-3 {
+  animation: floatSphere3 4.5s ease-in-out infinite alternate;
+}
+
+.animate-spin-ultra-slow {
+  animation: spinUltraSlow 35s linear infinite;
+}
+
+/* Scroll Reveal States */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Delays for Cards */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+
+/* Interactive Hover Enhancements */
+.interactive-card {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* 1200px and down */
+@media (max-width: 1200px) {
+  .operating-model-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .catalog-4col-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-card:not(:last-child)::after {
+    display: none;
+  }
+
+  .stat-card {
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 2rem;
+  }
+
+  .trust-badges-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-top-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* 992px and down (Tablets) */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-pillars-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .intro-visual-composition {
+    order: -1;
+  }
+
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leadership-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .split-why-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .center-mockup-graphic {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-pkg-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .digital-prod-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .workflow-nodes-row {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .workflow-nodes-row::before {
+    display: none;
+  }
+}
+
+/* 768px and down (Mobile Landscape & Large Phones) */
+@media (max-width: 768px) {
+  .hero-pillars-row {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-4col-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .operating-model-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-pkg-2x2 {
+    grid-template-columns: 1fr;
+  }
+
+  .two-col-catalog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-badges-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .leadership-values-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .phone-mockup {
+    right: 0;
+    bottom: -15px;
+    width: 150px;
+  }
+}
+
+/* 576px and down (Small Mobile) */
+@media (max-width: 576px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leader-card {
+    padding: 1.5rem;
+  }
+
+  .leader-card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .modal-box {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .branded-mug-mockup {
+    display: none;
+  }
+
+  .workflow-pipeline-bar,
+  .stack-pipeline-box {
+    font-size: 0.75rem;
+    padding: 0.65rem 1.25rem;
+  }
+}

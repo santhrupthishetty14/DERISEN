@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-navy-dark: #12092c;
+    --brand-indigo-dark: #180D38;
+    --brand-card-dark: #1E1147;
+    --brand-purple: #6320EE;
+    --brand-violet: #7C3AED;
+    --brand-violet-light: #8B5CF6;
+    --brand-lilac: #EDE9FE;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-pill-primary {
+    @apply inline-flex items-center gap-3 py-2.5 pl-6 pr-3 bg-brand-card hover:bg-brand-navy text-white text-[15px] font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-glow-purple border border-white/10;
+  }
+
+  .btn-icon-circle {
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-brand-purple text-white transition-transform duration-300 group-hover:translate-x-1;
+  }
+
+  .eyebrow {
+    @apply inline-block text-xs font-extrabold uppercase tracking-widest text-brand-purple mb-3;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark via-brand-purple to-brand-violetLight;
+  }
+
+  .dot-pattern {
+    @apply absolute w-64 h-64 pointer-events-none opacity-15;
+    background-image: radial-gradient(#6320EE 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+}
+
+@layer utilities {
+  .clip-path-reveal-left {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .clip-path-reveal-full {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ==========================================================================
+   Hero Visual Keyframe Animations
+   ========================================================================== */
+@keyframes waveFlow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 48; }
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-8px) scaleY(1.04); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-12px) rotate(3deg) scale(1.05); }
+}
+
+@keyframes floatSphere1 {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-14px) translateX(6px) scale(1.04); }
+}
+
+@keyframes floatSphere2 {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(12px) translateX(-5px) scale(0.96); }
+}
+
+@keyframes floatSphere3 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.08); }
+}
+
+@keyframes spinUltraSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-wave-flow {
+  animation: waveFlow 4s linear infinite;
+}
+
+.animate-wave-float {
+  animation: waveFloat 6s ease-in-out infinite alternate;
+}
+
+.animate-float-slow {
+  animation: floatSlow 7s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-1 {
+  animation: floatSphere1 5.5s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-2 {
+  animation: floatSphere2 6.5s ease-in-out infinite alternate;
+}
+
+.animate-float-sphere-3 {
+  animation: floatSphere3 4.5s ease-in-out infinite alternate;
+}
+
+.animate-spin-ultra-slow {
+  animation: spinUltraSlow 35s linear infinite;
+}
