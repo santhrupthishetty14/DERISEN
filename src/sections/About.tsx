@@ -141,12 +141,15 @@ export const About: React.FC = () => {
               style={{
                 transform: `translate3d(0, ${parallaxOffset * -0.8}px, 0)`,
               }}
-              className={`relative w-72 h-72 sm:w-84 sm:h-84 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.25)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`relative w-72 h-72 sm:w-84 sm:h-84 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isRevealed
                   ? 'clip-path-reveal-full scale-100 opacity-100'
                   : 'clip-path-reveal-left scale-[1.06] opacity-0'
               }`}
             >
+              {/* Refined Studio Accent Ring */}
+              <div className="absolute -inset-3.5 rounded-full border border-brand-purple/20 pointer-events-none" />
+
               <div className="w-full h-full rounded-full overflow-hidden border-4 border-white relative group/center">
                 <img
                   src="/assets/about-circle-collage.jpg"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 
 interface PreloaderProps {
@@ -6,63 +6,111 @@ interface PreloaderProps {
 }
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
-  const [progress, setProgress] = useState(0);
   const [isDone, setIsDone] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const logoWrapperRef = useRef<HTMLDivElement>(null);
+  const curtainTopRef = useRef<HTMLDivElement>(null);
+  const curtainBottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Disable body scroll during preloader
     document.body.style.overflow = 'hidden';
 
-    // Animate progress 0 -> 100% over ~1.6s
-    const startTime = performance.now();
-    const duration = 1600;
-
-    const interval = requestAnimationFrame(function update(now) {
-      const elapsed = now - startTime;
-      const currentProgress = Math.min(100, Math.round((elapsed / duration) * 100));
-      setProgress(currentProgress);
-
-      if (currentProgress < 100) {
-        requestAnimationFrame(update);
-      } else {
-        // Trigger exit timeline
-        const tl = gsap.timeline({
-          onComplete: () => {
-            setIsDone(true);
-            document.body.style.overflow = '';
-            onComplete();
-          },
-        });
-
-        tl.to('.preloader-content', {
-          opacity: 0,
-          y: -25,
-          duration: 0.5,
-          ease: 'power3.in',
-        })
-          .to(
-            '.preloader-curtain-top',
-            {
-              yPercent: -100,
-              duration: 0.7,
-              ease: 'power4.inOut',
-            },
-            '-=0.2'
-          )
-          .to(
-            '.preloader-curtain-bottom',
-            {
-              yPercent: 100,
-              duration: 0.7,
-              ease: 'power4.inOut',
-            },
-            '<'
-          );
-      }
+    // Initial state setup: Dot starts scaled down, logo hidden inside dot origin
+    gsap.set(dotRef.current, {
+      scale: 0,
+      opacity: 0,
+      transformOrigin: '50% 50%',
     });
 
+    gsap.set(logoWrapperRef.current, {
+      scale: 0.12,
+      opacity: 0,
+      filter: 'blur(10px)',
+      transformOrigin: '50% 50%',
+    });
+
+    const masterTl = gsap.timeline({
+      delay: 0.15,
+      onComplete: () => {
+        setIsDone(true);
+        document.body.style.overflow = '';
+        onComplete();
+      },
+    });
+
+    // Step 1: Organic Dot Popup with natural elastic physics
+    masterTl.to(dotRef.current, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.7,
+      ease: 'elastic.out(1, 0.55)',
+    });
+
+    // Step 2: Gentle organic breath
+    masterTl.to(dotRef.current, {
+      scale: 1.18,
+      duration: 0.4,
+      ease: 'sine.inOut',
+    });
+
+    // Step 3: Dot expands naturally into liquid ring as real De.risen logo blooms seamlessly from within
+    masterTl.to(
+      dotRef.current,
+      {
+        scale: 6,
+        opacity: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+      },
+      '+=0.02'
+    );
+
+    masterTl.to(
+      logoWrapperRef.current,
+      {
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 0.8,
+        ease: 'power4.out',
+      },
+      '<'
+    );
+
+    // Step 4: Natural pause to absorb the brand
+    masterTl.to({}, { duration: 0.5 });
+
+    // Step 5: Smooth cinematic exit transition
+    masterTl
+      .to(logoWrapperRef.current, {
+        scale: 1.03,
+        opacity: 0,
+        y: -12,
+        duration: 0.4,
+        ease: 'power2.in',
+      })
+      .to(
+        curtainTopRef.current,
+        {
+          yPercent: -100,
+          duration: 0.85,
+          ease: 'power4.inOut',
+        },
+        '-=0.15'
+      )
+      .to(
+        curtainBottomRef.current,
+        {
+          yPercent: 100,
+          duration: 0.85,
+          ease: 'power4.inOut',
+        },
+        '<'
+      );
+
     return () => {
-      cancelAnimationFrame(interval);
+      masterTl.kill();
       document.body.style.overflow = '';
     };
   }, [onComplete]);
@@ -70,42 +118,46 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   if (isDone) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] pointer-events-auto flex items-center justify-center overflow-hidden">
-      {/* Top and Bottom Transition Curtains */}
-      <div className="preloader-curtain-top absolute top-0 left-0 w-full h-1/2 bg-[#0B041A] z-10" />
-      <div className="preloader-curtain-bottom absolute bottom-0 left-0 w-full h-1/2 bg-[#0B041A] z-10" />
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-[9999] pointer-events-auto flex items-center justify-center overflow-hidden bg-white select-none"
+    >
+      {/* Top Curtain */}
+      <div
+        ref={curtainTopRef}
+        className="absolute top-0 left-0 w-full h-1/2 bg-white border-b border-gray-100 z-10 shadow-[0_10px_30px_rgba(24,13,56,0.06)]"
+      />
 
-      {/* Main Preloader Content */}
-      <div className="preloader-content relative z-20 flex flex-col items-center justify-center px-6 text-center max-w-lg">
-        {/* Animated Brand Mark */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-purple to-brand-violet flex items-center justify-center shadow-[0_0_30px_rgba(99,32,238,0.5)] border border-white/20">
-            <span className="text-white font-black text-2xl tracking-tighter">D</span>
-          </div>
-          <div className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            De<span className="text-brand-purple">.</span>risen
-          </div>
-        </div>
+      {/* Bottom Curtain */}
+      <div
+        ref={curtainBottomRef}
+        className="absolute bottom-0 left-0 w-full h-1/2 bg-white border-t border-gray-100 z-10 shadow-[0_-10px_30px_rgba(24,13,56,0.06)]"
+      />
 
-        {/* Tagline */}
-        <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-brand-lilac/80 mb-8 max-w-md">
-          Creative Thinking. Strategic Execution. Measurable Results.
-        </p>
+      {/* Center Stage: Fluid Dot & Blooming Logo */}
+      <div className="relative z-20 flex items-center justify-center w-full h-full">
+        {/* Natural Purple Dot */}
+        <div
+          ref={dotRef}
+          className="absolute w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-purple shadow-[0_0_24px_rgba(99,32,238,0.45)] pointer-events-none"
+        />
 
-        {/* Progress Container */}
-        <div className="w-64 sm:w-80 h-1 bg-white/10 rounded-full overflow-hidden mb-3 relative">
-          <div
-            className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-75 ease-out shadow-[0_0_12px_#6320EE]"
-            style={{ width: `${progress}%` }}
+        {/* Real De.risen Logo Emerging From Inside */}
+        <div
+          ref={logoWrapperRef}
+          className="relative flex items-center justify-center px-6"
+        >
+          <img
+            src="/assets/derisen-logo-transparent.png"
+            alt="De.risen"
+            className="h-14 sm:h-16 md:h-20 w-auto object-contain drop-shadow-[0_10px_28px_rgba(99,32,238,0.12)]"
           />
-        </div>
-
-        {/* Numeric Percentage */}
-        <div className="flex items-center justify-between w-64 sm:w-80 text-[11px] font-mono font-bold text-white/50">
-          <span>INITIALIZING</span>
-          <span className="text-brand-lilac font-bold">{progress}%</span>
         </div>
       </div>
     </div>
   );
 };
+
+export default Preloader;
+
+

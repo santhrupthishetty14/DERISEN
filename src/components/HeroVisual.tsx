@@ -346,8 +346,12 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ timeline }) => {
         className="hidden sm:flex absolute -bottom-10 left-6 z-25"
       >
         <div className="relative w-28 h-26 bg-gradient-to-br from-white via-gray-100 to-gray-200 rounded-t-xl rounded-b-3xl shadow-[0_20px_35px_rgba(24,13,56,0.18)] border border-gray-200 p-3 flex flex-col items-center justify-center">
-          <span className="text-sm font-black text-brand-purple tracking-tight">De.risen</span>
-          <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mt-0.5">Creative</span>
+          <img
+            src="/assets/derisen-logo-transparent.png"
+            alt="De.risen"
+            className="h-4 w-auto object-contain"
+          />
+          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">Creative</span>
           <div className="absolute -right-4 top-4 w-5 h-14 border-[5px] border-l-0 border-gray-300 rounded-r-2xl" />
         </div>
       </div>
@@ -365,7 +369,11 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ timeline }) => {
                 <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                <span className="font-extrabold text-brand-lilac tracking-tight ml-2 text-xs">De.risen</span>
+                <img
+                  src="/assets/derisen-logo-white.png"
+                  alt="De.risen"
+                  className="h-3.5 w-auto object-contain ml-2"
+                />
               </div>
               <span className="text-white/60 text-[11px] font-mono">Agency Suite</span>
             </div>
@@ -420,7 +428,11 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ timeline }) => {
           <div className="bg-gradient-to-b from-[#180D38] to-[#100726] rounded-[24px] p-3.5 text-white text-[11px] min-h-[250px] flex flex-col justify-between border border-white/10">
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="font-black text-brand-lilac text-xs">De.risen</span>
+                <img
+                  src="/assets/derisen-logo-white.png"
+                  alt="De.risen"
+                  className="h-3 w-auto object-contain"
+                />
                 <span className="text-[10px] text-white/50">9:41</span>
               </div>
               <div className="font-extrabold text-xs text-white leading-tight mb-3">

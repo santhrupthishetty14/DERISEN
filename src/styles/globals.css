@@ -128,3 +128,87 @@
 .animate-spin-ultra-slow {
   animation: spinUltraSlow 35s linear infinite;
 }
+
+/* ==========================================================================
+   AI & Futuristic Theme Keyframes & Effects
+   ========================================================================== */
+@keyframes neuralGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(99, 32, 238, 0.5), 0 0 30px rgba(56, 189, 248, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.8), 0 0 45px rgba(56, 189, 248, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes aiScanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes holographicSweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes orbitRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radarSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-ai-glow {
+  animation: neuralGlowPulse 3s ease-in-out infinite;
+}
+
+.animate-scanline {
+  animation: aiScanline 4s linear infinite;
+}
+
+.animate-holo-text {
+  background-size: 200% 200%;
+  animation: holographicSweep 4s ease infinite;
+}
+
+.animate-orbit {
+  animation: orbitRotate 16s linear infinite;
+}
+
+.circuit-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(99, 32, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 32, 238, 0.05) 1px, transparent 1px);
+}
+
+.circuit-grid-dark {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+}

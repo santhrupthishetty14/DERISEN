@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PORTFOLIO_ITEMS } from '../utils/constants';
 import { ArrowUpRight, Star } from 'lucide-react';
 
@@ -22,21 +22,48 @@ const TESTIMONIALS = [
 ];
 
 export const WorkGallery: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isRevealed, setIsRevealed] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const filteredItems = selectedCategory === 'All'
     ? PORTFOLIO_ITEMS
     : PORTFOLIO_ITEMS.filter((item) => item.category === selectedCategory);
 
   return (
-    <section id="work-gallery" className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="work-gallery"
+      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+    >
       {/* Background Dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div
+          className={`text-center max-w-3xl mx-auto mb-14 transition-all duration-700 ease-out ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <span className="eyebrow">WORK GALLERY &amp; TESTIMONIALS</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4 leading-tight">
             Impact That Speaks For Itself
@@ -48,7 +75,11 @@ export const WorkGallery: React.FC = () => {
         </div>
 
         {/* Filter Category Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-14">
+        <div
+          className={`flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-14 transition-all duration-700 ease-out delay-150 ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
           {CATEGORIES.map((cat) => (
             <button
               key={cat}

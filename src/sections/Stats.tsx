@@ -152,14 +152,16 @@ export const Stats: React.FC = () => {
                 key={stat.label}
                 className="group relative flex flex-col items-center text-center px-4 py-4 sm:py-2"
               >
-                {/* 1. Icon in circular gradient badge */}
+                {/* 1. Icon in circular gradient badge with AI aura */}
                 <div
                   ref={(el) => {
                     iconRefs.current[idx] = el;
                   }}
-                  className="w-16 h-16 sm:w-[70px] sm:h-[70px] rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center mb-5 shadow-[0_8px_20px_rgba(99,32,238,0.28)] transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(99,32,238,0.4)]"
+                  className="relative w-16 h-16 sm:w-[70px] sm:h-[70px] rounded-full bg-gradient-to-br from-brand-purple via-brand-violet to-brand-cyan text-white flex items-center justify-center mb-5 shadow-[0_8px_20px_rgba(99,32,238,0.35)] transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110 group-hover:shadow-[0_12px_32px_rgba(56,189,248,0.5)] cursor-pointer"
                 >
-                  <IconComponent className="w-7 h-7 sm:w-8 sm:h-8" />
+                  {/* Subtle pulsing AI ring */}
+                  <div className="absolute -inset-1.5 rounded-full border border-brand-cyan/40 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 animate-ping" style={{ animationDuration: '2s' }} />
+                  <IconComponent className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:rotate-12" />
                 </div>
 
                 {/* 2. Number counting up */}

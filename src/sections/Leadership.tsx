@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LeaderCard } from '../components/LeaderCard';
 import { LEADERS } from '../utils/constants';
 import { Lightbulb, TrendingUp } from 'lucide-react';
 
 export const Leadership: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="leadership" className="py-24 bg-surface-subtle relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="leadership"
+      className="py-24 bg-surface-subtle relative overflow-hidden"
+    >
       {/* Dot Matrix Ambient Pattern */}
-      <div className="dot-pattern top-8 left-8" />
-      <div className="dot-pattern top-8 right-8" />
+      <div className="dot-pattern top-8 left-8 opacity-10" />
+      <div className="dot-pattern top-8 right-8 opacity-10" />
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div
+          className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ease-out ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <span className="eyebrow">THE VISIONARIES BEHIND</span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-dark tracking-tight mb-4">
             DE.RISEN
@@ -50,7 +78,11 @@ export const Leadership: React.FC = () => {
         </div>
 
         {/* 2 Founder Profile Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-8 transition-all duration-800 ease-out delay-200 ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
           {LEADERS.map((leader) => (
             <LeaderCard key={leader.name} leader={leader} />
           ))}

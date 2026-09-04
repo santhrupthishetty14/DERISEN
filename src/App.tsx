@@ -34,7 +34,7 @@ export const App: React.FC = () => {
   // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
@@ -50,11 +50,25 @@ export const App: React.FC = () => {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', handleLoad);
+
     return () => {
+      window.removeEventListener('load', handleLoad);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);
+
+  const handlePreloaderComplete = () => {
+    setIsPreloaderComplete(true);
+    // Allow DOM layout to settle, then refresh all pin triggers
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+  };
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -69,7 +83,7 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
       {/* 0. Luxury Agency Preloader */}
-      <Preloader onComplete={() => setIsPreloaderComplete(true)} />
+      <Preloader onComplete={handlePreloaderComplete} />
 
       {/* 0B. Custom Magnetic Cursor (Desktop) */}
       <CustomCursor />

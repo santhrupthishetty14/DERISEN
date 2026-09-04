@@ -246,12 +246,14 @@ export const WhyChooseUs: React.FC = () => {
                 }}
                 onMouseEnter={() => setHoveredId(feature.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`group relative bg-white rounded-2xl border p-6 sm:p-7 flex flex-col gap-4 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default ${
+                className={`group relative bg-white rounded-2xl border p-6 sm:p-7 flex flex-col gap-4 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default overflow-hidden ${
                   isHovered
-                    ? 'border-brand-purple/50 shadow-[0_16px_36px_rgba(99,32,238,0.13)] -translate-y-1.5'
+                    ? 'border-brand-purple/60 shadow-[0_16px_36px_rgba(99,32,238,0.18)] -translate-y-2'
                     : 'border-gray-200/90 shadow-sm translate-y-0'
                 }`}
               >
+                {/* AI Card Cyber Accent Line on Hover */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {/* ── Icon badge: scale 0.8 → 1 on scroll enter, translate-y on hover ── */}
                 <div
                   ref={(el) => {
