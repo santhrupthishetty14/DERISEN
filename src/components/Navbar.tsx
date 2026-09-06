@@ -119,12 +119,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
           <div className="hidden lg:flex items-center">
             <button
               onClick={onOpenModal}
-              className="group relative inline-flex items-center gap-3 py-2.5 pl-6 pr-3 bg-brand-card hover:bg-brand-navy text-white text-[14.5px] font-bold rounded-full transition-all duration-300 shadow-[0_4px_16px_rgba(24,13,56,0.18)] hover:shadow-[0_8px_25px_rgba(99,32,238,0.35)] hover:-translate-y-0.5 border border-white/10 active:translate-y-0"
+              className="group relative inline-flex items-center gap-3.5 py-2.5 pl-6 pr-2.5 bg-[#13063e] hover:bg-[#1c0a56] text-white text-[14.5px] font-bold rounded-full transition-all duration-300 shadow-[0_4px_18px_rgba(19,6,62,0.25)] hover:shadow-[0_8px_25px_rgba(99,32,238,0.4)] hover:-translate-y-0.5 cursor-pointer"
               aria-label="Open Let's Talk modal"
             >
               <span className="tracking-[-0.01em]">Let's Talk</span>
-              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-brand-purple text-white shadow-inner transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-brand-violet">
-                <ArrowRight className="w-3.5 h-3.5" />
+              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white text-brand-purple shadow-sm transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
             </button>
           </div>

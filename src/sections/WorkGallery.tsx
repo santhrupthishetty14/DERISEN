@@ -21,6 +21,13 @@ const TESTIMONIALS = [
   },
 ];
 
+const GALLERY_IMAGE_MAP: Record<string, string> = {
+  'Branding & Identity': '/assets/service-branding.jpg',
+  'IT & Web Development': '/assets/service-it-solutions.jpg',
+  'Digital Marketing': '/assets/service-marketing.jpg',
+  'Motion & Video': '/assets/service-creative-design.jpg',
+};
+
 export const WorkGallery: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -95,54 +102,75 @@ export const WorkGallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Portfolio Grid Cards */}
+        {/* Portfolio Grid Cards with Dynamic Showcase Pictures */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 mb-20">
-          {filteredItems.map((item, idx) => (
-            <div
-              key={item.title}
-              className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-purple/50 hover:-translate-y-2 transition-all duration-500 flex flex-col group cursor-view-target"
-            >
-              {/* Visual Header */}
-              <div className="h-48 bg-gradient-to-br from-[#12092c] via-[#1E1147] to-[#180D38] p-6 flex flex-col justify-between relative overflow-hidden">
-                {/* Glow on hover */}
-                <div className="absolute inset-0 bg-radial from-brand-purple/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {filteredItems.map((item, idx) => {
+            const imgSrc = GALLERY_IMAGE_MAP[item.category] || '/assets/about-circle-collage.jpg';
 
-                <div className="flex justify-between items-center relative z-10">
-                  <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-brand-cyan bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
-                    {item.category}
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-purple">
-                    <ArrowUpRight className="w-4 h-4" />
+            return (
+              <div
+                key={item.title}
+                style={{ transitionDelay: `${idx * 120}ms` }}
+                className={`bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-purple/50 hover:-translate-y-2.5 transition-all duration-700 flex flex-col group cursor-view-target ${
+                  isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+                }`}
+              >
+                {/* Visual Header with Real Delivered Work Picture */}
+                <div className="h-52 relative overflow-hidden bg-brand-navy">
+                  <img
+                    src={imgSrc}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-115 will-change-transform"
+                    loading="lazy"
+                  />
+
+                  {/* Gradient Overlay for Readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-black/20" />
+
+                  {/* Shimmer Light Reflection on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  <div className="relative z-10 p-5 flex flex-col justify-between h-full">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-brand-cyan bg-brand-dark/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-sm">
+                        {item.category}
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-brand-purple shadow-sm">
+                        <ArrowUpRight className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <div className="text-white/90 font-black text-2xl tracking-tighter drop-shadow-md">
+                      0{idx + 1}
+                    </div>
                   </div>
                 </div>
 
-                <div className="text-white font-black text-2xl tracking-tighter relative z-10">
-                  0{idx + 1}
+                {/* Body */}
+                <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between">
+                  <div>
+                    <span className="text-xs font-bold text-brand-purple mb-1.5 block">
+                      {item.client}
+                    </span>
+                    <h4 className="text-base sm:text-lg font-black text-brand-dark mb-2 leading-snug group-hover:text-brand-purple transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-gray-600 leading-relaxed font-medium">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Bottom Card Line */}
+                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] font-mono text-gray-400">
+                    <span>CASE STUDY</span>
+                    <span className="text-brand-purple font-bold group-hover:translate-x-1 transition-transform">
+                      EXPLORE →
+                    </span>
+                  </div>
                 </div>
               </div>
-
-              {/* Body */}
-              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between">
-                <div>
-                  <span className="text-xs font-bold text-brand-purple mb-1.5 block">
-                    {item.client}
-                  </span>
-                  <h4 className="text-base sm:text-lg font-black text-brand-dark mb-2 leading-snug group-hover:text-brand-purple transition-colors">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs text-gray-600 leading-relaxed font-medium">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Bottom Card Line */}
-                <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] font-mono text-gray-400">
-                  <span>CASE STUDY</span>
-                  <span className="text-brand-purple font-bold">EXPLORE</span>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Testimonials Strip */}

@@ -24,18 +24,24 @@ export const LeaderCard: React.FC<LeaderCardProps> = ({ leader }) => {
       <div>
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6 text-center sm:text-left">
-          {/* Avatar Frame with Glowing Purple Gradient Border */}
+          {/* Avatar Frame with Glowing Animated Purple-Cyan Gradient Border */}
           <div className="relative group/avatar">
-            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan flex-shrink-0 shadow-lg shadow-brand-purple/30 overflow-hidden transition-transform duration-500 group-hover/avatar:scale-105">
+            {/* Animated Rotating Gradient Glow Ring behind Picture */}
+            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-brand-purple via-brand-cyan to-brand-violet opacity-60 group-hover/avatar:opacity-100 blur-sm transition-all duration-700 animate-pulse" />
+
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan flex-shrink-0 shadow-[0_12px_30px_rgba(99,32,238,0.35)] overflow-hidden transition-transform duration-500 group-hover/avatar:scale-105 group-hover/avatar:shadow-[0_16px_40px_rgba(99,32,238,0.45)]">
               <img
                 src={avatarSrc}
                 alt={leader.name}
-                className="w-full h-full rounded-full object-cover object-top transition-transform duration-700 group-hover/avatar:scale-110"
+                className="w-full h-full rounded-full object-cover object-top transition-transform duration-700 group-hover/avatar:scale-115 will-change-transform"
                 loading="lazy"
               />
+              {/* Dynamic Photo Glare */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent opacity-0 group-hover/avatar:opacity-100 transition-opacity duration-500 pointer-events-none" />
             </div>
+
             {/* Illuminated floating badge */}
-            <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md border-2 border-white">
+            <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-gradient-to-tr from-brand-purple to-brand-violet text-white flex items-center justify-center shadow-lg border-2 border-white transition-transform duration-300 group-hover/avatar:scale-110">
               {isShweta ? <Award className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
             </div>
           </div>

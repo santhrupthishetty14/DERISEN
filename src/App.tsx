@@ -3,8 +3,8 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { Preloader } from './components/Preloader';
 import { CustomCursor } from './components/CustomCursor';
+import { BrandIntro } from './components/BrandIntro';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
 import { Stats } from './sections/Stats';
@@ -27,7 +27,6 @@ import { Toast } from './components/Toast';
 gsap.registerPlugin(ScrollTrigger);
 
 export const App: React.FC = () => {
-  const [, setIsPreloaderComplete] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -55,20 +54,18 @@ export const App: React.FC = () => {
     };
     window.addEventListener('load', handleLoad);
 
+    // Initial refresh after render
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
+
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('load', handleLoad);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);
-
-  const handlePreloaderComplete = () => {
-    setIsPreloaderComplete(true);
-    // Allow DOM layout to settle, then refresh all pin triggers
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
-  };
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -82,8 +79,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
-      {/* 0. Luxury Agency Preloader */}
-      <Preloader onComplete={handlePreloaderComplete} />
+      {/* 0. Cinematic Brand Signature Intro ("In Different Form") */}
+      <BrandIntro onComplete={() => ScrollTrigger.refresh()} />
 
       {/* 0B. Custom Magnetic Cursor (Desktop) */}
       <CustomCursor />

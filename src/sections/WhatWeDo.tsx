@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PenTool, Tag, Megaphone, Code, CheckCircle, Lightbulb, Target, Users, Rocket } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const WhatWeDo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const centerFrameRef = useRef<HTMLDivElement>(null);
+  const centerImgRef = useRef<HTMLImageElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,21 +26,42 @@ export const WhatWeDo: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    const handleScroll = () => {
+    const ctx = gsap.context(() => {
       if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setScrollY(rect.top);
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            end: 'bottom 15%',
+            scrub: 1.2,
+          },
+        });
+
+        if (centerFrameRef.current) {
+          tl.fromTo(
+            centerFrameRef.current,
+            { y: 40 },
+            { y: -50, ease: 'none' },
+            0
+          );
+        }
+
+        if (centerImgRef.current) {
+          tl.fromTo(
+            centerImgRef.current,
+            { scale: 1.0 },
+            { scale: 1.18, ease: 'none' },
+            0
+          );
+        }
       }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    }, sectionRef);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
     };
   }, []);
-
-  const centerParallax = scrollY * -0.05;
 
   return (
     <section
@@ -183,21 +209,19 @@ export const WhatWeDo: React.FC = () => {
               Center Column: Real Extracted Visual Frame with Parallax & Glow
               ================================================================= */}
           <div
-            style={{
-              transform: `translate3d(0, ${centerParallax}px, 0)`,
-              transitionDelay: '300ms',
-            }}
-            className={`lg:col-span-2 flex justify-center py-4 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            ref={centerFrameRef}
+            className={`lg:col-span-2 flex justify-center py-4 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
               isRevealed
                 ? 'clip-path-reveal-full scale-100 opacity-100'
                 : 'clip-path-reveal-left scale-[1.06] opacity-0'
             }`}
           >
-            <div className="relative w-48 sm:w-56 h-80 sm:h-96 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(99,32,238,0.3)] border-2 border-brand-purple/40 group/center">
+            <div className="relative w-48 sm:w-56 h-80 sm:h-96 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(99,32,238,0.35)] border-2 border-brand-purple/50 group/center">
               <img
+                ref={centerImgRef}
                 src="/assets/what-we-do-center.jpg"
                 alt="DE.RISEN Creative Workshop"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105 will-change-transform"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-black/20 flex flex-col justify-end p-4 text-white text-center">

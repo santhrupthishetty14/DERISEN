@@ -24,17 +24,19 @@ export const PillarBadge: React.FC<PillarBadgeProps> = ({
   const IconComponent = iconMap[iconName] || PenTool;
 
   return (
-    <div className="flex items-start gap-4 p-4 rounded-xl bg-white/80 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-md transition-all duration-300">
+    <div className="group flex items-start gap-3.5 p-4 sm:p-4.5 rounded-2xl bg-white/90 hover:bg-white border border-gray-100/90 hover:border-brand-purple/30 shadow-[0_4px_18px_rgba(24,13,56,0.04)] hover:shadow-[0_10px_28px_rgba(99,32,238,0.1)] transition-all duration-300 hover:-translate-y-1">
       <div
-        className={`flex items-center justify-center w-12 h-12 flex-shrink-0 bg-gradient-to-br from-brand-purple to-brand-violet text-white shadow-md shadow-brand-purple/20 ${
+        className={`flex items-center justify-center w-11 h-11 flex-shrink-0 bg-gradient-to-br from-brand-purple to-brand-violet text-white shadow-md shadow-brand-purple/25 transition-transform duration-300 group-hover:scale-105 ${
           isPolygon ? 'rounded-xl' : 'rounded-full'
         }`}
       >
         <IconComponent className="w-5 h-5" />
       </div>
       <div>
-        <h4 className="text-base font-bold text-brand-dark mb-1">{title}</h4>
-        <p className="text-xs text-gray-600 leading-relaxed">{description}</p>
+        <h4 className="text-[14.5px] sm:text-base font-bold text-brand-dark mb-0.5 group-hover:text-brand-purple transition-colors">
+          {title}
+        </h4>
+        <p className="text-xs text-gray-500 leading-relaxed">{description}</p>
       </div>
     </div>
   );

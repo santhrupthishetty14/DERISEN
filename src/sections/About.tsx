@@ -2,11 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { VisionMissionCard } from '../components/VisionMissionCard';
 import { VISION_MISSION_DATA } from '../utils/constants';
 import { PenTool, Megaphone, Code, Sparkles } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const About: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const circleImgRef = useRef<HTMLImageElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const cardsColRef = useRef<HTMLDivElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,22 +29,53 @@ export const About: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    const handleScroll = () => {
+    // GSAP ScrollTrigger for About Section Pictures
+    const ctx = gsap.context(() => {
       if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setScrollY(rect.top);
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1.2,
+          },
+        });
+
+        // Circle Collage Picture Zoom and Float
+        if (circleImgRef.current) {
+          tl.fromTo(
+            circleImgRef.current,
+            { scale: 0.92, y: 25 },
+            { scale: 1.14, y: -25, ease: 'none' },
+            0
+          );
+        }
+
+        // Studio Accent Ring Rotation
+        if (ringRef.current) {
+          tl.fromTo(
+            ringRef.current,
+            { rotate: 0 },
+            { rotate: 140, ease: 'none' },
+            0
+          );
+        }
+
+        // Parallax depth on 3 Thumbnail Image Cards
+        if (cardsColRef.current) {
+          const cards = cardsColRef.current.children;
+          if (cards[0]) tl.to(cards[0], { y: -35, ease: 'none' }, 0);
+          if (cards[1]) tl.to(cards[1], { y: -15, ease: 'none' }, 0);
+          if (cards[2]) tl.to(cards[2], { y: 15, ease: 'none' }, 0);
+        }
       }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    }, sectionRef);
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
     };
   }, []);
-
-  // Subtle scroll parallax offset
-  const parallaxOffset = scrollY * 0.04;
 
   return (
     <section
@@ -138,9 +175,6 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-center gap-6 relative">
             {/* 1. Main Center Circle Frame with Extracted Collage */}
             <div
-              style={{
-                transform: `translate3d(0, ${parallaxOffset * -0.8}px, 0)`,
-              }}
               className={`relative w-72 h-72 sm:w-84 sm:h-84 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isRevealed
                   ? 'clip-path-reveal-full scale-100 opacity-100'
@@ -148,13 +182,17 @@ export const About: React.FC = () => {
               }`}
             >
               {/* Refined Studio Accent Ring */}
-              <div className="absolute -inset-3.5 rounded-full border border-brand-purple/20 pointer-events-none" />
+              <div
+                ref={ringRef}
+                className="absolute -inset-3.5 rounded-full border-2 border-dashed border-brand-purple/40 pointer-events-none"
+              />
 
               <div className="w-full h-full rounded-full overflow-hidden border-4 border-white relative group/center">
                 <img
+                  ref={circleImgRef}
                   src="/assets/about-circle-collage.jpg"
                   alt="DE.RISEN Agency Setup"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105 will-change-transform"
                   loading="lazy"
                 />
                 {/* Overlay subtle gradient */}
@@ -175,7 +213,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* 2. Right Side 3 Visual Cards (Creative, Marketing, IT) */}
-            <div className="flex flex-col gap-3 w-full max-w-[280px]">
+            <div ref={cardsColRef} className="flex flex-col gap-3.5 w-full max-w-[280px]">
               {/* Card 1: Creative Design & Branding */}
               <div
                 style={{ transitionDelay: '300ms' }}

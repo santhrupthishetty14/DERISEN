@@ -212,3 +212,30 @@
     linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
 }
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-4deg);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4.5s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: floatMedium 3.5s ease-in-out infinite;
+}
+
