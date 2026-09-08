@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
-import { createDeRisenLogoShapes } from "../utils/logoShapes";
+import { createDeLogoShapes } from "../utils/logoShapes";
 
 interface BrandIntroProps {
   onComplete: () => void;
@@ -126,15 +126,15 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Exact Official De.risen 3D Extruded Logo
-    const logoShapes = createDeRisenLogoShapes();
+    // Exact Official "De." 3D Extruded Logo Emblem
+    const logoShapes = createDeLogoShapes();
     const extrudeSettings = {
-      depth: 0.35,
+      depth: 0.42,
       bevelEnabled: true,
-      bevelSegments: 6,
+      bevelSegments: 8,
       steps: 1,
-      bevelSize: 0.04,
-      bevelThickness: 0.04,
+      bevelSize: 0.06,
+      bevelThickness: 0.06,
     };
 
     const logoGeo = new THREE.ExtrudeGeometry(logoShapes, extrudeSettings);
