@@ -15,13 +15,13 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
   const sheenRef = useRef<HTMLDivElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
 
-  const cleanupRef = useRef<(() => void) | null>(null);
+  const skipRef = useRef<(() => void) | null>(null);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
 
   const handleSkip = useCallback(() => {
-    if (cleanupRef.current) {
-      cleanupRef.current();
+    if (skipRef.current) {
+      skipRef.current();
     }
   }, []);
 
@@ -502,11 +502,11 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       onCompleteRef.current();
     };
 
-    cleanupRef.current = () => {
+    skipRef.current = () => {
       masterTl.kill();
       gsap.to(containerRef.current, {
         opacity: 0,
-        duration: 0.35,
+        duration: 0.3,
         ease: "power2.out",
         onComplete: finishIntro,
       });
@@ -515,7 +515,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === " ") {
         e.preventDefault();
-        handleSkip();
+        skipRef.current?.();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -555,9 +555,15 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     window.addEventListener("resize", onResize);
 
     return () => {
-      // Only runs when component actually unmounts
-      if (cleanupRef.current) {
-        cleanupRef.current();
+      // Safe cleanup without calling onComplete or aborting prematurely
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("keydown", handleKeyDown);
+      masterTl.kill();
+      try {
+        renderer.dispose();
+      } catch {
+        // Safe disposal
       }
     };
   }, []); // Empty dependency array ensures it NEVER gets interrupted by parent re-renders!
