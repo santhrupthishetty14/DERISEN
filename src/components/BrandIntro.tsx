@@ -11,7 +11,11 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const textGroupRef = useRef<HTMLDivElement>(null);
-  const brandTitleRef = useRef<HTMLDivElement>(null);
+  const dotStageRef = useRef<HTMLDivElement>(null);
+  const dotCharRef = useRef<HTMLSpanElement>(null);
+  const dePrefixRef = useRef<HTMLSpanElement>(null);
+  const risenSuffixRef = useRef<HTMLSpanElement>(null);
+  const logoImageRef = useRef<HTMLImageElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const sublineRef = useRef<HTMLParagraphElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
@@ -44,14 +48,14 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     const H = window.innerHeight;
     const isMobile = W < 768;
 
-    // 1. Pristine Studio White Scene
+    // 1. Pristine Studio White Scene Setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    // Initial Camera: Low-angle isometric floor perspective
+    // Initial Camera: Isometric floor perspective
     const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 100);
-    camera.position.set(0, 4.2, isMobile ? 8.4 : 6.8);
-    camera.lookAt(0, 0.2, 0);
+    camera.position.set(0, 4.4, isMobile ? 8.6 : 7.0);
+    camera.lookAt(0, 0.3, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -71,7 +75,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     }
 
     // 2. High-End Studio Lighting for Glossy Acrylic
-    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xf8fafc, 1.4);
+    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xf8fafc, 1.45);
     scene.add(ambientLight);
 
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.8);
@@ -89,7 +93,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     keyLight.shadow.radius = 3.0;
     scene.add(keyLight);
 
-    const softFill = new THREE.DirectionalLight(0xede9fe, 1.1);
+    const softFill = new THREE.DirectionalLight(0xede9fe, 1.2);
     softFill.position.set(-6, 8, -4);
     scene.add(softFill);
 
@@ -107,7 +111,27 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // 4. Motion Trails on the Floor in Brand Colors (#7C3AED, #B063FF, #490365, #6320EE)
+    // 4. Large 3D Glossy Brand Dot (Lands First Center Stage)
+    // Radius ~0.42 glossy sphere in signature brand plum #490365
+    const dotGeo = new THREE.SphereGeometry(0.42, 36, 36);
+    const dotMat = new THREE.MeshPhysicalMaterial({
+      color: 0x490365, // Deep Brand Plum from logo
+      roughness: 0.05,
+      metalness: 0.04,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.03,
+      reflectivity: 0.95,
+    });
+    const dotMesh = new THREE.Mesh(dotGeo, dotMat);
+    dotMesh.castShadow = true;
+    dotMesh.receiveShadow = true;
+    scene.add(dotMesh);
+
+    // Starts high up above the floor
+    dotMesh.position.set(0, 4.5, 0);
+    dotMesh.scale.set(1.4, 1.4, 1.4);
+
+    // 5. Motion Trails on the Floor in Brand Colors (#7C3AED, #B063FF, #490365, #6320EE)
     const trailGroup = new THREE.Group();
     scene.add(trailGroup);
 
@@ -131,7 +155,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     const trail4 = new THREE.Line(trailGeo4, trailMat4);
     trailGroup.add(trail4);
 
-    // 5. 3D Emblem Segments Assembly in Exact Brand Colors
+    // 6. 3D Emblem Segments Assembly in Exact Brand Colors
     const shapes = createGoogleGShapes(1.55, 0.85);
     const extrudeSettings = {
       depth: 0.38,
@@ -143,7 +167,6 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       curveSegments: 36,
     };
 
-    // DERISEN Official Brand Materials (High-gloss acrylic clearcoat with exact hex codes)
     const createSegmentMaterial = (colorHex: number) => {
       return new THREE.MeshPhysicalMaterial({
         color: colorHex,
@@ -155,15 +178,15 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       });
     };
 
-    // Exact De.risen Brand Colors:
+    // Official De.risen Brand Colors:
     // - Violet: #7C3AED
-    // - Electric Lavender (from logo "risen"): #B063FF
-    // - Deep Plum (from logo "De."): #490365
-    // - Signature Brand Purple: #6320EE
-    const segmentMat1 = createSegmentMaterial(0x7c3aed); // Electric Violet (#7C3AED)
-    const segmentMat2 = createSegmentMaterial(0xb063ff); // Electric Lavender (#B063FF)
-    const segmentMat3 = createSegmentMaterial(0x490365); // Deep Plum (#490365)
-    const segmentMat4 = createSegmentMaterial(0x6320ee); // Signature Purple (#6320EE)
+    // - Electric Lavender: #B063FF
+    // - Deep Plum: #490365
+    // - Signature Purple: #6320EE
+    const segmentMat1 = createSegmentMaterial(0x7c3aed);
+    const segmentMat2 = createSegmentMaterial(0xb063ff);
+    const segmentMat3 = createSegmentMaterial(0x490365);
+    const segmentMat4 = createSegmentMaterial(0x6320ee);
 
     const geo1 = new THREE.ExtrudeGeometry(shapes.yellow, extrudeSettings);
     const geo2 = new THREE.ExtrudeGeometry(shapes.green, extrudeSettings);
@@ -188,138 +211,179 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     emblemGroup.add(mesh4);
     scene.add(emblemGroup);
 
-    // Initial state: lying in perspective on the floor
+    // Initial state: emblem lying in perspective on the floor
     emblemGroup.position.set(0, 0.22, 0);
     emblemGroup.rotation.set(-Math.PI / 2.3, 0, 0);
 
-    // Spread the 4 pieces outwards along the floor initially (sliding assembly)
-    mesh1.position.set(-1.4, 0.05, -1.2);
+    // Spread the 4 pieces outwards along the floor initially
+    mesh1.position.set(-1.8, 0.05, -1.6);
     mesh1.rotation.z = 0.35;
 
-    mesh2.position.set(-2.0, 0.05, 0.8);
+    mesh2.position.set(-2.4, 0.05, 1.0);
     mesh2.rotation.z = -0.4;
 
-    mesh3.position.set(0.9, 0.05, 1.5);
+    mesh3.position.set(1.2, 0.05, 1.8);
     mesh3.rotation.z = 0.5;
 
-    mesh4.position.set(2.2, 0.05, -0.4);
+    mesh4.position.set(2.6, 0.05, -0.6);
     mesh4.rotation.z = -0.3;
 
     // GSAP DOM Initial States
     gsap.set(textGroupRef.current, { opacity: 0, y: 25 });
-    gsap.set(brandTitleRef.current, { opacity: 0, y: 15, scale: 0.95 });
+    gsap.set(dotStageRef.current, { opacity: 0, scale: 0 });
+    gsap.set(dotCharRef.current, { scale: 0, transformOrigin: "center center" });
+    gsap.set(dePrefixRef.current, { opacity: 0, x: -20 });
+    gsap.set(risenSuffixRef.current, { opacity: 0, x: 20 });
+    gsap.set(logoImageRef.current, { opacity: 0, scale: 0.95 });
     gsap.set(taglineRef.current, { opacity: 0, y: 10, letterSpacing: "0.22em" });
     gsap.set(sublineRef.current, { opacity: 0, y: 8 });
     gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
 
     const camTarget = {
       posX: 0,
-      posY: 4.2,
-      posZ: isMobile ? 8.4 : 6.8,
+      posY: 4.4,
+      posZ: isMobile ? 8.6 : 7.0,
       lookX: 0,
-      lookY: 0.2,
+      lookY: 0.3,
       lookZ: 0,
     };
 
     // Master Timeline
     const masterTl = gsap.timeline({
-      delay: 0.2,
+      delay: 0.15,
       onComplete: () => {
         finishIntro();
       },
     });
 
     // Show Skip Button
-    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2);
 
-    // Reveal motion trail lines on the floor
+    // ==========================================
+    // Phase 0: LARGE DOT FIRST (0.2s - 1.8s)
+    // The glossy 3D Brand Dot drops in first with a soft contact bounce
+    // ==========================================
     masterTl.to(
-      [trailMat1, trailMat2, trailMat3, trailMat4],
-      { opacity: 0.65, duration: 0.8, ease: "power2.out" },
+      dotMesh.position,
+      {
+        y: 0.42,
+        duration: 1.2,
+        ease: "bounce.out",
+      },
       0.2
     );
 
+    masterTl.to(
+      dotMesh.scale,
+      {
+        x: 1.0,
+        y: 1.0,
+        z: 1.0,
+        duration: 1.0,
+        ease: "power2.out",
+      },
+      0.3
+    );
+
+    // Reveal motion trail lines on the floor as the dot lands
+    masterTl.to(
+      [trailMat1, trailMat2, trailMat3, trailMat4],
+      { opacity: 0.7, duration: 0.6, ease: "power2.out" },
+      0.9
+    );
+
     // ==========================================
-    // Phase 1: Pieces Slide In Along Floor Tracks (0.4s - 3.0s)
+    // Phase 1: Pieces Slide In Around the Dot (1.4s - 3.4s)
     // ==========================================
     masterTl.to(
       mesh1.position,
-      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
-      0.4
+      { x: 0, y: 0, z: 0, duration: 2.2, ease: "power3.out" },
+      1.3
     );
     masterTl.to(
       mesh1.rotation,
-      { z: 0, duration: 2.6, ease: "power3.out" },
-      0.4
+      { z: 0, duration: 2.2, ease: "power3.out" },
+      1.3
     );
 
     masterTl.to(
       mesh2.position,
-      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
-      0.45
+      { x: 0, y: 0, z: 0, duration: 2.2, ease: "power3.out" },
+      1.35
     );
     masterTl.to(
       mesh2.rotation,
-      { z: 0, duration: 2.6, ease: "power3.out" },
-      0.45
+      { z: 0, duration: 2.2, ease: "power3.out" },
+      1.35
     );
 
     masterTl.to(
       mesh3.position,
-      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
-      0.5
+      { x: 0, y: 0, z: 0, duration: 2.2, ease: "power3.out" },
+      1.4
     );
     masterTl.to(
       mesh3.rotation,
-      { z: 0, duration: 2.6, ease: "power3.out" },
-      0.5
+      { z: 0, duration: 2.2, ease: "power3.out" },
+      1.4
     );
 
     masterTl.to(
       mesh4.position,
-      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
-      0.55
+      { x: 0, y: 0, z: 0, duration: 2.2, ease: "power3.out" },
+      1.45
     );
     masterTl.to(
       mesh4.rotation,
-      { z: 0, duration: 2.6, ease: "power3.out" },
-      0.55
+      { z: 0, duration: 2.2, ease: "power3.out" },
+      1.45
     );
 
     // Fade out trails as pieces dock
     masterTl.to(
       [trailMat1, trailMat2, trailMat3, trailMat4],
-      { opacity: 0, duration: 0.8, ease: "power2.in" },
+      { opacity: 0, duration: 0.7, ease: "power2.in" },
+      2.6
+    );
+
+    // Dot integrates into assembled emblem
+    masterTl.to(
+      dotMesh.position,
+      { y: 0.22, duration: 1.2, ease: "power2.inOut" },
+      2.0
+    );
+    masterTl.to(
+      dotMesh.scale,
+      { x: 0.65, y: 0.65, z: 0.65, duration: 1.2, ease: "power2.inOut" },
       2.0
     );
 
     // ==========================================
-    // Phase 2: Docking Settle & Liquid Glass Highlight (2.7s - 4.2s)
+    // Phase 2: Docking Settle & Liquid Glass Highlight (3.0s - 4.4s)
     // ==========================================
-    // Subtle locking bounce
     masterTl.to(
       emblemGroup.scale,
-      { x: 1.04, y: 1.04, z: 1.04, duration: 0.25, ease: "power1.out" },
-      2.9
+      { x: 1.04, y: 1.04, z: 1.04, duration: 0.22, ease: "power1.out" },
+      3.1
     );
     masterTl.to(
       emblemGroup.scale,
-      { x: 1.0, y: 1.0, z: 1.0, duration: 0.45, ease: "power2.inOut" },
-      3.15
+      { x: 1.0, y: 1.0, z: 1.0, duration: 0.4, ease: "power2.inOut" },
+      3.32
     );
 
-    // Liquid Glass Sheen Light Sweep
-    sheenLight.intensity = 3.5;
+    // Liquid Glass Sheen Light Sweep across bevels
+    sheenLight.intensity = 3.8;
     masterTl.fromTo(
       sheenLight.position,
       { x: -5, y: 2.5, z: 3 },
       { x: 5, y: 2.5, z: 3, duration: 1.6, ease: "power2.inOut" },
-      2.8
+      3.0
     );
-    masterTl.to(sheenLight, { intensity: 0, duration: 0.4 }, 4.0);
+    masterTl.to(sheenLight, { intensity: 0, duration: 0.4 }, 4.2);
 
     // ==========================================
-    // Phase 3: Standing Upright & Front Elevation (3.0s - 5.8s)
+    // Phase 3: Standing Upright & Front Elevation (3.2s - 5.8s)
     // ==========================================
     masterTl.to(
       emblemGroup.rotation,
@@ -327,10 +391,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0,
         z: 0,
-        duration: 2.8,
+        duration: 2.6,
         ease: "power2.inOut",
       },
-      3.0
+      3.2
     );
 
     masterTl.to(
@@ -339,11 +403,14 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0.95,
         z: 0,
-        duration: 2.8,
+        duration: 2.6,
         ease: "power2.inOut",
       },
-      3.0
+      3.2
     );
+
+    // Fade out standalone 3D floor dot as emblem rises
+    masterTl.to(dotMesh.scale, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.in" }, 3.2);
 
     // Camera smoothly adjusts to front elevation view
     masterTl.to(
@@ -355,62 +422,88 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         lookX: 0,
         lookY: 0.55,
         lookZ: 0,
-        duration: 2.8,
+        duration: 2.6,
         ease: "power2.inOut",
       },
-      3.0
-    );
-
-    // Keylight adjusts to illuminate the front face
-    masterTl.to(
-      keyLight.position,
-      { x: -4, y: 10, z: 8, duration: 2.6, ease: "power2.inOut" },
       3.2
     );
 
+    masterTl.to(
+      keyLight.position,
+      { x: -4, y: 10, z: 8, duration: 2.4, ease: "power2.inOut" },
+      3.4
+    );
+
     // ==========================================
-    // Phase 4: Official Logo "De.risen" & Tagline Reveal (4.8s - 7.0s)
+    // Phase 4: TYPOGRAPHY: LARGE DOT FIRST, LATER FOLLOWED BY DERISEN (4.6s - 7.0s)
     // ==========================================
     masterTl.to(
       textGroupRef.current,
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      4.8
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      4.6
     );
 
+    // 1. Large Dot reveals first
     masterTl.to(
-      brandTitleRef.current,
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "power2.out",
-      },
-      5.0
+      dotStageRef.current,
+      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" },
+      4.7
+    );
+    masterTl.to(
+      dotCharRef.current,
+      { scale: 1.4, duration: 0.4, ease: "back.out(2)" },
+      4.7
     );
 
+    // 2. "De." joins the dot
+    masterTl.to(
+      dePrefixRef.current,
+      { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
+      5.1
+    );
+
+    // 3. "risen" slides out followed after the dot!
+    masterTl.to(
+      risenSuffixRef.current,
+      { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" },
+      5.4
+    );
+
+    // 4. Smooth transition into the exact crisp official logo asset
+    masterTl.to(
+      logoImageRef.current,
+      { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+      5.9
+    );
+    masterTl.to(
+      dotStageRef.current,
+      { opacity: 0, duration: 0.3, ease: "power1.out" },
+      6.0
+    );
+
+    // Tagline & Subline reveal
     masterTl.to(
       taglineRef.current,
       {
         opacity: 1,
         y: 0,
         letterSpacing: "0.32em",
-        duration: 1.5,
+        duration: 1.2,
         ease: "power2.out",
       },
-      5.4
+      5.8
     );
 
     masterTl.to(
       sublineRef.current,
-      { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" },
-      5.8
+      { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+      6.2
     );
 
     // ==========================================
-    // Phase 5: Savor Reveal & Transition to Website (7.0s - 9.2s)
+    // Phase 5: Savor Reveal & Transition to Website (7.2s - 9.2s)
     // ==========================================
-    masterTl.to({}, { duration: 1.8 }, 7.0);
+    masterTl.to({}, { duration: 1.8 }, 7.2);
 
     masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.3 }, 8.5);
     masterTl.to(
@@ -443,6 +536,8 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       document.body.style.overflow = "";
 
       try {
+        dotGeo.dispose();
+        dotMat.dispose();
         geo1.dispose();
         geo2.dispose();
         geo3.dispose();
@@ -536,15 +631,37 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         </button>
       </div>
 
-      {/* Center Stage: Official Brand Logo "De.risen" & Tagline Reveal beneath the standing 3D Emblem */}
+      {/* Center Stage: Large Dot First, Later Followed by Derisen */}
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-24 md:pb-28 z-20 pointer-events-none">
         <div
           ref={textGroupRef}
           className="relative flex flex-col items-center justify-center text-center px-4"
         >
-          {/* Exact Official De.risen Brand Logo Image with 'De.' dot followed by 'risen' */}
-          <div ref={brandTitleRef} className="flex items-center justify-center">
+          {/* Main Logo Reveal Stage */}
+          <div className="relative flex items-center justify-center h-16 sm:h-20 min-w-[280px]">
+            {/* 1. Sequential Text Reveal: Large Dot First, Later Followed by Derisen */}
+            <div
+              ref={dotStageRef}
+              className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl font-black tracking-normal"
+              style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+            >
+              <span ref={dePrefixRef} className="text-[#490365]">
+                De
+              </span>
+              <span
+                ref={dotCharRef}
+                className="inline-block text-[#490365] mx-0.5 transform font-extrabold text-4xl sm:text-5xl md:text-6xl leading-none"
+              >
+                .
+              </span>
+              <span ref={risenSuffixRef} className="text-[#b063ff]">
+                risen
+              </span>
+            </div>
+
+            {/* 2. Official Brand Logo Image seamlessly settled */}
             <img
+              ref={logoImageRef}
               src="/assets/derisen-logo-transparent.png"
               alt="De.risen"
               className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain drop-shadow-sm transition-all"
