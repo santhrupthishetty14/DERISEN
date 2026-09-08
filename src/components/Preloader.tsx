@@ -7,31 +7,33 @@ interface PreloaderProps {
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [isDone, setIsDone] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const logoWrapperRef = useRef<HTMLDivElement>(null);
-  const curtainTopRef = useRef<HTMLDivElement>(null);
-  const curtainBottomRef = useRef<HTMLDivElement>(null);
+  const curtainRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const accentLineRef = useRef<SVGLineElement>(null);
+  const dotRef = useRef<HTMLSpanElement>(null);
+  const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const taglineRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
-    // Initial state setup: Dot starts scaled down, logo hidden inside dot origin
-    gsap.set(dotRef.current, {
-      scale: 0,
-      opacity: 0,
-      transformOrigin: '50% 50%',
-    });
+    const letters = lettersRef.current.filter(Boolean);
 
-    gsap.set(logoWrapperRef.current, {
-      scale: 0.12,
-      opacity: 0,
-      filter: 'blur(10px)',
-      transformOrigin: '50% 50%',
-    });
+    // ── initial states ──
+    gsap.set(letters, { yPercent: 110, opacity: 0 });
+    gsap.set(dotRef.current, { scale: 0, opacity: 0 });
+    gsap.set(taglineRef.current, { opacity: 0, y: 10 });
 
-    const masterTl = gsap.timeline({
-      delay: 0.15,
+    if (accentLineRef.current) {
+      const len = (accentLineRef.current as SVGLineElement & { getTotalLength?: () => number }).getTotalLength?.() ?? 80;
+      gsap.set(accentLineRef.current, {
+        strokeDasharray: len,
+        strokeDashoffset: len,
+      });
+    }
+
+    const tl = gsap.timeline({
+      delay: 0.2,
       onComplete: () => {
         setIsDone(true);
         document.body.style.overflow = '';
@@ -39,125 +41,227 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       },
     });
 
-    // Step 1: Organic Dot Popup with natural elastic physics
-    masterTl.to(dotRef.current, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.7,
-      ease: 'elastic.out(1, 0.55)',
+    // 1. Draw accent line (left bar of the D)
+    tl.to(accentLineRef.current, {
+      strokeDashoffset: 0,
+      duration: 0.55,
+      ease: 'power3.out',
     });
 
-    // Step 2: Gentle organic breath
-    masterTl.to(dotRef.current, {
-      scale: 1.18,
-      duration: 0.4,
-      ease: 'sine.inOut',
-    });
-
-    // Step 3: Dot expands naturally into liquid ring as real De.risen logo blooms seamlessly from within
-    masterTl.to(
-      dotRef.current,
+    // 2. "De" slides up
+    tl.to(
+      letters.slice(0, 2),
       {
-        scale: 6,
-        opacity: 0,
-        duration: 0.85,
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.55,
         ease: 'power3.out',
+        stagger: 0.07,
       },
-      '+=0.02'
+      '-=0.25'
     );
 
-    masterTl.to(
-      logoWrapperRef.current,
+    // 3. The dot pops in
+    tl.to(
+      dotRef.current,
       {
         scale: 1,
         opacity: 1,
-        filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power4.out',
+        duration: 0.4,
+        ease: 'back.out(2)',
       },
-      '<'
+      '-=0.1'
     );
 
-    // Step 4: Natural pause to absorb the brand
-    masterTl.to({}, { duration: 0.5 });
+    // 4. "risen" letters stagger in
+    tl.to(
+      letters.slice(2),
+      {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.55,
+        ease: 'power3.out',
+        stagger: 0.065,
+      },
+      '-=0.25'
+    );
 
-    // Step 5: Smooth cinematic exit transition
-    masterTl
-      .to(logoWrapperRef.current, {
-        scale: 1.03,
-        opacity: 0,
-        y: -12,
-        duration: 0.4,
-        ease: 'power2.in',
-      })
-      .to(
-        curtainTopRef.current,
-        {
-          yPercent: -100,
-          duration: 0.85,
-          ease: 'power4.inOut',
-        },
-        '-=0.15'
-      )
-      .to(
-        curtainBottomRef.current,
-        {
-          yPercent: 100,
-          duration: 0.85,
-          ease: 'power4.inOut',
-        },
-        '<'
-      );
+    // 5. Tagline fades in
+    tl.to(
+      taglineRef.current,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+      },
+      '-=0.1'
+    );
+
+    // 6. Hold
+    tl.to({}, { duration: 0.85 });
+
+    // 7. Logo fades up out
+    tl.to([logoRef.current, taglineRef.current], {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      ease: 'power2.in',
+    });
+
+    // 8. Curtain wipes to reveal site
+    tl.to(
+      curtainRef.current,
+      {
+        scaleY: 0,
+        transformOrigin: 'top center',
+        duration: 0.75,
+        ease: 'power4.inOut',
+      },
+      '-=0.15'
+    );
 
     return () => {
-      masterTl.kill();
+      tl.kill();
       document.body.style.overflow = '';
     };
   }, [onComplete]);
 
   if (isDone) return null;
 
+  const risenPart = ['r', 'i', 's', 'e', 'n'];
+
   return (
     <div
-      ref={containerRef}
-      className="fixed inset-0 z-[9999] pointer-events-auto flex items-center justify-center overflow-hidden bg-white select-none"
+      className="fixed inset-0 z-[9999] pointer-events-auto overflow-hidden select-none"
+      style={{ background: '#0d0618' }}
     >
-      {/* Top Curtain */}
+      {/* Curtain overlay — scaleY from 1→0 on exit */}
       <div
-        ref={curtainTopRef}
-        className="absolute top-0 left-0 w-full h-1/2 bg-white border-b border-gray-100 z-10 shadow-[0_10px_30px_rgba(24,13,56,0.06)]"
+        ref={curtainRef}
+        className="absolute inset-0 z-10"
+        style={{ background: '#0d0618', transformOrigin: 'top center' }}
       />
 
-      {/* Bottom Curtain */}
+      {/* Radial purple ambient glow */}
       <div
-        ref={curtainBottomRef}
-        className="absolute bottom-0 left-0 w-full h-1/2 bg-white border-t border-gray-100 z-10 shadow-[0_-10px_30px_rgba(24,13,56,0.06)]"
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(99,32,238,0.20) 0%, transparent 70%)',
+        }}
       />
 
-      {/* Center Stage: Fluid Dot & Blooming Logo */}
-      <div className="relative z-20 flex items-center justify-center w-full h-full">
-        {/* Natural Purple Dot */}
-        <div
-          ref={dotRef}
-          className="absolute w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-purple shadow-[0_0_24px_rgba(99,32,238,0.45)] pointer-events-none"
-        />
+      {/* Centre stage */}
+      <div className="relative z-20 flex flex-col items-center justify-center w-full h-full" style={{ gap: '20px' }}>
 
-        {/* Real De.risen Logo Emerging From Inside */}
-        <div
-          ref={logoWrapperRef}
-          className="relative flex items-center justify-center px-6"
-        >
-          <img
-            src="/assets/derisen-logo-transparent.png"
-            alt="De.risen"
-            className="h-14 sm:h-16 md:h-20 w-auto object-contain drop-shadow-[0_10px_28px_rgba(99,32,238,0.12)]"
-          />
+        {/* Logo row */}
+        <div ref={logoRef} className="flex items-center" style={{ gap: 0 }}>
+
+          {/* D with animated SVG accent bar */}
+          <span className="relative inline-flex items-center" style={{ marginRight: '1px' }}>
+            <svg
+              className="absolute pointer-events-none"
+              style={{ left: 0, top: '50%', transform: 'translateY(-50%)' }}
+              width="5"
+              height="60"
+              viewBox="0 0 5 60"
+            >
+              <line
+                ref={accentLineRef}
+                x1="2.5"
+                y1="4"
+                x2="2.5"
+                y2="56"
+                stroke="#6320EE"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span
+              ref={el => { lettersRef.current[0] = el; }}
+              className="inline-block"
+              style={{
+                fontSize: 'clamp(52px, 8vw, 82px)',
+                fontFamily: "'Inter', 'Outfit', system-ui, sans-serif",
+                fontWeight: 800,
+                color: '#ffffff',
+                paddingLeft: '13px',
+                lineHeight: 1,
+              }}
+            >
+              D
+            </span>
+          </span>
+
+          {/* e */}
+          <span
+            ref={el => { lettersRef.current[1] = el; }}
+            className="inline-block"
+            style={{
+              fontSize: 'clamp(52px, 8vw, 82px)',
+              fontFamily: "'Inter', 'Outfit', system-ui, sans-serif",
+              fontWeight: 800,
+              color: '#ffffff',
+              lineHeight: 1,
+            }}
+          >
+            e
+          </span>
+
+          {/* Animated dot */}
+          <span
+            ref={dotRef}
+            className="inline-block"
+            style={{
+              fontSize: 'clamp(52px, 8vw, 82px)',
+              fontFamily: "'Inter', 'Outfit', system-ui, sans-serif",
+              fontWeight: 800,
+              color: '#6320EE',
+              lineHeight: 1,
+              display: 'inline-block',
+            }}
+          >
+            .
+          </span>
+
+          {/* risen — individual letter animation */}
+          {risenPart.map((char, i) => (
+            <span
+              key={i}
+              ref={el => { lettersRef.current[2 + i] = el; }}
+              className="inline-block"
+              style={{
+                fontSize: 'clamp(52px, 8vw, 82px)',
+                fontFamily: "'Inter', 'Outfit', system-ui, sans-serif",
+                fontWeight: 800,
+                color: '#a855f7',
+                lineHeight: 1,
+              }}
+            >
+              {char}
+            </span>
+          ))}
         </div>
+
+        {/* Tagline */}
+        <p
+          ref={taglineRef}
+          style={{
+            fontFamily: "'Inter', system-ui, sans-serif",
+            fontSize: 'clamp(11px, 1.4vw, 14px)',
+            letterSpacing: '0.30em',
+            textTransform: 'uppercase',
+            color: 'rgba(168,85,247,0.6)',
+            fontWeight: 500,
+            margin: 0,
+          }}
+        >
+          Rise above. Redefine.
+        </p>
       </div>
     </div>
   );
 };
 
 export default Preloader;
-
-
