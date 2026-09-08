@@ -231,31 +231,31 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     emblemGroup.add(gem2);
 
     // Initial Positions (Scatter far on the floor along motion vectors)
-    // Target Assembly Coordinates
-    const targetBar = { x: -1.6, y: 0.3, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
-    const targetBowl = { x: -1.4, y: 0.3, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
-    const targetDot = { x: 0.7, y: -0.9, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
-    const targetGem1 = { x: 1.8, y: 0.6, z: 0.2, rotY: 0.4, rotX: 0.3, rotZ: 0 };
-    const targetGem2 = { x: -2.4, y: -0.8, z: -0.2, rotY: -0.3, rotX: 0.2, rotZ: 0 };
+    // Target Assembly Coordinates (positioned comfortably in upper-middle)
+    const targetBar = { x: -1.6, y: 1.0, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
+    const targetBowl = { x: -1.4, y: 1.0, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
+    const targetDot = { x: 0.7, y: -0.2, z: 0, rotY: 0, rotX: 0, rotZ: 0 };
+    const targetGem1 = { x: 1.9, y: 1.4, z: 0.2, rotY: 0.4, rotX: 0.3, rotZ: 0 };
+    const targetGem2 = { x: -2.5, y: -0.1, z: -0.2, rotY: -0.3, rotX: 0.2, rotZ: 0 };
 
     // Set initial positions off-screen on the 3D ground plane
-    barMesh.position.set(-10, 0.3, -4);
+    barMesh.position.set(-11, 0.3, -5);
     barMesh.rotation.set(-Math.PI / 2, 0, -0.6);
 
-    dBowlMesh.position.set(10, 0.3, 8);
+    dBowlMesh.position.set(11, 0.3, 9);
     dBowlMesh.rotation.set(-Math.PI / 2, 0, 0.8);
 
-    dotMesh.position.set(-6, 8, 2);
+    dotMesh.position.set(-5, 9, 2);
     dotMesh.rotation.set(0, 0, 0);
 
-    gem1.position.set(9, 0.4, -7);
-    gem2.position.set(-8, 0.4, 8);
+    gem1.position.set(10, 0.4, -8);
+    gem2.position.set(-9, 0.4, 9);
 
     // GSAP Initial Component State
-    gsap.set(textGroupRef.current, { opacity: 0, y: 25 });
-    gsap.set(fullNameRef.current, { opacity: 0, scale: 0.9, filter: "blur(12px)" });
-    gsap.set(subtitleRef.current, { opacity: 0, y: 15 });
-    gsap.set(sheenRef.current, { xPercent: -180 });
+    gsap.set(textGroupRef.current, { opacity: 0, y: 30 });
+    gsap.set(fullNameRef.current, { opacity: 0, scale: 0.88, filter: "blur(14px)" });
+    gsap.set(subtitleRef.current, { opacity: 0, y: 18 });
+    gsap.set(sheenRef.current, { xPercent: -200 });
     gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
 
     // Camera object for tweening
@@ -264,28 +264,28 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       lookX: 0, lookY: 0, lookZ: 0,
     };
 
-    // Master Cinematic GSAP Timeline
+    // Master Slow Cinematic GSAP Timeline
     const masterTl = gsap.timeline({
-      delay: 0.1,
+      delay: 0.2,
       onComplete: () => {
         finishIntro();
       },
     });
 
-    // 0. Fade in Skip button
-    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2);
+    // 0. Fade in Skip button gently
+    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.4);
 
-    // 1. STEP 1: 3D Pieces Slide In Dynamically Across Floor (0.2s - 1.6s)
+    // 1. STEP 1: Slow, Elegant 3D Pieces Slide In Dynamically Across Floor (0.4s - 3.4s)
     masterTl.to(
       barMesh.position,
       {
         x: targetBar.x,
         y: targetBar.y,
         z: targetBar.z,
-        duration: 1.4,
-        ease: "power3.out",
+        duration: 2.8,
+        ease: "power2.out",
       },
-      0.2
+      0.4
     );
     masterTl.to(
       barMesh.rotation,
@@ -293,10 +293,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0,
         z: 0,
-        duration: 1.4,
-        ease: "power3.out",
+        duration: 2.8,
+        ease: "power2.out",
       },
-      0.2
+      0.4
     );
 
     masterTl.to(
@@ -305,10 +305,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: targetBowl.x,
         y: targetBowl.y,
         z: targetBowl.z,
-        duration: 1.45,
-        ease: "power3.out",
+        duration: 3.0,
+        ease: "power2.out",
       },
-      0.25
+      0.5
     );
     masterTl.to(
       dBowlMesh.rotation,
@@ -316,36 +316,23 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0,
         z: 0,
-        duration: 1.45,
-        ease: "power3.out",
+        duration: 3.0,
+        ease: "power2.out",
       },
-      0.25
+      0.5
     );
 
-    // Dot drops in from above with bounce
-    masterTl.to(
-      dotMesh.position,
-      {
-        x: targetDot.x,
-        y: targetDot.y,
-        z: targetDot.z,
-        duration: 1.2,
-        ease: "bounce.out",
-      },
-      0.55
-    );
-
-    // Accent gems slide and snap in
+    // Accent gems slide and snap in slowly
     masterTl.to(
       gem1.position,
       {
         x: targetGem1.x,
         y: targetGem1.y,
         z: targetGem1.z,
-        duration: 1.35,
-        ease: "power3.out",
+        duration: 2.8,
+        ease: "power2.out",
       },
-      0.3
+      0.6
     );
     masterTl.to(
       gem2.position,
@@ -353,54 +340,67 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: targetGem2.x,
         y: targetGem2.y,
         z: targetGem2.z,
-        duration: 1.35,
-        ease: "power3.out",
+        duration: 2.8,
+        ease: "power2.out",
       },
-      0.35
+      0.7
     );
 
-    // 2. STEP 2: Camera Smoothly Tilts Up from Isometric Ground Angle to Straight-On Frontal (1.2s - 2.4s)
+    // Dot drops in from above with slow graceful bounce
+    masterTl.to(
+      dotMesh.position,
+      {
+        x: targetDot.x,
+        y: targetDot.y,
+        z: targetDot.z,
+        duration: 2.2,
+        ease: "bounce.out",
+      },
+      1.4
+    );
+
+    // 2. STEP 2: Camera Slowly Swoops Up from Isometric Ground Angle to Straight-On Frontal (3.2s - 6.2s)
     masterTl.to(
       camTarget,
       {
         posX: 0,
-        posY: 0.1,
-        posZ: W < 768 ? 9.5 : 7.2,
+        posY: 0.4,
+        posZ: W < 768 ? 9.8 : 7.6,
         lookX: 0,
-        lookY: 0,
+        lookY: 0.4,
         lookZ: 0,
-        duration: 1.4,
-        ease: "power3.inOut",
+        duration: 3.0,
+        ease: "power2.inOut",
       },
-      1.1
+      3.2
     );
 
     // Fade out ground guide lines as camera settles
-    masterTl.to(lineGroup.position, { y: -2, duration: 0.8, ease: "power2.in" }, 1.3);
+    masterTl.to(lineGroup.position, { y: -2, duration: 1.4, ease: "power2.in" }, 3.6);
 
-    // Dynamic light sweep across the beveled edges
+    // Slow dynamic light sweep across the beveled edges
     masterTl.to(
       keyLight.position,
       {
-        x: -6,
-        y: 12,
-        z: 14,
-        duration: 1.2,
+        x: -7,
+        y: 14,
+        z: 15,
+        duration: 2.8,
         ease: "power2.inOut",
       },
-      1.5
+      4.0
     );
 
-    // 3. STEP 3: Full Brand Name "De.risen" & Tagline Displays Below (As in the video) (2.0s - 3.2s)
+    // 3. STEP 3: Full Brand Name "De.risen" & Tagline Displays Below (As in the video) (5.4s - 8.8s)
     masterTl.to(
       textGroupRef.current,
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        ease: "power3.out",
+        duration: 1.2,
+        ease: "power2.out",
       },
-      1.9
+      5.4
     );
 
     masterTl.to(
@@ -409,20 +409,20 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
-        duration: 0.75,
-        ease: "back.out(1.5)",
+        duration: 1.8,
+        ease: "power2.out",
       },
-      2.0
+      5.6
     );
 
     masterTl.to(
       sheenRef.current,
       {
-        xPercent: 220,
-        duration: 0.85,
+        xPercent: 240,
+        duration: 2.0,
         ease: "power2.inOut",
       },
-      2.35
+      6.4
     );
 
     masterTl.to(
@@ -430,50 +430,50 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 1.6,
         ease: "power2.out",
       },
-      2.5
+      7.2
     );
 
-    // 4. STEP 4: Admire the Complete Official Brand Identity (3.0s - 4.0s)
-    masterTl.to({}, { duration: 0.9 }, 3.1);
+    // 4. STEP 4: Savor & Admire the Complete Official Brand Identity in Full Glory (8.8s - 12.0s)
+    masterTl.to({}, { duration: 3.2 }, 8.8);
 
-    // 5. STEP 5: Smooth Transition to Navbar (4.0s - 4.8s)
-    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.25 }, 3.9);
-    masterTl.to(subtitleRef.current, { opacity: 0, y: -6, duration: 0.3 }, 3.95);
+    // 5. STEP 5: Slow, Smooth Transition to Navbar (12.0s - 13.6s)
+    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.5 }, 11.8);
+    masterTl.to(subtitleRef.current, { opacity: 0, y: -8, duration: 0.6 }, 11.9);
 
     masterTl.to(
       textGroupRef.current,
       {
         opacity: 0,
-        y: -15,
-        duration: 0.45,
+        y: -20,
+        duration: 0.9,
         ease: "power2.in",
       },
-      4.0
+      12.0
     );
 
     masterTl.to(
       emblemGroup.scale,
       {
-        x: 0.3,
-        y: 0.3,
-        z: 0.3,
-        duration: 0.7,
-        ease: "power3.inOut",
+        x: 0.25,
+        y: 0.25,
+        z: 0.25,
+        duration: 1.4,
+        ease: "power2.inOut",
       },
-      4.05
+      12.05
     );
 
     masterTl.to(
       containerRef.current,
       {
         opacity: 0,
-        duration: 0.6,
+        duration: 1.2,
         ease: "power2.inOut",
       },
-      4.2
+      12.4
     );
 
     const finishIntro = () => {
