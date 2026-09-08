@@ -1,37 +1,17 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
-import { createDeLogoShapes } from "../utils/logoShapes";
+import { createGoogleGShapes, createTrailGeometry } from "../utils/googleLogoShapes";
 
 interface BrandIntroProps {
   onComplete: () => void;
-}
-
-// Generates the rich purple-to-magenta-violet gradient texture
-function createGradientTexture(): THREE.Texture {
-  const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 256;
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-    const grad = ctx.createLinearGradient(0, 0, 1024, 0);
-    grad.addColorStop(0, "#3b0764");
-    grad.addColorStop(0.18, "#6320ee");
-    grad.addColorStop(0.45, "#8b5cf6");
-    grad.addColorStop(0.72, "#a855f7");
-    grad.addColorStop(1, "#d946ef");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 1024, 256);
-  }
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.needsUpdate = true;
-  return texture;
 }
 
 export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const textGroupRef = useRef<HTMLDivElement>(null);
+  const brandTitleRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const sublineRef = useRef<HTMLParagraphElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
@@ -64,13 +44,13 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     const H = window.innerHeight;
     const isMobile = W < 768;
 
-    // Pure Studio White Scene Setup
+    // 1. Pristine Studio White Scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    // Camera initial high-angle perspective looking down at 3D De.risen logo on the floor
-    const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
-    camera.position.set(0, 4.4, isMobile ? 8.4 : 6.8);
+    // Initial Camera: Low-angle isometric floor perspective
+    const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 100);
+    camera.position.set(0, 4.2, isMobile ? 8.4 : 6.8);
     camera.lookAt(0, 0.2, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -83,128 +63,261 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.18;
 
     if (mountRef.current) {
       mountRef.current.innerHTML = "";
       mountRef.current.appendChild(renderer.domElement);
     }
 
-    // High-End Studio Lighting
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xf8fafc, 1.4);
-    scene.add(hemiLight);
+    // 2. High-End Studio Lighting for Glossy Acrylic
+    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xf1f5f9, 1.4);
+    scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.8);
     keyLight.position.set(6, 12, 8);
     keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 1024;
-    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
     keyLight.shadow.camera.near = 0.5;
     keyLight.shadow.camera.far = 30;
-    keyLight.shadow.camera.left = -7;
-    keyLight.shadow.camera.right = 7;
-    keyLight.shadow.camera.top = 7;
-    keyLight.shadow.camera.bottom = -7;
-    keyLight.shadow.bias = -0.001;
-    keyLight.shadow.radius = 3.5;
+    keyLight.shadow.camera.left = -6;
+    keyLight.shadow.camera.right = 6;
+    keyLight.shadow.camera.top = 6;
+    keyLight.shadow.camera.bottom = -6;
+    keyLight.shadow.bias = -0.0008;
+    keyLight.shadow.radius = 3.0;
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd946ef, 1.2);
-    rimLight.position.set(-6, 7, -3);
-    scene.add(rimLight);
+    const softFill = new THREE.DirectionalLight(0xffffff, 1.0);
+    softFill.position.set(-6, 8, -4);
+    scene.add(softFill);
 
-    const fillLight = new THREE.PointLight(0x8b5cf6, 2.2, 18);
-    fillLight.position.set(0, 3, 5);
-    scene.add(fillLight);
+    // Moving Specular Sheen Light (glides across the curved bevels)
+    const sheenLight = new THREE.PointLight(0xffffff, 0, 15);
+    sheenLight.position.set(-6, 2.5, 4);
+    scene.add(sheenLight);
 
-    // Studio White Ground Plane with Soft Contact Shadows
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
-    const groundGeo = new THREE.PlaneGeometry(40, 40);
+    // 3. Studio White Floor with Soft Contact Shadow
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.18 });
+    const groundGeo = new THREE.PlaneGeometry(50, 50);
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.01;
+    ground.position.y = -0.005;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Exact Official "De." 3D Extruded Logo Emblem
-    const logoShapes = createDeLogoShapes();
+    // 4. Motion Trails on the Floor (thin glowing curved arcs)
+    const trailGroup = new THREE.Group();
+    scene.add(trailGroup);
+
+    const yellowTrailGeo = createTrailGeometry(2.3, (140 * Math.PI) / 180, (25 * Math.PI) / 180);
+    const yellowTrailMat = new THREE.LineBasicMaterial({ color: 0xfbbc05, transparent: true, opacity: 0 });
+    const yellowTrail = new THREE.Line(yellowTrailGeo, yellowTrailMat);
+    trailGroup.add(yellowTrail);
+
+    const greenTrailGeo = createTrailGeometry(2.5, (220 * Math.PI) / 180, (140 * Math.PI) / 180);
+    const greenTrailMat = new THREE.LineBasicMaterial({ color: 0x34a853, transparent: true, opacity: 0 });
+    const greenTrail = new THREE.Line(greenTrailGeo, greenTrailMat);
+    trailGroup.add(greenTrail);
+
+    const blueTrailGeo = createTrailGeometry(2.4, (315 * Math.PI) / 180, (220 * Math.PI) / 180);
+    const blueTrailMat = new THREE.LineBasicMaterial({ color: 0x4285f4, transparent: true, opacity: 0 });
+    const blueTrail = new THREE.Line(blueTrailGeo, blueTrailMat);
+    trailGroup.add(blueTrail);
+
+    const redTrailGeo = createTrailGeometry(2.2, 0, (315 * Math.PI) / 180);
+    const redTrailMat = new THREE.LineBasicMaterial({ color: 0xea4335, transparent: true, opacity: 0 });
+    const redTrail = new THREE.Line(redTrailGeo, redTrailMat);
+    trailGroup.add(redTrail);
+
+    // 5. Google 3D G Letter Emblem Assembly
+    const shapes = createGoogleGShapes(1.55, 0.85);
     const extrudeSettings = {
-      depth: 0.42,
+      depth: 0.38,
       bevelEnabled: true,
-      bevelSegments: 8,
+      bevelSegments: 10,
       steps: 1,
-      bevelSize: 0.06,
-      bevelThickness: 0.06,
+      bevelSize: 0.08,
+      bevelThickness: 0.08,
+      curveSegments: 36,
     };
 
-    const logoGeo = new THREE.ExtrudeGeometry(logoShapes, extrudeSettings);
-    logoGeo.center();
+    // Google Brand Materials (Rich candy-gloss finish with high clearcoat)
+    const createSegmentMaterial = (colorHex: number) => {
+      return new THREE.MeshPhysicalMaterial({
+        color: colorHex,
+        roughness: 0.06,
+        metalness: 0.04,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.03,
+        reflectivity: 0.95,
+      });
+    };
 
-    const gradientTexture = createGradientTexture();
+    const yellowMat = createSegmentMaterial(0xfbbc05); // Google Yellow
+    const greenMat = createSegmentMaterial(0x34a853);  // Google Green
+    const blueMat = createSegmentMaterial(0x4285f4);   // Google Blue
+    const redMat = createSegmentMaterial(0xea4335);    // Google Red
 
-    const logoMat = new THREE.MeshPhysicalMaterial({
-      map: gradientTexture,
-      roughness: 0.12,
-      metalness: 0.15,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.06,
-      reflectivity: 0.9,
+    const yellowGeo = new THREE.ExtrudeGeometry(shapes.yellow, extrudeSettings);
+    const greenGeo = new THREE.ExtrudeGeometry(shapes.green, extrudeSettings);
+    const blueGeo = new THREE.ExtrudeGeometry(shapes.blue, extrudeSettings);
+    const redGeo = new THREE.ExtrudeGeometry(shapes.red, extrudeSettings);
+
+    const yellowMesh = new THREE.Mesh(yellowGeo, yellowMat);
+    const greenMesh = new THREE.Mesh(greenGeo, greenMat);
+    const blueMesh = new THREE.Mesh(blueGeo, blueMat);
+    const redMesh = new THREE.Mesh(redGeo, redMat);
+
+    [yellowMesh, greenMesh, blueMesh, redMesh].forEach((mesh) => {
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
     });
 
-    const logoMesh = new THREE.Mesh(logoGeo, logoMat);
-    logoMesh.castShadow = true;
-    logoMesh.receiveShadow = true;
+    // Parent group for complete assembled emblem
+    const googleGroup = new THREE.Group();
+    googleGroup.add(yellowMesh);
+    googleGroup.add(greenMesh);
+    googleGroup.add(blueMesh);
+    googleGroup.add(redMesh);
+    scene.add(googleGroup);
 
-    // Logo Pivot Group
-    const logoGroup = new THREE.Group();
-    logoGroup.add(logoMesh);
-    scene.add(logoGroup);
+    // Initial state: lying in perspective on the floor
+    googleGroup.position.set(0, 0.22, 0);
+    googleGroup.rotation.set(-Math.PI / 2.3, 0, 0);
 
-    // Initial State: 3D De.risen Logo lies flat in perspective on the floor (like the reference video)
-    logoGroup.position.set(0, 0.22, 0);
-    logoGroup.rotation.set(-Math.PI / 2.2, 0, -0.15);
+    // Spread the 4 pieces outwards along the floor initially (like the reference video at 06.6s)
+    yellowMesh.position.set(-1.4, 0.05, -1.2);
+    yellowMesh.rotation.z = 0.35;
 
-    // GSAP Initial Component State
+    greenMesh.position.set(-2.0, 0.05, 0.8);
+    greenMesh.rotation.z = -0.4;
+
+    blueMesh.position.set(0.9, 0.05, 1.5);
+    blueMesh.rotation.z = 0.5;
+
+    redMesh.position.set(2.2, 0.05, -0.4);
+    redMesh.rotation.z = -0.3;
+
+    // GSAP DOM Initial States
     gsap.set(textGroupRef.current, { opacity: 0, y: 25 });
-    gsap.set(taglineRef.current, { opacity: 0, y: 15, letterSpacing: "0.2em" });
-    gsap.set(sublineRef.current, { opacity: 0, y: 10 });
+    gsap.set(brandTitleRef.current, { opacity: 0, y: 15, letterSpacing: "0.15em" });
+    gsap.set(taglineRef.current, { opacity: 0, y: 10, letterSpacing: "0.22em" });
+    gsap.set(sublineRef.current, { opacity: 0, y: 8 });
     gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
 
-    // Camera object for tweening
     const camTarget = {
       posX: 0,
-      posY: 4.4,
+      posY: 4.2,
       posZ: isMobile ? 8.4 : 6.8,
       lookX: 0,
       lookY: 0.2,
       lookZ: 0,
     };
 
-    // Master Cinematic GSAP Timeline
+    // Master Timeline
     const masterTl = gsap.timeline({
-      delay: 0.25,
+      delay: 0.2,
       onComplete: () => {
         finishIntro();
       },
     });
 
-    // 0. Fade in Skip button
-    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.3);
+    // Show Skip Button
+    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
 
-    // Phase 1: Subtle initial floating oscillation while lying in perspective on the floor (0.0s - 2.0s)
+    // Reveal motion trail lines on the floor
     masterTl.to(
-      logoGroup.rotation,
-      {
-        z: -0.12,
-        duration: 2.0,
-        ease: "sine.inOut",
-      },
+      [yellowTrailMat, greenTrailMat, blueTrailMat, redTrailMat],
+      { opacity: 0.65, duration: 0.8, ease: "power2.out" },
       0.2
     );
 
-    // Phase 2: 3D De.risen Logo Smoothly Rotates & Stands Upright (2.0s - 5.0s)
+    // ==========================================
+    // Phase 1: Pieces Slide In Along Floor Tracks (0.4s - 3.0s)
+    // ==========================================
     masterTl.to(
-      logoGroup.rotation,
+      yellowMesh.position,
+      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
+      0.4
+    );
+    masterTl.to(
+      yellowMesh.rotation,
+      { z: 0, duration: 2.6, ease: "power3.out" },
+      0.4
+    );
+
+    masterTl.to(
+      greenMesh.position,
+      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
+      0.45
+    );
+    masterTl.to(
+      greenMesh.rotation,
+      { z: 0, duration: 2.6, ease: "power3.out" },
+      0.45
+    );
+
+    masterTl.to(
+      blueMesh.position,
+      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
+      0.5
+    );
+    masterTl.to(
+      blueMesh.rotation,
+      { z: 0, duration: 2.6, ease: "power3.out" },
+      0.5
+    );
+
+    masterTl.to(
+      redMesh.position,
+      { x: 0, y: 0, z: 0, duration: 2.6, ease: "power3.out" },
+      0.55
+    );
+    masterTl.to(
+      redMesh.rotation,
+      { z: 0, duration: 2.6, ease: "power3.out" },
+      0.55
+    );
+
+    // Fade out trails as pieces dock
+    masterTl.to(
+      [yellowTrailMat, greenTrailMat, blueTrailMat, redTrailMat],
+      { opacity: 0, duration: 0.8, ease: "power2.in" },
+      2.0
+    );
+
+    // ==========================================
+    // Phase 2: Docking Settle & Liquid Glass Highlight (2.7s - 4.2s)
+    // ==========================================
+    // Subtle locking bounce
+    masterTl.to(
+      googleGroup.scale,
+      { x: 1.04, y: 1.04, z: 1.04, duration: 0.25, ease: "power1.out" },
+      2.9
+    );
+    masterTl.to(
+      googleGroup.scale,
+      { x: 1.0, y: 1.0, z: 1.0, duration: 0.45, ease: "power2.inOut" },
+      3.15
+    );
+
+    // Liquid Glass Sheen Light Sweep
+    sheenLight.intensity = 3.5;
+    masterTl.fromTo(
+      sheenLight.position,
+      { x: -5, y: 2.5, z: 3 },
+      { x: 5, y: 2.5, z: 3, duration: 1.6, ease: "power2.inOut" },
+      2.8
+    );
+    masterTl.to(sheenLight, { intensity: 0, duration: 0.4 }, 4.0);
+
+    // ==========================================
+    // Phase 3: Standing Upright & Front Elevation (3.0s - 5.8s)
+    // ==========================================
+    masterTl.to(
+      googleGroup.rotation,
       {
         x: 0,
         y: 0,
@@ -212,60 +325,63 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         duration: 2.8,
         ease: "power2.inOut",
       },
-      2.0
+      3.0
     );
 
     masterTl.to(
-      logoGroup.position,
+      googleGroup.position,
       {
         x: 0,
-        y: 0.85,
+        y: 0.95,
         z: 0,
         duration: 2.8,
         ease: "power2.inOut",
       },
-      2.0
+      3.0
     );
 
-    // Camera smoothly adjusts to center the standing 3D De.risen logo straight-on
+    // Camera smoothly adjusts to front elevation view
     masterTl.to(
       camTarget,
       {
         posX: 0,
-        posY: 0.45,
-        posZ: isMobile ? 8.0 : 6.2,
+        posY: 0.55,
+        posZ: isMobile ? 8.2 : 6.4,
         lookX: 0,
-        lookY: 0.45,
+        lookY: 0.55,
         lookZ: 0,
         duration: 2.8,
         ease: "power2.inOut",
       },
-      2.0
+      3.0
     );
 
-    // Specular light sweep across beveled letter edges as logo rises
+    // Keylight adjusts to illuminate the front face
     masterTl.to(
       keyLight.position,
-      {
-        x: -5,
-        y: 12,
-        z: 10,
-        duration: 2.5,
-        ease: "power2.inOut",
-      },
-      2.5
+      { x: -4, y: 10, z: 8, duration: 2.6, ease: "power2.inOut" },
+      3.2
     );
 
-    // Phase 3: Tagline & Subtitle Reveals Below Standing 3D Logo (4.8s - 6.8s)
+    // ==========================================
+    // Phase 4: Brand Typography Reveal Below Assembled Emblem (4.8s - 7.0s)
+    // ==========================================
     masterTl.to(
       textGroupRef.current,
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+      4.8
+    );
+
+    masterTl.to(
+      brandTitleRef.current,
       {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        letterSpacing: "0.28em",
+        duration: 1.4,
         ease: "power2.out",
       },
-      4.8
+      5.0
     );
 
     masterTl.to(
@@ -274,58 +390,39 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         opacity: 1,
         y: 0,
         letterSpacing: "0.32em",
-        duration: 1.6,
+        duration: 1.5,
         ease: "power2.out",
       },
-      5.0
+      5.4
     );
 
     masterTl.to(
       sublineRef.current,
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power2.out",
-      },
-      5.6
+      { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" },
+      5.8
     );
 
-    // Phase 4: Savor the Complete Official 3D Brand Reveal (6.8s - 8.8s)
-    masterTl.to({}, { duration: 2.0 }, 6.8);
+    // ==========================================
+    // Phase 5: Savor Reveal & Transition to Website (7.0s - 9.2s)
+    // ==========================================
+    masterTl.to({}, { duration: 1.8 }, 7.0);
 
-    // Phase 5: Smooth Glide into Navbar
     masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.3 }, 8.5);
     masterTl.to(
       textGroupRef.current,
-      {
-        opacity: 0,
-        y: -15,
-        duration: 0.6,
-        ease: "power2.in",
-      },
+      { opacity: 0, y: -12, duration: 0.6, ease: "power2.in" },
       8.6
     );
 
     masterTl.to(
-      logoGroup.scale,
-      {
-        x: 0.24,
-        y: 0.24,
-        z: 0.24,
-        duration: 0.9,
-        ease: "power2.inOut",
-      },
+      googleGroup.scale,
+      { x: 0.22, y: 0.22, z: 0.22, duration: 0.85, ease: "power2.inOut" },
       8.7
     );
 
     masterTl.to(
       containerRef.current,
-      {
-        opacity: 0,
-        duration: 0.7,
-        ease: "power2.inOut",
-      },
+      { opacity: 0, duration: 0.7, ease: "power2.inOut" },
       8.9
     );
 
@@ -341,9 +438,14 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       document.body.style.overflow = "";
 
       try {
-        logoGeo.dispose();
-        logoMat.dispose();
-        gradientTexture.dispose();
+        yellowGeo.dispose();
+        greenGeo.dispose();
+        blueGeo.dispose();
+        redGeo.dispose();
+        yellowMat.dispose();
+        greenMat.dispose();
+        blueMat.dispose();
+        redMat.dispose();
         groundGeo.dispose();
         groundMat.dispose();
         renderer.dispose();
@@ -372,7 +474,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     };
     window.addEventListener("keydown", handleKeyDown);
 
-    // Render loop
+    // 60FPS Render Loop
     const renderLoop = () => {
       if (isTerminated) return;
       rafId = requestAnimationFrame(renderLoop);
@@ -412,7 +514,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       className="fixed inset-0 z-[100] overflow-hidden select-none"
       style={{ background: "#ffffff" }}
     >
-      {/* 3D WebGL Canvas for 3D De.risen Logo Standing Up */}
+      {/* 3D WebGL Canvas for Google 3D Reveal */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none" />
 
       {/* Top Bar with Skip Button */}
@@ -429,16 +531,25 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         </button>
       </div>
 
-      {/* Center Stage: Tagline Reveal right below the standing 3D De.risen Logo */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-24 sm:pb-28 md:pb-32 z-20 pointer-events-none">
+      {/* Center Stage: Typography Reveal beneath the standing 3D Google Emblem */}
+      <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-24 md:pb-28 z-20 pointer-events-none">
         <div
           ref={textGroupRef}
           className="relative flex flex-col items-center justify-center text-center px-4"
         >
+          {/* Main Brand Title */}
+          <h1
+            ref={brandTitleRef}
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-[0.28em] uppercase text-[#1e293b]"
+            style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+          >
+            DE<span className="text-[#4285f4]">.</span>RISEN
+          </h1>
+
           {/* Subtitle / Tagline display */}
           <p
             ref={taglineRef}
-            className="text-[11px] sm:text-[13px] font-bold tracking-[0.32em] uppercase text-brand-dark/85"
+            className="mt-3 text-[11px] sm:text-[13px] font-bold tracking-[0.32em] uppercase text-gray-600"
             style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
           >
             Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
@@ -446,7 +557,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
 
           <p
             ref={sublineRef}
-            className="mt-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.4em] uppercase text-brand-purple/75"
+            className="mt-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.4em] uppercase text-[#4285f4]"
           >
             Rise Above &bull; Redefine
           </p>
