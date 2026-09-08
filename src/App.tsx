@@ -100,16 +100,18 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  const handleIntroComplete = React.useCallback(() => {
+    setShowIntro(false);
+    ScrollTrigger.refresh();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
       {/* 0. Cinematic Brand Signature Intro ("In Different Form") */}
       {showIntro && (
         <BrandIntro
           key={introKey}
-          onComplete={() => {
-            setShowIntro(false);
-            ScrollTrigger.refresh();
-          }}
+          onComplete={handleIntroComplete}
         />
       )}
 

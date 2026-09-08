@@ -16,6 +16,8 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
   const skipBtnRef = useRef<HTMLButtonElement>(null);
 
   const cleanupRef = useRef<(() => void) | null>(null);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   const handleSkip = useCallback(() => {
     if (cleanupRef.current) {
@@ -257,28 +259,28 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       lookZ: 0,
     };
 
-    // Master Cinematic GSAP Timeline
+    // Master VERY SLOW Cinematic GSAP Timeline (Total ~15.6 seconds)
     const masterTl = gsap.timeline({
-      delay: 0.15,
+      delay: 0.3,
       onComplete: () => {
         finishIntro();
       },
     });
 
     // 0. Fade in Skip button gently
-    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.2);
+    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.4);
 
-    // 1. STEP 1: 3D Pieces Slide In Dynamically Across Floor (0.2s - 2.8s)
+    // 1. STEP 1: Very Slow 3D Pieces Slide In Across Floor (0.4s - 3.8s)
     masterTl.to(
       barMesh.position,
       {
         x: targetBar.x,
         y: targetBar.y,
         z: targetBar.z,
-        duration: 2.2,
+        duration: 3.4,
         ease: "power2.out",
       },
-      0.2
+      0.4
     );
     masterTl.to(
       barMesh.rotation,
@@ -286,10 +288,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0,
         z: 0,
-        duration: 2.2,
+        duration: 3.4,
         ease: "power2.out",
       },
-      0.2
+      0.4
     );
 
     masterTl.to(
@@ -298,10 +300,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: targetBowl.x,
         y: targetBowl.y,
         z: targetBowl.z,
-        duration: 2.3,
+        duration: 3.5,
         ease: "power2.out",
       },
-      0.25
+      0.5
     );
     masterTl.to(
       dBowlMesh.rotation,
@@ -309,10 +311,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0,
         y: 0,
         z: 0,
-        duration: 2.3,
+        duration: 3.5,
         ease: "power2.out",
       },
-      0.25
+      0.5
     );
 
     masterTl.to(
@@ -321,10 +323,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: targetGem1.x,
         y: targetGem1.y,
         z: targetGem1.z,
-        duration: 2.1,
+        duration: 3.2,
         ease: "power2.out",
       },
-      0.3
+      0.6
     );
     masterTl.to(
       gem2.position,
@@ -332,26 +334,26 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: targetGem2.x,
         y: targetGem2.y,
         z: targetGem2.z,
-        duration: 2.1,
+        duration: 3.2,
         ease: "power2.out",
       },
-      0.35
+      0.7
     );
 
-    // Dot drops in and bounces softly
+    // Dot drops in and bounces softly in slow motion
     masterTl.to(
       dotMesh.position,
       {
         x: targetDot.x,
         y: targetDot.y,
         z: targetDot.z,
-        duration: 1.8,
+        duration: 2.2,
         ease: "bounce.out",
       },
-      0.8
+      1.8
     );
 
-    // 2. STEP 2: Camera Smoothly Swoops Up to Front View (2.2s - 4.4s)
+    // 2. STEP 2: Camera Very Slowly Swoops Up to Front View (3.6s - 7.0s)
     masterTl.to(
       camTarget,
       {
@@ -361,38 +363,38 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         lookX: 0,
         lookY: 0.3,
         lookZ: 0,
-        duration: 2.2,
+        duration: 3.4,
         ease: "power2.inOut",
       },
-      2.0
+      3.6
     );
 
     // Fade out ground guide lines
-    masterTl.to(lineGroup.position, { y: -2, duration: 1.2, ease: "power2.in" }, 2.4);
+    masterTl.to(lineGroup.position, { y: -2, duration: 1.8, ease: "power2.in" }, 4.0);
 
-    // Light sweep across beveled edges
+    // Slow light sweep across beveled edges
     masterTl.to(
       keyLight.position,
       {
         x: -5,
         y: 10,
         z: 10,
-        duration: 2.0,
+        duration: 3.0,
         ease: "power2.inOut",
       },
-      2.5
+      4.2
     );
 
-    // 3. STEP 3: Full Brand Name "De.risen" & Tagline Reveals (3.2s - 5.5s)
+    // 3. STEP 3: Full Brand Name "De.risen" & Tagline Reveals Slowly (6.0s - 10.0s)
     masterTl.to(
       textGroupRef.current,
       {
         opacity: 1,
         y: 0,
-        duration: 0.9,
+        duration: 1.6,
         ease: "power2.out",
       },
-      3.0
+      6.0
     );
 
     masterTl.to(
@@ -401,20 +403,20 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
-        duration: 1.2,
+        duration: 2.0,
         ease: "power2.out",
       },
-      3.1
+      6.2
     );
 
     masterTl.to(
       sheenRef.current,
       {
         xPercent: 240,
-        duration: 1.4,
+        duration: 2.5,
         ease: "power2.inOut",
       },
-      3.6
+      7.0
     );
 
     masterTl.to(
@@ -422,28 +424,28 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       {
         opacity: 1,
         y: 0,
-        duration: 1.0,
+        duration: 1.8,
         ease: "power2.out",
       },
-      4.0
+      7.8
     );
 
-    // 4. STEP 4: Admire the Complete Brand Identity (5.0s - 7.5s)
-    masterTl.to({}, { duration: 2.5 }, 5.0);
+    // 4. STEP 4: Luxurious Hold to Admire the Complete Brand Identity (10.0s - 14.0s)
+    masterTl.to({}, { duration: 4.0 }, 10.0);
 
-    // 5. STEP 5: Smooth Transition to Navbar (7.5s - 8.8s)
-    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.4 }, 7.3);
-    masterTl.to(subtitleRef.current, { opacity: 0, y: -8, duration: 0.4 }, 7.4);
+    // 5. STEP 5: Smooth Transition to Navbar (14.0s - 15.6s)
+    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.5 }, 13.8);
+    masterTl.to(subtitleRef.current, { opacity: 0, y: -8, duration: 0.6 }, 13.9);
 
     masterTl.to(
       textGroupRef.current,
       {
         opacity: 0,
         y: -20,
-        duration: 0.7,
+        duration: 1.0,
         ease: "power2.in",
       },
-      7.5
+      14.0
     );
 
     masterTl.to(
@@ -452,20 +454,20 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         x: 0.25,
         y: 0.25,
         z: 0.25,
-        duration: 1.0,
+        duration: 1.4,
         ease: "power2.inOut",
       },
-      7.6
+      14.05
     );
 
     masterTl.to(
       containerRef.current,
       {
         opacity: 0,
-        duration: 0.8,
+        duration: 1.2,
         ease: "power2.inOut",
       },
-      7.8
+      14.4
     );
 
     const finishIntro = () => {
@@ -497,7 +499,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         // Safe disposal
       }
 
-      onComplete();
+      onCompleteRef.current();
     };
 
     cleanupRef.current = () => {
@@ -553,11 +555,12 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     window.addEventListener("resize", onResize);
 
     return () => {
+      // Only runs when component actually unmounts
       if (cleanupRef.current) {
         cleanupRef.current();
       }
     };
-  }, [onComplete, handleSkip]);
+  }, []); // Empty dependency array ensures it NEVER gets interrupted by parent re-renders!
 
   return (
     <div
