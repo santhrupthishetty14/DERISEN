@@ -77,10 +77,41 @@ export const App: React.FC = () => {
     }, 4500);
   };
 
+  const [showIntro, setShowIntro] = useState(true);
+  const [introKey, setIntroKey] = useState(0);
+
+  const handleReplayIntro = () => {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+    setIntroKey((prev) => prev + 1);
+    setShowIntro(true);
+  };
+
+  useEffect(() => {
+    const onPlayIntro = () => {
+      handleReplayIntro();
+    };
+    window.addEventListener('play-logo-intro', onPlayIntro);
+    return () => {
+      window.removeEventListener('play-logo-intro', onPlayIntro);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
       {/* 0. Cinematic Brand Signature Intro ("In Different Form") */}
-      <BrandIntro onComplete={() => ScrollTrigger.refresh()} />
+      {showIntro && (
+        <BrandIntro
+          key={introKey}
+          onComplete={() => {
+            setShowIntro(false);
+            ScrollTrigger.refresh();
+          }}
+        />
+      )}
 
       {/* 0B. Custom Magnetic Cursor (Desktop) */}
       <CustomCursor />
