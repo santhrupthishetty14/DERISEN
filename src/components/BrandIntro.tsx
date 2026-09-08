@@ -1,25 +1,27 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
+import { createDeRisenLogoShapes } from "../utils/logoShapes";
 
 interface BrandIntroProps {
   onComplete: () => void;
 }
 
-// Generates the rich purple-to-magenta gradient texture matching the reference video
+// Generates the rich purple-to-magenta-violet gradient texture
 function createGradientTexture(): THREE.Texture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 1024;
+  canvas.height = 256;
   const ctx = canvas.getContext("2d");
   if (ctx) {
-    const grad = ctx.createLinearGradient(0, 512, 512, 0);
-    grad.addColorStop(0, "#4c1d95");
-    grad.addColorStop(0.3, "#6320ee");
-    grad.addColorStop(0.65, "#a855f7");
+    const grad = ctx.createLinearGradient(0, 0, 1024, 0);
+    grad.addColorStop(0, "#3b0764");
+    grad.addColorStop(0.18, "#6320ee");
+    grad.addColorStop(0.45, "#8b5cf6");
+    grad.addColorStop(0.72, "#a855f7");
     grad.addColorStop(1, "#d946ef");
     ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 512, 512);
+    ctx.fillRect(0, 0, 1024, 256);
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
@@ -30,8 +32,8 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const textGroupRef = useRef<HTMLDivElement>(null);
-  const brandNameRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
+  const sublineRef = useRef<HTMLParagraphElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
 
   const skipRef = useRef<(() => void) | null>(null);
@@ -66,10 +68,10 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
-    // Camera initial high-angle perspective looking down at emblem lying on the ground
+    // Camera initial high-angle perspective looking down at 3D De.risen logo on the floor
     const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
-    camera.position.set(0, 3.8, isMobile ? 6.2 : 5.0);
-    camera.lookAt(0, 0.1, 0);
+    camera.position.set(0, 4.4, isMobile ? 8.4 : 6.8);
+    camera.lookAt(0, 0.2, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -81,7 +83,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.15;
 
     if (mountRef.current) {
       mountRef.current.innerHTML = "";
@@ -89,112 +91,98 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
     }
 
     // High-End Studio Lighting
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xf1f5f9, 1.3);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xf8fafc, 1.4);
     scene.add(hemiLight);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.8);
-    keyLight.position.set(4, 10, 6);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+    keyLight.position.set(6, 12, 8);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
     keyLight.shadow.camera.near = 0.5;
-    keyLight.shadow.camera.far = 25;
-    keyLight.shadow.camera.left = -5;
-    keyLight.shadow.camera.right = 5;
-    keyLight.shadow.camera.top = 5;
-    keyLight.shadow.camera.bottom = -5;
-    keyLight.shadow.bias = -0.0008;
+    keyLight.shadow.camera.far = 30;
+    keyLight.shadow.camera.left = -7;
+    keyLight.shadow.camera.right = 7;
+    keyLight.shadow.camera.top = 7;
+    keyLight.shadow.camera.bottom = -7;
+    keyLight.shadow.bias = -0.001;
     keyLight.shadow.radius = 3.5;
     scene.add(keyLight);
 
     const rimLight = new THREE.DirectionalLight(0xd946ef, 1.2);
-    rimLight.position.set(-5, 6, -3);
+    rimLight.position.set(-6, 7, -3);
     scene.add(rimLight);
 
-    const fillLight = new THREE.PointLight(0xa855f7, 2.0, 15);
-    fillLight.position.set(0, 3, 4);
+    const fillLight = new THREE.PointLight(0x8b5cf6, 2.2, 18);
+    fillLight.position.set(0, 3, 5);
     scene.add(fillLight);
 
     // Studio White Ground Plane with Soft Contact Shadows
     const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
-    const groundGeo = new THREE.PlaneGeometry(30, 30);
+    const groundGeo = new THREE.PlaneGeometry(40, 40);
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -0.01;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // 3D Emblem Geometry (Curved teardrop/loop shape matching reference video)
-    const emblemShape = new THREE.Shape();
-    emblemShape.moveTo(0, -1.4);
-    emblemShape.bezierCurveTo(1.6, -1.4, 2.1, -0.3, 1.7, 0.7);
-    emblemShape.bezierCurveTo(1.4, 1.6, 0.5, 1.9, -0.2, 1.55);
-    emblemShape.bezierCurveTo(-1.1, 1.9, -1.8, 1.0, -1.8, 0);
-    emblemShape.bezierCurveTo(-1.8, -0.9, -1.0, -1.4, 0, -1.4);
-
-    const hole = new THREE.Path();
-    hole.moveTo(0, -0.7);
-    hole.bezierCurveTo(0.8, -0.7, 1.0, -0.15, 0.85, 0.35);
-    hole.bezierCurveTo(0.7, 0.8, 0.25, 0.95, -0.1, 0.75);
-    hole.bezierCurveTo(-0.5, 0.95, -0.9, 0.5, -0.9, 0);
-    hole.bezierCurveTo(-0.9, -0.45, -0.5, -0.7, 0, -0.7);
-    emblemShape.holes.push(hole);
-
+    // Exact Official De.risen 3D Extruded Logo
+    const logoShapes = createDeRisenLogoShapes();
     const extrudeSettings = {
-      depth: 0.38,
+      depth: 0.35,
       bevelEnabled: true,
-      bevelSegments: 8,
-      steps: 2,
-      bevelSize: 0.08,
-      bevelThickness: 0.08,
+      bevelSegments: 6,
+      steps: 1,
+      bevelSize: 0.04,
+      bevelThickness: 0.04,
     };
 
-    const emblemGeo = new THREE.ExtrudeGeometry(emblemShape, extrudeSettings);
-    emblemGeo.center();
+    const logoGeo = new THREE.ExtrudeGeometry(logoShapes, extrudeSettings);
+    logoGeo.center();
 
     const gradientTexture = createGradientTexture();
 
-    const emblemMat = new THREE.MeshPhysicalMaterial({
+    const logoMat = new THREE.MeshPhysicalMaterial({
       map: gradientTexture,
       roughness: 0.12,
-      metalness: 0.1,
+      metalness: 0.15,
       clearcoat: 1.0,
       clearcoatRoughness: 0.06,
-      reflectivity: 0.85,
+      reflectivity: 0.9,
     });
 
-    const emblemMesh = new THREE.Mesh(emblemGeo, emblemMat);
-    emblemMesh.castShadow = true;
-    emblemMesh.receiveShadow = true;
+    const logoMesh = new THREE.Mesh(logoGeo, logoMat);
+    logoMesh.castShadow = true;
+    logoMesh.receiveShadow = true;
 
-    // The Emblem Pivot Group
-    const emblemGroup = new THREE.Group();
-    emblemGroup.add(emblemMesh);
-    scene.add(emblemGroup);
+    // Logo Pivot Group
+    const logoGroup = new THREE.Group();
+    logoGroup.add(logoMesh);
+    scene.add(logoGroup);
 
-    // Initial State: Emblem lies flat in 3D perspective on the floor (like ref_frame_04)
-    emblemGroup.position.set(0, 0.22, 0);
-    emblemGroup.rotation.set(-Math.PI / 2.3, 0, -0.32);
+    // Initial State: 3D De.risen Logo lies flat in perspective on the floor (like the reference video)
+    logoGroup.position.set(0, 0.22, 0);
+    logoGroup.rotation.set(-Math.PI / 2.2, 0, -0.15);
 
     // GSAP Initial Component State
     gsap.set(textGroupRef.current, { opacity: 0, y: 25 });
-    gsap.set(brandNameRef.current, { opacity: 0, y: 15, letterSpacing: "0.1em" });
-    gsap.set(taglineRef.current, { opacity: 0, y: 10 });
+    gsap.set(taglineRef.current, { opacity: 0, y: 15, letterSpacing: "0.2em" });
+    gsap.set(sublineRef.current, { opacity: 0, y: 10 });
     gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
 
     // Camera object for tweening
     const camTarget = {
       posX: 0,
-      posY: 3.8,
-      posZ: isMobile ? 6.2 : 5.0,
+      posY: 4.4,
+      posZ: isMobile ? 8.4 : 6.8,
       lookX: 0,
-      lookY: 0.1,
+      lookY: 0.2,
       lookZ: 0,
     };
 
-    // Master Cinematic GSAP Timeline (matching reference video pacing ~8.2s)
+    // Master Cinematic GSAP Timeline
     const masterTl = gsap.timeline({
-      delay: 0.2,
+      delay: 0.25,
       onComplete: () => {
         finishIntro();
       },
@@ -205,88 +193,76 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
 
     // Phase 1: Subtle initial floating oscillation while lying in perspective on the floor (0.0s - 2.0s)
     masterTl.to(
-      emblemGroup.rotation,
+      logoGroup.rotation,
       {
-        z: -0.28,
+        z: -0.12,
         duration: 2.0,
         ease: "sine.inOut",
       },
       0.2
     );
 
-    // Phase 2: 3D Emblem Smoothly Rotates & Stands Up Right (2.2s - 4.8s) (Matches ref_frame_06 to 09)
+    // Phase 2: 3D De.risen Logo Smoothly Rotates & Stands Upright (2.0s - 5.0s)
     masterTl.to(
-      emblemGroup.rotation,
+      logoGroup.rotation,
       {
         x: 0,
         y: 0,
         z: 0,
-        duration: 2.6,
+        duration: 2.8,
         ease: "power2.inOut",
       },
-      2.2
+      2.0
     );
 
     masterTl.to(
-      emblemGroup.position,
+      logoGroup.position,
       {
         x: 0,
-        y: 0.95,
+        y: 0.85,
         z: 0,
-        duration: 2.6,
+        duration: 2.8,
         ease: "power2.inOut",
       },
-      2.2
+      2.0
     );
 
-    // Camera smoothly adjusts to center the standing 3D emblem straight-on
+    // Camera smoothly adjusts to center the standing 3D De.risen logo straight-on
     masterTl.to(
       camTarget,
       {
         posX: 0,
-        posY: 0.5,
-        posZ: isMobile ? 5.8 : 4.6,
+        posY: 0.45,
+        posZ: isMobile ? 8.0 : 6.2,
         lookX: 0,
-        lookY: 0.5,
+        lookY: 0.45,
         lookZ: 0,
-        duration: 2.6,
+        duration: 2.8,
         ease: "power2.inOut",
       },
-      2.2
+      2.0
     );
 
-    // Specular light sweep across top curved bevel as it rises
+    // Specular light sweep across beveled letter edges as logo rises
     masterTl.to(
       keyLight.position,
       {
-        x: -4,
-        y: 11,
-        z: 8,
-        duration: 2.4,
+        x: -5,
+        y: 12,
+        z: 10,
+        duration: 2.5,
         ease: "power2.inOut",
       },
-      2.8
+      2.5
     );
 
-    // Phase 3: Brand Name & Tagline Expands Smoothly Below (4.6s - 6.5s) (Matches ref_frame_10 & 11)
+    // Phase 3: Tagline & Subtitle Reveals Below Standing 3D Logo (4.8s - 6.8s)
     masterTl.to(
       textGroupRef.current,
       {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        ease: "power2.out",
-      },
-      4.6
-    );
-
-    masterTl.to(
-      brandNameRef.current,
-      {
-        opacity: 1,
-        y: 0,
-        letterSpacing: "0.38em",
-        duration: 1.6,
         ease: "power2.out",
       },
       4.8
@@ -297,17 +273,29 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       {
         opacity: 1,
         y: 0,
+        letterSpacing: "0.32em",
+        duration: 1.6,
+        ease: "power2.out",
+      },
+      5.0
+    );
+
+    masterTl.to(
+      sublineRef.current,
+      {
+        opacity: 1,
+        y: 0,
         duration: 1.2,
         ease: "power2.out",
       },
-      5.4
+      5.6
     );
 
-    // Phase 4: Savor the Complete 3D Brand Reveal (6.5s - 8.2s)
-    masterTl.to({}, { duration: 1.8 }, 6.5);
+    // Phase 4: Savor the Complete Official 3D Brand Reveal (6.8s - 8.8s)
+    masterTl.to({}, { duration: 2.0 }, 6.8);
 
     // Phase 5: Smooth Glide into Navbar
-    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.3 }, 8.0);
+    masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.3 }, 8.5);
     masterTl.to(
       textGroupRef.current,
       {
@@ -316,19 +304,19 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         duration: 0.6,
         ease: "power2.in",
       },
-      8.1
+      8.6
     );
 
     masterTl.to(
-      emblemGroup.scale,
+      logoGroup.scale,
       {
-        x: 0.22,
-        y: 0.22,
-        z: 0.22,
+        x: 0.24,
+        y: 0.24,
+        z: 0.24,
         duration: 0.9,
         ease: "power2.inOut",
       },
-      8.2
+      8.7
     );
 
     masterTl.to(
@@ -338,7 +326,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         duration: 0.7,
         ease: "power2.inOut",
       },
-      8.4
+      8.9
     );
 
     const finishIntro = () => {
@@ -353,8 +341,8 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       document.body.style.overflow = "";
 
       try {
-        emblemGeo.dispose();
-        emblemMat.dispose();
+        logoGeo.dispose();
+        logoMat.dispose();
         gradientTexture.dispose();
         groundGeo.dispose();
         groundMat.dispose();
@@ -424,7 +412,7 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
       className="fixed inset-0 z-[100] overflow-hidden select-none"
       style={{ background: "#ffffff" }}
     >
-      {/* 3D WebGL Canvas for 3D Emblem Standing Up */}
+      {/* 3D WebGL Canvas for 3D De.risen Logo Standing Up */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none" />
 
       {/* Top Bar with Skip Button */}
@@ -441,30 +429,26 @@ export const BrandIntro: React.FC<BrandIntroProps> = ({ onComplete }) => {
         </button>
       </div>
 
-      {/* Center Stage: Typography Reveal right below the standing 3D emblem (matches ref_frame_10 & 11) */}
+      {/* Center Stage: Tagline Reveal right below the standing 3D De.risen Logo */}
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-24 sm:pb-28 md:pb-32 z-20 pointer-events-none">
         <div
           ref={textGroupRef}
           className="relative flex flex-col items-center justify-center text-center px-4"
         >
-          {/* Brand Name Typography */}
-          <h1
-            ref={brandNameRef}
-            className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-brand-dark transition-all duration-300"
-            style={{
-              fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-              letterSpacing: "0.38em",
-            }}
-          >
-            De<span className="text-brand-purple">.</span>risen
-          </h1>
-
           {/* Subtitle / Tagline display */}
           <p
             ref={taglineRef}
-            className="mt-3 sm:mt-4 text-[10px] sm:text-[12px] font-bold tracking-[0.3em] uppercase text-brand-purple/80"
+            className="text-[11px] sm:text-[13px] font-bold tracking-[0.32em] uppercase text-brand-dark/85"
+            style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
           >
             Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
+          </p>
+
+          <p
+            ref={sublineRef}
+            className="mt-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.4em] uppercase text-brand-purple/75"
+          >
+            Rise Above &bull; Redefine
           </p>
         </div>
       </div>
