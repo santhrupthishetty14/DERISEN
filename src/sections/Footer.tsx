@@ -1,9 +1,21 @@
 import React from 'react';
 import { Logo } from '../components/Logo';
-import { Mail, Phone, MapPin, Linkedin, Instagram, Twitter } from 'lucide-react';
-import { NAV_ITEMS } from '../utils/constants';
+import { Mail, Phone, MapPin, Linkedin, Instagram, MessageSquare } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handleNav = (e: React.MouseEvent, page: string) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(page);
+    } else {
+      window.location.hash = '#' + page;
+    }
+  };
+
   return (
     <footer className="bg-brand-navy text-white pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
       {/* Background Cybernetic Circuit Texture */}
@@ -14,31 +26,39 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">
           {/* Brand Info */}
           <div className="lg:col-span-4">
-            <Logo variant="light" className="mb-4" />
+            <div onClick={(e) => handleNav(e, 'home')} className="cursor-pointer">
+              <Logo variant="light" className="mb-4" />
+            </div>
             <p className="text-xs sm:text-sm text-white/70 max-w-sm mb-6 leading-relaxed">
-              Smart Solutions. Real Impact. Creative Design, Branding, Digital Marketing &amp; IT Solutions under one roof.
+              Smart Solutions. Real Impact. Creative Design, Branding, Digital Marketing &amp; IT Solutions under one unified leadership.
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://wa.me/917899910917?text=Hi%20DE.RISEN%2C%20I%20would%20like%20to%20inquire%20about%20your%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-600 flex items-center justify-center text-white transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-purple flex items-center justify-center text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-purple flex items-center justify-center text-white transition-colors"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-pink flex items-center justify-center text-white transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-purple flex items-center justify-center text-white transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -49,13 +69,46 @@ export const Footer: React.FC = () => {
               Navigation
             </h4>
             <ul className="space-y-2.5 text-xs text-white/70">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="hover:text-brand-violetLight transition-colors">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'home')}
+                  className="hover:text-brand-violetLight transition-colors cursor-pointer text-left"
+                >
+                  Home
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'about')}
+                  className="hover:text-brand-violetLight transition-colors cursor-pointer text-left"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight transition-colors cursor-pointer text-left"
+                >
+                  Services &amp; Packages
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'work')}
+                  className="hover:text-brand-violetLight transition-colors cursor-pointer text-left"
+                >
+                  Work Gallery &amp; Testimonials
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'contact')}
+                  className="hover:text-brand-violetLight transition-colors cursor-pointer text-left"
+                >
+                  Contact Us
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -65,12 +118,46 @@ export const Footer: React.FC = () => {
               Core Verticals
             </h4>
             <ul className="space-y-2.5 text-xs text-white/70">
-              <li><a href="#individual-services" className="hover:text-brand-violetLight">01 Brand Identity</a></li>
-              <li><a href="#individual-services" className="hover:text-brand-violetLight">02 Graphic Design</a></li>
-              <li><a href="#individual-services" className="hover:text-brand-violetLight">03 Print &amp; Marketing</a></li>
-              <li><a href="#individual-services" className="hover:text-brand-violetLight">04 Digital UI/UX</a></li>
-              <li><a href="#digital-production" className="hover:text-brand-violetLight">05 Motion &amp; Video</a></li>
-              <li><a href="#digital-production" className="hover:text-brand-violetLight">08 Website &amp; IT Solutions</a></li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight cursor-pointer text-left"
+                >
+                  01 Brand Identity &amp; Strategy
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight cursor-pointer text-left"
+                >
+                  02 Graphic &amp; Print Design
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight cursor-pointer text-left"
+                >
+                  03 Performance Digital Marketing
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight cursor-pointer text-left"
+                >
+                  04 Website &amp; Full-Stack IT Solutions
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => handleNav(e, 'services')}
+                  className="hover:text-brand-violetLight cursor-pointer text-left"
+                >
+                  05 3D Motion Graphics &amp; Video Shoots
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -82,15 +169,19 @@ export const Footer: React.FC = () => {
             <div className="space-y-3 text-xs text-white/70">
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
-                <span>contact@derisen.com</span>
+                <a href="mailto:derisen.official@gmail.com" className="hover:text-white transition-colors">
+                  derisen.official@gmail.com
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <a href="tel:+917899910917" className="hover:text-white transition-colors">
+                  +91 78999 10917
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
-                <span>Mumbai &amp; Global Remote</span>
+                <span>Karnataka, India &amp; Global Remote</span>
               </div>
             </div>
           </div>
@@ -98,8 +189,8 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Credits */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
-          <div>© 2026 DE.RISEN. All rights reserved. Client approved design reference.</div>
-          <div className="font-semibold text-white/40">Creative • Digital • Technology</div>
+          <div>© 2026 DE.RISEN. All rights reserved. Creative • Digital • Technology.</div>
+          <div className="font-semibold text-white/40">Smart Solutions. Real Impact.</div>
         </div>
       </div>
     </footer>

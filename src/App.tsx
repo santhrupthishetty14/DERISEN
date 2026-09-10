@@ -1,34 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { CustomCursor } from './components/CustomCursor';
 import { Brand3DIntro } from './components/Brand3DIntro';
 import { Navbar } from './components/Navbar';
-import { Hero } from './sections/Hero';
-import { Stats } from './sections/Stats';
-import { OperatingModel } from './sections/OperatingModel';
-import { About } from './sections/About';
-import { Leadership } from './sections/Leadership';
-import { WhatWeDo } from './sections/WhatWeDo';
-import { ProcessTimeline } from './sections/ProcessTimeline';
-import { Promise } from './sections/Promise';
-import { ServicesPackages } from './sections/ServicesPackages';
-import { ServiceCatalog } from './sections/ServiceCatalog';
-import { DigitalProduction } from './sections/DigitalProduction';
-import { WorkGallery } from './sections/WorkGallery';
-import { FinalCTA } from './sections/FinalCTA';
 import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
 
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { WorkPage } from './pages/WorkPage';
+import { ContactPage } from './pages/ContactPage';
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
+const VALID_PAGES = ['home', 'about', 'services', 'work', 'contact'];
+
+function getPageFromHash(): string {
+  const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+  // Map old section hashes if any
+  if (hash === 'services-packages') return 'services';
+  if (hash === 'work-gallery') return 'work';
+  if (VALID_PAGES.includes(hash)) return hash;
+  return 'home';
+}
+
 export const App: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<string>(getPageFromHash);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -38,8 +45,8 @@ export const App: React.FC = () => {
       orientation: 'vertical',
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
-    // Synchronize Lenis scroll with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
     const updateLenis = (time: number) => {
@@ -54,17 +61,44 @@ export const App: React.FC = () => {
     };
     window.addEventListener('load', handleLoad);
 
-    // Initial refresh after render
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 200);
-
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('load', handleLoad);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
+      lenisRef.current = null;
     };
+  }, []);
+
+  // Synchronize hash changes with currentPage state
+  useEffect(() => {
+    const handleHashChange = () => {
+      const newPage = getPageFromHash();
+      setCurrentPage(newPage);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+      setTimeout(() => ScrollTrigger.refresh(), 100);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleNavigate = useCallback((page: string) => {
+    let target = page.toLowerCase();
+    if (target === 'services-packages') target = 'services';
+    if (target === 'work-gallery') target = 'work';
+    if (!VALID_PAGES.includes(target)) target = 'home';
+
+    setCurrentPage(target);
+    window.location.hash = '#' + target;
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    setTimeout(() => ScrollTrigger.refresh(), 120);
   }, []);
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -77,7 +111,10 @@ export const App: React.FC = () => {
     }, 4500);
   };
 
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    // Only show 3D intro if on home page
+    return getPageFromHash() === 'home';
+  });
   const [introKey, setIntroKey] = useState(0);
 
   const handleReplayIntro = () => {
@@ -100,7 +137,7 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  const handleIntroComplete = React.useCallback(() => {
+  const handleIntroComplete = useCallback(() => {
     setShowIntro(false);
     ScrollTrigger.refresh();
   }, []);
@@ -119,52 +156,63 @@ export const App: React.FC = () => {
       <CustomCursor />
 
       {/* 1. Header & Navigation */}
-      <Navbar onOpenModal={handleOpenModal} />
+      <Navbar
+        onOpenModal={handleOpenModal}
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+      />
 
-      {/* 2. Main Content Sections */}
-      <main className="flex-grow">
-        {/* Page 2: Hero Section & 4 Pillars Strip */}
-        <Hero onOpenModal={handleOpenModal} />
+      {/* 2. Main Multi-Page Content Area with Smooth Page Transitions */}
+      <main className="flex-grow pt-[70px] sm:pt-[90px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="w-full"
+          >
+            {currentPage === 'home' && (
+              <HomePage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {/* Page 3: Performance & Statistics (96+, 51+, 2+, 100%) */}
-        <Stats />
+            {currentPage === 'about' && (
+              <AboutPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {/* Page 4: 4 Services. One Operating Model */}
-        <OperatingModel />
+            {currentPage === 'services' && (
+              <ServicesPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {/* Page 5: Company Introduction, Vision, Mission, Goal */}
-        <About />
+            {currentPage === 'work' && (
+              <WorkPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {/* Page 6: Leadership (The Visionaries Behind DE.RISEN) */}
-        <Leadership />
-
-        {/* Page 7: What We Do & Why Choose DE.RISEN */}
-        <WhatWeDo />
-
-        {/* Page 8: Structured Work Process (6 Steps) */}
-        <ProcessTimeline />
-
-        {/* Page 9: Our Promise & 6-Node Workflow Pipeline */}
-        <Promise />
-
-        {/* Page 10: Services & Packages */}
-        <ServicesPackages />
-
-        {/* Page 11: Individual Services Catalog */}
-        <ServiceCatalog />
-
-        {/* Page 12: Digital + Production Stack */}
-        <DigitalProduction />
-
-        {/* Work Gallery & Testimonials */}
-        <WorkGallery />
-
-        {/* Final Conversion CTA: "Let's Make Your Brand Rise." */}
-        <FinalCTA onOpenModal={handleOpenModal} />
+            {currentPage === 'contact' && (
+              <ContactPage
+                onSuccess={handleFormSuccess}
+                onNavigate={handleNavigate}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
-      {/* 3. Site Footer */}
-      <Footer />
+      {/* 3. Site Footer with Navigation */}
+      <Footer onNavigate={handleNavigate} />
 
       {/* 4. Interactive Consultation Dialog Modal */}
       <ContactModal
