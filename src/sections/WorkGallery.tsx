@@ -105,22 +105,22 @@ export const WorkGallery: React.FC = () => {
         {/* Portfolio Grid Cards with Dynamic Showcase Pictures */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 mb-20">
           {filteredItems.map((item, idx) => {
-            const imgSrc = GALLERY_IMAGE_MAP[item.category] || '/assets/about-circle-collage.jpg';
+            const imgSrc = item.imageUrl || GALLERY_IMAGE_MAP[item.category] || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=85';
 
             return (
               <div
                 key={item.title}
                 style={{ transitionDelay: `${idx * 120}ms` }}
-                className={`bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-purple/50 hover:-translate-y-2.5 transition-all duration-700 flex flex-col group cursor-view-target ${
+                className={`bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-purple/50 hover:-translate-y-2.5 transition-all duration-500 flex flex-col group cursor-pointer ${
                   isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
                 }`}
               >
                 {/* Visual Header with Real Delivered Work Picture */}
-                <div className="h-52 relative overflow-hidden bg-brand-navy">
+                <div className="h-56 relative overflow-hidden bg-brand-navy">
                   <img
                     src={imgSrc}
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-115 will-change-transform"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
                     loading="lazy"
                   />
 
@@ -140,8 +140,15 @@ export const WorkGallery: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="text-white/90 font-black text-2xl tracking-tighter drop-shadow-md">
-                      0{idx + 1}
+                    <div className="flex items-end justify-between">
+                      <div className="text-white/90 font-black text-2xl tracking-tighter drop-shadow-md">
+                        0{idx + 1}
+                      </div>
+                      {item.metrics && (
+                        <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full backdrop-blur-sm">
+                          {item.metrics}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
