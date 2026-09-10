@@ -4,6 +4,7 @@ import { VISION_MISSION_DATA } from '../utils/constants';
 import { PenTool, Megaphone, Code, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SectionBanner } from '../components/SectionBanner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,11 +82,22 @@ export const About: React.FC = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+      className="bg-white relative overflow-hidden"
     >
+      {/* ── Section Banner ── */}
+      <SectionBanner
+        eyebrow="COMPANY INTRODUCTION"
+        title="About DE.RISEN"
+        subtitle="Creativity, innovation, and strategy — united to build brands that rise above the ordinary."
+        imageUrl="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=90&auto=format&fit=crop"
+        imageAlt="Creative studio workspace"
+        minHeight={300}
+      />
+
       {/* Ambient background dots */}
       <div className="dot-pattern top-12 left-10 opacity-10" />
       <div className="dot-pattern bottom-12 right-10 opacity-10" />
+      <div className="py-24 sm:py-32">
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         {/* ===================================================================
