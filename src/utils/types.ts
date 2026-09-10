@@ -73,4 +73,7 @@ export interface PortfolioItem {
   client: string;
   category: string;
   description: string;
+  imageUrl?: string;
+  metrics?: string;
 }
+
