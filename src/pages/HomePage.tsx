@@ -153,7 +153,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
           {/* Grid of 3 High-Res Items */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {featuredWorks.map((item, idx) => (
+            {featuredWorks.map((item) => (
               <div
                 key={item.title}
                 onClick={() => onNavigate('work')}
