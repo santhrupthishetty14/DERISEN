@@ -283,24 +283,48 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     title: 'Corporate Brand Identity & Guidelines',
     client: 'Finizon Consulting Pvt. Ltd.',
     category: 'Branding & Identity',
-    description: 'Complete visual identity system, corporate stationery, guidelines and typography.'
+    description: 'Complete visual identity system, corporate stationery, guidelines and typography.',
+    imageUrl: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=85',
+    metrics: '+180% Brand Recall'
   },
   {
     title: 'Full-Stack Scalable Web Platform',
     client: 'Sanama Solution',
     category: 'IT & Web Development',
-    description: 'High-performance responsive portal with speed optimization and custom workflows.'
+    description: 'High-performance responsive portal with speed optimization and custom workflows.',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85',
+    metrics: '<0.8s Load Time'
   },
   {
     title: 'Omnichannel Lead Generation Campaign',
     client: 'Fintech & Real Estate Enterprise',
     category: 'Digital Marketing',
-    description: 'Targeted Google Ads & Meta Funnels generating 3.8x ROAS and continuous client leads.'
+    description: 'Targeted Google Ads & Meta Funnels generating continuous qualified client leads.',
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
+    metrics: '3.8x Target ROAS'
   },
   {
     title: '3D Product Animation & Social Motion',
     client: 'Global Lifestyle & Retail Brand',
     category: 'Motion & Video',
-    description: 'High-definition 3D motion graphics, commercial reels, and promotional video shoots.'
+    description: 'High-definition 3D motion graphics, commercial reels, and promotional video shoots.',
+    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85',
+    metrics: '1.2M+ Viral Reach'
+  },
+  {
+    title: 'Luxury Product Packaging & Print',
+    client: 'Organic Wellness Essentials',
+    category: 'Branding & Identity',
+    description: 'Eco-friendly premium packaging suite, tactile finish print and exhibition booth banners.',
+    imageUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=1200&q=85',
+    metrics: 'Gold Packaging Award'
+  },
+  {
+    title: 'Next-Gen Mobile SaaS Application',
+    client: 'HyperGrowth Cloud Platform',
+    category: 'IT & Web Development',
+    description: 'Intuitive micro-interactions, dark glassmorphism dashboard, and cross-platform native feel.',
+    imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=85',
+    metrics: '4.9 App Store Rating'
   }
 ];
