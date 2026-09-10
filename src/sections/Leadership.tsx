@@ -45,7 +45,7 @@ export const Leadership: React.FC = () => {
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern top-8 right-8 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24">
         {/* Section Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ease-out ${
