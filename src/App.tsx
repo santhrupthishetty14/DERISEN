@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { CustomCursor } from './components/CustomCursor';
-import { BrandIntro } from './components/BrandIntro';
+import { Brand3DIntro } from './components/Brand3DIntro';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
 import { Stats } from './sections/Stats';
@@ -107,9 +107,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
-      {/* 0. Cinematic Brand Signature Intro ("In Different Form") */}
+      {/* 0. Cinematic 3D Brand Intro (White Studio, 3D De.risen Logo) */}
       {showIntro && (
-        <BrandIntro
+        <Brand3DIntro
           key={introKey}
           onComplete={handleIntroComplete}
         />
