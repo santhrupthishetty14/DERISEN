@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PROCESS_STEPS } from '../utils/constants';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { SectionBanner } from '../components/SectionBanner';
 
 export const ProcessTimeline: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -37,13 +38,23 @@ export const ProcessTimeline: React.FC = () => {
     <section
       ref={sectionRef}
       id="work-process"
-      className="py-24 sm:py-32 bg-surface-subtle relative overflow-hidden"
+      className="bg-surface-subtle relative overflow-hidden"
     >
+      {/* ── Section Banner ── */}
+      <SectionBanner
+        eyebrow="STRUCTURED ROADMAP"
+        title="Our Work Process"
+        subtitle="A clear 6-step strategy from discovery to launch — built for precision, purpose, and lasting impact."
+        imageUrl="https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?w=1600&q=90&auto=format&fit=crop"
+        imageAlt="Strategic workflow planning"
+        minHeight={280}
+      />
+
       {/* Background Dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24 sm:py-32">
         {/* Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-16 sm:mb-20 transition-all duration-700 ${
