@@ -76,21 +76,7 @@ export const WorkGallery: React.FC = () => {
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24 sm:py-32">
-        {/* Header */}
-        <div
-          className={`text-center max-w-3xl mx-auto mb-14 transition-all duration-700 ease-out ${
-            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="eyebrow">WORK GALLERY &amp; TESTIMONIALS</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4 leading-tight">
-            Impact That Speaks For Itself
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600 font-medium max-w-2xl mx-auto">
-            A curated showcase of delivered creative assets, brand identities, and high-performance digital systems.
-          </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto mt-4" />
-        </div>
+
 
         {/* Filter Category Pills */}
         <div
