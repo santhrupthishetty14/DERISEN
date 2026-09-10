@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PenTool, Tag, Megaphone, Code, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 import { TrustBadge } from '../components/TrustBadge';
 import { OPERATING_MODEL_SERVICES, TRUST_BADGES } from '../utils/constants';
+import { SectionBanner } from '../components/SectionBanner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,7 +147,17 @@ export const OperatingModel: React.FC = () => {
   }, []);
 
   return (
-    <div id="services-packages" className="relative bg-[#FAFAFC]">
+    <div id="operating-model" className="relative bg-[#FAFAFC]">
+      {/* ── Section Banner ── */}
+      <SectionBanner
+        eyebrow="4 SERVICES. ONE OPERATING MODEL."
+        title="Our Services"
+        subtitle="Creative Design, Branding, Digital Marketing, and IT Solutions — integrated under one roof."
+        imageUrl="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=90&auto=format&fit=crop"
+        imageAlt="Integrated services operating model"
+        minHeight={280}
+      />
+
       {/* Pinned 100vh Viewport Section */}
       <section
         ref={pinTargetRef}
