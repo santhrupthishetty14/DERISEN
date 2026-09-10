@@ -1,11 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Hero } from '../sections/Hero';
 import { Stats } from '../sections/Stats';
 import { OperatingModel } from '../sections/OperatingModel';
 import { FinalCTA } from '../sections/FinalCTA';
 import { PORTFOLIO_ITEMS } from '../utils/constants';
-import { ArrowRight, ArrowUpRight, Sparkles, CheckCircle, ShieldCheck, Star } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle, ShieldCheck, Star } from 'lucide-react';
 
 interface HomePageProps {
   onOpenModal: () => void;
