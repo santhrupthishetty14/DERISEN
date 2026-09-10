@@ -4,6 +4,8 @@ import { ArrowRight, X } from 'lucide-react';
 
 interface NavbarProps {
   onOpenModal: () => void;
+  currentPage: string;
+  onNavigate: (page: string) => void;
 }
 
 interface NavItemData {
@@ -15,46 +17,27 @@ interface NavItemData {
 const DESKTOP_NAV_ITEMS: NavItemData[] = [
   { label: 'Home', href: '#home', id: 'home' },
   { label: 'About Us', href: '#about', id: 'about' },
-  { label: 'Services & Packages', href: '#services-packages', id: 'services-packages' },
-  { label: 'Work Gallery & Testimonial', href: '#work-gallery', id: 'work-gallery' },
+  { label: 'Services & Packages', href: '#services', id: 'services' },
+  { label: 'Work Gallery & Testimonials', href: '#work', id: 'work' },
   { label: 'Contact Us', href: '#contact', id: 'contact' },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Scroll listener for sticky size change & active section detection
+  // Scroll listener for sticky header background change
   useEffect(() => {
     const handleScroll = () => {
-      // Navbar size change threshold
       if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
-
-      // Active Section Tracking
-      const scrollPosition = window.scrollY + 140;
-      const sectionIds = ['home', 'about', 'services-packages', 'work-gallery', 'contact'];
-
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i];
-        const element = document.getElementById(id);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -70,6 +53,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
     };
   }, [mobileMenuOpen]);
 
+  const handleItemClick = (e: React.MouseEvent, pageId: string) => {
+    e.preventDefault();
+    onNavigate(pageId);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       {/* =====================================================================
@@ -78,23 +67,29 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'h-[70px] bg-white/80 backdrop-blur-md shadow-[0_10px_30px_rgba(24,13,56,0.06)] border-b border-gray-200/50'
-            : 'h-[90px] bg-white/50 backdrop-blur-sm border-b border-transparent'
+            ? 'h-[70px] bg-white/90 backdrop-blur-md shadow-[0_10px_30px_rgba(24,13,56,0.06)] border-b border-gray-200/50'
+            : 'h-[90px] bg-white/60 backdrop-blur-sm border-b border-transparent'
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 h-full flex items-center justify-between">
           {/* 1. DE.RISEN Animated Logo */}
-          <Logo isAnimated={true} />
+          <div
+            onClick={(e) => handleItemClick(e, 'home')}
+            className="cursor-pointer"
+          >
+            <Logo isAnimated={true} />
+          </div>
 
           {/* 2. Desktop Navigation Menu */}
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             {DESKTOP_NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
+              const isActive = currentPage === item.id;
               return (
                 <a
                   key={item.id}
                   href={item.href}
-                  className={`relative text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 py-2 group ${
+                  onClick={(e) => handleItemClick(e, item.id)}
+                  className={`relative text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 py-2 group cursor-pointer ${
                     isActive
                       ? 'text-brand-purple font-bold'
                       : 'text-gray-600 hover:text-brand-purple'
@@ -102,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
                 >
                   <span>{item.label}</span>
 
-                  {/* Client's Purple Underline for Active Item */}
+                  {/* Active Indicator Underline */}
                   <span
                     className={`absolute bottom-0 left-0 h-[2.5px] rounded-full transition-all duration-300 ease-out ${
                       isActive
@@ -132,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
           {/* 4. Premium Mobile Hamburger Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden relative p-2.5 rounded-full text-brand-dark hover:text-brand-purple hover:bg-brand-lilacSoft transition-colors focus:outline-none"
+            className="lg:hidden relative p-2.5 rounded-full text-brand-dark hover:text-brand-purple hover:bg-brand-lilacSoft transition-colors focus:outline-none cursor-pointer"
             aria-label="Open mobile menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -155,20 +150,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
             : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Fullscreen Backdrop / Glassmorphism Background */}
         <div className="absolute inset-0 bg-[#0B041A]/95 backdrop-blur-2xl text-white flex flex-col justify-between p-6 sm:p-10">
-          {/* Ambient Purple Radial Glows */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-brand-purple/25 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-violet/20 rounded-full blur-3xl pointer-events-none" />
 
           {/* Top Bar inside Fullscreen Drawer */}
           <div className="relative z-10 flex items-center justify-between pb-6 border-b border-white/10">
-            <Logo variant="light" isAnimated={false} />
+            <div
+              onClick={(e) => handleItemClick(e, 'home')}
+              className="cursor-pointer"
+            >
+              <Logo variant="light" isAnimated={false} />
+            </div>
 
-            {/* Animated Close Button */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="w-11 h-11 rounded-full bg-white/10 hover:bg-brand-purple text-white flex items-center justify-center transition-all duration-300 hover:rotate-90"
+              className="w-11 h-11 rounded-full bg-white/10 hover:bg-brand-purple text-white flex items-center justify-center transition-all duration-300 hover:rotate-90 cursor-pointer"
               aria-label="Close mobile menu"
             >
               <X className="w-5 h-5" />
@@ -178,16 +175,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
           {/* Staggered Navigation Items List */}
           <nav className="relative z-10 my-auto flex flex-col gap-5 sm:gap-6 py-6">
             {DESKTOP_NAV_ITEMS.map((item, index) => {
-              const isActive = activeSection === item.id;
+              const isActive = currentPage === item.id;
               return (
                 <a
                   key={item.id}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleItemClick(e, item.id)}
                   style={{
                     transitionDelay: mobileMenuOpen ? `${index * 60 + 100}ms` : '0ms',
                   }}
-                  className={`text-2xl sm:text-3xl font-extrabold tracking-tight transition-all duration-500 transform ${
+                  className={`text-2xl sm:text-3xl font-extrabold tracking-tight transition-all duration-500 transform cursor-pointer ${
                     mobileMenuOpen
                       ? 'translate-y-0 opacity-100'
                       : 'translate-y-6 opacity-0'
@@ -211,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
             })}
           </nav>
 
-          {/* Mobile Bottom Section: CTA & Brand Philosophy */}
+          {/* Mobile Bottom Section: CTA */}
           <div
             style={{
               transitionDelay: mobileMenuOpen ? '450ms' : '0ms',
@@ -227,7 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
                 setMobileMenuOpen(false);
                 onOpenModal();
               }}
-              className="w-full inline-flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-brand-purple to-brand-violet text-white text-base font-extrabold rounded-full shadow-[0_6px_25px_rgba(99,32,238,0.45)] hover:brightness-110 active:scale-[0.98] transition-all"
+              className="w-full inline-flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-brand-purple to-brand-violet text-white text-base font-extrabold rounded-full shadow-[0_6px_25px_rgba(99,32,238,0.45)] hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
             >
               <span>Let's Talk</span>
               <ArrowRight className="w-4 h-4" />
