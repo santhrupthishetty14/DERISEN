@@ -147,7 +147,7 @@ export const OperatingModel: React.FC = () => {
   }, []);
 
   return (
-    <div id="operating-model" className="relative bg-[#FAFAFC]">
+    <div id="services" className="relative bg-[#FAFAFC]">
       {/* ── Section Banner ── */}
       <SectionBanner
         eyebrow="4 SERVICES. ONE OPERATING MODEL."
