@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PORTFOLIO_ITEMS } from '../utils/constants';
 import { ArrowUpRight, Star } from 'lucide-react';
+import { SectionBanner } from '../components/SectionBanner';
 
 const CATEGORIES = ['All', 'Branding & Identity', 'IT & Web Development', 'Digital Marketing', 'Motion & Video'];
 
@@ -58,13 +59,23 @@ export const WorkGallery: React.FC = () => {
     <section
       ref={sectionRef}
       id="work-gallery"
-      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+      className="bg-white relative overflow-hidden"
     >
+      {/* ── Section Banner ── */}
+      <SectionBanner
+        eyebrow="WORK GALLERY & TESTIMONIALS"
+        title="Impact That Speaks For Itself"
+        subtitle="A curated showcase of delivered creative assets, brand identities, and high-performance digital systems."
+        imageUrl="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1600&q=90&auto=format&fit=crop"
+        imageAlt="Creative portfolio gallery"
+        minHeight={300}
+      />
+
       {/* Background Dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24 sm:py-32">
         {/* Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-14 transition-all duration-700 ease-out ${
