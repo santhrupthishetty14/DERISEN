@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PenTool, Tag, Megaphone, Code, CheckCircle, Lightbulb, Target, Users, Rocket } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SectionBanner } from '../components/SectionBanner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,23 +67,13 @@ export const WhatWeDo: React.FC = () => {
     <section
       ref={sectionRef}
       id="what-we-do"
-      className="bg-white relative overflow-hidden"
+      className="py-24 sm:py-32 bg-white relative overflow-hidden"
     >
-      {/* ── Section Banner ── */}
-      <SectionBanner
-        eyebrow="OUR EXPERTISE"
-        title="What We Do"
-        subtitle="Transforming bold ideas into powerful brands and meaningful digital experiences."
-        imageUrl="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1600&q=90&auto=format&fit=crop"
-        imageAlt="Creative strategy brainstorm"
-        minHeight={280}
-      />
-
       {/* Background Dots */}
       <div className="dot-pattern top-10 left-10 opacity-10" />
       <div className="dot-pattern bottom-10 right-10 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24 sm:py-32">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* =================================================================
               Left Column: WHAT WE DO (Line-by-Line Heading & 4 Mini Badges)

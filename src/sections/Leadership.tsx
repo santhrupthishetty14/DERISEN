@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { LeaderCard } from '../components/LeaderCard';
 import { LEADERS } from '../utils/constants';
 import { Lightbulb, TrendingUp } from 'lucide-react';
-import { SectionBanner } from '../components/SectionBanner';
 
 export const Leadership: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -29,23 +28,13 @@ export const Leadership: React.FC = () => {
     <section
       ref={sectionRef}
       id="leadership"
-      className="bg-surface-subtle relative overflow-hidden"
+      className="py-24 bg-surface-subtle relative overflow-hidden"
     >
-      {/* ── Section Banner ── */}
-      <SectionBanner
-        eyebrow="THE VISIONARIES BEHIND"
-        title="DE.RISEN Leadership"
-        subtitle="Driven by passion, guided by strategy, and committed to building impactful brands."
-        imageUrl="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=90&auto=format&fit=crop"
-        imageAlt="Leadership team meeting"
-        minHeight={280}
-      />
-
       {/* Dot Matrix Ambient Pattern */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern top-8 right-8 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ease-out ${

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import { SectionBanner } from '../components/SectionBanner';
 
 export const ServicesPackages: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -54,23 +53,13 @@ export const ServicesPackages: React.FC = () => {
     <section
       ref={sectionRef}
       id="services-packages"
-      className="bg-surface-subtle relative overflow-hidden"
+      className="py-24 sm:py-32 bg-surface-subtle relative overflow-hidden"
     >
-      {/* ── Section Banner ── */}
-      <SectionBanner
-        eyebrow="INTEGRATED ECOSYSTEM"
-        title="Services & Packages"
-        subtitle="Everything your brand needs — creative design, branding, digital marketing, and IT solutions."
-        imageUrl="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1600&q=90&auto=format&fit=crop"
-        imageAlt="Professional services and packages"
-        minHeight={280}
-      />
-
       {/* Ambient background dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10 py-24 sm:py-32">
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         {/* Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-16 sm:mb-20 transition-all duration-700 ${

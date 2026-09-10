@@ -136,7 +136,7 @@ export const LEADERS: LeaderProfile[] = [
     avatarSeed: 'lejai',
     bioParagraphs: [
       'Lejai Jayakumar is the Managing Director and Co-Founder of DE.RISEN, leading the company\'s business strategy, operations, and growth initiatives. With extensive experience in consulting, operations management, and business development, he plays a key role in delivering innovative solutions and building long-term client relationships.',
-      'As Director of Finizon Consulting Pvt. Ltd., Lejai has contributed to consulting projects across export businesses, real estate, and property development. He also brings nearly five years of operational leadership experience from Sanama Solution, where he managed budgeting, business operations, and organizational efficiency.',
+      'As Director of Finizon Consulting Pvt. Ltd., Lejay has contributed to consulting projects across export businesses, real estate, and property development. He also brings nearly five years of operational leadership experience from Sanama Solution, where he managed budgeting, business operations, and organizational efficiency.',
       'Beyond his corporate responsibilities, Lejai serves as the State IT & Social Media Head of Akhil Bharat Hindu Mahasabha, leading digital initiatives and communication strategies.',
       'At DE.RISEN, he is committed to driving innovation, operational excellence, and sustainable business growth while helping clients transform ideas into impactful brands.'
     ]
