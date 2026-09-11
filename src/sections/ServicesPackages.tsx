@@ -12,7 +12,7 @@ export const ServicesPackages: React.FC = () => {
           setIsRevealed(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
 
     if (sectionRef.current) {
