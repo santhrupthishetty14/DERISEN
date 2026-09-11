@@ -99,13 +99,13 @@ export const ProcessTimeline: React.FC = () => {
                 style={{
                   transitionDelay: `${index * 80}ms`,
                 }}
-                className={`rounded-2xl p-8 sm:p-9 transition-all duration-500 relative cursor-pointer overflow-hidden border flex flex-col justify-between ${
+                className={`rounded-2xl p-6 sm:p-9 transition-all duration-500 relative cursor-pointer overflow-hidden border flex flex-col justify-between ${
                   isRevealed
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
                 } ${
                   isActive
-                    ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white border-brand-purple shadow-[0_20px_50px_rgba(99,32,238,0.28)] scale-[1.03] -translate-y-1'
+                    ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white border-brand-purple shadow-[0_20px_50px_rgba(99,32,238,0.28)] scale-[1.02] sm:scale-[1.03] -translate-y-1'
                     : 'bg-white text-gray-900 border-gray-200 shadow-sm hover:border-brand-purple/40 hover:-translate-y-0.5'
                 }`}
               >
