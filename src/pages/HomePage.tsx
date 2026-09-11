@@ -152,12 +152,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       </section>
 
       {/* 6. Featured Work Showcase Preview */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1320px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1320px] mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-14"
+          >
             <div>
               <span className="eyebrow">SELECTED CASE STUDIES</span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight leading-tight">
                 Featured Client Work
               </h2>
             </div>
@@ -168,21 +174,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
               <span>Explore All Delivered Projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-          </div>
+          </motion.div>
 
-          {/* Grid of 3 High-Res Items */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {featuredWorks.map((item) => (
-              <div
+          {/* Grid of 3 High-Res Items with Staggered Entrance */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12">
+            {featuredWorks.map((item, idx) => (
+              <motion.div
                 key={item.title}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
                 onClick={() => onNavigate('work')}
                 className="rounded-3xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-purple/50 hover:-translate-y-2 transition-all duration-500 flex flex-col group cursor-pointer bg-white"
               >
-                <div className="h-60 relative overflow-hidden bg-brand-navy">
+                <div className="h-56 sm:h-60 relative overflow-hidden bg-brand-navy">
                   <img
                     src={item.imageUrl || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=85'}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/30 to-transparent" />
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
@@ -202,7 +213,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                   )}
                 </div>
 
-                <div className="p-6 flex-grow flex flex-col justify-between">
+                <div className="p-5 sm:p-6 flex-grow flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-brand-purple block mb-1">
                       {item.client}
@@ -221,26 +232,32 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* 7. Client Testimonial Highlight Card */}
-      <section className="py-16 bg-surface-subtle border-t border-gray-100">
-        <div className="max-w-[1000px] mx-auto px-6 text-center">
+      <section className="py-16 sm:py-20 bg-surface-subtle border-t border-gray-100">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7 }}
+          className="max-w-[1000px] mx-auto px-4 sm:px-6 text-center"
+        >
           <div className="flex justify-center gap-1 text-amber-400 mb-4">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-amber-400" />
+              <Star key={i} className="w-4 sm:w-5 h-4 sm:h-5 fill-amber-400" />
             ))}
           </div>
-          <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-dark leading-snug tracking-tight mb-6">
+          <blockquote className="text-lg sm:text-2xl md:text-3xl font-bold text-brand-dark leading-snug tracking-tight mb-6">
             “DE.RISEN completely transformed our corporate identity and digital presence. Their attention to detail, brand strategy, and execution speed exceeded every expectation.”
           </blockquote>
           <div className="text-sm font-black text-brand-dark">Rajesh Malhotra</div>
           <div className="text-xs text-brand-purple font-semibold">Managing Director, Finizon Consulting</div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 8. Final Conversion CTA */}
