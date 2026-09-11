@@ -6,23 +6,19 @@ interface Brand3DIntroProps {
 }
 
 /**
- * Premium Logo Opening Animation for DE.RISEN
+ * Full-Screen Complete Pure White Logo Opening Animation for DE.RISEN
  * 
- * Powered directly by the supplied high-fidelity video:
- * "Purple_logo_glowing_animation_20260911193702.mp4"
- * 
- * Features:
- *  - Fluid purple metallic ribbon / liquid swirl and glowing light around the DE.RISEN logo.
- *  - Seamless pure white background matching the video's background.
- *  - Responsive video container across desktop, tablet, and mobile viewports.
- *  - Holds the final pristine frame cleanly, then smoothly transitions to the website.
- *  - Interactive tap/click to skip, and keyboard 'ESC' / Space key support.
+ * Powered by "Purple_logo_glowing_animation_20260911193702.mp4":
+ *  - 100% edge-to-edge full-screen viewport presentation.
+ *  - Calibrated with precision levels filter so background is 100% complete pure white (#FFFFFF).
+ *  - Seamlessly blends with the surrounding white canvas without any gray box, borders, or lines.
+ *  - Cleanly holds the final frame, then smoothly dissolves into the homepage.
+ *  - Instant skip with tap/click anywhere or keyboard 'ESC'.
  */
 export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
-  const taglineRef = useRef<HTMLDivElement>(null);
 
   const skipRef = useRef<(() => void) | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -70,7 +66,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       }
       gsap.to(containerRef.current, {
         opacity: 0,
-        duration: 0.35,
+        duration: 0.3,
         ease: "power2.out",
         onComplete: finishIntro,
       });
@@ -88,17 +84,16 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     gsap.fromTo(
       skipBtnRef.current,
       { opacity: 0, y: -6 },
-      { opacity: 1, y: 0, duration: 0.4, delay: 0.3, ease: "power2.out" }
+      { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Video play handling
+    // Play video automatically
     const video = videoRef.current;
     if (video) {
       video.playbackRate = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // If browser policy blocks autoplay with sound, ensure muted and retry
           video.muted = true;
           video.play().catch(() => {});
         });
@@ -118,20 +113,12 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     };
   }, []);
 
-  // When video reaches end or near completion
+  // When video reaches completion
   const handleVideoEnded = () => {
     if (hasEnded) return;
     setHasEnded(true);
 
-    // Reveal tagline smoothly on the final frame
-    gsap.to(taglineRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-
-    // Hold the completed pristine logo briefly, then smoothly transition
+    // Hold the completed crisp logo for 0.7s, then smoothly dissolve into the website
     setTimeout(() => {
       gsap.to(containerRef.current, {
         opacity: 0,
@@ -147,7 +134,6 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     }, 700);
   };
 
-  // Near-end fallback monitor
   const handleTimeUpdate = () => {
     const video = videoRef.current;
     if (!video || hasEnded) return;
@@ -161,15 +147,14 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     <div
       ref={containerRef}
       onClick={handleSkip}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center select-none cursor-pointer overflow-hidden bg-white"
-      style={{ backgroundColor: "#FFFFFF" }}
+      className="fixed inset-0 z-[100] w-screen h-screen select-none cursor-pointer overflow-hidden bg-white"
+      style={{
+        backgroundColor: "#FFFFFF",
+      }}
       aria-label="DE.RISEN Animated Logo Intro"
     >
-      {/* Top Bar with Skip Button and Mobile Notice */}
-      <div className="absolute top-5 left-5 right-5 sm:top-8 sm:right-8 z-30 flex items-center justify-between pointer-events-auto">
-        <span className="sm:hidden text-[10px] font-bold text-gray-400 tracking-wider uppercase bg-black/5 px-3 py-1 rounded-full border border-black/10">
-          Tap to skip
-        </span>
+      {/* Top Bar with Skip Button */}
+      <div className="absolute top-5 right-5 sm:top-8 sm:right-8 z-30 pointer-events-auto">
         <button
           ref={skipBtnRef}
           type="button"
@@ -177,7 +162,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
             e.stopPropagation();
             handleSkip();
           }}
-          className="ml-auto group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+          className="group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
           aria-label="Skip Intro Animation"
         >
           <span>Skip</span>
@@ -185,8 +170,8 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
         </button>
       </div>
 
-      {/* Main Video Animation Stage */}
-      <div className="relative w-full max-w-[1000px] px-4 sm:px-8 flex flex-col items-center justify-center">
+      {/* Full-Screen Pure White Video Stage: edge-to-edge with pure white background */}
+      <div className="w-full h-full flex items-center justify-center overflow-hidden bg-white">
         <video
           ref={videoRef}
           src="/assets/purple_logo_glowing_animation.mp4"
@@ -196,28 +181,14 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           preload="auto"
           onEnded={handleVideoEnded}
           onTimeUpdate={handleTimeUpdate}
-          className="w-full h-auto max-h-[65vh] sm:max-h-[75vh] object-contain select-none pointer-events-none mix-blend-multiply"
+          className="w-full h-full object-contain max-h-screen max-w-screen"
           style={{
             backgroundColor: "#FFFFFF",
+            // Precision level mapping: pushes any off-white/gray (230-255) to 100% complete pure white (#FFFFFF),
+            // making the video background completely seamless with the page canvas while keeping purple colors vibrant
+            filter: "contrast(1.18) brightness(1.09)",
           }}
         />
-
-        {/* Subtle Brand Tagline that reveals on the final frame */}
-        <div
-          ref={taglineRef}
-          className="mt-4 sm:mt-6 flex flex-col items-center justify-center text-center opacity-0 translate-y-2 pointer-events-none transition-all duration-500"
-        >
-          <p
-            className="text-[10px] sm:text-[12px] md:text-[13px] font-bold tracking-[0.22em] sm:tracking-[0.32em] uppercase text-gray-800 text-center"
-            style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
-          >
-            Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
-          </p>
-
-          <p className="mt-1.5 text-[9px] sm:text-[11px] font-semibold tracking-[0.28em] sm:tracking-[0.38em] uppercase text-[#6320EE] text-center">
-            Rise Above &bull; Redefine
-          </p>
-        </div>
       </div>
     </div>
   );
