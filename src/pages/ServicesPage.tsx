@@ -1,6 +1,5 @@
 import React from 'react';
 import { PageHeroBanner } from '../components/PageHeroBanner';
-import { WhatWeDo } from '../sections/WhatWeDo';
 import { ServicesPackages } from '../sections/ServicesPackages';
 import { ServiceCatalog } from '../sections/ServiceCatalog';
 import { DigitalProduction } from '../sections/DigitalProduction';
@@ -27,26 +26,25 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         onNavigateHome={() => onNavigate('home')}
       />
 
-      {/* 2. What We Do - 4 Core Pillars */}
-      <WhatWeDo />
-
-      {/* 3. Comprehensive Services Packages */}
+      {/* 2. Slide 10: Services & Packages Overview */}
       <ServicesPackages />
 
-      {/* 4. Individual Services Catalog (Filterable) */}
+      {/* 3. Slide 11: Individual Services Catalog (Filterable) */}
       <ServiceCatalog />
 
-      {/* 5. Digital + Production Stack */}
+      {/* 4. Slide 12: Digital + Production Stack */}
       <DigitalProduction />
 
-      {/* 6. Structured Work Process (6 Steps) */}
+      {/* 5. Slide 8: Structured Work Process (6 Steps) */}
       <ProcessTimeline />
 
-      {/* 7. Our Promise & 6-Node Workflow Pipeline */}
+      {/* 6. Slide 9: Our Promise & 6-Node Workflow Pipeline */}
       <Promise />
 
-      {/* 8. Conversion CTA */}
+      {/* 7. Conversion CTA */}
       <FinalCTA onOpenModal={onOpenModal} />
     </div>
   );
 };
+
+export default ServicesPage;
