@@ -6,10 +6,10 @@ import { FinalCTA } from '../sections/FinalCTA';
 
 interface HomePageProps {
   onOpenModal: () => void;
-  onNavigate: (page: string) => void;
+  onNavigate?: (page: string) => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) => {
+export const HomePage: React.FC<HomePageProps> = ({ onOpenModal }) => {
   return (
     <div className="w-full overflow-x-hidden">
       {/* 1. Slide 2: Hero Section & 4 Pillars Strip */}
