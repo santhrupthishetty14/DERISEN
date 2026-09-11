@@ -92,13 +92,20 @@ export const Stats: React.FC = () => {
 
     const st = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: 'top 80%',
+      start: 'top 92%',
       onEnter: () => {
         setHasAnimated(true);
         triggerStatsAnimation();
       },
       once: true,
     });
+
+    // Immediately trigger if already visible in viewport
+    const rect = sectionRef.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92) {
+      setHasAnimated(true);
+      triggerStatsAnimation();
+    }
 
     return () => {
       st.kill();
