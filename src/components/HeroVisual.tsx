@@ -64,7 +64,7 @@ export const HeroVisual: React.FC = () => {
             id="hero-main-picture"
             src="/assets/hero-3d-scene-perfect.png"
             alt="De.risen 3D Agency Suite & Creative Studio"
-            className="w-full h-auto max-h-[300px] sm:max-h-[420px] lg:max-h-[570px] object-contain drop-shadow-[0_25px_60px_rgba(24,13,56,0.18)] transition-all duration-500 will-change-transform"
+            className="w-full h-auto max-h-[520px] lg:max-h-[570px] object-contain drop-shadow-[0_25px_60px_rgba(24,13,56,0.18)] transition-all duration-500 will-change-transform"
             loading="eager"
           />
 
@@ -78,7 +78,7 @@ export const HeroVisual: React.FC = () => {
         {/* Dynamic 3D Floating Metallic Purple Sphere 1 (Left-Center near Mug & Button) */}
         <div
           id="hero-sphere-left"
-          className="absolute left-1 sm:-left-8 bottom-10 sm:bottom-18 z-20 pointer-events-none transition-transform duration-300 ease-out animate-float-slow hidden sm:block"
+          className="absolute -left-4 sm:-left-8 bottom-14 sm:bottom-18 z-20 pointer-events-none transition-transform duration-300 ease-out animate-float-slow"
           style={{
             transform: isDesktop
               ? `translate3d(${mousePos.x * -20}px, ${mousePos.y * -16}px, 0)`
