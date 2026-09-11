@@ -4,7 +4,7 @@ import { INDIVIDUAL_SERVICES_CATALOG } from '../utils/constants';
 
 // Swiper modules and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, FreeMode } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
