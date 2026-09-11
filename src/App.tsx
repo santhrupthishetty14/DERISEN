@@ -14,17 +14,19 @@ import { Toast } from './components/Toast';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
+import { WorkPage } from './pages/WorkPage';
 import { ContactPage } from './pages/ContactPage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-const VALID_PAGES = ['home', 'about', 'services', 'contact'];
+const VALID_PAGES = ['home', 'about', 'services', 'work', 'contact'];
 
 function getPageFromHash(): string {
   const hash = window.location.hash.replace('#', '').trim().toLowerCase();
   // Map legacy section hashes if any
-  if (hash === 'services-packages' || hash === 'work' || hash === 'work-gallery') return 'services';
+  if (hash === 'services-packages') return 'services';
+  if (hash === 'work-gallery') return 'work';
   if (VALID_PAGES.includes(hash)) return hash;
   return 'home';
 }
