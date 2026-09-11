@@ -100,7 +100,7 @@ export const VISION_MISSION_DATA: VisionMissionItem[] = [
     kicker: 'OUR VISION',
     title: 'Creating Brands That Shape the Future',
     description: 'At DE.RISEN, our vision is to become a trusted global creative and digital transformation partner, empowering businesses through innovation, strategy, and technology. We aspire to build iconic brands, deliver exceptional digital experiences, and inspire sustainable growth by transforming bold ideas into lasting success stories.',
-    iconName: 'Compass',
+    iconName: 'Telescope',
   },
   {
     kicker: 'OUR MISSION',
