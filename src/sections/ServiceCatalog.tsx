@@ -22,7 +22,7 @@ export const ServiceCatalog: React.FC = () => {
           setIsRevealed(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
 
     if (sectionRef.current) {
@@ -36,9 +36,9 @@ export const ServiceCatalog: React.FC = () => {
     <section
       ref={sectionRef}
       id="individual-services"
-      className="py-24 bg-white relative overflow-hidden"
+      className="py-20 sm:py-28 bg-white relative overflow-hidden"
     >
-      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div
           className={`text-center max-w-3xl mx-auto mb-12 sm:mb-16 transition-all duration-700 ease-out ${
@@ -49,7 +49,7 @@ export const ServiceCatalog: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-4">
             Choose what your brand needs.
           </h2>
-          <p className="text-base text-gray-600 font-medium">
+          <p className="text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto">
             A modular service catalog—from identity and content to digital experiences and production.
           </p>
         </div>
@@ -62,13 +62,10 @@ export const ServiceCatalog: React.FC = () => {
         >
           {/* We use negative margin and padding to allow box-shadows on cards to not be clipped, while remaining swipeable. */}
           <Swiper
-            modules={[Navigation, Pagination, Mousewheel, FreeMode]}
-            spaceBetween={24}
-            slidesPerView={1.2}
+            modules={[Navigation, Pagination, FreeMode]}
+            spaceBetween={20}
+            slidesPerView={1.15}
             freeMode={true}
-            mousewheel={{
-              forceToAxis: true,
-            }}
             pagination={{
               clickable: true,
               dynamicBullets: true,
