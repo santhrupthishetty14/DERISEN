@@ -19,7 +19,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         title="Transforming Bold Ideas Into"
         highlightedWord="Impactful Brands."
         subtitle="Discover our vision, strategic operating model, and the passionate leadership dedicated to elevating enterprises to new heights."
-        backgroundImage="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=85"
+        backgroundImage="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=95"
         currentPage="About Us"
         onNavigateHome={() => onNavigate('home')}
       />

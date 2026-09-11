@@ -1,20 +1,33 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import gsap from "gsap";
 import * as THREE from "three";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import gsap from "gsap";
 
 interface Brand3DIntroProps {
   onComplete: () => void;
 }
 
+/**
+ * 4-Second Cinematic 3D Horizontal Logo Reveal Animation for DE.RISEN
+ * 
+ * Concept & Choreography:
+ *  - CAMERA travels smoothly horizontally from left to right through 3D depth.
+ *  - Real 3D depth/extrusion, reflections, soft purple cinematic lighting, and depth of field.
+ *  - Exact DE.RISEN logo typography, proportions, shape, and purple colors are 100% preserved.
+ *  - Timeline (Exactly 4.0s):
+ *      0.0–0.6s: Atmospheric opening. Camera is positioned on the left in depth with subtle
+ *                purple ambient glow awakening on the leading mark.
+ *      0.6–2.6s: Camera smoothly glides horizontally through depth while revealing the logo
+ *                with a luminous purple light edge and rich 3D parallax.
+ *      2.6–3.3s: Camera settles squarely in center; full logo settles sharp and solid.
+ *      3.3–3.8s: Single subtle purple specular light sheen sweeps across the finished logo.
+ *      3.8–4.0s: Final clean hold on the pristine centered logo before transition.
+ */
 export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
-  const mountRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const textGroupRef = useRef<HTMLDivElement>(null);
+  const mountRef = useRef<HTMLDivElement>(null);
+  const skipBtnRef = useRef<HTMLButtonElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const sublineRef = useRef<HTMLParagraphElement>(null);
-  const skipBtnRef = useRef<HTMLButtonElement>(null);
 
   const skipRef = useRef<(() => void) | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -38,697 +51,21 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     if (navLogo) navLogo.style.opacity = "0";
 
     let isTerminated = false;
-    let rafId = 0;
-
-    const W = window.innerWidth;
-    const H = window.innerHeight;
-    const isMobile = W < 768;
-
-    // Responsive layout & scale calculator:
-    // Ensures the 3D typography ("De.risen", ~5.85 units wide) is 100% visible, centered,
-    // and beautifully framed on any viewport (mobile phones, tablets, foldables, laptops, ultra-wides).
-    const getResponsiveConfig = (w: number, h: number) => {
-      const aspect = w / h;
-      const isNarrow = w < 768 || aspect < 1.1;
-
-      if (!isNarrow) {
-        // Desktop & Laptop (Preserve exact reference design & cinematic depth)
-        return {
-          fov: 36,
-          stageScale: 1.0,
-          phase0Y: 3.6,
-          phase0Z: 7.0,
-          phase1Y: 3.4,
-          phase1Z: 6.6,
-          phase3Y: 0.55,
-          phase3Z: 5.8,
-          lookY0: 0.35,
-          lookY3: 0.55,
-          sphere1: { x: -3.8, y: 1.4, z: 1.2 },
-          sphere2: { x: 3.8, y: 2.6, z: -1.2 },
-          sphere3: { x: 4.0, y: 0.9, z: 1.6 },
-        };
-      }
-
-      // Mobile & Portrait Viewports (e.g. Samsung Galaxy S20, iPhone, Tablet portrait)
-      const fov = 40;
-      const phase3Z = 7.0;
-      const tanHalfFov = Math.tan((fov * Math.PI) / 360);
-      const visibleWidth = 2 * phase3Z * tanHalfFov * aspect;
-
-      // Natural logo width is ~5.85 units. On mobile, we want the logo to occupy ~78% of visible screen width
-      const targetLogoWidth = visibleWidth * 0.78;
-      const stageScale = Math.min(0.9, Math.max(0.28, targetLogoWidth / 5.85));
-
-      const distanceRatio = phase3Z / 5.8;
-
-      return {
-        fov,
-        stageScale,
-        phase0Y: 0.35 + (3.6 - 0.35) * distanceRatio,
-        phase0Z: 7.0 * distanceRatio,
-        phase1Y: 0.35 + (3.4 - 0.35) * distanceRatio,
-        phase1Z: 6.6 * distanceRatio,
-        phase3Y: 0.65,
-        phase3Z,
-        lookY0: 0.35,
-        lookY3: 0.65,
-        sphere1: { x: -visibleWidth * 0.42, y: 1.7, z: 0.8 },
-        sphere2: { x: visibleWidth * 0.40, y: 2.2, z: -0.6 },
-        sphere3: { x: visibleWidth * 0.42, y: 0.6, z: 1.0 },
-      };
-    };
-
-    const initialConfig = getResponsiveConfig(W, H);
-
-    let sphereBaseY1 = initialConfig.sphere1.y;
-    let sphereBaseY2 = initialConfig.sphere2.y;
-    let sphereBaseY3 = initialConfig.sphere3.y;
-
-    // 1. Pristine Studio White Scene Setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
-
-    // Dynamic stage container that uniformly scales all 3D intro elements to fit any screen
-    const stageGroup = new THREE.Group();
-    scene.add(stageGroup);
-    stageGroup.scale.set(initialConfig.stageScale, initialConfig.stageScale, initialConfig.stageScale);
-
-    // Initial Camera: Dramatic slow-moving isometric perspective looking down at floor
-    const camera = new THREE.PerspectiveCamera(initialConfig.fov, W / H, 0.1, 150);
-    camera.position.set(0, initialConfig.phase0Y, initialConfig.phase0Z);
-    camera.lookAt(0, initialConfig.lookY0, 0);
-
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: false,
-      powerPreference: "high-performance",
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(W, H);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
-
-    if (mountRef.current) {
-      mountRef.current.innerHTML = "";
-      mountRef.current.appendChild(renderer.domElement);
-    }
-
-    // 2. High-End Studio Lighting for 3D Glossy Acrylic & Metal
-    const ambientLight = new THREE.HemisphereLight(0xffffff, 0xf1f5f9, 1.45);
-    scene.add(ambientLight);
-
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
-    keyLight.position.set(6, 11, 7);
-    keyLight.castShadow = true;
-    keyLight.shadow.mapSize.width = 2048;
-    keyLight.shadow.mapSize.height = 2048;
-    keyLight.shadow.camera.near = 0.5;
-    keyLight.shadow.camera.far = 45;
-    keyLight.shadow.camera.left = -12;
-    keyLight.shadow.camera.right = 12;
-    keyLight.shadow.camera.top = 12;
-    keyLight.shadow.camera.bottom = -12;
-    keyLight.shadow.bias = -0.0006;
-    keyLight.shadow.radius = 3.5;
-    scene.add(keyLight);
-
-    const softFill = new THREE.DirectionalLight(0xede9fe, 1.15);
-    softFill.position.set(-6, 7, -3);
-    scene.add(softFill);
-
-    // Dynamic Moving Specular Sheen Light (glides across the 3D letters)
-    const sheenLight = new THREE.PointLight(0xffffff, 0, 16);
-    sheenLight.position.set(-6, 2.2, 3.5);
-    stageGroup.add(sheenLight);
-
-    // 3. Studio White Floor with Soft Contact Shadows
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
-    const groundGeo = new THREE.PlaneGeometry(140, 140);
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.005;
-    ground.receiveShadow = true;
-    scene.add(ground);
-
-    // Soft Ambient Floor Reflection Glow
-    const floorGlowGeo = new THREE.PlaneGeometry(8, 8);
-    const floorGlowCanvas = document.createElement("canvas");
-    floorGlowCanvas.width = 128;
-    floorGlowCanvas.height = 128;
-    const ctx = floorGlowCanvas.getContext("2d");
-    if (ctx) {
-      const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-      grad.addColorStop(0, "rgba(99, 32, 238, 0.12)");
-      grad.addColorStop(0.5, "rgba(176, 99, 255, 0.05)");
-      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 128, 128);
-    }
-    const floorGlowTex = new THREE.CanvasTexture(floorGlowCanvas);
-    const floorGlowMat = new THREE.MeshBasicMaterial({
-      map: floorGlowTex,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-    });
-    const floorGlow = new THREE.Mesh(floorGlowGeo, floorGlowMat);
-    floorGlow.rotation.x = -Math.PI / 2;
-    floorGlow.position.y = 0.001;
-    stageGroup.add(floorGlow);
-
-    // 4. Large 3D Glossy Brand Dot
-    const dotGeo = new THREE.SphereGeometry(0.38, 48, 48);
-    const dotMat = new THREE.MeshPhysicalMaterial({
-      color: 0x490365, // Official De.risen Deep Brand Plum
-      roughness: 0.04,
-      metalness: 0.06,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.02,
-      reflectivity: 0.95,
-    });
-    const dotMesh = new THREE.Mesh(dotGeo, dotMat);
-    dotMesh.castShadow = true;
-    dotMesh.receiveShadow = true;
-    stageGroup.add(dotMesh);
-
-    // Starts high up above the floor
-    dotMesh.position.set(-0.92, 4.6, -1.2);
-    dotMesh.scale.set(1.4, 1.4, 1.4);
-
-    // Floor Shockwave Ripple Rings
-    const rippleGeo = new THREE.RingGeometry(0.1, 0.18, 48);
-    const rippleMat = new THREE.MeshBasicMaterial({
-      color: 0x6320ee,
-      transparent: true,
-      opacity: 0,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-    });
-    const ripple = new THREE.Mesh(rippleGeo, rippleMat);
-    ripple.rotation.x = -Math.PI / 2;
-    ripple.position.y = 0.002;
-    stageGroup.add(ripple);
-
-    // 5. Parent 3D Group for the Assembled Name
-    const logoGroup = new THREE.Group();
-    stageGroup.add(logoGroup);
-    logoGroup.position.set(0, 0.22, 0);
-    logoGroup.rotation.set(-Math.PI / 2.3, 0, 0);
-
-    const deGroup = new THREE.Group();
-    const risenGroup = new THREE.Group();
-    logoGroup.add(deGroup);
-    logoGroup.add(risenGroup);
-
-    // Brand Materials for Real 3D Extruded Letters
-    const plumMat = new THREE.MeshPhysicalMaterial({
-      color: 0x3d0059, // Official De.risen Deep Plum
-      roughness: 0.04,
-      metalness: 0.05,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.02,
-      reflectivity: 0.95,
-    });
-
-    const lilacMat = new THREE.MeshPhysicalMaterial({
-      color: 0xb063ff, // Electric Lavender / Lilac Accent
-      roughness: 0.03,
-      metalness: 0.06,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.02,
-      reflectivity: 0.95,
-    });
-
-    const violetMat = new THREE.MeshPhysicalMaterial({
-      color: 0x9333ea, // Vibrant Electric Violet for "risen"
-      roughness: 0.04,
-      metalness: 0.05,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.02,
-      reflectivity: 0.95,
-    });
-
-    // 6. Ambient 3D Floating Metallic Purple Spheres
-    const sphereGroup = new THREE.Group();
-    scene.add(sphereGroup);
-
-    const createMetallicSphere = (color: number, size: number, x: number, y: number, z: number) => {
-      const geo = new THREE.SphereGeometry(size, 32, 32);
-      const mat = new THREE.MeshPhysicalMaterial({
-        color,
-        roughness: 0.08,
-        metalness: 0.4,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.03,
-        reflectivity: 0.95,
-      });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.set(x, y, z);
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      sphereGroup.add(mesh);
-      return mesh;
-    };
-
-    const sphere1 = createMetallicSphere(0x934bf8, 0.35, initialConfig.sphere1.x, initialConfig.sphere1.y, initialConfig.sphere1.z); // Left
-    const sphere2 = createMetallicSphere(0x6320ee, 0.28, initialConfig.sphere2.x, initialConfig.sphere2.y, initialConfig.sphere2.z); // Top-Right
-    const sphere3 = createMetallicSphere(0x7e34f4, 0.30, initialConfig.sphere3.x, initialConfig.sphere3.y, initialConfig.sphere3.z);  // Far Right
-
-    let clock = 0;
-
-    // 7. Floor Motion Trails (Reference Video Curved Paths)
-    const createTrail = (curvePts: THREE.Vector3[], color: number) => {
-      const curve = new THREE.CatmullRomCurve3(curvePts);
-      const points = curve.getPoints(48);
-      const geo = new THREE.BufferGeometry().setFromPoints(points);
-      const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0 });
-      const line = new THREE.Line(geo, mat);
-      stageGroup.add(line);
-      return { line, mat, geo };
-    };
-
-    const trail1 = createTrail(
-      [
-        new THREE.Vector3(-7.5, 0.01, -3.2),
-        new THREE.Vector3(-5.2, 0.01, -1.8),
-        new THREE.Vector3(-3.2, 0.01, -0.6),
-        new THREE.Vector3(-2.15, 0.01, 0),
-      ],
-      0x490365
-    );
-    const trail2 = createTrail(
-      [
-        new THREE.Vector3(7.5, 0.01, 3.2),
-        new THREE.Vector3(5.2, 0.01, 1.8),
-        new THREE.Vector3(3.2, 0.01, 0.6),
-        new THREE.Vector3(1.25, 0.01, 0),
-      ],
-      0xb063ff
-    );
-
-    // GSAP Initial States
-    gsap.set(textGroupRef.current, { opacity: 0, y: 16 });
-    gsap.set(taglineRef.current, { opacity: 0, y: 10, letterSpacing: isMobile ? "0.18em" : "0.22em" });
-    gsap.set(sublineRef.current, { opacity: 0, y: 8 });
-    gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
-
-    const camTarget = {
-      posX: 0,
-      posY: initialConfig.phase0Y,
-      posZ: initialConfig.phase0Z,
-      lookX: 0,
-      lookY: initialConfig.lookY0,
-      lookZ: 0,
-    };
-
     let masterTl: gsap.core.Timeline | null = null;
-
-    // Synchronous Font Load & Build so NO POPPING occurs
-    fetch("/assets/droid_sans_bold.typeface.json")
-      .then((res) => res.json())
-      .then((fontJson) => {
-        if (isTerminated) return;
-
-        const font = new FontLoader().parse(fontJson);
-
-        const textConfig = {
-          font,
-          size: 1.18,
-          depth: 0.32,
-          curveSegments: 16,
-          bevelEnabled: true,
-          bevelThickness: 0.05,
-          bevelSize: 0.035,
-          bevelSegments: 5,
-        };
-
-        // 1. 3D "De" Geometry
-        const deGeo = new TextGeometry("De", textConfig);
-        deGeo.computeBoundingBox();
-        const deBox = deGeo.boundingBox!;
-        const deW = deBox.max.x - deBox.min.x;
-        deGeo.translate(-deBox.min.x - deW / 2, -deBox.min.y, 0);
-
-        const deMesh = new THREE.Mesh(deGeo, plumMat);
-        deMesh.castShadow = true;
-        deMesh.receiveShadow = true;
-        deGroup.add(deMesh);
-
-        // Lilac vertical accent bar on the left of "D"
-        const accentGeo = new THREE.CylinderGeometry(0.09, 0.09, 1.22, 24);
-        accentGeo.translate(0, 0.61, 0);
-        const accentMesh = new THREE.Mesh(accentGeo, lilacMat);
-        accentMesh.position.set(-deW / 2 - 0.12, 0, 0.16);
-        accentMesh.castShadow = true;
-        accentMesh.receiveShadow = true;
-        deGroup.add(accentMesh);
-
-        // 2. 3D "risen" Geometry
-        const risenGeo = new TextGeometry("risen", textConfig);
-        risenGeo.computeBoundingBox();
-        const risenBox = risenGeo.boundingBox!;
-        const risenW = risenBox.max.x - risenBox.min.x;
-        risenGeo.translate(-risenBox.min.x - risenW / 2, -risenBox.min.y, 0);
-
-        const risenMesh = new THREE.Mesh(risenGeo, violetMat);
-        risenMesh.castShadow = true;
-        risenMesh.receiveShadow = true;
-        risenGroup.add(risenMesh);
-
-        // Target coordinates when docked in the center:
-        const dotGap = 0.46;
-        const totalWidth = deW + 0.16 + dotGap + risenW;
-        const startX = -totalWidth / 2;
-
-        const targetDeX = startX + deW / 2 + 0.12;
-        const targetDotX = startX + deW + 0.16 + dotGap / 2;
-        const targetRisenX = startX + deW + 0.16 + dotGap + risenW / 2;
-        const targetDotY = 0.16;
-
-        // Start pieces FAR OFF-SCREEN in perspective for the sleepy curved entrance:
-        deGroup.position.set(-7.5, 0, -3.2);
-        deGroup.rotation.set(0, 0.3, 0.55);
-
-        risenGroup.position.set(7.5, 0, 3.2);
-        risenGroup.rotation.set(0, -0.3, -0.55);
-
-        // Master Timeline Choreography:
-        // Slow, elegant, sleepy cinematic motion FIRST before revealing the name
-        masterTl = gsap.timeline({
-          delay: 0.15,
-          onComplete: () => {
-            finishIntro();
-          },
-        });
-
-        // Show Skip Button early
-        masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2);
-
-        // =========================================================================
-        // Phase 1: SLEEPY CINEMATIC MOTION (0.2s - 4.2s)
-        // Pieces glide in slow, graceful, sweeping arcs across the white floor
-        // =========================================================================
-
-        // Motion trails glow on the white floor
-        masterTl.to([trail1.mat, trail2.mat], { opacity: 0.7, duration: 0.8, ease: "power2.out" }, 0.2);
-        masterTl.to(floorGlowMat, { opacity: 0.85, duration: 1.0, ease: "power2.out" }, 0.4);
-
-        // 3D Brand Dot drops gracefully from the top with slow momentum
-        masterTl.to(
-          dotMesh.position,
-          {
-            y: 0.38,
-            duration: 1.6,
-            ease: "power2.inOut",
-          },
-          0.3
-        );
-        masterTl.to(
-          dotMesh.scale,
-          {
-            x: 1.0,
-            y: 1.0,
-            z: 1.0,
-            duration: 1.4,
-            ease: "power2.out",
-          },
-          0.4
-        );
-
-        // Floor shockwave ripple expands gently
-        masterTl.fromTo(
-          ripple.scale,
-          { x: 0.2, y: 0.2, z: 0.2 },
-          { x: 8.5, y: 8.5, z: 8.5, duration: 1.6, ease: "power2.out" },
-          1.2
-        );
-        masterTl.fromTo(
-          rippleMat,
-          { opacity: 0.65 },
-          { opacity: 0, duration: 1.6, ease: "power2.out" },
-          1.2
-        );
-
-        // 3D "De" glides in a sleepy, graceful curved path from the far left
-        masterTl.to(
-          deGroup.position,
-          {
-            x: targetDeX,
-            z: 0,
-            duration: 3.4,
-            ease: "power2.inOut",
-          },
-          0.4
-        );
-        masterTl.to(
-          deGroup.rotation,
-          {
-            y: 0,
-            z: 0,
-            duration: 3.4,
-            ease: "power2.inOut",
-          },
-          0.4
-        );
-
-        // 3D "risen" glides in a sleepy, graceful curved path from the far right
-        masterTl.to(
-          risenGroup.position,
-          {
-            x: targetRisenX,
-            z: 0,
-            duration: 3.4,
-            ease: "power2.inOut",
-          },
-          0.45
-        );
-        masterTl.to(
-          risenGroup.rotation,
-          {
-            y: 0,
-            z: 0,
-            duration: 3.4,
-            ease: "power2.inOut",
-          },
-          0.45
-        );
-
-        // 3D Brand Dot gently glides and docks right into its baseline spot
-        masterTl.to(
-          dotMesh.position,
-          {
-            x: targetDotX,
-            y: 0.16,
-            z: 0.16,
-            duration: 2.2,
-            ease: "power2.inOut",
-          },
-          1.6
-        );
-        masterTl.to(
-          dotMesh.scale,
-          {
-            x: 0.42,
-            y: 0.42,
-            z: 0.42,
-            duration: 2.2,
-            ease: "power2.inOut",
-          },
-          1.6
-        );
-
-        // Camera slowly floats and drifts in perspective (sleepy cinematic camera)
-        masterTl.to(
-          camTarget,
-          {
-            posX: 0,
-            posY: initialConfig.phase1Y,
-            posZ: initialConfig.phase1Z,
-            duration: 3.4,
-            ease: "sine.inOut",
-          },
-          0.4
-        );
-
-        // Fade out floor trails as pieces converge
-        masterTl.to([trail1.mat, trail2.mat], { opacity: 0, duration: 0.8, ease: "power2.in" }, 3.0);
-
-        // =========================================================================
-        // Phase 2: DOCKING SETTLE & SPECULAR SHEEN SWEEP (3.6s - 4.8s)
-        // =========================================================================
-        masterTl.to(
-          logoGroup.scale,
-          { x: 1.04, y: 1.04, z: 1.04, duration: 0.28, ease: "power1.out" },
-          3.7
-        );
-        masterTl.to(
-          logoGroup.scale,
-          { x: 1.0, y: 1.0, z: 1.0, duration: 0.45, ease: "power2.inOut" },
-          3.98
-        );
-
-        // Brilliant Specular Sheen Light slowly glides across the beveled acrylic letters
-        sheenLight.intensity = 4.2;
-        masterTl.fromTo(
-          sheenLight.position,
-          { x: -6.5, y: 2.0, z: 3.2 },
-          { x: 6.5, y: 2.0, z: 3.2, duration: 1.8, ease: "power2.inOut" },
-          3.6
-        );
-        masterTl.to(sheenLight, { intensity: 0, duration: 0.5 }, 5.2);
-
-        // =========================================================================
-        // Phase 3: MAJESTIC STAND-UP TO FRONT ELEVATION (4.4s - 6.8s)
-        // (The assembled 3D logo tilts upright facing the camera!)
-        // =========================================================================
-        masterTl.to(
-          logoGroup.rotation,
-          {
-            x: 0,
-            y: 0,
-            z: 0,
-            duration: 2.4,
-            ease: "power2.inOut",
-          },
-          4.4
-        );
-
-        masterTl.to(
-          logoGroup.position,
-          {
-            x: 0,
-            y: 0.75,
-            z: 0,
-            duration: 2.4,
-            ease: "power2.inOut",
-          },
-          4.4
-        );
-
-        // Dot rises synchronously with the 3D logo
-        masterTl.to(
-          dotMesh.position,
-          {
-            x: targetDotX,
-            y: 0.75 + targetDotY,
-            z: 0.16,
-            duration: 2.4,
-            ease: "power2.inOut",
-          },
-          4.4
-        );
-
-        // Camera smoothly glides into commanding front hero elevation
-        masterTl.to(
-          camTarget,
-          {
-            posX: 0,
-            posY: initialConfig.phase3Y,
-            posZ: initialConfig.phase3Z,
-            lookX: 0,
-            lookY: initialConfig.lookY3,
-            lookZ: 0,
-            duration: 2.4,
-            ease: "power2.inOut",
-          },
-          4.4
-        );
-
-        masterTl.to(
-          keyLight.position,
-          { x: -4, y: 9, z: 7, duration: 2.4, ease: "power2.inOut" },
-          4.5
-        );
-
-        // =========================================================================
-        // Phase 4: ONLY NOW REVEAL COMPLETE TYPOGRAPHY (6.0s - 8.0s)
-        // (As requested: "SLEEPY CINEMATIC MOTION 1ST BEFORE SHOWING THE COMPLETE NAME")
-        // =========================================================================
-        masterTl.to(
-          textGroupRef.current,
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          6.0
-        );
-
-        masterTl.to(
-          taglineRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            letterSpacing: isMobile ? "0.18em" : "0.32em",
-            duration: 1.2,
-            ease: "power2.out",
-          },
-          6.2
-        );
-
-        masterTl.to(
-          sublineRef.current,
-          { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
-          6.6
-        );
-
-        // =========================================================================
-        // Phase 5: Transition into Website (8.0s - 9.6s)
-        // =========================================================================
-        masterTl.to({}, { duration: 1.4 }, 7.8);
-
-        masterTl.to(skipBtnRef.current, { opacity: 0, duration: 0.3 }, 8.8);
-        masterTl.to(
-          textGroupRef.current,
-          { opacity: 0, y: -10, duration: 0.6, ease: "power2.in" },
-          8.9
-        );
-
-        masterTl.to(
-          logoGroup.scale,
-          { x: 0.22, y: 0.22, z: 0.22, duration: 0.75, ease: "power2.inOut" },
-          9.0
-        );
-        masterTl.to(
-          dotMesh.scale,
-          { x: 0.08, y: 0.08, z: 0.08, duration: 0.75, ease: "power2.inOut" },
-          9.0
-        );
-
-        masterTl.to(
-          containerRef.current,
-          { opacity: 0, duration: 0.6, ease: "power2.inOut" },
-          9.2
-        );
-      });
+    let rafId = 0;
 
     const finishIntro = () => {
       if (isTerminated) return;
       isTerminated = true;
 
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", onResize);
       window.removeEventListener("keydown", handleKeyDown);
-
+      window.removeEventListener("resize", onResize);
       if (navLogo) navLogo.style.opacity = "1";
       document.body.style.overflow = "";
 
+      // Cleanup Three.js
       try {
-        dotGeo.dispose();
-        dotMat.dispose();
-        plumMat.dispose();
-        lilacMat.dispose();
-        violetMat.dispose();
-        groundGeo.dispose();
-        groundMat.dispose();
-        floorGlowGeo.dispose();
-        floorGlowMat.dispose();
-        floorGlowTex.dispose();
-        rippleGeo.dispose();
-        rippleMat.dispose();
-        trail1.geo.dispose();
-        trail1.mat.dispose();
-        trail2.geo.dispose();
-        trail2.mat.dispose();
         renderer.dispose();
       } catch {
         // Safe disposal
@@ -741,7 +78,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       masterTl?.kill();
       gsap.to(containerRef.current, {
         opacity: 0,
-        duration: 0.3,
+        duration: 0.35,
         ease: "power2.out",
         onComplete: finishIntro,
       });
@@ -755,46 +92,558 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     };
     window.addEventListener("keydown", handleKeyDown);
 
-    // 60FPS Render Loop with Dynamic Ambient Sphere Bobbing
+    // Accessibility prefers-reduced-motion check
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        delay: 1.5,
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: finishIntro,
+      });
+      return;
+    }
+
+    // =========================================================================
+    // Three.js Cinematic 3D Scene Setup
+    // =========================================================================
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const scene = new THREE.Scene();
+    // Atmospheric dark studio fog
+    scene.fog = new THREE.FogExp2(0x0a0414, 0.038);
+
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+
+    if (mountRef.current) {
+      mountRef.current.replaceChildren(renderer.domElement);
+    }
+
+    // Exact logo aspect ratio: 1680 / 340 = 4.941176
+    const LOGO_ASPECT = 1680 / 340;
+    const LOGO_WIDTH = 5.2;
+    const LOGO_HEIGHT = LOGO_WIDTH / LOGO_ASPECT; // ~1.052
+
+    // Responsive Camera & Framing Calculations
+    const getCameraZ = (w: number, h: number) => {
+      const aspect = w / h;
+      const fovRad = (camera.fov * Math.PI) / 180;
+      const visibleHeightAtDist1 = 2 * Math.tan(fovRad / 2);
+      
+      // We want the logo to occupy ~70% of screen width on desktop, ~85% on mobile
+      const targetScreenFraction = aspect < 1.0 ? 0.88 : aspect < 1.6 ? 0.78 : 0.68;
+      const requiredVisibleWidth = LOGO_WIDTH / targetScreenFraction;
+      const requiredVisibleHeight = requiredVisibleWidth / aspect;
+      const distance = Math.max(requiredVisibleHeight / visibleHeightAtDist1, 4.4);
+      return distance;
+    };
+
+    let targetBaseZ = getCameraZ(width, height);
+
+    // Camera trajectory state managed by GSAP
+    const camTarget = {
+      x: -4.8,
+      y: 0.35,
+      z: targetBaseZ * 0.88,
+      lookX: -2.8,
+      lookY: -0.05,
+      lookZ: 0,
+    };
+
+    // =========================================================================
+    // Shader Uniforms for Precise Reveal & Specular Sheen
+    // =========================================================================
+    const shaderUniforms = {
+      uReveal: { value: 0.0 }, // 0.0 -> 1.0 (Left to Right reveal)
+      uEdgeWidth: { value: 0.055 },
+      uSheen: { value: 0.0 },  // 0.0 -> 1.0 (Specular sheen pass)
+      uLogoTexture: { value: null as THREE.Texture | null },
+      uTint: { value: new THREE.Color(0xffffff) },
+      uBrightness: { value: 1.0 },
+    };
+
+    // Load High-Res Official DE.RISEN Logo Texture
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load("/assets/derisen-logo-transparent.png", (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.minFilter = THREE.LinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      tex.generateMipmaps = true;
+      shaderUniforms.uLogoTexture.value = tex;
+    });
+
+    // Custom Vertex & Fragment Shader for the Logo
+    const vertexShader = `
+      varying vec2 vUv;
+      varying vec3 vWorldPosition;
+      varying vec3 vNormal;
+
+      void main() {
+        vUv = uv;
+        vNormal = normalize(normalMatrix * normal);
+        vec4 worldPos = modelMatrix * vec4(position, 1.0);
+        vWorldPosition = worldPos.xyz;
+        gl_Position = projectionMatrix * viewMatrix * worldPos;
+      }
+    `;
+
+    const fragmentShader = `
+      uniform sampler2D uLogoTexture;
+      uniform float uReveal;
+      uniform float uEdgeWidth;
+      uniform float uSheen;
+      uniform vec3 uTint;
+      uniform float uBrightness;
+
+      varying vec2 vUv;
+      varying vec3 vWorldPosition;
+      varying vec3 vNormal;
+
+      void main() {
+        vec4 tex = texture2D(uLogoTexture, vUv);
+        if (tex.a < 0.02) discard;
+
+        // Progressive reveal from left (0.0) to right (1.0)
+        float revealEdge = uReveal;
+        if (vUv.x > revealEdge) {
+          discard;
+        }
+
+        // Luminous Purple Light Glow along the traveling reveal boundary
+        float distToEdge = revealEdge - vUv.x;
+        float edgeGlow = smoothstep(uEdgeWidth, 0.0, distToEdge) * step(0.001, revealEdge) * step(revealEdge, 0.999);
+
+        // Specular Sheen Sweep: Diagonal streak moving left to right
+        float sheenPos = uSheen * 1.5 - 0.25;
+        float diagonalCoord = vUv.x + (vUv.y - 0.5) * 0.28;
+        float sheenDist = abs(diagonalCoord - sheenPos);
+        float sheenIntensity = smoothstep(0.09, 0.0, sheenDist) * step(0.01, uSheen);
+
+        // Pristine original logo color combined with tint
+        vec3 col = tex.rgb * uTint * uBrightness;
+
+        // Luminous purple edge core: soft lilac edge transitioning to intense white glint
+        vec3 edgeGlowCol = mix(vec3(0.72, 0.42, 1.0), vec3(1.0, 1.0, 1.0), smoothstep(uEdgeWidth * 0.45, 0.0, distToEdge));
+        col = mix(col, edgeGlowCol, edgeGlow * 0.85);
+
+        // Add Specular Sheen
+        col += vec3(0.92, 0.82, 1.0) * sheenIntensity * 0.75;
+
+        gl_FragColor = vec4(col, tex.a);
+      }
+    `;
+
+    // =========================================================================
+    // 3D Extruded Logo Hierarchy (Authentic Depth without warps)
+    // =========================================================================
+    const logoGroup = new THREE.Group();
+    scene.add(logoGroup);
+
+    const planeGeo = new THREE.PlaneGeometry(LOGO_WIDTH, LOGO_HEIGHT, 1, 1);
+
+    // 1. Subtle 3D Extrusion Slices (Creates tangible side bevels when viewed at angle)
+    const EXTRUSION_SLICES = 8;
+    const SLICE_DEPTH = 0.012; // Total depth ~0.096 units
+    const extrusionMeshes: THREE.Mesh[] = [];
+
+    for (let i = 1; i <= EXTRUSION_SLICES; i++) {
+      const zOffset = -i * SLICE_DEPTH;
+      // Darker rich plum shade for extrusion edges (#250036 to #380252)
+      const darkenRatio = 1.0 - (i / EXTRUSION_SLICES) * 0.45;
+      const sliceMat = new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        uniforms: {
+          uReveal: shaderUniforms.uReveal,
+          uEdgeWidth: shaderUniforms.uEdgeWidth,
+          uSheen: shaderUniforms.uSheen,
+          uLogoTexture: shaderUniforms.uLogoTexture,
+          uTint: { value: new THREE.Color(0x35084a).multiplyScalar(darkenRatio) },
+          uBrightness: { value: 0.75 * darkenRatio },
+        },
+        transparent: true,
+        depthWrite: false,
+      });
+
+      const sliceMesh = new THREE.Mesh(planeGeo, sliceMat);
+      sliceMesh.position.set(0, 0, zOffset);
+      logoGroup.add(sliceMesh);
+      extrusionMeshes.push(sliceMesh);
+    }
+
+    // 2. Front Face Mesh (Pristine original logo colors & lighting)
+    const frontMat = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms: shaderUniforms,
+      transparent: true,
+      depthWrite: false,
+    });
+    const frontMesh = new THREE.Mesh(planeGeo, frontMat);
+    frontMesh.position.set(0, 0, 0.002);
+    logoGroup.add(frontMesh);
+
+    // 3. Ambient Back Drop Shadow Plane (Soft depth grounding behind logo)
+    const shadowGeo = new THREE.PlaneGeometry(LOGO_WIDTH * 1.12, LOGO_HEIGHT * 1.25);
+    const shadowMat = new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      transparent: true,
+      opacity: 0.45,
+      depthWrite: false,
+    });
+    const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowMesh.position.set(0, -0.06, -0.15);
+    logoGroup.add(shadowMesh);
+
+    // =========================================================================
+    // Reflective Studio Floor Plane (High-End Studio Reflection)
+    // =========================================================================
+    const floorGeo = new THREE.PlaneGeometry(35, 20);
+    // Dark satin floor catching purple light highlights
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x0c0618,
+      roughness: 0.38,
+      metalness: 0.75,
+    });
+    const floorMesh = new THREE.Mesh(floorGeo, floorMat);
+    floorMesh.rotation.x = -Math.PI / 2;
+    floorMesh.position.set(0, -1.2, 0);
+    scene.add(floorMesh);
+
+    // Inverted Soft Logo Mirror Reflection on Floor
+    const reflectGeo = new THREE.PlaneGeometry(LOGO_WIDTH, LOGO_HEIGHT);
+    const reflectMat = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader: `
+        uniform sampler2D uLogoTexture;
+        uniform float uReveal;
+        uniform float uSheen;
+        varying vec2 vUv;
+        void main() {
+          // Flip vertically for reflection
+          vec2 uv = vec2(vUv.x, 1.0 - vUv.y);
+          vec4 tex = texture2D(uLogoTexture, uv);
+          if (tex.a < 0.02 || vUv.x > uReveal) discard;
+          
+          // Soft vertical fade with distance from logo bottom
+          float verticalFade = smoothstep(0.0, 0.85, 1.0 - vUv.y);
+          vec3 col = tex.rgb * vec3(0.55, 0.35, 0.85);
+          gl_FragColor = vec4(col, tex.a * 0.28 * verticalFade);
+        }
+      `,
+      uniforms: {
+        uLogoTexture: shaderUniforms.uLogoTexture,
+        uReveal: shaderUniforms.uReveal,
+        uSheen: shaderUniforms.uSheen,
+      },
+      transparent: true,
+      depthWrite: false,
+    });
+    const reflectMesh = new THREE.Mesh(reflectGeo, reflectMat);
+    reflectMesh.position.set(0, -1.22, 0);
+    reflectMesh.scale.set(1.0, -1.0, 1.0);
+    scene.add(reflectMesh);
+
+    // =========================================================================
+    // Cinematic Lighting & Volumetric Atmosphere
+    // =========================================================================
+    // 1. Ambient Fill Light
+    const ambientLight = new THREE.AmbientLight(0x180b2a, 1.8);
+    scene.add(ambientLight);
+
+    // 2. Traveling Key Spot Light (Follows the camera and reveal boundary)
+    const keySpotLight = new THREE.SpotLight(0xc084fc, 25, 16, Math.PI / 4, 0.65, 1.2);
+    keySpotLight.position.set(-4.5, 2.5, 4.0);
+    scene.add(keySpotLight);
+
+    // 3. Top-Back Rim Light (Highlights subtle 3D top bevels)
+    const rimLight = new THREE.DirectionalLight(0x9333ea, 4.0);
+    rimLight.position.set(0, 4.5, -2.5);
+    scene.add(rimLight);
+
+    // 4. Moving Purple Glow Pool on Floor
+    const floorGlowGeo = new THREE.PlaneGeometry(4.5, 3.0);
+    const floorGlowTex = (() => {
+      const c = document.createElement("canvas");
+      c.width = 128;
+      c.height = 128;
+      const ctx = c.getContext("2d")!;
+      const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+      grad.addColorStop(0, "rgba(168, 85, 247, 0.55)");
+      grad.addColorStop(0.4, "rgba(126, 34, 206, 0.25)");
+      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 128, 128);
+      const t = new THREE.CanvasTexture(c);
+      return t;
+    })();
+    const floorGlowMat = new THREE.MeshBasicMaterial({
+      map: floorGlowTex,
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const floorGlowMesh = new THREE.Mesh(floorGlowGeo, floorGlowMat);
+    floorGlowMesh.rotation.x = -Math.PI / 2;
+    floorGlowMesh.position.set(-2.5, -1.18, 0.5);
+    scene.add(floorGlowMesh);
+
+    // =========================================================================
+    // Depth of Field & Parallax Elements (Optical Foreground Bokeh & Background Fins)
+    // =========================================================================
+    // Subtle background architectural light fins for vertical motion parallax
+    const bgFinsGroup = new THREE.Group();
+    scene.add(bgFinsGroup);
+
+    const finGeo = new THREE.BoxGeometry(0.04, 8.0, 0.04);
+    const finMat = new THREE.MeshBasicMaterial({
+      color: 0x49187a,
+      transparent: true,
+      opacity: 0.18,
+    });
+    const finPositions = [-7, -4.5, -2, 0.5, 3, 5.5, 8];
+    finPositions.forEach((posX) => {
+      const fin = new THREE.Mesh(finGeo, finMat);
+      fin.position.set(posX, 0.5, -3.2);
+      bgFinsGroup.add(fin);
+    });
+
+    // Optical Foreground Soft Bokeh Discs (Parallax depth of field)
+    const bokehGroup = new THREE.Group();
+    scene.add(bokehGroup);
+
+    const bokehGeo = new THREE.PlaneGeometry(0.65, 0.65);
+    const bokehTex = (() => {
+      const c = document.createElement("canvas");
+      c.width = 64;
+      c.height = 64;
+      const ctx = c.getContext("2d")!;
+      const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, "rgba(230, 200, 255, 0.65)");
+      grad.addColorStop(0.5, "rgba(168, 85, 247, 0.25)");
+      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 64, 64);
+      return new THREE.CanvasTexture(c);
+    })();
+
+    const bokehConfigs = [
+      { x: -3.8, y: -0.4, z: 2.6, s: 1.2, o: 0.35 },
+      { x: -1.2, y: 0.7, z: 2.2, s: 0.9, o: 0.25 },
+      { x: 1.5, y: -0.5, z: 2.5, s: 1.4, o: 0.3 },
+      { x: 3.6, y: 0.5, z: 2.1, s: 0.8, o: 0.2 },
+    ];
+
+    bokehConfigs.forEach((cfg) => {
+      const bMat = new THREE.MeshBasicMaterial({
+        map: bokehTex,
+        transparent: true,
+        opacity: cfg.o,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      });
+      const bMesh = new THREE.Mesh(bokehGeo, bMat);
+      bMesh.position.set(cfg.x, cfg.y, cfg.z);
+      bMesh.scale.set(cfg.s, cfg.s, 1);
+      bokehGroup.add(bMesh);
+    });
+
+    // =========================================================================
+    // Master 4.0-Second Cinematic Choreography Timeline
+    // =========================================================================
+    masterTl = gsap.timeline({
+      delay: 0.05,
+      onComplete: () => {
+        // Elegant fade into the website
+        gsap.to(containerRef.current, {
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.inOut",
+          onComplete: finishIntro,
+        });
+      },
+    });
+
+    // Initial State setup
+    gsap.set(skipBtnRef.current, { opacity: 0, y: -8 });
+    gsap.set(taglineRef.current, { opacity: 0, y: 14 });
+    gsap.set(sublineRef.current, { opacity: 0, y: 10 });
+
+    // Fade in skip button gently
+    masterTl.to(skipBtnRef.current, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.2);
+
+    // -------------------------------------------------------------------------
+    // Phase 1: 0.0s – 0.6s (Atmospheric Opening & Awakening Purple Rim)
+    // -------------------------------------------------------------------------
+    masterTl.to(
+      floorGlowMat,
+      {
+        opacity: 0.65,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      0.1
+    );
+
+    // -------------------------------------------------------------------------
+    // Phase 2: 0.6s – 2.6s (Camera Travels Horizontally Through 3D Depth)
+    // "Camera smoothly travels from left to right through depth, revealing logo"
+    // -------------------------------------------------------------------------
+    masterTl.to(
+      camTarget,
+      {
+        x: 0.0,
+        y: 0.0,
+        z: targetBaseZ,
+        lookX: 0.0,
+        lookY: 0.0,
+        duration: 2.0,
+        ease: "power2.inOut",
+      },
+      0.6
+    );
+
+    // Key spotlight moves horizontally in sync with camera & reveal
+    masterTl.to(
+      keySpotLight.position,
+      {
+        x: 0.0,
+        y: 2.0,
+        z: 4.8,
+        duration: 2.0,
+        ease: "power2.inOut",
+      },
+      0.6
+    );
+
+    // Move floor glow pool across underneath the logo
+    masterTl.to(
+      floorGlowMesh.position,
+      {
+        x: 0.0,
+        duration: 2.0,
+        ease: "power2.inOut",
+      },
+      0.6
+    );
+
+    // Reveal uniform transitions from 0.0 to 1.0 unveiling the exact DE.RISEN logo
+    masterTl.to(
+      shaderUniforms.uReveal,
+      {
+        value: 1.0,
+        duration: 2.0,
+        ease: "power2.inOut",
+      },
+      0.6
+    );
+
+    // -------------------------------------------------------------------------
+    // Phase 3: 2.6s – 3.3s (Complete Centered Settle Sharp & Solid)
+    // -------------------------------------------------------------------------
+    // Floor glow softly dissipates to leave a pristine mirror reflection
+    masterTl.to(
+      floorGlowMat,
+      {
+        opacity: 0.15,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      2.6
+    );
+
+    // Reveal clean tagline and positioning statement below
+    masterTl.to(
+      taglineRef.current,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      2.7
+    );
+
+    masterTl.to(
+      sublineRef.current,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.55,
+        ease: "power2.out",
+      },
+      2.85
+    );
+
+    // -------------------------------------------------------------------------
+    // Phase 4: 3.3s – 3.8s (Subtle Purple Specular Light Sweep)
+    // -------------------------------------------------------------------------
+    masterTl.fromTo(
+      shaderUniforms.uSheen,
+      { value: 0.0 },
+      {
+        value: 1.0,
+        duration: 0.55,
+        ease: "power1.inOut",
+      },
+      3.25
+    );
+
+    // -------------------------------------------------------------------------
+    // Phase 5: 3.8s – 4.0s (Clean Hold on the Centered Pristine DE.RISEN Logo)
+    // -------------------------------------------------------------------------
+    masterTl.to({}, { duration: 0.25 }, 3.75);
+
+    // =========================================================================
+    // 60FPS Render Loop with Dynamic Camera LookAt & Subtle Parallax
+    // =========================================================================
     const renderLoop = () => {
       if (isTerminated) return;
       rafId = requestAnimationFrame(renderLoop);
 
-      clock += 0.015;
-      sphere1.position.y = sphereBaseY1 + Math.sin(clock * 1.2) * 0.12;
-      sphere2.position.y = sphereBaseY2 + Math.cos(clock * 0.9) * 0.14;
-      sphere3.position.y = sphereBaseY3 + Math.sin(clock * 1.5 + 1) * 0.10;
-
-      camera.position.set(camTarget.posX, camTarget.posY, camTarget.posZ);
+      // Update camera position from animated camTarget
+      camera.position.set(camTarget.x, camTarget.y, camTarget.z);
       camera.lookAt(camTarget.lookX, camTarget.lookY, camTarget.lookZ);
+
+      // Subtle atmospheric motion on foreground bokeh particles
+      const time = performance.now() * 0.001;
+      bokehGroup.children.forEach((b, idx) => {
+        b.position.y += Math.sin(time * 1.5 + idx) * 0.0008;
+      });
 
       renderer.render(scene, camera);
     };
     renderLoop();
 
+    // =========================================================================
+    // Resize Handler
+    // =========================================================================
     const onResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const config = getResponsiveConfig(w, h);
-      camera.fov = config.fov;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
 
-      stageGroup.scale.set(config.stageScale, config.stageScale, config.stageScale);
-
-      sphere1.position.x = config.sphere1.x;
-      sphere2.position.x = config.sphere2.x;
-      sphere3.position.x = config.sphere3.x;
-
-      sphereBaseY1 = config.sphere1.y;
-      sphereBaseY2 = config.sphere2.y;
-      sphereBaseY3 = config.sphere3.y;
-
-      if (masterTl && masterTl.time() >= 6.8) {
-        camTarget.posY = config.phase3Y;
-        camTarget.posZ = config.phase3Z;
-        camTarget.lookY = config.lookY3;
+      targetBaseZ = getCameraZ(w, h);
+      if (masterTl && masterTl.time() >= 2.6) {
+        camTarget.z = targetBaseZ;
       }
     };
     window.addEventListener("resize", onResize);
@@ -806,6 +655,16 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       window.removeEventListener("keydown", handleKeyDown);
       masterTl?.kill();
       try {
+        planeGeo.dispose();
+        shadowGeo.dispose();
+        floorGeo.dispose();
+        reflectGeo.dispose();
+        floorGlowGeo.dispose();
+        floorGlowTex.dispose();
+        finGeo.dispose();
+        finMat.dispose();
+        bokehGeo.dispose();
+        bokehTex.dispose();
         renderer.dispose();
       } catch {
         // Safe disposal
@@ -817,15 +676,24 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     <div
       ref={containerRef}
       onClick={handleSkip}
-      className="fixed inset-0 z-[100] overflow-hidden select-none cursor-pointer"
-      style={{ background: "#ffffff" }}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center select-none cursor-pointer overflow-hidden bg-[#0a0414]"
+      aria-label="DE.RISEN 3D Cinematic Logo Reveal"
     >
-      {/* 3D WebGL Canvas for Sleepy Cinematic 3D De.risen Logo Assembly */}
+      {/* 3D WebGL Canvas */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none" />
+
+      {/* Cinematic Vignette Overlay for Depth & Studio Contrast */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 45%, rgba(20, 8, 40, 0.0) 35%, rgba(8, 3, 16, 0.72) 75%, rgba(5, 2, 10, 0.94) 100%)",
+        }}
+      />
 
       {/* Top Bar with Skip Button and Mobile Notice */}
       <div className="absolute top-5 left-5 right-5 sm:top-8 sm:right-8 z-30 flex items-center justify-between pointer-events-auto">
-        <span className="sm:hidden text-[10px] font-bold text-gray-500 tracking-wider uppercase bg-black/5 px-3 py-1 rounded-full border border-black/10">
+        <span className="sm:hidden text-[10px] font-bold text-gray-400 tracking-wider uppercase bg-white/5 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md">
           Tap to skip
         </span>
         <button
@@ -835,35 +703,30 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
             e.stopPropagation();
             handleSkip();
           }}
-          className="ml-auto group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+          className="ml-auto group flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md text-gray-300 hover:text-white text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
           aria-label="Skip Intro Animation"
         >
           <span>Skip</span>
-          <span className="text-[10px] text-gray-400 group-hover:text-gray-600 transition-colors">ESC</span>
+          <span className="text-[10px] text-gray-500 group-hover:text-gray-400 transition-colors">ESC</span>
         </button>
       </div>
 
-      {/* Bottom Center: Tagline & Positioning Statement (Revealed ONLY after 3D assembly!) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-14 sm:pb-18 md:pb-20 z-20 pointer-events-none">
-        <div
-          ref={textGroupRef}
-          className="relative flex flex-col items-center justify-center text-center px-4"
+      {/* Bottom Center: Minimal Cinematic Tagline & Positioning Statement */}
+      <div className="absolute inset-x-0 bottom-10 sm:bottom-14 md:bottom-16 flex flex-col items-center justify-center text-center px-4 pointer-events-none z-20">
+        <p
+          ref={taglineRef}
+          className="text-[10px] sm:text-[12px] md:text-[13px] font-bold tracking-[0.24em] sm:tracking-[0.35em] uppercase text-gray-300 text-center"
+          style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
         >
-          <p
-            ref={taglineRef}
-            className="text-[10px] sm:text-[13px] md:text-[14px] font-bold tracking-[0.18em] sm:tracking-[0.32em] uppercase text-gray-800 max-w-[92vw] text-center"
-            style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
-          >
-            Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
-          </p>
+          Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
+        </p>
 
-          <p
-            ref={sublineRef}
-            className="mt-2 text-[9px] sm:text-[11px] font-semibold tracking-[0.28em] sm:tracking-[0.42em] uppercase text-[#6320ee] max-w-[92vw] text-center"
-          >
-            Rise Above &bull; Redefine
-          </p>
-        </div>
+        <p
+          ref={sublineRef}
+          className="mt-2 text-[9px] sm:text-[11px] font-semibold tracking-[0.32em] sm:tracking-[0.42em] uppercase text-[#B063FF] text-center"
+        >
+          Rise Above &bull; Redefine
+        </p>
       </div>
     </div>
   );

@@ -105,7 +105,7 @@ export const WorkGallery: React.FC = () => {
         {/* Portfolio Grid Cards with Dynamic Showcase Pictures */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 mb-20">
           {filteredItems.map((item, idx) => {
-            const imgSrc = item.imageUrl || GALLERY_IMAGE_MAP[item.category] || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=85';
+            const imgSrc = item.imageUrl || GALLERY_IMAGE_MAP[item.category] || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95';
 
             return (
               <div

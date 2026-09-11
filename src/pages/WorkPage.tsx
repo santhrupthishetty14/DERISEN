@@ -17,7 +17,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) =
         title="Our Portfolio of Impact &"
         highlightedWord="Delivered Work."
         subtitle="Explore our cross-industry portfolio across branding identities, high-scale web platforms, performance campaigns, and 3D visual production."
-        backgroundImage="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=1800&q=85"
+        backgroundImage="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=2400&q=95"
         currentPage="Work Gallery"
         onNavigateHome={() => onNavigate('home')}
       />

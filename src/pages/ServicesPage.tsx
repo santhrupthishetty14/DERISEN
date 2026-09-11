@@ -21,7 +21,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         title="Comprehensive Services & Strategic"
         highlightedWord="Packages."
         subtitle="From brand identity systems and full-stack web platforms to ROI-driven digital marketing and high-end video production."
-        backgroundImage="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=85"
+        backgroundImage="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2400&q=95"
         currentPage="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
       />

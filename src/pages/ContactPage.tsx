@@ -60,7 +60,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSuccess, onNavigate 
         title="Let's Build Something"
         highlightedWord="Remarkable."
         subtitle="Have a project in mind or need strategic consultation? Our leadership team is ready to connect with you."
-        backgroundImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85"
+        backgroundImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=95"
         currentPage="Contact Us"
         onNavigateHome={() => onNavigate('home')}
       />
