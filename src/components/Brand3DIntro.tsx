@@ -716,6 +716,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     window.addEventListener("resize", onResize);
 
     return () => {
+      document.body.style.overflow = "";
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("keydown", handleKeyDown);
@@ -731,19 +732,26 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] overflow-hidden select-none"
+      onClick={handleSkip}
+      className="fixed inset-0 z-[100] overflow-hidden select-none cursor-pointer"
       style={{ background: "#ffffff" }}
     >
       {/* 3D WebGL Canvas for Sleepy Cinematic 3D De.risen Logo Assembly */}
       <div ref={mountRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* Top Bar with Skip Button */}
-      <div className="absolute top-6 right-6 sm:top-8 sm:right-8 z-30">
+      {/* Top Bar with Skip Button and Mobile Notice */}
+      <div className="absolute top-5 left-5 right-5 sm:top-8 sm:right-8 z-30 flex items-center justify-between pointer-events-auto">
+        <span className="sm:hidden text-[10px] font-bold text-gray-500 tracking-wider uppercase bg-black/5 px-3 py-1 rounded-full border border-black/10">
+          Tap to skip
+        </span>
         <button
           ref={skipBtnRef}
           type="button"
-          onClick={handleSkip}
-          className="group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSkip();
+          }}
+          className="ml-auto group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
           aria-label="Skip Intro Animation"
         >
           <span>Skip</span>
