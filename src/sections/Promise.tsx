@@ -14,7 +14,7 @@ export const Promise: React.FC = () => {
           setIsRevealed(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     );
 
     if (sectionRef.current) {
@@ -134,17 +134,17 @@ export const Promise: React.FC = () => {
           </div>
 
           {/* Breadcrumb Strip matching PDF */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 px-6 sm:px-8 py-3.5 bg-brand-lilacSoft border border-brand-lilacBorder rounded-full text-xs font-black tracking-wider text-brand-purple uppercase shadow-sm">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2.5 sm:py-3.5 bg-brand-lilacSoft border border-brand-lilacBorder rounded-2xl sm:rounded-full text-[10px] sm:text-xs font-black tracking-wider text-brand-purple uppercase shadow-sm max-w-full">
             <span>DISCOVER</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
             <span>STRATEGIZE</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
             <span>CREATE</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
             <span>DEVELOP</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
             <span>LAUNCH</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
             <span className="text-brand-dark">GROW</span>
           </div>
         </div>
