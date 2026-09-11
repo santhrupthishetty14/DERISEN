@@ -1,9 +1,8 @@
 import React from 'react';
 import { PageHeroBanner } from '../components/PageHeroBanner';
 import { About } from '../sections/About';
-import { OperatingModel } from '../sections/OperatingModel';
 import { Leadership } from '../sections/Leadership';
-import { WhyChooseUs } from '../sections/WhyChooseUs';
+import { WhatWeDo } from '../sections/WhatWeDo';
 import { FinalCTA } from '../sections/FinalCTA';
 
 interface AboutPageProps {
@@ -25,20 +24,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         onNavigateHome={() => onNavigate('home')}
       />
 
-      {/* 2. Company Story, Vision, Mission & Goals */}
+      {/* 2. Slide 5: Company Introduction, Story, Vision, Mission & Goals */}
       <About />
 
-      {/* 3. Operating Model */}
-      <OperatingModel />
-
-      {/* 4. The Leadership: Shweta Deharkar & Lejai Jayakumar */}
+      {/* 3. Slide 6: The Visionaries Behind DE.RISEN (Shweta Deharkar & Lejai Jayakumar) */}
       <Leadership />
 
-      {/* 5. Why Choose DE.RISEN */}
-      <WhyChooseUs />
+      {/* 4. Slide 7: What We Do & Why Choose DE.RISEN */}
+      <WhatWeDo />
 
-      {/* 6. Conversion CTA */}
+      {/* 5. Conversion CTA */}
       <FinalCTA onOpenModal={onOpenModal} />
     </div>
   );
 };
+
+export default AboutPage;
