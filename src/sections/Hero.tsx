@@ -357,72 +357,72 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
           ===================================================================== */}
       <div
         ref={pillarsRef}
-        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[28px] shadow-[0_15px_40px_rgba(24,13,56,0.06)] border border-gray-100/90 p-4 sm:p-6 lg:p-7 relative z-20 transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(24,13,56,0.1)]"
+        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[28px] shadow-[0_15px_40px_rgba(24,13,56,0.06)] border border-gray-100/90 p-3.5 sm:p-6 lg:p-7 relative z-20 transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(24,13,56,0.1)] mt-6 sm:mt-8"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
-          <div className="group flex items-center gap-4 transition-all duration-300 hover:translate-x-1">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
-              <div className="w-7 h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
-                <PenTool className="w-3.5 h-3.5 -rotate-45" />
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
+                <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-[15px] sm:text-base font-black text-brand-dark leading-tight mb-1 group-hover:text-brand-purple transition-colors">
-                Creative<br className="hidden sm:inline" /> Design
+              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+                Creative Design
               </h4>
-              <p className="text-[11.5px] sm:text-xs text-gray-500 leading-relaxed max-w-[200px]">
+              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Unique and engaging designs that bring your ideas to life.
               </p>
             </div>
           </div>
 
           {/* 2. Branding */}
-          <div className="group flex items-center gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
-              <div className="w-7 h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
-                <Tag className="w-3.5 h-3.5 -rotate-45" />
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
+                <Tag className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-[15px] sm:text-base font-black text-brand-dark leading-tight mb-1 group-hover:text-brand-purple transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
                 Branding
               </h4>
-              <p className="text-[11.5px] sm:text-xs text-gray-500 leading-relaxed max-w-[200px]">
+              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Build a strong brand identity that connects and inspires trust.
               </p>
             </div>
           </div>
 
           {/* 3. Digital Marketing */}
-          <div className="group flex items-center gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
-              <div className="w-7 h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
-                <Megaphone className="w-3.5 h-3.5 -rotate-45" />
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
+                <Megaphone className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-[15px] sm:text-base font-black text-brand-dark leading-tight mb-1 group-hover:text-brand-purple transition-colors">
-                Digital<br className="hidden sm:inline" /> Marketing
+              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+                Digital Marketing
               </h4>
-              <p className="text-[11.5px] sm:text-xs text-gray-500 leading-relaxed max-w-[200px]">
+              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Result-driven marketing strategies that grow your brand online.
               </p>
             </div>
           </div>
 
           {/* 4. IT Solutions */}
-          <div className="group flex items-center gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
-              <div className="w-7 h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
-                <Code className="w-3.5 h-3.5 -rotate-45" />
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
+                <Code className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-[15px] sm:text-base font-black text-brand-dark leading-tight mb-1 group-hover:text-brand-purple transition-colors">
-                IT<br className="hidden sm:inline" /> Solutions
+              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+                IT Solutions
               </h4>
-              <p className="text-[11.5px] sm:text-xs text-gray-500 leading-relaxed max-w-[200px]">
+              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Reliable and scalable IT solutions to power your business.
               </p>
             </div>
