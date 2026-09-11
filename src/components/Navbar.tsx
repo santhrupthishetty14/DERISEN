@@ -18,6 +18,7 @@ const DESKTOP_NAV_ITEMS: NavItemData[] = [
   { label: 'Home', href: '#home', id: 'home' },
   { label: 'About Us', href: '#about', id: 'about' },
   { label: 'Services & Packages', href: '#services', id: 'services' },
+  { label: 'Work Gallery & Testimonials', href: '#work', id: 'work' },
   { label: 'Contact Us', href: '#contact', id: 'contact' },
 ];
 
