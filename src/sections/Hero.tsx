@@ -265,13 +265,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-white select-none overflow-hidden min-h-screen flex flex-col justify-between pt-24 sm:pt-28 pb-6 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white"
+      className="relative bg-white select-none overflow-hidden min-h-screen flex flex-col justify-between pt-24 sm:pt-28 pb-6 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full"
     >
       {/* Background Soft Purple Aura & Ambient Radiance */}
-      <div
-        ref={auraRef}
-        className="absolute top-12 left-1/4 w-[600px] h-[600px] bg-brand-purple/6 rounded-full blur-3xl pointer-events-none transition-transform"
-      />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+          ref={auraRef}
+          className="absolute top-12 left-1/4 w-[600px] h-[600px] bg-brand-purple/6 rounded-full blur-3xl transition-transform"
+        />
+      </div>
 
       {/* Hero Core Content Stage (Immediately visible on page load) */}
       <div className="w-full max-w-[1360px] mx-auto flex-grow flex flex-col justify-center my-auto py-4 sm:py-6 relative z-10">
@@ -279,12 +281,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
           {/* =================================================================
               Left Column: Headline, Subtitle, CTA Button & Floating Sphere
               ================================================================= */}
-          <div ref={leftColRef} className="lg:col-span-5 flex flex-col items-start text-left relative">
+          <div ref={leftColRef} className="lg:col-span-5 flex flex-col items-start text-left relative w-full max-w-full">
             {/* Display Headline */}
-            <h1 className="reveal-item text-[32px] sm:text-5xl lg:text-[48px] xl:text-[56px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-4 sm:mb-5">
+            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[48px] xl:text-[56px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-4 sm:mb-5 max-w-full break-words">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
-              <div className="relative inline-block text-brand-purple mt-1">
+              <div className="relative inline-block text-brand-purple mt-1 max-w-full">
                 <span>We Make Them Rise.</span>
                 {/* Reference Curved Underline Swoop */}
                 <svg
@@ -310,7 +312,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
             </p>
 
             {/* CTA Button and Floating Sphere Row */}
-            <div className="reveal-item relative flex items-center gap-4 sm:gap-6">
+            <div className="reveal-item relative flex flex-wrap items-center gap-4 sm:gap-6 max-w-full">
               <button
                 onClick={onOpenModal}
                 className="group relative inline-flex items-center gap-3.5 sm:gap-4 py-3 sm:py-3.5 pl-6 sm:pl-7 pr-2.5 sm:pr-3 bg-[#13063e] hover:bg-[#1f0a5c] text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(99,32,238,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"

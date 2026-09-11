@@ -81,7 +81,7 @@ export const About: React.FC = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+      className="py-24 sm:py-32 bg-white relative overflow-hidden w-full max-w-full"
     >
       {/* Ambient background dots */}
       <div className="dot-pattern top-12 left-10 opacity-10" />
@@ -175,7 +175,7 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-center gap-6 relative">
             {/* 1. Main Center Circle Frame with Extracted Collage */}
             <div
-              className={`relative w-60 h-60 xs:w-64 xs:h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[calc(100vw-3rem)] ${
+              className={`relative w-60 h-60 xs:w-64 xs:h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[calc(100%-1.5rem)] ${
                 isRevealed
                   ? 'clip-path-reveal-full scale-100 opacity-100'
                   : 'clip-path-reveal-left scale-[1.06] opacity-0'

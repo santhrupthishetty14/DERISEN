@@ -49,8 +49,10 @@ export const Promise: React.FC = () => {
           }`}
         >
           {/* Ambient Glow Orbs */}
-          <div className="absolute -top-24 -left-24 w-72 h-72 bg-brand-purple/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-brand-violet/30 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-24 -left-24 w-72 h-72 bg-brand-purple/30 rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-brand-violet/30 rounded-full blur-3xl" />
+          </div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white/10 backdrop-blur-md text-brand-lilac text-xs font-black uppercase tracking-widest rounded-full mb-6 border border-white/15 shadow-inner">

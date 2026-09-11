@@ -22,9 +22,9 @@ export const PageHeroBanner: React.FC<PageHeroBannerProps> = ({
   onNavigateHome,
 }) => {
   return (
-    <section className="relative w-full min-h-[380px] sm:min-h-[440px] md:min-h-[480px] pt-32 pb-20 flex items-center justify-center overflow-hidden bg-brand-dark">
+    <section className="relative w-full max-w-full min-h-[380px] sm:min-h-[440px] md:min-h-[480px] pt-32 pb-20 flex items-center justify-center overflow-hidden bg-brand-dark">
       {/* 1. Background Image with High-Res Photography & Blur/Parallax Styling */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src={backgroundImage}
           alt={title}
@@ -35,11 +35,11 @@ export const PageHeroBanner: React.FC<PageHeroBannerProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-brand-purple/70 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-purple/30 via-transparent to-transparent" />
-      </div>
 
-      {/* Decorative ambient glowing orbs */}
-      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-purple/20 rounded-full filter blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-brand-pink/15 rounded-full filter blur-3xl pointer-events-none" />
+        {/* Decorative ambient glowing orbs */}
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-purple/20 rounded-full filter blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-brand-pink/15 rounded-full filter blur-3xl" />
+      </div>
 
       {/* 2. Banner Content with Framer Motion Entrance Animations */}
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 w-full text-center flex flex-col items-center">

@@ -44,14 +44,80 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     const H = window.innerHeight;
     const isMobile = W < 768;
 
-    // 1. Pristine Studio White Scene Setup (Exact Reference Video Style)
+    // Responsive layout & scale calculator:
+    // Ensures the 3D typography ("De.risen", ~5.85 units wide) is 100% visible, centered,
+    // and beautifully framed on any viewport (mobile phones, tablets, foldables, laptops, ultra-wides).
+    const getResponsiveConfig = (w: number, h: number) => {
+      const aspect = w / h;
+      const isNarrow = w < 768 || aspect < 1.1;
+
+      if (!isNarrow) {
+        // Desktop & Laptop (Preserve exact reference design & cinematic depth)
+        return {
+          fov: 36,
+          stageScale: 1.0,
+          phase0Y: 3.6,
+          phase0Z: 7.0,
+          phase1Y: 3.4,
+          phase1Z: 6.6,
+          phase3Y: 0.55,
+          phase3Z: 5.8,
+          lookY0: 0.35,
+          lookY3: 0.55,
+          sphere1: { x: -3.8, y: 1.4, z: 1.2 },
+          sphere2: { x: 3.8, y: 2.6, z: -1.2 },
+          sphere3: { x: 4.0, y: 0.9, z: 1.6 },
+        };
+      }
+
+      // Mobile & Portrait Viewports (e.g. Samsung Galaxy S20, iPhone, Tablet portrait)
+      const fov = 40;
+      const phase3Z = 7.0;
+      const tanHalfFov = Math.tan((fov * Math.PI) / 360);
+      const visibleWidth = 2 * phase3Z * tanHalfFov * aspect;
+
+      // Natural logo width is ~5.85 units. On mobile, we want the logo to occupy ~78% of visible screen width
+      const targetLogoWidth = visibleWidth * 0.78;
+      const stageScale = Math.min(0.9, Math.max(0.28, targetLogoWidth / 5.85));
+
+      const distanceRatio = phase3Z / 5.8;
+
+      return {
+        fov,
+        stageScale,
+        phase0Y: 0.35 + (3.6 - 0.35) * distanceRatio,
+        phase0Z: 7.0 * distanceRatio,
+        phase1Y: 0.35 + (3.4 - 0.35) * distanceRatio,
+        phase1Z: 6.6 * distanceRatio,
+        phase3Y: 0.65,
+        phase3Z,
+        lookY0: 0.35,
+        lookY3: 0.65,
+        sphere1: { x: -visibleWidth * 0.42, y: 1.7, z: 0.8 },
+        sphere2: { x: visibleWidth * 0.40, y: 2.2, z: -0.6 },
+        sphere3: { x: visibleWidth * 0.42, y: 0.6, z: 1.0 },
+      };
+    };
+
+    const initialConfig = getResponsiveConfig(W, H);
+
+    let sphereBaseY1 = initialConfig.sphere1.y;
+    let sphereBaseY2 = initialConfig.sphere2.y;
+    let sphereBaseY3 = initialConfig.sphere3.y;
+
+    // 1. Pristine Studio White Scene Setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
 
+    // Dynamic stage container that uniformly scales all 3D intro elements to fit any screen
+    const stageGroup = new THREE.Group();
+    scene.add(stageGroup);
+    stageGroup.scale.set(initialConfig.stageScale, initialConfig.stageScale, initialConfig.stageScale);
+
     // Initial Camera: Dramatic slow-moving isometric perspective looking down at floor
-    const camera = new THREE.PerspectiveCamera(36, W / H, 0.1, 100);
-    camera.position.set(0, 3.6, isMobile ? 8.4 : 7.0);
-    camera.lookAt(0, 0.35, 0);
+    const camera = new THREE.PerspectiveCamera(initialConfig.fov, W / H, 0.1, 150);
+    camera.position.set(0, initialConfig.phase0Y, initialConfig.phase0Z);
+    camera.lookAt(0, initialConfig.lookY0, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -61,7 +127,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(W, H);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
 
@@ -80,11 +146,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     keyLight.shadow.mapSize.width = 2048;
     keyLight.shadow.mapSize.height = 2048;
     keyLight.shadow.camera.near = 0.5;
-    keyLight.shadow.camera.far = 28;
-    keyLight.shadow.camera.left = -6;
-    keyLight.shadow.camera.right = 6;
-    keyLight.shadow.camera.top = 6;
-    keyLight.shadow.camera.bottom = -6;
+    keyLight.shadow.camera.far = 45;
+    keyLight.shadow.camera.left = -12;
+    keyLight.shadow.camera.right = 12;
+    keyLight.shadow.camera.top = 12;
+    keyLight.shadow.camera.bottom = -12;
     keyLight.shadow.bias = -0.0006;
     keyLight.shadow.radius = 3.5;
     scene.add(keyLight);
@@ -96,11 +162,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     // Dynamic Moving Specular Sheen Light (glides across the 3D letters)
     const sheenLight = new THREE.PointLight(0xffffff, 0, 16);
     sheenLight.position.set(-6, 2.2, 3.5);
-    scene.add(sheenLight);
+    stageGroup.add(sheenLight);
 
     // 3. Studio White Floor with Soft Contact Shadows
     const groundMat = new THREE.ShadowMaterial({ opacity: 0.16 });
-    const groundGeo = new THREE.PlaneGeometry(60, 60);
+    const groundGeo = new THREE.PlaneGeometry(140, 140);
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -0.005;
@@ -131,7 +197,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     const floorGlow = new THREE.Mesh(floorGlowGeo, floorGlowMat);
     floorGlow.rotation.x = -Math.PI / 2;
     floorGlow.position.y = 0.001;
-    scene.add(floorGlow);
+    stageGroup.add(floorGlow);
 
     // 4. Large 3D Glossy Brand Dot
     const dotGeo = new THREE.SphereGeometry(0.38, 48, 48);
@@ -146,7 +212,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     const dotMesh = new THREE.Mesh(dotGeo, dotMat);
     dotMesh.castShadow = true;
     dotMesh.receiveShadow = true;
-    scene.add(dotMesh);
+    stageGroup.add(dotMesh);
 
     // Starts high up above the floor
     dotMesh.position.set(-0.92, 4.6, -1.2);
@@ -164,11 +230,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     const ripple = new THREE.Mesh(rippleGeo, rippleMat);
     ripple.rotation.x = -Math.PI / 2;
     ripple.position.y = 0.002;
-    scene.add(ripple);
+    stageGroup.add(ripple);
 
     // 5. Parent 3D Group for the Assembled Name
     const logoGroup = new THREE.Group();
-    scene.add(logoGroup);
+    stageGroup.add(logoGroup);
     logoGroup.position.set(0, 0.22, 0);
     logoGroup.rotation.set(-Math.PI / 2.3, 0, 0);
 
@@ -227,9 +293,9 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       return mesh;
     };
 
-    const sphere1 = createMetallicSphere(0x934bf8, 0.35, -3.8, 1.4, 1.2); // Left
-    const sphere2 = createMetallicSphere(0x6320ee, 0.28, 3.8, 2.6, -1.2); // Top-Right
-    const sphere3 = createMetallicSphere(0x7e34f4, 0.30, 4.2, 0.9, 1.6);  // Far Right
+    const sphere1 = createMetallicSphere(0x934bf8, 0.35, initialConfig.sphere1.x, initialConfig.sphere1.y, initialConfig.sphere1.z); // Left
+    const sphere2 = createMetallicSphere(0x6320ee, 0.28, initialConfig.sphere2.x, initialConfig.sphere2.y, initialConfig.sphere2.z); // Top-Right
+    const sphere3 = createMetallicSphere(0x7e34f4, 0.30, initialConfig.sphere3.x, initialConfig.sphere3.y, initialConfig.sphere3.z);  // Far Right
 
     let clock = 0;
 
@@ -240,7 +306,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       const geo = new THREE.BufferGeometry().setFromPoints(points);
       const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0 });
       const line = new THREE.Line(geo, mat);
-      scene.add(line);
+      stageGroup.add(line);
       return { line, mat, geo };
     };
 
@@ -265,16 +331,16 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
 
     // GSAP Initial States
     gsap.set(textGroupRef.current, { opacity: 0, y: 16 });
-    gsap.set(taglineRef.current, { opacity: 0, y: 10, letterSpacing: "0.22em" });
+    gsap.set(taglineRef.current, { opacity: 0, y: 10, letterSpacing: isMobile ? "0.18em" : "0.22em" });
     gsap.set(sublineRef.current, { opacity: 0, y: 8 });
     gsap.set(skipBtnRef.current, { opacity: 0, y: -10 });
 
     const camTarget = {
       posX: 0,
-      posY: 3.6,
-      posZ: isMobile ? 8.4 : 7.0,
+      posY: initialConfig.phase0Y,
+      posZ: initialConfig.phase0Z,
       lookX: 0,
-      lookY: 0.35,
+      lookY: initialConfig.lookY0,
       lookZ: 0,
     };
 
@@ -479,8 +545,8 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           camTarget,
           {
             posX: 0,
-            posY: 3.4,
-            posZ: isMobile ? 8.0 : 6.6,
+            posY: initialConfig.phase1Y,
+            posZ: initialConfig.phase1Z,
             duration: 3.4,
             ease: "sine.inOut",
           },
@@ -560,10 +626,10 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           camTarget,
           {
             posX: 0,
-            posY: 0.55,
-            posZ: isMobile ? 7.6 : 5.8,
+            posY: initialConfig.phase3Y,
+            posZ: initialConfig.phase3Z,
             lookX: 0,
-            lookY: 0.55,
+            lookY: initialConfig.lookY3,
             lookZ: 0,
             duration: 2.4,
             ease: "power2.inOut",
@@ -592,7 +658,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           {
             opacity: 1,
             y: 0,
-            letterSpacing: "0.32em",
+            letterSpacing: isMobile ? "0.18em" : "0.32em",
             duration: 1.2,
             ease: "power2.out",
           },
@@ -695,9 +761,9 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       rafId = requestAnimationFrame(renderLoop);
 
       clock += 0.015;
-      sphere1.position.y = 1.4 + Math.sin(clock * 1.2) * 0.12;
-      sphere2.position.y = 2.6 + Math.cos(clock * 0.9) * 0.14;
-      sphere3.position.y = 0.9 + Math.sin(clock * 1.5 + 1) * 0.10;
+      sphere1.position.y = sphereBaseY1 + Math.sin(clock * 1.2) * 0.12;
+      sphere2.position.y = sphereBaseY2 + Math.cos(clock * 0.9) * 0.14;
+      sphere3.position.y = sphereBaseY3 + Math.sin(clock * 1.5 + 1) * 0.10;
 
       camera.position.set(camTarget.posX, camTarget.posY, camTarget.posZ);
       camera.lookAt(camTarget.lookX, camTarget.lookY, camTarget.lookZ);
@@ -709,9 +775,27 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     const onResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
+      const config = getResponsiveConfig(w, h);
+      camera.fov = config.fov;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+
+      stageGroup.scale.set(config.stageScale, config.stageScale, config.stageScale);
+
+      sphere1.position.x = config.sphere1.x;
+      sphere2.position.x = config.sphere2.x;
+      sphere3.position.x = config.sphere3.x;
+
+      sphereBaseY1 = config.sphere1.y;
+      sphereBaseY2 = config.sphere2.y;
+      sphereBaseY3 = config.sphere3.y;
+
+      if (masterTl && masterTl.time() >= 6.8) {
+        camTarget.posY = config.phase3Y;
+        camTarget.posZ = config.phase3Z;
+        camTarget.lookY = config.lookY3;
+      }
     };
     window.addEventListener("resize", onResize);
 
@@ -767,7 +851,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
         >
           <p
             ref={taglineRef}
-            className="text-[11px] sm:text-[13px] md:text-[14px] font-bold tracking-[0.32em] uppercase text-gray-800"
+            className="text-[10px] sm:text-[13px] md:text-[14px] font-bold tracking-[0.18em] sm:tracking-[0.32em] uppercase text-gray-800 max-w-[92vw] text-center"
             style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
           >
             Creative Design &bull; Branding &bull; Marketing &bull; IT Solutions
@@ -775,7 +859,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
 
           <p
             ref={sublineRef}
-            className="mt-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.42em] uppercase text-[#6320ee]"
+            className="mt-2 text-[9px] sm:text-[11px] font-semibold tracking-[0.28em] sm:tracking-[0.42em] uppercase text-[#6320ee] max-w-[92vw] text-center"
           >
             Rise Above &bull; Redefine
           </p>

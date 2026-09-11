@@ -191,15 +191,17 @@ export const WhyChooseUs: React.FC = () => {
     <section
       ref={sectionRef}
       id="why-choose-us"
-      className="py-24 sm:py-32 bg-[#F8F9FD] relative overflow-hidden"
+      className="py-24 sm:py-32 bg-[#F8F9FD] relative overflow-hidden w-full max-w-full"
     >
       {/* Subtle ambient dot patterns */}
       <div className="dot-pattern top-12 left-10 opacity-10" />
       <div className="dot-pattern bottom-12 right-10 opacity-10" />
 
       {/* Soft gradient halo */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-purple/4 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-violet/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-purple/4 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-violet/5 rounded-full blur-3xl" />
+      </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
 

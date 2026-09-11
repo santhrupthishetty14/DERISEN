@@ -149,7 +149,7 @@ export const OperatingModel: React.FC = () => {
   }, []);
 
   return (
-    <div id="services-packages" className="relative bg-[#FAFAFC]">
+    <div id="services-packages" className="relative bg-[#FAFAFC] w-full max-w-full overflow-hidden">
       {/* =====================================================================
           1. DESKTOP VIEW (>= 1024px): Pinned Horizontal Cinematic Track
           ===================================================================== */}
@@ -159,14 +159,16 @@ export const OperatingModel: React.FC = () => {
           className="w-full h-screen min-h-[680px] max-h-[1080px] flex flex-col justify-between py-8 lg:py-10 relative overflow-hidden bg-[#FAFAFC]"
         >
           {/* Ambient Glows */}
-          <div
-            className="absolute -top-32 -left-32 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl pointer-events-none transition-transform duration-700"
-            style={{ transform: `translateX(${scrollProgress * 80}px)` }}
-          />
-          <div
-            className="absolute -bottom-32 -right-32 w-96 h-96 bg-brand-violet/10 rounded-full blur-3xl pointer-events-none transition-transform duration-700"
-            style={{ transform: `translateX(${-scrollProgress * 80}px)` }}
-          />
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+              className="absolute -top-32 -left-32 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl transition-transform duration-700"
+              style={{ transform: `translateX(${scrollProgress * 80}px)` }}
+            />
+            <div
+              className="absolute -bottom-32 -right-32 w-96 h-96 bg-brand-violet/10 rounded-full blur-3xl transition-transform duration-700"
+              style={{ transform: `translateX(${-scrollProgress * 80}px)` }}
+            />
+          </div>
           <div className="dot-pattern top-12 left-12 opacity-15 pointer-events-none" />
           <div className="dot-pattern bottom-12 right-12 opacity-15 pointer-events-none" />
 

@@ -30,12 +30,14 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenModal }) => {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-28 sm:py-36 bg-gradient-to-br from-[#0B041A] via-[#180D38] to-[#100726] text-white text-center relative overflow-hidden"
+      className="py-28 sm:py-36 bg-gradient-to-br from-[#0B041A] via-[#180D38] to-[#100726] text-white text-center relative overflow-hidden w-full max-w-full"
     >
       {/* Dynamic Ambient Background Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-purple/25 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-10 left-10 w-72 h-72 bg-brand-violet/20 rounded-full blur-[90px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-brand-cyan/15 rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-purple/25 rounded-full blur-[120px]" />
+        <div className="absolute top-10 left-10 w-72 h-72 bg-brand-violet/20 rounded-full blur-[90px]" />
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-brand-cyan/15 rounded-full blur-[90px]" />
+      </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         <div

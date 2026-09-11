@@ -17,10 +17,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-brand-navy text-white pt-20 pb-10 border-t border-white/10 relative overflow-hidden">
+    <footer className="bg-brand-navy text-white pt-20 pb-10 border-t border-white/10 relative overflow-hidden w-full max-w-full">
       {/* Background Cybernetic Circuit Texture */}
-      <div className="absolute inset-0 circuit-grid-dark opacity-15 pointer-events-none" />
-      <div className="absolute -top-32 right-1/4 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 circuit-grid-dark opacity-15" />
+        <div className="absolute -top-32 right-1/4 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl" />
+      </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">

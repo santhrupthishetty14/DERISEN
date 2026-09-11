@@ -85,7 +85,9 @@ export const ServicesPackages: React.FC = () => {
             }`}
           >
             {/* Ambient Radial Glow */}
-            <div className="absolute -top-16 -right-16 w-60 h-60 bg-brand-purple/35 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute -top-16 -right-16 w-60 h-60 bg-brand-purple/35 rounded-full blur-3xl" />
+            </div>
 
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-8">

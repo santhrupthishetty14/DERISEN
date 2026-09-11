@@ -11,7 +11,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenModal }) => {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full max-w-full overflow-x-clip">
       {/* 1. Slide 2: Hero Section & 4 Pillars Strip */}
       <Hero onOpenModal={onOpenModal} />
 

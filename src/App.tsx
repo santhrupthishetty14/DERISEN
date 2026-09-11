@@ -170,7 +170,7 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative overflow-x-hidden w-full">
+    <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">
       {/* Dynamic Global Scroll Progress Indicator Bar */}
       <div
         className="fixed top-0 left-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-brand-cyan z-[60] origin-left shadow-[0_0_12px_rgba(99,32,238,0.85)] pointer-events-none transition-[width] duration-100 ease-out"
@@ -196,7 +196,7 @@ export const App: React.FC = () => {
       />
 
       {/* 2. Main Multi-Page Content Area with Smooth Page Transitions */}
-      <main className="flex-grow pt-[70px] sm:pt-[90px]">
+      <main className="flex-grow pt-[70px] sm:pt-[90px] w-full max-w-full overflow-x-clip">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
@@ -204,7 +204,7 @@ export const App: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full"
+            className="w-full max-w-full overflow-x-clip"
           >
             {currentPage === 'home' && (
               <HomePage

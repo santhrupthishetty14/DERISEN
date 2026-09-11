@@ -42,7 +42,7 @@ export const HeroVisual: React.FC = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full max-w-[760px] mx-auto flex items-center justify-center select-none perspective-[1200px] overflow-hidden sm:overflow-visible py-2 sm:py-0"
+      className="relative w-full max-w-[760px] mx-auto flex items-center justify-center select-none perspective-[1200px] overflow-hidden py-2 sm:py-0"
     >
       {/* Background Soft Purple Aura Glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -50,7 +50,9 @@ export const HeroVisual: React.FC = () => {
       </div>
 
       {/* Ambient Delicate Flowing Wave Ribbons Glow */}
-      <div className="absolute -top-10 -right-10 w-60 sm:w-96 h-60 sm:h-96 bg-brand-violet/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-10 -right-10 w-60 sm:w-96 h-60 sm:h-96 bg-brand-violet/15 rounded-full blur-3xl" />
+      </div>
 
       {/* Master 3D Artwork (iMac, Phone, Mug, Keyboard, Velvet Ribbon & Spheres) */}
       <div

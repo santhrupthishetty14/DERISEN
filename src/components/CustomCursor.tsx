@@ -6,6 +6,8 @@ export const CustomCursor: React.FC = () => {
   const [cursorType, setCursorType] = useState<'default' | 'pointer' | 'view' | 'hidden'>('default');
   const [isVisible, setIsVisible] = useState(false);
 
+  const posRef = React.useRef({ x: -100, y: -100 });
+
   useEffect(() => {
     // Only enable on desktop without touch screen
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -16,6 +18,7 @@ export const CustomCursor: React.FC = () => {
     setIsVisible(true);
 
     const onMouseMove = (e: MouseEvent) => {
+      posRef.current = { x: e.clientX, y: e.clientY };
       setPosition({ x: e.clientX, y: e.clientY });
 
       // Determine element under cursor
@@ -34,7 +37,7 @@ export const CustomCursor: React.FC = () => {
     const onMouseLeave = () => setIsVisible(false);
     const onMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
@@ -42,8 +45,8 @@ export const CustomCursor: React.FC = () => {
     let animationFrameId: number;
     const animateTrail = () => {
       setTrailingPos((prev) => {
-        const dx = position.x - prev.x;
-        const dy = position.y - prev.y;
+        const dx = posRef.current.x - prev.x;
+        const dy = posRef.current.y - prev.y;
         return {
           x: prev.x + dx * 0.22,
           y: prev.y + dy * 0.22,
@@ -60,7 +63,7 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseenter', onMouseEnter);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [position.x, position.y]);
+  }, []);
 
   if (!isVisible) return null;
 

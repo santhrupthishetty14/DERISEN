@@ -53,7 +53,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSuccess, onNavigate 
   };
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full max-w-full bg-white overflow-x-clip">
       {/* 1. Page Hero Banner with High-Resolution Photography */}
       <PageHeroBanner
         badge="GET IN TOUCH WITH DE.RISEN"

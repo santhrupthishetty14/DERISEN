@@ -10,7 +10,7 @@ interface WorkPageProps {
 
 export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
-    <div className="w-full">
+    <div className="w-full max-w-full overflow-x-clip">
       {/* 1. Page Hero Banner with High-Resolution Photography */}
       <PageHeroBanner
         badge="DELIVERED PROJECTS & CASE STUDIES"
