@@ -5,6 +5,7 @@ import { OperatingModel } from '../sections/OperatingModel';
 import { FinalCTA } from '../sections/FinalCTA';
 import { PORTFOLIO_ITEMS } from '../utils/constants';
 import { ArrowRight, ArrowUpRight, CheckCircle, ShieldCheck, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface HomePageProps {
   onOpenModal: () => void;
@@ -15,7 +16,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
   const featuredWorks = PORTFOLIO_ITEMS.slice(0, 3);
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-hidden">
       {/* 1. Hero Section & 4 Pillars Strip */}
       <Hero onOpenModal={onOpenModal} />
 
@@ -23,62 +24,80 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       <Stats />
 
       {/* 3. About DE.RISEN High-Impact Spotlight (Curated Teaser) */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-[1320px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Image / Visual Collage */}
-            <div className="lg:col-span-5 relative">
+      <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
+        <div className="max-w-[1320px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Image / Visual Collage with Scroll Entrance */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 relative"
+            >
               <div className="relative rounded-3xl overflow-hidden border border-gray-200 shadow-2xl group">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85"
                   alt="DE.RISEN Agency Team"
-                  className="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[360px] sm:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/20 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
                   <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-cyan mb-1 block">
                     FOUNDED IN EXCELLENCE
                   </span>
-                  <h4 className="text-xl font-extrabold leading-snug">
+                  <h4 className="text-lg sm:text-xl font-extrabold leading-snug">
                     Creative Vision Powered by Technical Precision.
                   </h4>
                 </div>
               </div>
 
-              {/* Floating Stat Card */}
-              <div className="absolute -bottom-6 -right-4 bg-white rounded-2xl p-5 shadow-xl border border-gray-100 flex items-center gap-4 hidden sm:flex">
-                <div className="w-12 h-12 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-black text-xl">
+              {/* Floating Stat Card with Gentle Levitation */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="absolute -bottom-5 -right-3 sm:-bottom-6 sm:-right-4 bg-white rounded-2xl p-4 sm:p-5 shadow-2xl border border-gray-100 flex items-center gap-3 sm:gap-4"
+              >
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-black text-lg sm:text-xl shadow-inner">
                   96+
                 </div>
                 <div>
-                  <div className="text-xs font-mono font-bold text-gray-400">DELIVERED</div>
-                  <div className="text-sm font-black text-brand-dark">Creative Projects</div>
+                  <div className="text-[10px] sm:text-xs font-mono font-bold text-gray-400">DELIVERED</div>
+                  <div className="text-xs sm:text-sm font-black text-brand-dark">Creative Projects</div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            {/* Right Story Text */}
-            <div className="lg:col-span-7 lg:pl-6">
+            {/* Right Story Text with Staggered Scroll Entrance */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 lg:pl-6"
+            >
               <span className="eyebrow">WHO WE ARE</span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-5 sm:mb-6 leading-tight">
                 Where Bold Ideas Rise into{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">
                   Market Leaders.
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal mb-6">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal mb-6">
                 DE.RISEN was established with a singular mission: to help startups, SMEs, and enterprises transform ambitious visions into powerful brands and high-performing digital systems.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-surface-subtle border border-gray-200/60">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mb-8">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-surface-subtle border border-gray-200/60 hover:border-brand-purple/40 transition-colors">
                   <CheckCircle className="w-5 h-5 text-brand-purple shrink-0 mt-0.5" />
                   <div>
                     <h5 className="text-sm font-bold text-brand-dark">Strategic Leadership</h5>
                     <p className="text-xs text-gray-500 mt-0.5">Led by Shweta Deharkar & Lejai Jayakumar.</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-surface-subtle border border-gray-200/60">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-surface-subtle border border-gray-200/60 hover:border-brand-cyan/40 transition-colors">
                   <ShieldCheck className="w-5 h-5 text-brand-cyan shrink-0 mt-0.5" />
                   <div>
                     <h5 className="text-sm font-bold text-brand-dark">One Unified Model</h5>
@@ -87,10 +106,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <button
                   onClick={() => onNavigate('about')}
-                  className="px-7 py-3.5 rounded-full bg-brand-dark hover:bg-brand-purple text-white text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 shadow-lg shadow-brand-dark/20 flex items-center gap-2 group cursor-pointer"
+                  className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-brand-dark hover:bg-brand-purple text-white text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 shadow-lg shadow-brand-dark/20 flex items-center gap-2 group cursor-pointer hover:scale-105 active:scale-95"
                 >
                   <span>Explore Our Story & Leadership</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -98,12 +117,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="px-7 py-3.5 rounded-full bg-surface-subtle hover:bg-gray-100 text-brand-dark text-xs sm:text-sm font-bold border border-gray-200 transition-colors cursor-pointer"
+                  className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-surface-subtle hover:bg-gray-100 text-brand-dark text-xs sm:text-sm font-bold border border-gray-200 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95"
                 >
                   Get In Touch
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
