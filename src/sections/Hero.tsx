@@ -281,7 +281,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
               ================================================================= */}
           <div ref={leftColRef} className="lg:col-span-5 flex flex-col items-start text-left relative">
             {/* Display Headline */}
-            <h1 className="reveal-item text-4xl sm:text-5xl lg:text-[48px] xl:text-[56px] font-black text-brand-dark leading-[1.08] tracking-[-0.035em] mb-4 sm:mb-5">
+            <h1 className="reveal-item text-[32px] sm:text-5xl lg:text-[48px] xl:text-[56px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-4 sm:mb-5">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
               <div className="relative inline-block text-brand-purple mt-1">
@@ -304,21 +304,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
             </h1>
 
             {/* Supporting Text matching reference exactly */}
-            <p className="reveal-item text-base sm:text-lg text-gray-600 font-medium max-w-[460px] leading-relaxed mb-6 sm:mb-8">
+            <p className="reveal-item text-sm sm:text-lg text-gray-600 font-medium max-w-[460px] leading-relaxed mb-6 sm:mb-8">
               Creative Design, Branding, Digital Marketing &amp;<br className="hidden sm:inline" />
               IT Solutions under one roof.
             </p>
 
             {/* CTA Button and Floating Sphere Row */}
-            <div className="reveal-item relative flex items-center gap-6">
+            <div className="reveal-item relative flex items-center gap-4 sm:gap-6">
               <button
                 onClick={onOpenModal}
-                className="group relative inline-flex items-center gap-4 py-3.5 pl-7 pr-3 bg-[#13063e] hover:bg-[#1f0a5c] text-white text-[15px] font-bold rounded-full transition-all duration-300 shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(99,32,238,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="group relative inline-flex items-center gap-3.5 sm:gap-4 py-3 sm:py-3.5 pl-6 sm:pl-7 pr-2.5 sm:pr-3 bg-[#13063e] hover:bg-[#1f0a5c] text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(99,32,238,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 aria-label="Explore Our Services"
               >
                 <span className="tracking-[-0.01em]">Explore Our Services</span>
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-brand-purple shadow-sm transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-brand-purple shadow-sm transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </span>
               </button>
 
