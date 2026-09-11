@@ -175,7 +175,7 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-center gap-6 relative">
             {/* 1. Main Center Circle Frame with Extracted Collage */}
             <div
-              className={`relative w-72 h-72 sm:w-84 sm:h-84 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`relative w-60 h-60 xs:w-64 xs:h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[calc(100vw-3rem)] ${
                 isRevealed
                   ? 'clip-path-reveal-full scale-100 opacity-100'
                   : 'clip-path-reveal-left scale-[1.06] opacity-0'
@@ -184,7 +184,7 @@ export const About: React.FC = () => {
               {/* Refined Studio Accent Ring */}
               <div
                 ref={ringRef}
-                className="absolute -inset-3.5 rounded-full border-2 border-dashed border-brand-purple/40 pointer-events-none"
+                className="absolute -inset-2.5 sm:-inset-3.5 rounded-full border-2 border-dashed border-brand-purple/40 pointer-events-none"
               />
 
               <div className="w-full h-full rounded-full overflow-hidden border-4 border-white relative group/center">
@@ -200,14 +200,14 @@ export const About: React.FC = () => {
               </div>
 
               {/* Floating Service Badge Pill 1: Top Left */}
-              <div className="absolute -top-3 -left-3 bg-brand-dark/90 backdrop-blur-md text-white border border-white/20 px-3 py-1.5 rounded-full flex items-center gap-2 text-[11px] font-extrabold shadow-lg">
-                <PenTool className="w-3.5 h-3.5 text-brand-cyan" />
+              <div className="absolute top-0 left-0 sm:-top-3 sm:-left-3 bg-brand-dark/90 backdrop-blur-md text-white border border-white/20 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg">
+                <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-cyan" />
                 <span>Creative Design</span>
               </div>
 
               {/* Floating Service Badge Pill 2: Bottom Right */}
-              <div className="absolute -bottom-3 -right-3 bg-brand-purple text-white px-3.5 py-1.5 rounded-full flex items-center gap-2 text-[11px] font-extrabold shadow-lg shadow-brand-purple/40">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="absolute bottom-0 right-0 sm:-bottom-3 sm:-right-3 bg-brand-purple text-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg shadow-brand-purple/40">
+                <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                 <span>Strategy First</span>
               </div>
             </div>
