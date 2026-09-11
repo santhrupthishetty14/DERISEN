@@ -227,6 +227,13 @@ export const App: React.FC = () => {
               />
             )}
 
+            {currentPage === 'work' && (
+              <WorkPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+
             {currentPage === 'contact' && (
               <ContactPage
                 onSuccess={handleFormSuccess}
