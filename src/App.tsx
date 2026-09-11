@@ -35,6 +35,7 @@ export const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>(getPageFromHash);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const lenisRef = useRef<Lenis | null>(null);
 
   // Initialize Lenis smooth scroll
@@ -44,10 +45,16 @@ export const App: React.FC = () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
+      syncTouch: false,
     });
     lenisRef.current = lenis;
 
-    lenis.on('scroll', ScrollTrigger.update);
+    lenis.on('scroll', (e: any) => {
+      ScrollTrigger.update();
+      if (typeof e.progress === 'number') {
+        setScrollProgress(e.progress);
+      }
+    });
 
     const updateLenis = (time: number) => {
       lenis.raf(time * 1000);
@@ -56,6 +63,15 @@ export const App: React.FC = () => {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
+    // Fallback scroll listener for scroll progress
+    const handleNativeScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0) {
+        setScrollProgress(Math.min(1, Math.max(0, window.scrollY / total)));
+      }
+    };
+    window.addEventListener('scroll', handleNativeScroll, { passive: true });
+
     const handleLoad = () => {
       ScrollTrigger.refresh();
     };
@@ -63,6 +79,7 @@ export const App: React.FC = () => {
 
     return () => {
       window.removeEventListener('load', handleLoad);
+      window.removeEventListener('scroll', handleNativeScroll);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
       lenisRef.current = null;
@@ -74,6 +91,7 @@ export const App: React.FC = () => {
     const handleHashChange = () => {
       const newPage = getPageFromHash();
       setCurrentPage(newPage);
+      setScrollProgress(0);
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       if (lenisRef.current) {
         lenisRef.current.scrollTo(0, { immediate: true });
@@ -93,6 +111,7 @@ export const App: React.FC = () => {
 
     setCurrentPage(target);
     window.location.hash = '#' + target;
+    setScrollProgress(0);
 
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     if (lenisRef.current) {
@@ -112,7 +131,10 @@ export const App: React.FC = () => {
   };
 
   const [showIntro, setShowIntro] = useState(() => {
-    // Only show 3D intro if on home page
+    if (typeof window !== 'undefined') {
+      const seen = sessionStorage.getItem('derisen_seen_intro');
+      if (seen) return false;
+    }
     return getPageFromHash() === 'home';
   });
   const [introKey, setIntroKey] = useState(0);
@@ -138,12 +160,23 @@ export const App: React.FC = () => {
   }, []);
 
   const handleIntroComplete = useCallback(() => {
+    try {
+      sessionStorage.setItem('derisen_seen_intro', 'true');
+    } catch {
+      // Ignore
+    }
     setShowIntro(false);
     ScrollTrigger.refresh();
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative">
+    <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative overflow-x-hidden w-full">
+      {/* Dynamic Global Scroll Progress Indicator Bar */}
+      <div
+        className="fixed top-0 left-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-brand-cyan z-[60] origin-left shadow-[0_0_12px_rgba(99,32,238,0.85)] pointer-events-none transition-[width] duration-100 ease-out"
+        style={{ width: `${scrollProgress * 100}%` }}
+      />
+
       {/* 0. Cinematic 3D Brand Intro (White Studio, 3D De.risen Logo) */}
       {showIntro && (
         <Brand3DIntro
