@@ -103,9 +103,9 @@ export const About: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-brand-dark tracking-tight mb-8 leading-[1.15]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-brand-dark tracking-tight mb-8 leading-[1.22]">
               {/* Line 1 */}
-              <div className="overflow-hidden pb-1">
+              <div className="overflow-hidden pb-2">
                 <div
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
@@ -116,7 +116,7 @@ export const About: React.FC = () => {
               </div>
 
               {/* Line 2 */}
-              <div className="overflow-hidden pb-1">
+              <div className="overflow-hidden pb-2">
                 <div
                   style={{ transitionDelay: '140ms' }}
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -128,14 +128,14 @@ export const About: React.FC = () => {
               </div>
 
               {/* Line 3 with Gradient Text */}
-              <div className="overflow-hidden pb-1">
+              <div className="overflow-hidden pb-3 pt-0.5">
                 <div
                   style={{ transitionDelay: '280ms' }}
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
                   }`}
                 >
-                  <span className="gradient-text">Driving Growth.</span>
+                  <span className="gradient-text inline-block pb-1">Driving Growth.</span>
                 </div>
               </div>
             </h2>
@@ -171,14 +171,14 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Exact Visual Composition from PDF Page 4 with Real Assets & Micro-Parallax */}
+          {/* Right Column: Exact Visual Composition with Real Assets & Micro-Parallax */}
           <div className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-center gap-6 relative">
-            {/* 1. Main Center Circle Frame with Extracted Collage */}
+            {/* 1. Main Center Circle Frame with Full-Bleed Studio Asset */}
             <div
-              className={`relative w-60 h-60 xs:w-64 xs:h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[calc(100%-1.5rem)] ${
+              className={`relative w-56 h-56 xs:w-64 xs:h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 flex-shrink-0 aspect-square rounded-full p-2 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan shadow-[0_25px_60px_rgba(99,32,238,0.22)] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isRevealed
-                  ? 'clip-path-reveal-full scale-100 opacity-100'
-                  : 'clip-path-reveal-left scale-[1.06] opacity-0'
+                  ? 'scale-100 opacity-100'
+                  : 'scale-[1.06] opacity-0'
               }`}
             >
               {/* Refined Studio Accent Ring */}
@@ -187,26 +187,26 @@ export const About: React.FC = () => {
                 className="absolute -inset-2.5 sm:-inset-3.5 rounded-full border-2 border-dashed border-brand-purple/40 pointer-events-none"
               />
 
-              <div className="w-full h-full rounded-full overflow-hidden border-4 border-white relative group/center">
+              <div className="w-full h-full rounded-full overflow-hidden border-4 border-white relative group/center shadow-inner">
                 <img
                   ref={circleImgRef}
                   src="/assets/about-circle-collage.jpg"
                   alt="DE.RISEN Agency Setup"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105 will-change-transform"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover/center:scale-105 will-change-transform"
                   loading="lazy"
                 />
                 {/* Overlay subtle gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/25 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Floating Service Badge Pill 1: Top Left */}
-              <div className="absolute top-0 left-0 sm:-top-3 sm:-left-3 bg-brand-dark/90 backdrop-blur-md text-white border border-white/20 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg">
+              <div className="absolute top-0 left-0 sm:-top-3 sm:-left-3 bg-brand-dark/90 backdrop-blur-md text-white border border-white/20 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg z-20">
                 <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-cyan" />
                 <span>Creative Design</span>
               </div>
 
               {/* Floating Service Badge Pill 2: Bottom Right */}
-              <div className="absolute bottom-0 right-0 sm:-bottom-3 sm:-right-3 bg-brand-purple text-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg shadow-brand-purple/40">
+              <div className="absolute bottom-0 right-0 sm:-bottom-3 sm:-right-3 bg-brand-purple text-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-extrabold shadow-lg shadow-brand-purple/40 z-20">
                 <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                 <span>Strategy First</span>
               </div>
