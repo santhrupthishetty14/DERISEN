@@ -140,7 +140,7 @@ export const HeroVisual: React.FC = () => {
           {/* Cinematic Website UI 3D Animation Video */}
           <video
             ref={videoRef}
-            poster="/assets/website-ui-animation-poster.jpg"
+            poster="/assets/website-ui-animation-poster.jpg?v=nowatermark"
             autoPlay
             muted
             loop
@@ -150,9 +150,9 @@ export const HeroVisual: React.FC = () => {
             controls={false}
             className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl block shadow-inner pointer-events-none"
           >
-            <source src="/assets/website-ui-animation-preview.mp4" type="video/mp4" />
-            <source src="/assets/website-ui-animation.mp4" type="video/mp4" />
-            <source src="/animations/website-animation.mp4" type="video/mp4" />
+            <source src="/assets/website-ui-animation-preview.mp4?v=nowatermark" type="video/mp4" />
+            <source src="/assets/website-ui-animation.mp4?v=nowatermark" type="video/mp4" />
+            <source src="/animations/website-animation.mp4?v=nowatermark" type="video/mp4" />
           </video>
 
           {/* Subtle Creative-Agency Purple Edge Gradient / Glow */}
