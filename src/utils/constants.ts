@@ -176,7 +176,6 @@ export const INDIVIDUAL_SERVICES_CATALOG: ServiceCategory[] = [
   {
     number: '02',
     title: 'Graphic Design',
-    isHighlighted: true,
     items: [
       'Social Media Creatives',
       'Instagram Carousel Posts',
@@ -264,7 +263,6 @@ export const DIGITAL_PRODUCTION_SERVICES: DigitalProductionService[] = [
   {
     number: '08',
     title: 'Website & IT Solutions',
-    isHighlighted: true,
     items: [
       'Business Websites',
       'Corporate Websites',

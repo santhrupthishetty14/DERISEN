@@ -65,7 +65,13 @@ export const ServiceCatalog: React.FC = () => {
             modules={[Navigation, Pagination, FreeMode]}
             spaceBetween={20}
             slidesPerView={1.15}
-            freeMode={true}
+            freeMode={{
+              enabled: true,
+              momentum: true,
+              momentumRatio: 0.9,
+              momentumVelocityRatio: 1.1,
+              momentumBounce: true,
+            }}
             pagination={{
               clickable: true,
               dynamicBullets: true,
@@ -82,6 +88,7 @@ export const ServiceCatalog: React.FC = () => {
               1280: {
                 slidesPerView: 4,
                 spaceBetween: 24,
+                freeMode: false,
               },
             }}
             className="!pb-16 px-2 -mx-2"
@@ -92,6 +99,9 @@ export const ServiceCatalog: React.FC = () => {
                   <CatalogCard
                     category={cat}
                     isActive={activeNumber === cat.number}
+                    onClick={() => {
+                      setActiveNumber((prev) => (prev === cat.number ? null : cat.number));
+                    }}
                     onMouseEnter={() => setActiveNumber(cat.number)}
                     onMouseLeave={() => setActiveNumber(null)}
                   />

@@ -109,6 +109,27 @@ export const App: React.FC = () => {
     if (target === 'work-gallery') target = 'work';
     if (!VALID_PAGES.includes(target)) target = 'home';
 
+    const targetEl = target === 'home' ? null : document.getElementById(target);
+
+    // If on homepage and section exists, smoothly scroll to it
+    if (currentPage === 'home' && (target === 'home' || targetEl)) {
+      if (target === 'home') {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { duration: 1.1 });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } else if (targetEl) {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(targetEl, { offset: -80, duration: 1.1 });
+        } else {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      window.history.replaceState(null, '', '#' + target);
+      return;
+    }
+
     setCurrentPage(target);
     window.location.hash = '#' + target;
     setScrollProgress(0);
@@ -118,7 +139,7 @@ export const App: React.FC = () => {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
     setTimeout(() => ScrollTrigger.refresh(), 120);
-  }, []);
+  }, [currentPage]);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -130,13 +151,7 @@ export const App: React.FC = () => {
     }, 4500);
   };
 
-  const [showIntro, setShowIntro] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const seen = sessionStorage.getItem('derisen_seen_intro');
-      if (seen) return false;
-    }
-    return getPageFromHash() === 'home';
-  });
+  const [showIntro, setShowIntro] = useState(false);
   const [introKey, setIntroKey] = useState(0);
 
   const handleReplayIntro = () => {

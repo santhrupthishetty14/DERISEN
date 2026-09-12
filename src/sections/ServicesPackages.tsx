@@ -52,7 +52,7 @@ export const ServicesPackages: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="services-packages"
+      id="services"
       className="py-24 sm:py-32 bg-surface-subtle relative overflow-hidden"
     >
       {/* Ambient background dots */}

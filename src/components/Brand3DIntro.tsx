@@ -179,9 +179,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           muted
           playsInline
           preload="auto"
+          disablePictureInPicture
+          controls={false}
           onEnded={handleVideoEnded}
           onTimeUpdate={handleTimeUpdate}
-          className="w-full h-full object-contain max-h-screen max-w-screen"
+          className="w-full h-full object-contain max-h-screen max-w-screen pointer-events-none"
           style={{
             backgroundColor: "#FFFFFF",
             // Precision level mapping: pushes any off-white/gray (230-255) to 100% complete pure white (#FFFFFF),

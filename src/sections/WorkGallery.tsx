@@ -57,7 +57,7 @@ export const WorkGallery: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="work-gallery"
+      id="work"
       className="py-24 sm:py-32 bg-white relative overflow-hidden"
     >
       {/* Background Dots */}
