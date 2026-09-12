@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { VisionMissionCard } from '../components/VisionMissionCard';
 import { VISION_MISSION_DATA } from '../utils/constants';
+import { AnimatedSectionBanner } from '../components/AnimatedSectionBanner';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -166,6 +167,21 @@ export const About: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Animated Section Banner: Strategy, Innovation, Workspace */}
+        <AnimatedSectionBanner
+          badge="DE.RISEN / STRATEGY & INNOVATION"
+          title="Where Strategic Vision Meets"
+          highlightWord="Flawless Execution."
+          description="At DE.RISEN, we unite brand strategy, innovative creative direction, and high-performance digital systems to build enduring competitive advantage for ambitious businesses."
+          imageSrc="/assets/banner-about.jpg"
+          pills={['Strategy-First Approach', 'Brand Identity Systems', 'Full-Spectrum Production', 'Creative Innovation']}
+          stats={[
+            { value: '96+', label: 'Delivered Projects' },
+            { value: '100%', label: 'Satisfaction Rate' },
+          ]}
+          accentGlow="purple"
+        />
 
         {/* ===================================================================
             Bottom 3 Core Cards: Vision, Mission, Goal

@@ -9,15 +9,20 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
+
 import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { WorkPage } from './pages/WorkPage';
+import { ContactPage } from './pages/ContactPage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-const SECTION_IDS = ['home', 'about', 'services', 'work', 'contact'];
+const PAGE_IDS = ['home', 'about', 'services', 'work', 'contact'];
 
 export const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>('home');
+  const [currentPage, setCurrentPage] = useState<string>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -48,22 +53,18 @@ export const App: React.FC = () => {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
-    // Fallback scroll listener for scroll progress
+    // Native scroll listener fallback for progress
     const handleNativeScroll = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
       if (total > 0) {
         setScrollProgress(Math.min(1, Math.max(0, window.scrollY / total)));
+      } else {
+        setScrollProgress(0);
       }
     };
     window.addEventListener('scroll', handleNativeScroll, { passive: true });
 
-    const handleLoad = () => {
-      ScrollTrigger.refresh();
-    };
-    window.addEventListener('load', handleLoad);
-
     return () => {
-      window.removeEventListener('load', handleLoad);
       window.removeEventListener('scroll', handleNativeScroll);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
@@ -71,67 +72,64 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // IntersectionObserver to accurately track the active section during scroll
-  useEffect(() => {
-    const handleScrollSpy = () => {
-      const scrollPosition = window.scrollY + 180;
-      for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
-        const id = SECTION_IDS[i];
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScrollSpy, { passive: true });
-    handleScrollSpy();
-    return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, []);
-
-  // Smooth scroll handler when navigating between sections
-  const handleNavigate = useCallback((targetId: string) => {
-    let cleanId = targetId.toLowerCase().replace('#', '');
+  // Multi-page navigation handler
+  const handleNavigate = useCallback((targetPage: string) => {
+    let cleanId = targetPage.toLowerCase().replace('#', '');
     if (cleanId === 'services-packages') cleanId = 'services';
     if (cleanId === 'work-gallery') cleanId = 'work';
-    if (!SECTION_IDS.includes(cleanId)) cleanId = 'home';
+    if (!PAGE_IDS.includes(cleanId)) cleanId = 'home';
 
-    setActiveSection(cleanId);
-    window.history.replaceState(null, '', `#${cleanId}`);
+    setCurrentPage(cleanId);
+    window.history.pushState(null, '', `#${cleanId}`);
 
-    const targetElement = document.getElementById(cleanId);
-    if (targetElement) {
-      const headerOffset = 75;
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // Instant reset to top for crisp multi-page feel
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setScrollProgress(0);
 
+    // Refresh ScrollTrigger after DOM has updated
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 120);
+  }, []);
+
+  // Sync browser back/forward history buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+      let cleanId = hash;
+      if (cleanId === 'services-packages') cleanId = 'services';
+      if (cleanId === 'work-gallery') cleanId = 'work';
+      if (!PAGE_IDS.includes(cleanId)) cleanId = 'home';
+
+      setCurrentPage(cleanId);
       if (lenisRef.current) {
-        lenisRef.current.scrollTo(offsetPosition, { duration: 1.0 });
-      } else {
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        lenisRef.current.scrollTo(0, { immediate: true });
       }
-    } else {
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { duration: 0.8 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      setScrollProgress(0);
+      setTimeout(() => ScrollTrigger.refresh(), 120);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Initial load from URL hash
+  useEffect(() => {
+    const initialHash = window.location.hash.replace('#', '').trim().toLowerCase();
+    if (initialHash) {
+      let cleanId = initialHash;
+      if (cleanId === 'services-packages') cleanId = 'services';
+      if (cleanId === 'work-gallery') cleanId = 'work';
+      if (PAGE_IDS.includes(cleanId)) {
+        setCurrentPage(cleanId);
+        setTimeout(() => ScrollTrigger.refresh(), 200);
       }
     }
   }, []);
-
-  // Handle initial hash on page load
-  useEffect(() => {
-    const initialHash = window.location.hash.replace('#', '').trim().toLowerCase();
-    if (initialHash && SECTION_IDS.includes(initialHash)) {
-      setTimeout(() => {
-        handleNavigate(initialHash);
-      }, 400);
-    }
-  }, [handleNavigate]);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -184,7 +182,7 @@ export const App: React.FC = () => {
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* 0. Cinematic 3D Brand Intro (White Studio, 3D De.risen Logo) */}
+      {/* 0. Cinematic 3D Brand Intro */}
       {showIntro && (
         <Brand3DIntro
           key={introKey}
@@ -192,19 +190,48 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* 0B. Custom Magnetic Cursor (Desktop) */}
+      {/* 0B. Custom Magnetic Cursor */}
       <CustomCursor />
 
-      {/* 1. Header & Navigation (Tracks current active section dynamically) */}
+      {/* 1. Header & Navigation (Tracks current active page) */}
       <Navbar
         onOpenModal={handleOpenModal}
-        currentPage={activeSection}
+        currentPage={currentPage}
         onNavigate={handleNavigate}
       />
 
-      {/* 2. Main Single-Page Content Area systematically containing all PDF slides */}
+      {/* 2. Main Multi-Page Content Area */}
       <main className="flex-grow w-full max-w-full overflow-x-clip">
-        <HomePage onOpenModal={handleOpenModal} />
+        {currentPage === 'home' && (
+          <HomePage
+            onOpenModal={handleOpenModal}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {currentPage === 'about' && (
+          <AboutPage
+            onOpenModal={handleOpenModal}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {currentPage === 'services' && (
+          <ServicesPage
+            onOpenModal={handleOpenModal}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {currentPage === 'work' && (
+          <WorkPage
+            onOpenModal={handleOpenModal}
+            onNavigate={handleNavigate}
+          />
+        )}
+        {currentPage === 'contact' && (
+          <ContactPage
+            onOpenModal={handleOpenModal}
+            onNavigate={handleNavigate}
+          />
+        )}
       </main>
 
       {/* 3. Site Footer with Navigation */}
