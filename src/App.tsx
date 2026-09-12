@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import { CustomCursor } from './components/CustomCursor';
 import { Brand3DIntro } from './components/Brand3DIntro';
@@ -10,29 +9,15 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
-
 import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { WorkPage } from './pages/WorkPage';
-import { ContactPage } from './pages/ContactPage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-const VALID_PAGES = ['home', 'about', 'services', 'work', 'contact'];
-
-function getPageFromHash(): string {
-  const hash = window.location.hash.replace('#', '').trim().toLowerCase();
-  // Map legacy section hashes if any
-  if (hash === 'services-packages') return 'services';
-  if (hash === 'work-gallery') return 'work';
-  if (VALID_PAGES.includes(hash)) return hash;
-  return 'home';
-}
+const SECTION_IDS = ['home', 'about', 'services', 'work', 'contact'];
 
 export const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<string>(getPageFromHash);
+  const [activeSection, setActiveSection] = useState<string>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -86,50 +71,67 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Synchronize hash changes with currentPage state
+  // IntersectionObserver to accurately track the active section during scroll
   useEffect(() => {
-    const handleHashChange = () => {
-      const newPage = getPageFromHash();
-      setCurrentPage(newPage);
-      setScrollProgress(0);
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
+    const handleScrollSpy = () => {
+      const scrollPosition = window.scrollY + 180;
+      for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
+        const id = SECTION_IDS[i];
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(id);
+            break;
+          }
+        }
       }
-      setTimeout(() => ScrollTrigger.refresh(), 100);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    handleScrollSpy();
+    return () => window.removeEventListener('scroll', handleScrollSpy);
   }, []);
 
-  const handleNavigate = useCallback((page: string) => {
-    let target = page.toLowerCase();
-    if (target === 'services-packages') target = 'services';
-    if (target === 'work-gallery') target = 'work';
-    if (!VALID_PAGES.includes(target)) target = 'home';
+  // Smooth scroll handler when navigating between sections
+  const handleNavigate = useCallback((targetId: string) => {
+    let cleanId = targetId.toLowerCase().replace('#', '');
+    if (cleanId === 'services-packages') cleanId = 'services';
+    if (cleanId === 'work-gallery') cleanId = 'work';
+    if (!SECTION_IDS.includes(cleanId)) cleanId = 'home';
 
-    // If already on this page, smoothly scroll to top
-    if (target === currentPage) {
+    setActiveSection(cleanId);
+    window.history.replaceState(null, '', `#${cleanId}`);
+
+    const targetElement = document.getElementById(cleanId);
+    if (targetElement) {
+      const headerOffset = 75;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(offsetPosition, { duration: 1.0 });
+      } else {
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    } else {
       if (lenisRef.current) {
         lenisRef.current.scrollTo(0, { duration: 0.8 });
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      return;
     }
+  }, []);
 
-    // Switch to target dedicated page
-    setCurrentPage(target);
-    window.location.hash = '#' + target;
-    setScrollProgress(0);
-
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
+  // Handle initial hash on page load
+  useEffect(() => {
+    const initialHash = window.location.hash.replace('#', '').trim().toLowerCase();
+    if (initialHash && SECTION_IDS.includes(initialHash)) {
+      setTimeout(() => {
+        handleNavigate(initialHash);
+      }, 400);
     }
-    setTimeout(() => ScrollTrigger.refresh(), 120);
-  }, [currentPage]);
+  }, [handleNavigate]);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -193,60 +195,16 @@ export const App: React.FC = () => {
       {/* 0B. Custom Magnetic Cursor (Desktop) */}
       <CustomCursor />
 
-      {/* 1. Header & Navigation */}
+      {/* 1. Header & Navigation (Tracks current active section dynamically) */}
       <Navbar
         onOpenModal={handleOpenModal}
-        currentPage={currentPage}
+        currentPage={activeSection}
         onNavigate={handleNavigate}
       />
 
-      {/* 2. Main Multi-Page Content Area with Smooth Page Transitions */}
-      <main className="flex-grow pt-[70px] sm:pt-[90px] w-full max-w-full overflow-x-clip">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentPage}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full max-w-full overflow-x-clip"
-          >
-            {currentPage === 'home' && (
-              <HomePage
-                onOpenModal={handleOpenModal}
-                onNavigate={handleNavigate}
-              />
-            )}
-
-            {currentPage === 'about' && (
-              <AboutPage
-                onOpenModal={handleOpenModal}
-                onNavigate={handleNavigate}
-              />
-            )}
-
-            {currentPage === 'services' && (
-              <ServicesPage
-                onOpenModal={handleOpenModal}
-                onNavigate={handleNavigate}
-              />
-            )}
-
-            {currentPage === 'work' && (
-              <WorkPage
-                onOpenModal={handleOpenModal}
-                onNavigate={handleNavigate}
-              />
-            )}
-
-            {currentPage === 'contact' && (
-              <ContactPage
-                onSuccess={handleFormSuccess}
-                onNavigate={handleNavigate}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
+      {/* 2. Main Single-Page Content Area systematically containing all PDF slides */}
+      <main className="flex-grow w-full max-w-full overflow-x-clip">
+        <HomePage onOpenModal={handleOpenModal} />
       </main>
 
       {/* 3. Site Footer with Navigation */}

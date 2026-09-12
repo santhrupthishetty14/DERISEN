@@ -1,41 +1,66 @@
 import React from 'react';
 import { Hero } from '../sections/Hero';
-import { About } from '../sections/About';
 import { Stats } from '../sections/Stats';
+import { About } from '../sections/About';
+import { Leadership } from '../sections/Leadership';
+import { WhatWeDo } from '../sections/WhatWeDo';
 import { ServicesPackages } from '../sections/ServicesPackages';
+import { ServiceCatalog } from '../sections/ServiceCatalog';
+import { DigitalProduction } from '../sections/DigitalProduction';
 import { OperatingModel } from '../sections/OperatingModel';
 import { ProcessTimeline } from '../sections/ProcessTimeline';
+import { Promise } from '../sections/Promise';
+import { WhyChooseUs } from '../sections/WhyChooseUs';
 import { WorkGallery } from '../sections/WorkGallery';
 import { FinalCTA } from '../sections/FinalCTA';
 
 interface HomePageProps {
   onOpenModal: () => void;
-  onNavigate?: (page: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenModal }) => {
   return (
     <div className="w-full max-w-full overflow-x-clip">
-      {/* 1. Hero Section with Cinematic Video & 4 Pillars Strip */}
+      {/* Slide 1: Hero Banner with 4 Pillars & Dynamic Visual */}
       <Hero onOpenModal={onOpenModal} />
 
-      {/* 2. About Section: Introduction, Vision, Mission & Goals */}
-      <About />
-
-      {/* 3. Performance & Statistics: (96+, 51+, 2+, 100%) */}
+      {/* Slide 2: Key Performance Metrics & Statistics */}
       <Stats />
 
-      {/* 4. Services & Packages: Integrated Ecosystem with Staggered Cards */}
+      {/* Slide 5: Company Introduction, Vision, Mission & Goals */}
+      <About />
+
+      {/* Slide 6: The Visionaries Behind DE.RISEN */}
+      <Leadership />
+
+      {/* Slide 3: What We Do (Creative Design, Branding, Marketing, IT) */}
+      <WhatWeDo />
+
+      {/* Slide 10: Integrated Ecosystem Services & Packages */}
       <ServicesPackages />
 
-      {/* 5. Process & Operating Model: Structure & Execution Architecture */}
+      {/* Slide 11: Comprehensive Service Catalog (Filterable Categories) */}
+      <ServiceCatalog />
+
+      {/* Slide 12: Digital & Production Ecosystem Stack */}
+      <DigitalProduction />
+
+      {/* Slide 4: Strategic Operating Model & Execution Architecture */}
       <OperatingModel />
+
+      {/* Slide 8: Structured Work Process Roadmap */}
       <ProcessTimeline />
 
-      {/* 6. Work Gallery & Client Testimonials */}
+      {/* Slide 9: Our Core Promise & 6-Node Workflow Pipeline */}
+      <Promise />
+
+      {/* Slide 7: Why Choose DE.RISEN */}
+      <WhyChooseUs />
+
+      {/* Slide 8: Work Gallery & Client Testimonials */}
       <WorkGallery />
 
-      {/* 7. Contact / Conversion Final CTA */}
+      {/* Slide 9: Conversion CTA & Let's Connect */}
       <FinalCTA onOpenModal={onOpenModal} />
     </div>
   );

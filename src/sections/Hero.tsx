@@ -265,7 +265,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-white select-none overflow-hidden min-h-screen flex flex-col justify-between pt-24 sm:pt-28 pb-6 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full"
+      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[95px] sm:pt-[105px] md:pt-[110px] pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full"
     >
       {/* Background Soft Purple Aura & Ambient Radiance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -275,8 +275,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
         />
       </div>
 
-      {/* Hero Core Content Stage (Immediately visible on page load) */}
-      <div className="w-full max-w-[1360px] mx-auto flex-grow flex flex-col justify-center my-auto py-4 sm:py-6 relative z-10">
+      {/* Hero Core Content Stage (Directly below navbar with optimal spacing) */}
+      <div className="w-full max-w-[1360px] mx-auto flex flex-col justify-start pt-2 sm:pt-4 pb-6 sm:pb-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* =================================================================
               Left Column: Headline, Subtitle, CTA Button & Floating Sphere
