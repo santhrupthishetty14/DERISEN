@@ -109,27 +109,17 @@ export const App: React.FC = () => {
     if (target === 'work-gallery') target = 'work';
     if (!VALID_PAGES.includes(target)) target = 'home';
 
-    const targetEl = target === 'home' ? null : document.getElementById(target);
-
-    // If on homepage and section exists, smoothly scroll to it
-    if (currentPage === 'home' && (target === 'home' || targetEl)) {
-      if (target === 'home') {
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(0, { duration: 1.1 });
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      } else if (targetEl) {
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(targetEl, { offset: -80, duration: 1.1 });
-        } else {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
-        }
+    // If already on this page, smoothly scroll to top
+    if (target === currentPage) {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { duration: 0.8 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      window.history.replaceState(null, '', '#' + target);
       return;
     }
 
+    // Switch to target dedicated page
     setCurrentPage(target);
     window.location.hash = '#' + target;
     setScrollProgress(0);

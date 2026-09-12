@@ -25,7 +25,6 @@ const DESKTOP_NAV_ITEMS: NavItemData[] = [
 export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   // Scroll listener for sticky header background change
   useEffect(() => {
@@ -41,31 +40,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Track active section on homepage scroll
-  useEffect(() => {
-    if (currentPage !== 'home') {
-      setActiveSection(currentPage);
-      return;
-    }
-
-    const sections = ['home', 'about', 'services', 'work', 'contact'];
-    const handleScrollActive = () => {
-      const scrollPos = window.scrollY + 180;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sections[i]);
-          return;
-        }
-      }
-      setActiveSection('home');
-    };
-
-    window.addEventListener('scroll', handleScrollActive, { passive: true });
-    handleScrollActive();
-    return () => window.removeEventListener('scroll', handleScrollActive);
-  }, [currentPage]);
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -110,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
           {/* 2. Desktop Navigation Menu */}
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             {DESKTOP_NAV_ITEMS.map((item) => {
-              const isActive = (currentPage === 'home' ? activeSection : currentPage) === item.id;
+              const isActive = currentPage === item.id;
               return (
                 <a
                   key={item.id}
@@ -202,7 +176,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
           {/* Staggered Navigation Items List */}
           <nav className="relative z-10 my-auto flex flex-col gap-5 sm:gap-6 py-6">
             {DESKTOP_NAV_ITEMS.map((item, index) => {
-              const isActive = (currentPage === 'home' ? activeSection : currentPage) === item.id;
+              const isActive = currentPage === item.id;
               return (
                 <a
                   key={item.id}
