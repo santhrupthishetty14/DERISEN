@@ -16,7 +16,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
   return (
     <div className="w-full max-w-full overflow-x-clip bg-white">
       {/* 1. Hero Banner with 4 Core Pillars & Interactive 3D Visual */}
-      <Hero onOpenModal={onOpenModal} />
+      <Hero onOpenModal={onOpenModal} onNavigate={onNavigate} />
 
       {/* 2. Key Performance Metrics & Statistics */}
       <Stats />

@@ -8,9 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
   onOpenModal: () => void;
+  onNavigate: (page: string) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenModal, onNavigate }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightVisualRef = useRef<HTMLDivElement>(null);
@@ -314,7 +315,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
             {/* CTA Button and Floating Sphere Row */}
             <div className="reveal-item relative flex flex-wrap items-center gap-4 sm:gap-6 max-w-full">
               <button
-                onClick={onOpenModal}
+                onClick={() => onNavigate('services')}
                 className="group relative inline-flex items-center gap-3.5 sm:gap-4 py-3 sm:py-3.5 pl-6 sm:pl-7 pr-2.5 sm:pr-3 bg-[#13063e] hover:bg-[#1f0a5c] text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(99,32,238,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                 aria-label="Explore Our Services"
               >
@@ -346,10 +347,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
           </div>
 
           {/* =================================================================
-              Right Column: 3D Scene Mockup Artwork
+              Right Column: Premium Video Showcase (1st page.mp4)
               ================================================================= */}
-          <div ref={rightVisualRef} className="lg:col-span-7 flex justify-center items-center">
-            <HeroVisual />
+          <div ref={rightVisualRef} className="lg:col-span-7 flex justify-center items-center relative w-full">
+            <div className="relative w-full max-w-[660px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(99,32,238,0.22)] border border-purple-200/50 bg-gradient-to-tr from-brand-card/40 to-transparent p-2 sm:p-3 backdrop-blur-sm group">
+              {/* Outer Glow Halo */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/30 via-brand-cyan/20 to-brand-violet/30 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              
+              <div className="relative rounded-2xl overflow-hidden bg-black/80 aspect-video flex items-center justify-center">
+                <video
+                  src="/assets/hero-video.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover rounded-2xl transform transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
