@@ -158,11 +158,13 @@ export const About: React.FC = () => {
                   : 'scale-[0.96] opacity-0 translate-y-6'
               }`}
             >
-              <img
-                src="/assets/about-visual-composition.png"
-                alt="DE.RISEN Creative Agency - Building Brands. Creating Impact."
-                className="w-full h-auto object-contain drop-shadow-[0_20px_45px_rgba(99,32,238,0.14)] transition-transform duration-500 hover:scale-[1.02]"
-                loading="lazy"
+              <video
+                src="/assets/company-intro.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.14)] transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
           </div>
