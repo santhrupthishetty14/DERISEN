@@ -6,10 +6,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Swiper modules and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
 
 // Combine all 8 core service categories for a full, rich sliding catalog
 const ALL_CATALOG_SERVICES = [
@@ -121,9 +122,11 @@ export const ServiceCatalog: React.FC = () => {
           })}
         </div>
 
-        {/* Swipeable Carousel with data-lenis-prevent so Lenis does not block dragging */}
+        {/* Swipeable Carousel with full Lenis isolation */}
         <div
-          data-lenis-prevent
+          data-lenis-prevent="true"
+          data-lenis-prevent-wheel="true"
+          data-lenis-prevent-touch="true"
           className={`transition-all duration-800 ease-out delay-150 relative ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
@@ -138,14 +141,31 @@ export const ServiceCatalog: React.FC = () => {
             onSlideChange={(swiper) => {
               setCurrentSlide(swiper.realIndex);
             }}
-            modules={[Navigation, Pagination, Autoplay]}
+            modules={[Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard]}
             loop={true}
             grabCursor={true}
             simulateTouch={true}
             allowTouchMove={true}
+            threshold={5}
             touchRatio={1.5}
             touchAngle={45}
             nested={true}
+            freeMode={{
+              enabled: true,
+              momentum: true,
+              momentumRatio: 0.85,
+              momentumVelocityRatio: 1.1,
+              momentumBounce: true,
+            }}
+            mousewheel={{
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 1,
+            }}
+            keyboard={{
+              enabled: true,
+              onlyInViewport: true,
+            }}
             spaceBetween={20}
             slidesPerView={1.15}
             pagination={{
