@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 
 interface Brand3DIntroProps {
@@ -23,8 +23,6 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
   const skipRef = useRef<(() => void) | null>(null);
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
-
-  const [hasEnded, setHasEnded] = useState(false);
 
   const handleSkip = useCallback(() => {
     if (skipRef.current) {
@@ -87,10 +85,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play video automatically
+    // Play video automatically with calibrated 4s timing (2s logo assembly + 2s ending sparkling)
     const video = videoRef.current;
     if (video) {
-      video.playbackRate = 1.0;
+      video.currentTime = 0;
+      video.playbackRate = 1.5;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -100,7 +99,24 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       }
     }
 
+    // At 2.0s mark: jump straight into the ending sparkling effect!
+    const sparklingTimer = setTimeout(() => {
+      if (video && !isTerminated) {
+        video.currentTime = 8.0;
+        video.playbackRate = 1.0;
+      }
+    }, 2000);
+
+    // At 4.0s mark: dissolve smoothly into the homepage (2s rest + 2s sparkling = 4s total)
+    const endTimer = setTimeout(() => {
+      if (!isTerminated) {
+        finishIntro();
+      }
+    }, 4000);
+
     return () => {
+      clearTimeout(sparklingTimer);
+      clearTimeout(endTimer);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
       if (videoRef.current) {
@@ -113,41 +129,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     };
   }, []);
 
-  // When video reaches completion
-  const handleVideoEnded = () => {
-    if (hasEnded) return;
-    setHasEnded(true);
-
-    // Hold the completed crisp logo for 0.7s, then smoothly dissolve into the website
-    setTimeout(() => {
-      gsap.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.55,
-        ease: "power2.inOut",
-        onComplete: () => {
-          const navLogo = document.getElementById("main-nav-logo");
-          if (navLogo) navLogo.style.opacity = "1";
-          document.body.style.overflow = "";
-          onCompleteRef.current();
-        },
-      });
-    }, 700);
-  };
-
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || hasEnded) return;
-
-    if (video.duration && video.currentTime >= video.duration - 0.25) {
-      handleVideoEnded();
-    }
-  };
-
   return (
     <div
       ref={containerRef}
       onClick={handleSkip}
-      className="fixed inset-0 z-[100] w-screen h-screen select-none cursor-pointer overflow-hidden bg-white"
+      className="fixed inset-0 z-[100] w-screen h-screen select-none cursor-pointer overflow-hidden bg-white flex items-center justify-center"
       style={{
         backgroundColor: "#FFFFFF",
       }}
@@ -170,8 +156,8 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
         </button>
       </div>
 
-      {/* Full-Screen Pure White Video Stage: edge-to-edge with pure white background */}
-      <div className="w-full h-full flex items-center justify-center overflow-hidden bg-white">
+      {/* Pure White Video Stage: Calibrated to be slightly smaller and elegant */}
+      <div className="w-full h-full flex items-center justify-center overflow-hidden bg-white p-6">
         <video
           ref={videoRef}
           src="/assets/purple_logo_glowing_animation.mp4"
@@ -181,13 +167,9 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           preload="auto"
           disablePictureInPicture
           controls={false}
-          onEnded={handleVideoEnded}
-          onTimeUpdate={handleTimeUpdate}
-          className="w-full h-full object-contain max-h-screen max-w-screen pointer-events-none"
+          className="w-[78%] sm:w-[68%] max-w-[580px] h-auto max-h-[75vh] object-contain pointer-events-none transform scale-90 sm:scale-85"
           style={{
             backgroundColor: "#FFFFFF",
-            // Precision level mapping: pushes any off-white/gray (230-255) to 100% complete pure white (#FFFFFF),
-            // making the video background completely seamless with the page canvas while keeping purple colors vibrant
             filter: "contrast(1.18) brightness(1.09)",
           }}
         />

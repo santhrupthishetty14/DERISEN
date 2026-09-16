@@ -167,7 +167,7 @@ export const App: React.FC = () => {
     }, 4500);
   };
 
-  const [showIntro, setShowIntro] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [introKey, setIntroKey] = useState(0);
 
   const handleReplayIntro = () => {
