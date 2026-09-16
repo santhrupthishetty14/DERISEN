@@ -171,8 +171,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="space-y-3 text-xs text-white/70">
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
-                <a href="mailto:derisen.official@gmail.com" className="hover:text-white transition-colors">
-                  derisen.official@gmail.com
+                <a href="mailto:derisenofficial@gmail.com" className="hover:text-white transition-colors">
+                  derisenofficial@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">

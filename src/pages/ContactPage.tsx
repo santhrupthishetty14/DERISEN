@@ -103,7 +103,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
                   {/* Email */}
                   <a
-                    href="mailto:derisen.official@gmail.com"
+                    href="mailto:derisenofficial@gmail.com"
                     className="flex items-center gap-4 p-4.5 rounded-2xl bg-white border border-gray-200/80 hover:border-brand-purple hover:shadow-md transition-all group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-brand-purple/10 text-brand-purple flex items-center justify-center flex-shrink-0 group-hover:bg-brand-purple group-hover:text-white transition-colors">
@@ -112,7 +112,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                     <div className="flex-grow">
                       <div className="text-xs font-bold uppercase tracking-wider text-gray-400">Official Inquiries</div>
                       <div className="text-base font-bold text-brand-dark group-hover:text-brand-purple transition-colors">
-                        derisen.official@gmail.com
+                        derisenofficial@gmail.com
                       </div>
                       <div className="text-xs text-gray-500">Replies within 4 business hours</div>
                     </div>
