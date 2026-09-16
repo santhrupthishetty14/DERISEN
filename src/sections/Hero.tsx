@@ -1,17 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, PenTool, Tag, Megaphone, Code } from 'lucide-react';
-import { HeroVisual } from '../components/HeroVisual';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
-  onOpenModal: () => void;
+  onOpenModal?: () => void;
   onNavigate: (page: string) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenModal, onNavigate }) => {
+export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightVisualRef = useRef<HTMLDivElement>(null);
