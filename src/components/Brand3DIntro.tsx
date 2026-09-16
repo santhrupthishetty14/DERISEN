@@ -85,11 +85,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play video automatically with calibrated 4s timing (2s logo assembly + 2s ending sparkling)
+    // Play video automatically at 3.0x speed so the entire uncut 10s animation completes in ~3.3s
     const video = videoRef.current;
     if (video) {
       video.currentTime = 0;
-      video.playbackRate = 1.5;
+      video.playbackRate = 3.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -99,33 +99,31 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       }
     }
 
-    // At 2.0s mark: jump straight into the ending sparkling effect!
-    const sparklingTimer = setTimeout(() => {
-      if (video && !isTerminated) {
-        video.currentTime = 8.0;
-        video.playbackRate = 1.0;
-      }
-    }, 2000);
+    const handleVideoEnded = () => {
+      finishIntro();
+    };
 
-    // At 4.0s mark: dissolve smoothly into the homepage (2s rest + 2s sparkling = 4s total)
-    const endTimer = setTimeout(() => {
-      if (!isTerminated) {
-        finishIntro();
-      }
-    }, 4000);
+    if (video) {
+      video.addEventListener("ended", handleVideoEnded);
+    }
+
+    // Smooth fallback to ensure dissolve happens around ~3.4s if ended event is slightly delayed
+    const fallbackTimer = setTimeout(() => {
+      finishIntro();
+    }, 3500);
 
     return () => {
-      clearTimeout(sparklingTimer);
-      clearTimeout(endTimer);
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-      if (videoRef.current) {
+      clearTimeout(fallbackTimer);
+      if (video) {
+        video.removeEventListener("ended", handleVideoEnded);
         try {
-          videoRef.current.pause();
+          video.pause();
         } catch {
           // ignore
         }
       }
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
