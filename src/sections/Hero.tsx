@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, PenTool, Tag, Megaphone, Code } from 'lucide-react';
+import { PenTool, Tag, Megaphone, Code } from 'lucide-react';
+import { SlideArrowButton } from '../components/SlideArrowButton';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -313,16 +314,12 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
             {/* CTA Button and Floating Sphere Row */}
             <div className="reveal-item relative flex flex-wrap items-center gap-4 sm:gap-6 max-w-full">
-              <button
+              <SlideArrowButton
+                label="Explore Our Services"
                 onClick={() => onNavigate('services')}
-                className="group relative inline-flex items-center gap-3.5 sm:gap-4 py-3 sm:py-3.5 pl-6 sm:pl-7 pr-2.5 sm:pr-3 bg-[#13063e] hover:bg-[#1f0a5c] text-white text-[14px] sm:text-[15px] font-bold rounded-full transition-all duration-300 shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(99,32,238,0.42)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                aria-label="Explore Our Services"
-              >
-                <span className="tracking-[-0.01em]">Explore Our Services</span>
-                <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-brand-purple shadow-sm transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-                </span>
-              </button>
+                variant="navy"
+                size="md"
+              />
 
               {/* 3D Glossy Metallic Purple Sphere (Matching Reference Scene next to Button) */}
               <div

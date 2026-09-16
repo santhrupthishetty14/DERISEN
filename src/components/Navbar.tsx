@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
 import { ArrowRight, X } from 'lucide-react';
+import { SlideArrowButton } from './SlideArrowButton';
 
 interface NavbarProps {
   onOpenModal: () => void;
@@ -111,18 +112,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
             })}
           </nav>
 
-          {/* 3. Right-side Premium CTA Button (Styled with royal purple gradient matching reference) */}
+          {/* 3. Right-side Premium CTA Button (Arrow starts on left, slides to right when pressed) */}
           <div className="hidden lg:flex items-center">
-            <button
+            <SlideArrowButton
+              label="Let's Talk"
               onClick={onOpenModal}
-              className="group relative inline-flex items-center gap-3.5 py-2.5 pl-6 pr-2.5 bg-gradient-to-r from-[#6320ee] via-[#521ac2] to-[#380b72] hover:brightness-110 text-white text-[14.5px] font-bold rounded-full transition-all duration-300 shadow-[0_4px_18px_rgba(99,32,238,0.38)] hover:shadow-[0_8px_28px_rgba(99,32,238,0.55)] hover:-translate-y-0.5 cursor-pointer"
-              aria-label="Open Let's Talk modal"
-            >
-              <span className="tracking-[-0.01em]">Let's Talk</span>
-              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white text-brand-purple shadow-sm transition-transform duration-300 group-hover:translate-x-0.5">
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-            </button>
+              variant="purple"
+              size="sm"
+            />
           </div>
 
           {/* 4. Premium Mobile Hamburger Button */}
