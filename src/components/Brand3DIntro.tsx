@@ -85,11 +85,11 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play video automatically at 3.0x speed so the entire uncut 10s animation completes in ~3.3s
+    // Play video in 1 continuous natural flow: starts right at the logo formation climax and flows into the ending 2s sparkling
     const video = videoRef.current;
     if (video) {
-      video.currentTime = 0;
-      video.playbackRate = 3.0;
+      video.currentTime = 6.8;
+      video.playbackRate = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -107,10 +107,10 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       video.addEventListener("ended", handleVideoEnded);
     }
 
-    // Smooth fallback to ensure dissolve happens around ~3.4s if ended event is slightly delayed
+    // After 3.3s of seamless natural flow (6.8s to 10.0s), smoothly dissolve into the homepage
     const fallbackTimer = setTimeout(() => {
       finishIntro();
-    }, 3500);
+    }, 3400);
 
     return () => {
       clearTimeout(fallbackTimer);
