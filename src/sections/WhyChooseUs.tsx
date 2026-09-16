@@ -209,18 +209,17 @@ export const WhyChooseUs: React.FC = () => {
         <div ref={headingRef} className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="eyebrow">WHY CHOOSE DE.RISEN?</span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-[52px] font-black text-brand-dark tracking-tight leading-[1.22] mb-5">
-            {/* Each heading line sits in overflow-hidden mask with ample padding so descenders ('g') are never cut */}
-            <div className="overflow-hidden pb-3">
-              <div ref={headingLine1Ref} className="pb-1">Creating Brands That</div>
+          <h2 className="text-3xl sm:text-4xl lg:text-[52px] font-black text-brand-dark tracking-tight leading-[1.14] mb-5">
+            <div className="overflow-visible">
+              <div ref={headingLine1Ref}>Creating Brands That</div>
             </div>
-            <div className="overflow-hidden pb-3">
-              <div ref={headingLine2Ref} className="pb-1">
+            <div className="overflow-visible">
+              <div ref={headingLine2Ref}>
                 <span className="gradient-text">Leave a Lasting</span>
               </div>
             </div>
-            <div className="overflow-hidden pb-3">
-              <div ref={headingLine3Ref} className="pb-1">Impression</div>
+            <div className="overflow-visible">
+              <div ref={headingLine3Ref}>Impression</div>
             </div>
           </h2>
 

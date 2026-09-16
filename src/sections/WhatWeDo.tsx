@@ -89,30 +89,30 @@ export const WhatWeDo: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.25]">
-              <div className="overflow-hidden pb-3">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.14]">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                 >
                   We Create Brands
                 </div>
               </div>
-              <div className="overflow-hidden pb-3">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   style={{ transitionDelay: '120ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                 >
                   That Inspire,
                 </div>
               </div>
-              <div className="overflow-hidden pb-3">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   style={{ transitionDelay: '240ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                 >
@@ -249,20 +249,20 @@ export const WhatWeDo: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.25]">
-              <div className="overflow-hidden pb-3">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.14]">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                 >
                   Creating Brands That
                 </div>
               </div>
-              <div className="overflow-hidden pb-3">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   style={{ transitionDelay: '120ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                   }`}
                 >

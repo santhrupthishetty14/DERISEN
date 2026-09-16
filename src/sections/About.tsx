@@ -80,9 +80,9 @@ export const About: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-brand-dark tracking-tight mb-8 leading-[1.22]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-brand-dark tracking-tight mb-6 sm:mb-8 leading-[1.14]">
               {/* Line 1 */}
-              <div className="overflow-hidden pb-2">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
@@ -93,7 +93,7 @@ export const About: React.FC = () => {
               </div>
 
               {/* Line 2 */}
-              <div className="overflow-hidden pb-2">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   style={{ transitionDelay: '140ms' }}
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -105,14 +105,14 @@ export const About: React.FC = () => {
               </div>
 
               {/* Line 3 with Gradient Text */}
-              <div className="overflow-hidden pb-3 pt-0.5">
+              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   style={{ transitionDelay: '280ms' }}
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
                   }`}
                 >
-                  <span className="gradient-text inline-block pb-1">Driving Growth.</span>
+                  <span className="gradient-text">Driving Growth.</span>
                 </div>
               </div>
             </h2>
