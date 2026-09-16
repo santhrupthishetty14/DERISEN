@@ -89,7 +89,7 @@ export const WhatWeDo: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.14]">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 flex flex-col gap-1 leading-[1.22]">
               <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -249,7 +249,7 @@ export const WhatWeDo: React.FC = () => {
             </span>
 
             {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 leading-[1.14]">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 flex flex-col gap-1 leading-[1.22]">
               <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
