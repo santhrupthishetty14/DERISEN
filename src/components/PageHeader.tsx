@@ -283,11 +283,11 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         </div>
 
         {/* Title with staggered line reveals */}
-        <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black tracking-tight leading-[1.1] max-w-5xl mb-7">
+        <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black tracking-tight leading-[1.2] max-w-5xl mb-7">
           {/* Main title line */}
-          <div className="overflow-hidden pb-2">
+          <div className="overflow-hidden pb-3">
             <div
-              className={`text-white transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`text-white transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
                 isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
               }`}
               style={{ transitionDelay: '300ms' }}
@@ -298,15 +298,15 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           {/* Highlight word with gradient */}
           {highlightWord && (
-            <div className="overflow-hidden pb-2">
+            <div className="overflow-hidden pb-3">
               <div
-                className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] pb-1 ${
                   isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
                 }`}
                 style={{ transitionDelay: '450ms' }}
               >
                 <span
-                  className="text-transparent bg-clip-text inline-block pb-1"
+                  className="text-transparent bg-clip-text inline-block pb-1.5 pr-2"
                   style={{
                     backgroundImage: 'linear-gradient(135deg, #EDE9FE 0%, #A78BFA 25%, #38BDF8 50%, #8B5CF6 75%, #EDE9FE 100%)',
                     backgroundSize: '200% 200%',
