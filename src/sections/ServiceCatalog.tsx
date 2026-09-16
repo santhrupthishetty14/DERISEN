@@ -124,27 +124,24 @@ export const ServiceCatalog: React.FC = () => {
               setCurrentSlide(swiper.realIndex);
             }}
             modules={[Navigation, Pagination, FreeMode, Autoplay]}
-            spaceBetween={24}
+            spaceBetween={20}
             slidesPerView={1.15}
-            freeMode={{
-              enabled: true,
-              momentum: true,
-            }}
+            grabCursor={true}
             pagination={{
               clickable: true,
               dynamicBullets: true,
             }}
             breakpoints={{
               640: {
-                slidesPerView: 1.8,
-                spaceBetween: 24,
+                slidesPerView: 1.5,
+                spaceBetween: 22,
               },
               1024: {
-                slidesPerView: 2.6,
+                slidesPerView: 2.2,
                 spaceBetween: 24,
               },
               1280: {
-                slidesPerView: 3.2,
+                slidesPerView: 2.5,
                 spaceBetween: 28,
               },
             }}
@@ -159,8 +156,6 @@ export const ServiceCatalog: React.FC = () => {
                     onClick={() => {
                       setActiveNumber((prev) => (prev === cat.number ? null : cat.number));
                     }}
-                    onMouseEnter={() => setActiveNumber(cat.number)}
-                    onMouseLeave={() => setActiveNumber(null)}
                   />
                 </div>
               </SwiperSlide>
