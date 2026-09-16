@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DigitalProductionService } from '../utils/types';
 import { Check, Sparkles } from 'lucide-react';
 
@@ -14,44 +14,19 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
   service,
   isSelected = false,
   onClick,
-  onMouseEnter,
-  onMouseLeave,
 }) => {
-  const [isSelfHovered, setIsSelfHovered] = useState(false);
-  const [isSelfTouched, setIsSelfTouched] = useState(false);
-
-  const isDark = isSelected || isSelfHovered || isSelfTouched;
-
-  const handleTouch = () => {
-    setIsSelfTouched((prev) => !prev);
-    onClick?.();
-  };
-
-  const handleMouseEnter = () => {
-    setIsSelfHovered(true);
-    onMouseEnter?.();
-  };
-
-  const handleMouseLeave = () => {
-    setIsSelfHovered(false);
-    onMouseLeave?.();
-  };
+  // Dark theme is applied ONLY when explicitly active (touched/clicked by user)
+  const isDark = isSelected;
 
   return (
     <div
-      onClick={handleTouch}
-      onTouchStart={() => {
-        setIsSelfTouched(true);
-        onClick?.();
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          handleTouch();
+          onClick?.();
         }
       }}
       className={`rounded-2xl p-7 sm:p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${

@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 // Swiper modules and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, FreeMode } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,6 +17,7 @@ export const DigitalProduction: React.FC = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,7 +36,36 @@ export const DigitalProduction: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const pipelineSteps = ['CREATIVE', 'CONTENT', 'VISIBILITY', 'PERFORMANCE', 'DIGITAL EXPERIENCE'];
+  const handleTabClick = (idx: number, num: string) => {
+    setCurrentSlide(idx);
+    setActiveNumber(num);
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(idx);
+    }
+  };
+
+  const handleCardClick = (num: string) => {
+    // Only apply dark theme when user explicitly clicks/touches that card
+    setActiveNumber((prev) => (prev === num ? null : num));
+  };
+
+  const handlePrev = () => {
+    if (!swiperRef.current) return;
+    if (swiperRef.current.isBeginning) {
+      swiperRef.current.slideTo(DIGITAL_PRODUCTION_SERVICES.length - 1);
+    } else {
+      swiperRef.current.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (!swiperRef.current) return;
+    if (swiperRef.current.isEnd) {
+      swiperRef.current.slideTo(0);
+    } else {
+      swiperRef.current.slideNext();
+    }
+  };
 
   return (
     <section
@@ -43,14 +73,13 @@ export const DigitalProduction: React.FC = () => {
       id="digital-production"
       className="py-20 sm:py-28 bg-surface-subtle relative overflow-hidden"
     >
-      {/* Ambient background decoration */}
-      <div className="absolute top-1/4 -right-32 w-96 h-96 bg-brand-purple/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -left-32 w-96 h-96 bg-brand-violetLight/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle Grid / Ambient Backdrop */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#180D380a_1px,transparent_1px),linear-gradient(to_bottom,#180D380a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header with Navigation Arrows */}
         <div
-          className={`flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-6 transition-all duration-700 ease-out ${
+          className={`flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6 transition-all duration-700 ease-out ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -63,67 +92,115 @@ export const DigitalProduction: React.FC = () => {
               Extend your brand into every touchpoint.
             </h2>
             <p className="text-sm sm:text-base text-gray-600 font-medium">
-              Touch or hover any module to activate its dark suite. Drag horizontally with skidding momentum to explore.
+              Explore our 4 production modules—slide smoothly to view all capabilities.
             </p>
           </div>
 
-          {/* Controls: Skidding slide arrows */}
+          {/* Controls: Skidding slide arrows with wrap-around */}
           <div className="flex items-center gap-3 self-start md:self-end">
             <button
-              onClick={() => swiperRef.current?.slidePrev()}
+              onClick={handlePrev}
               aria-label="Previous Slide"
-              className="w-11 h-11 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-brand-purple hover:text-white hover:border-brand-purple hover:shadow-lg hover:shadow-brand-purple/20 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#51069E] hover:text-white hover:border-[#51069E] hover:shadow-lg hover:shadow-[#51069E]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
-              onClick={() => swiperRef.current?.slideNext()}
+              onClick={handleNext}
               aria-label="Next Slide"
-              className="w-11 h-11 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-brand-purple hover:text-white hover:border-brand-purple hover:shadow-lg hover:shadow-brand-purple/20 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#51069E] hover:text-white hover:border-[#51069E] hover:shadow-lg hover:shadow-[#51069E]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
         </div>
 
+        {/* 4 Category Quick Slide Tabs */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8">
+          {DIGITAL_PRODUCTION_SERVICES.map((service, idx) => {
+            const isSelected = activeNumber === service.number || currentSlide === idx;
+            return (
+              <button
+                key={service.number}
+                onClick={() => handleTabClick(idx, service.number)}
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
+                }`}
+              >
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
+                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
+                }`}>
+                  {service.number}
+                </span>
+                <span>{service.title}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Swipeable & Draggable Skidding Carousel */}
         <div
-          data-lenis-prevent
+          data-lenis-prevent="true"
+          data-lenis-prevent-wheel="true"
+          data-lenis-prevent-touch="true"
           className={`transition-all duration-800 ease-out delay-150 relative ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
           <Swiper
-            modules={[Navigation, Pagination, FreeMode]}
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            spaceBetween={20}
-            slidesPerView={1.12}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => {
+              setCurrentSlide(swiper.activeIndex);
+            }}
+            modules={[Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard]}
+            grabCursor={true}
+            simulateTouch={true}
+            allowTouchMove={true}
+            threshold={4}
+            touchRatio={1.5}
+            touchAngle={45}
+            nested={true}
             freeMode={{
               enabled: true,
               momentum: true,
-              momentumRatio: 0.9,
+              momentumRatio: 0.85,
               momentumVelocityRatio: 1.1,
               momentumBounce: true,
             }}
+            mousewheel={{
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 1,
+            }}
+            keyboard={{
+              enabled: true,
+              onlyInViewport: true,
+            }}
+            spaceBetween={24}
+            slidesPerView={1.15}
             pagination={{
               clickable: true,
               dynamicBullets: true,
             }}
             breakpoints={{
               640: {
-                slidesPerView: 2.15,
+                slidesPerView: 1.5,
                 spaceBetween: 24,
               },
               1024: {
-                slidesPerView: 3.15,
+                slidesPerView: 2.1,
                 spaceBetween: 24,
               },
               1280: {
-                slidesPerView: 4,
-                spaceBetween: 24,
-                freeMode: false,
+                slidesPerView: 2.3,
+                spaceBetween: 28,
               },
             }}
             className="!pb-14 px-1 -mx-1"
@@ -134,47 +211,14 @@ export const DigitalProduction: React.FC = () => {
                   <DigitalProdCard
                     service={service}
                     isSelected={activeNumber === service.number}
-                    onClick={() => {
-                      setActiveNumber((prev) => (prev === service.number ? null : service.number));
-                    }}
-                    onMouseEnter={() => setActiveNumber(service.number)}
-                    onMouseLeave={() => {
-                      // Keep active if touched or clicked
-                    }}
+                    onClick={() => handleCardClick(service.number)}
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-
-        {/* Swipe hint */}
-        <div className="flex items-center justify-center gap-2 text-xs font-semibold text-gray-400 mt-2 mb-10 tracking-wide uppercase">
-          <span className="inline-block w-8 h-[1px] bg-gray-200" />
-          <span>Swipe or drag to skid through services</span>
-          <span className="inline-block w-8 h-[1px] bg-gray-200" />
-        </div>
-
-        {/* Bottom Connected Pipeline Strip (Responsive on all screen sizes) */}
-        <div
-          className={`text-center transition-all duration-700 ease-out delay-300 ${
-            isRevealed ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}
-        >
-          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 px-4 sm:px-8 py-3 sm:py-3.5 bg-brand-lilacSoft border border-brand-lilacBorder rounded-2xl sm:rounded-full text-[11px] sm:text-sm font-extrabold tracking-wider text-brand-purple uppercase shadow-sm max-w-full">
-            {pipelineSteps.map((step, idx) => (
-              <React.Fragment key={step}>
-                <span>{step}</span>
-                {idx < pipelineSteps.length - 1 && (
-                  <span className="text-brand-violetLight font-bold">→</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
 };
-
-export default DigitalProduction;
