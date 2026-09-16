@@ -111,11 +111,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
             })}
           </nav>
 
-          {/* 3. Right-side Premium CTA Button */}
+          {/* 3. Right-side Premium CTA Button (Styled with royal purple gradient matching reference) */}
           <div className="hidden lg:flex items-center">
             <button
               onClick={onOpenModal}
-              className="group relative inline-flex items-center gap-3.5 py-2.5 pl-6 pr-2.5 bg-[#13063e] hover:bg-[#1c0a56] text-white text-[14.5px] font-bold rounded-full transition-all duration-300 shadow-[0_4px_18px_rgba(19,6,62,0.25)] hover:shadow-[0_8px_25px_rgba(99,32,238,0.4)] hover:-translate-y-0.5 cursor-pointer"
+              className="group relative inline-flex items-center gap-3.5 py-2.5 pl-6 pr-2.5 bg-gradient-to-r from-[#6320ee] via-[#521ac2] to-[#380b72] hover:brightness-110 text-white text-[14.5px] font-bold rounded-full transition-all duration-300 shadow-[0_4px_18px_rgba(99,32,238,0.38)] hover:shadow-[0_8px_28px_rgba(99,32,238,0.55)] hover:-translate-y-0.5 cursor-pointer"
               aria-label="Open Let's Talk modal"
             >
               <span className="tracking-[-0.01em]">Let's Talk</span>

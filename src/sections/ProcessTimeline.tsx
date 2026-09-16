@@ -50,12 +50,12 @@ export const ProcessTimeline: React.FC = () => {
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <span className="eyebrow">STRUCTURED ROADMAP</span>
+          <span className="eyebrow">OUR WORK PROCESS</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4">
-            Turning Vision into Measurable Success
+            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#6320ee] via-[#8b5cf6] to-[#a855f7]">Measurable Success</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
-            At DE.RISEN, we believe exceptional results are built through a clear strategy, creative innovation, and flawless execution. Our structured 6-step process ensures every project is delivered with precision, purpose, and lasting impact.
+            A clear, strategy-led process moves every project from insight to impact.
           </p>
           <div className="w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto mt-5" />
         </div>
@@ -105,7 +105,7 @@ export const ProcessTimeline: React.FC = () => {
                     : 'opacity-0 translate-y-8'
                 } ${
                   isActive
-                    ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white border-brand-purple shadow-[0_20px_50px_rgba(99,32,238,0.28)] scale-[1.02] sm:scale-[1.03] -translate-y-1'
+                    ? 'bg-gradient-to-br from-[#2b0853] via-[#430f73] to-[#581c87] text-white border-purple-500/50 shadow-[0_20px_50px_rgba(74,14,120,0.42)] scale-[1.02] sm:scale-[1.03] -translate-y-1'
                     : 'bg-white text-gray-900 border-gray-200 shadow-sm hover:border-brand-purple/40 hover:-translate-y-0.5'
                 }`}
               >

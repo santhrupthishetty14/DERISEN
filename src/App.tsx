@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
+import { PageTransition } from './components/PageTransition';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -23,6 +24,8 @@ const PAGE_IDS = ['home', 'about', 'services', 'work', 'contact'];
 
 export const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [transitionTarget, setTransitionTarget] = useState<string>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -72,28 +75,40 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Multi-page navigation handler
+  // Multi-page navigation handler with gradient tab transition
   const handleNavigate = useCallback((targetPage: string) => {
     let cleanId = targetPage.toLowerCase().replace('#', '');
     if (cleanId === 'services-packages') cleanId = 'services';
     if (cleanId === 'work-gallery') cleanId = 'work';
     if (!PAGE_IDS.includes(cleanId)) cleanId = 'home';
 
-    setCurrentPage(cleanId);
-    window.history.pushState(null, '', `#${cleanId}`);
-
-    // Instant reset to top for crisp multi-page feel
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
+    if (cleanId === currentPage) {
+      if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: false });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setScrollProgress(0);
 
-    // Refresh ScrollTrigger after DOM has updated
+    setTransitionTarget(cleanId);
+    setIsNavigating(true);
+
+    // After luxury gradient curtain sweeps in, swap page & reset scroll
     setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 120);
-  }, []);
+      setCurrentPage(cleanId);
+      window.history.pushState(null, '', `#${cleanId}`);
+
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      setScrollProgress(0);
+
+      // Gracefully sweep curtain out
+      setTimeout(() => {
+        setIsNavigating(false);
+        ScrollTrigger.refresh();
+      }, 350);
+    }, 280);
+  }, [currentPage]);
 
   // Sync browser back/forward history buttons
   useEffect(() => {
@@ -104,18 +119,29 @@ export const App: React.FC = () => {
       if (cleanId === 'work-gallery') cleanId = 'work';
       if (!PAGE_IDS.includes(cleanId)) cleanId = 'home';
 
-      setCurrentPage(cleanId);
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
-      }
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      setScrollProgress(0);
-      setTimeout(() => ScrollTrigger.refresh(), 120);
+      if (cleanId === currentPage) return;
+
+      setTransitionTarget(cleanId);
+      setIsNavigating(true);
+
+      setTimeout(() => {
+        setCurrentPage(cleanId);
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        setScrollProgress(0);
+
+        setTimeout(() => {
+          setIsNavigating(false);
+          ScrollTrigger.refresh();
+        }, 350);
+      }, 280);
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [currentPage]);
 
   // Initial load from URL hash
   useEffect(() => {
@@ -192,6 +218,9 @@ export const App: React.FC = () => {
 
       {/* 0B. Custom Magnetic Cursor */}
       <CustomCursor />
+
+      {/* 0C. Luxury Gradient Tab Transfer Screen */}
+      <PageTransition isActive={isNavigating} targetPage={transitionTarget} />
 
       {/* 1. Header & Navigation (Tracks current active page) */}
       <Navbar
