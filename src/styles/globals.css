@@ -82,7 +82,7 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark via-brand-purple to-brand-violetLight inline-block pb-1.5 pr-2;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-dark via-brand-purple to-brand-violetLight inline-block pb-2.5 sm:pb-3 pr-2 leading-[1.3];
   }
 
   .dot-pattern {

@@ -104,15 +104,15 @@ export const About: React.FC = () => {
                 </div>
               </div>
 
-              {/* Line 3 with Gradient Text */}
-              <div className={`pb-1 ${isRevealed ? 'overflow-visible' : 'overflow-hidden'}`}>
+              {/* Line 3 with Gradient Text (With ample bottom clearance for 'g' descender in Driving) */}
+              <div className="overflow-visible pb-2 sm:pb-3">
                 <div
                   style={{ transitionDelay: '280ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-visible ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
                   }`}
                 >
-                  <span className="gradient-text">Driving Growth.</span>
+                  <span className="gradient-text pb-2 sm:pb-3 pr-2 leading-[1.35] inline-block">Driving Growth.</span>
                 </div>
               </div>
             </h2>
