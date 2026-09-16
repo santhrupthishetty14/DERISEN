@@ -6,10 +6,11 @@ import { SlideArrowButton } from '../components/SlideArrowButton';
 // Swiper imports for smooth sliding
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
 
 interface ServicesPackagesProps {
   onOpenModal?: () => void;
@@ -29,7 +30,8 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
   const sectionRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeNumber, setActiveNumber] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,10 +109,34 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
     },
   ];
 
-  const handleTabClick = (index: number) => {
-    setActiveIndex(index);
+  const handleTabClick = (idx: number, num: string) => {
+    setCurrentSlide(idx);
+    setActiveNumber(num);
     if (swiperRef.current) {
-      swiperRef.current.slideTo(index);
+      swiperRef.current.slideTo(idx);
+    }
+  };
+
+  const handleCardClick = (num: string) => {
+    // Only apply dark theme when user explicitly clicks/touches that card
+    setActiveNumber((prev) => (prev === num ? null : num));
+  };
+
+  const handlePrev = () => {
+    if (!swiperRef.current) return;
+    if (swiperRef.current.isBeginning) {
+      swiperRef.current.slideTo(packages.length - 1);
+    } else {
+      swiperRef.current.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (!swiperRef.current) return;
+    if (swiperRef.current.isEnd) {
+      swiperRef.current.slideTo(0);
+    } else {
+      swiperRef.current.slideNext();
     }
   };
 
@@ -125,39 +151,58 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
-        {/* Header */}
-        <div
-          className={`text-center max-w-3xl mx-auto mb-12 sm:mb-16 transition-all duration-700 ${
-            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <span className="eyebrow">INTEGRATED ECOSYSTEM</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4 leading-tight">
-            Everything your brand needs.
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600 font-medium">
-            One unified sliding operating model across creative, branding, digital marketing, and technology.
-          </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto mt-4" />
+        {/* Header with Navigation Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
+          <div
+            className={`max-w-2xl transition-all duration-700 ease-out ${
+              isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <span className="eyebrow">INTEGRATED ECOSYSTEM</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-3">
+              Everything your brand needs.
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 font-medium">
+              Explore our 4 core modular packages—slide smoothly to view all capabilities.
+            </p>
+          </div>
+
+          {/* Slider Arrow Controls (Slide smoothly with wrap-around) */}
+          <div className="flex items-center gap-3 self-start md:self-auto">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous package"
+              className="w-12 h-12 rounded-full bg-white hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next package"
+              className="w-12 h-12 rounded-full bg-white hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* ── Interactive Service Slide Switcher Tabs ── */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
+        {/* 4 Category Quick Slide Tabs */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8">
           {packages.map((pkg, idx) => {
             const Icon = pkg.icon;
-            const isCurrent = activeIndex === idx;
+            const isSelected = activeNumber === pkg.num || currentSlide === idx;
             return (
               <button
                 key={pkg.num}
-                onClick={() => handleTabClick(idx)}
-                className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
-                  isCurrent
-                    ? 'bg-[#51069E] text-white shadow-[0_4px_18px_rgba(81,6,158,0.35)] scale-105'
-                    : 'bg-white text-gray-600 border border-gray-200 hover:border-[#51069E]/50 hover:text-[#51069E]'
+                onClick={() => handleTabClick(idx, pkg.num)}
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
                 }`}
               >
-                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${
-                  isCurrent ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
+                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
                 }`}>
                   {pkg.num}
                 </span>
@@ -168,161 +213,196 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
           })}
         </div>
 
-        {/* ── Sliding Services Showcase ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16">
-          {/* Left Dynamic Dark Feature Card */}
-          <div
-            className={`lg:col-span-4 bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] rounded-3xl p-8 sm:p-10 text-white shadow-[0_25px_60px_rgba(24,13,56,0.35)] border border-white/15 flex flex-col justify-between relative overflow-hidden transition-all duration-700 ${
-              isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-[0.97]'
-            }`}
+        {/* Swipeable Carousel: 4 cards with full room to slide smoothly */}
+        <div
+          data-lenis-prevent="true"
+          data-lenis-prevent-wheel="true"
+          data-lenis-prevent-touch="true"
+          className={`transition-all duration-800 ease-out delay-150 relative mb-16 ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
+          <Swiper
+            onBeforeInit={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => {
+              setCurrentSlide(swiper.activeIndex);
+            }}
+            modules={[Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard]}
+            grabCursor={true}
+            simulateTouch={true}
+            allowTouchMove={true}
+            threshold={4}
+            touchRatio={1.5}
+            touchAngle={45}
+            nested={true}
+            freeMode={{
+              enabled: true,
+              momentum: true,
+              momentumRatio: 0.85,
+              momentumVelocityRatio: 1.1,
+              momentumBounce: true,
+            }}
+            mousewheel={{
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 1,
+            }}
+            keyboard={{
+              enabled: true,
+              onlyInViewport: true,
+            }}
+            spaceBetween={24}
+            slidesPerView={1.15}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 1.5,
+                spaceBetween: 24,
+              },
+              1024: {
+                slidesPerView: 2.1,
+                spaceBetween: 24,
+              },
+              1280: {
+                slidesPerView: 2.3,
+                spaceBetween: 28,
+              },
+            }}
+            className="!pb-14 px-2 -mx-2"
           >
-            {/* Ambient Radial Glow */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute -top-16 -right-16 w-60 h-60 bg-[#51069E]/40 rounded-full blur-3xl" />
-            </div>
+            {packages.map((pkg) => {
+              const Icon = pkg.icon;
+              const isDark = activeNumber === pkg.num;
 
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-lilac via-brand-violetLight to-brand-cyan font-mono">
-                  {packages[activeIndex].num}
-                </span>
-                <span className="px-3.5 py-1 rounded-full bg-white/10 text-brand-lilac font-mono text-xs font-bold border border-white/15">
-                  SLIDE {activeIndex + 1} OF 04
-                </span>
-              </div>
+              return (
+                <SwiperSlide key={pkg.num} className="!h-auto flex">
+                  <div
+                    onClick={() => handleCardClick(pkg.num)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleCardClick(pkg.num);
+                      }
+                    }}
+                    className={`w-full rounded-2xl p-7 sm:p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
+                      isDark
+                        ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white shadow-2xl shadow-brand-dark/40 border-2 border-[#51069E]/90 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
+                        : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:border-[#51069E]/60 hover:shadow-xl hover:-translate-y-1.5 hover:translate-x-0.5 hover:-rotate-[0.3deg]'
+                    }`}
+                  >
+                    {/* Ambient background glow when dark */}
+                    {isDark && (
+                      <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#51069E]/30 rounded-full blur-3xl pointer-events-none transition-opacity duration-700" />
+                    )}
 
-              <div className="w-12 h-12 rounded-full bg-[#51069E] text-white flex items-center justify-center mb-5 shadow-lg shadow-[#51069E]/40">
-                {React.createElement(packages[activeIndex].icon, { className: 'w-6 h-6' })}
-              </div>
+                    {/* Skidding Gloss / Light sheen sweep on hover & touch */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
-              <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-3 tracking-tight">
-                {packages[activeIndex].title}
-              </h3>
-              <p className="text-sm text-brand-cyan font-semibold mb-4">
-                {packages[activeIndex].desc}
-              </p>
-              <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">
-                {packages[activeIndex].detail}
-              </p>
-            </div>
+                    {/* Top Active Indicator Badge */}
+                    {isDark && (
+                      <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#51069E]/40 border border-brand-cyan/50 text-brand-cyan text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.25)] animate-in fade-in duration-300">
+                        <Check className="w-3.5 h-3.5" />
+                        <span>Active</span>
+                      </div>
+                    )}
 
-            <div className="relative z-10 pt-6 mt-6 border-t border-white/15 flex items-center justify-between">
-              {/* Slider Arrow Controls */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => swiperRef.current?.slidePrev()}
-                  aria-label="Previous service"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#51069E] text-white flex items-center justify-center border border-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => swiperRef.current?.slideNext()}
-                  aria-label="Next service"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#51069E] text-white flex items-center justify-center border border-white/20 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              <span className="text-[11px] font-mono font-bold text-white/60 tracking-wider">
-                SWIPE OR USE ARROWS
-              </span>
-            </div>
-          </div>
-
-          {/* Right Sliding Carousel Cards Container */}
-          <div className="lg:col-span-8 flex flex-col justify-center">
-            <Swiper
-              onSwiper={(swiper) => {
-                swiperRef.current = swiper;
-              }}
-              onSlideChange={(swiper) => {
-                setActiveIndex(swiper.realIndex);
-              }}
-              modules={[Navigation, Pagination, Autoplay]}
-              spaceBetween={20}
-              slidesPerView={1}
-              breakpoints={{
-                640: {
-                  slidesPerView: 1.3,
-                  spaceBetween: 20,
-                },
-                1024: {
-                  slidesPerView: 1.7,
-                  spaceBetween: 24,
-                },
-                1280: {
-                  slidesPerView: 2,
-                  spaceBetween: 24,
-                },
-              }}
-              loop={true}
-              autoplay={{
-                delay: 4500,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
-              className="w-full !pb-14"
-            >
-              {packages.map((pkg, idx) => {
-                const Icon = pkg.icon;
-                const isSelected = activeIndex === idx;
-
-                return (
-                  <SwiperSlide key={pkg.num} className="!h-auto flex">
-                    <div
-                      className={`w-full bg-white rounded-3xl border p-7 sm:p-8 shadow-sm flex flex-col justify-between transition-all duration-500 group hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(81,6,158,0.18)] ${
-                        isSelected
-                          ? 'border-[#51069E] shadow-[0_12px_36px_rgba(81,6,158,0.12)] ring-2 ring-[#51069E]/20'
-                          : 'border-gray-200 hover:border-[#51069E]/60'
-                      }`}
-                    >
-                      <div>
-                        {/* Header: Icon + Number */}
-                        <div className="flex items-center justify-between mb-6">
-                          <div className="w-12 h-12 rounded-full bg-[#51069E] text-white flex items-center justify-center shadow-md shadow-[#51069E]/25 transition-transform duration-300 group-hover:scale-110">
-                            <Icon className="w-6 h-6" />
-                          </div>
-                          <span className="text-3xl font-black font-mono text-gray-200 group-hover:text-[#51069E]/30 transition-colors">
-                            {pkg.num}
-                          </span>
+                    <div>
+                      {/* Header: Icon + Number */}
+                      <div className="flex items-center justify-between mb-6">
+                        <div
+                          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+                            isDark
+                              ? 'bg-brand-cyan text-brand-dark shadow-[0_0_20px_rgba(0,240,255,0.35)] scale-105'
+                              : 'bg-[#51069E] text-white shadow-[#51069E]/25 group-hover:scale-110'
+                          }`}
+                        >
+                          <Icon className="w-6 h-6" />
                         </div>
-
-                        {/* Title & Tagline */}
-                        <h4 className="text-xl sm:text-2xl font-black text-brand-dark mb-2 tracking-tight group-hover:text-[#51069E] transition-colors">
-                          {pkg.title}
-                        </h4>
-                        <p className="text-xs sm:text-[13px] font-bold text-[#51069E] mb-4">
-                          {pkg.desc}
-                        </p>
-
-                        <p className="text-xs text-gray-500 leading-relaxed mb-6">
-                          {pkg.detail}
-                        </p>
-
-                        {/* Deliverables Bullet List */}
-                        <div className="space-y-2 mb-8 pt-4 border-t border-gray-100">
-                          <span className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-wider block mb-2">
-                            Key Deliverables:
-                          </span>
-                          {pkg.deliverables.map((item, i) => (
-                            <div key={i} className="flex items-center gap-2.5 text-xs text-gray-700 font-medium">
-                              <span className="w-4 h-4 rounded-full bg-brand-lilacSoft text-[#51069E] flex items-center justify-center flex-shrink-0">
-                                <Check className="w-3 h-3 stroke-[2.5]" />
-                              </span>
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
+                        <span
+                          className={`text-3xl font-black font-mono transition-colors ${
+                            isDark ? 'text-brand-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]' : 'text-gray-200 group-hover:text-[#51069E]/30'
+                          }`}
+                        >
+                          {pkg.num}
+                        </span>
                       </div>
 
-                      {/* Bottom Action */}
-                      <div className="pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
+                      {/* Title & Tagline */}
+                      <h4
+                        className={`text-xl sm:text-2xl font-black mb-2 tracking-tight transition-colors ${
+                          isDark ? 'text-white' : 'text-brand-dark group-hover:text-[#51069E]'
+                        }`}
+                      >
+                        {pkg.title}
+                      </h4>
+                      <p
+                        className={`text-xs sm:text-[13px] font-bold mb-4 transition-colors ${
+                          isDark ? 'text-brand-cyan' : 'text-[#51069E]'
+                        }`}
+                      >
+                        {pkg.desc}
+                      </p>
+
+                      <p
+                        className={`text-xs leading-relaxed mb-6 transition-colors ${
+                          isDark ? 'text-white/80' : 'text-gray-500'
+                        }`}
+                      >
+                        {pkg.detail}
+                      </p>
+
+                      {/* Deliverables Bullet List */}
+                      <div
+                        className={`space-y-2.5 mb-8 pt-4 border-t transition-colors ${
+                          isDark ? 'border-white/15' : 'border-gray-100'
+                        }`}
+                      >
+                        <span
+                          className={`text-[11px] font-mono font-bold uppercase tracking-wider block mb-2 transition-colors ${
+                            isDark ? 'text-brand-cyan/80' : 'text-gray-400'
+                          }`}
+                        >
+                          Key Deliverables:
+                        </span>
+                        {pkg.deliverables.map((item, i) => (
+                          <div
+                            key={i}
+                            className={`flex items-center gap-2.5 text-xs font-medium transition-colors ${
+                              isDark ? 'text-white/90' : 'text-gray-700'
+                            }`}
+                          >
+                            <span
+                              className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                                isDark
+                                  ? 'bg-[#51069E]/60 text-brand-cyan'
+                                  : 'bg-brand-lilacSoft text-[#51069E]'
+                              }`}
+                            >
+                              <Check className="w-3 h-3 stroke-[2.5]" />
+                            </span>
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Bottom Action */}
+                    <div
+                      className={`pt-4 border-t flex items-center justify-between gap-4 transition-colors ${
+                        isDark ? 'border-white/15' : 'border-gray-100'
+                      }`}
+                    >
+                      <div onClick={(e) => e.stopPropagation()}>
                         <SlideArrowButton
                           label="Book Consultation"
                           onClick={() => {
@@ -331,16 +411,20 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                           variant="purple"
                           size="sm"
                         />
-                        <span className="text-xs font-mono font-bold text-gray-400">
-                          {pkg.num}/04
-                        </span>
                       </div>
+                      <span
+                        className={`text-xs font-mono font-bold transition-colors ${
+                          isDark ? 'text-brand-cyan/70' : 'text-gray-400'
+                        }`}
+                      >
+                        {pkg.num}/04
+                      </span>
                     </div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
 
         {/* Animated Section Banner: IT Solutions & Digital Technology */}
