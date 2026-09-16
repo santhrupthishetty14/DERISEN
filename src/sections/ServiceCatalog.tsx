@@ -1,16 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CatalogCard } from '../components/CatalogCard';
-import { INDIVIDUAL_SERVICES_CATALOG } from '../utils/constants';
+import { INDIVIDUAL_SERVICES_CATALOG, DIGITAL_PRODUCTION_SERVICES } from '../utils/constants';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Swiper modules and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Pagination, FreeMode, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
+
+// Combine all 8 core service categories for a full, rich sliding catalog
+const ALL_CATALOG_SERVICES = [
+  ...INDIVIDUAL_SERVICES_CATALOG,
+  ...DIGITAL_PRODUCTION_SERVICES,
+];
 
 export const ServiceCatalog: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -36,11 +41,17 @@ export const ServiceCatalog: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleTabClick = (idx: number) => {
+  const handleTabClick = (idx: number, num: string) => {
     setCurrentSlide(idx);
+    setActiveNumber(num);
     if (swiperRef.current) {
-      swiperRef.current.slideTo(idx);
+      swiperRef.current.slideToLoop(idx);
     }
+  };
+
+  const handleCardClick = (num: string) => {
+    // Only apply dark theme when user clicks/touches that card
+    setActiveNumber((prev) => (prev === num ? null : num));
   };
 
   return (
@@ -62,7 +73,7 @@ export const ServiceCatalog: React.FC = () => {
               Choose what your brand needs.
             </h2>
             <p className="text-sm sm:text-base text-gray-600 font-medium">
-              A modular sliding service catalog—swipe or slide across each category.
+              Explore our full 8-category modular service catalog—slide smoothly across all capabilities.
             </p>
           </div>
 
@@ -86,14 +97,14 @@ export const ServiceCatalog: React.FC = () => {
         </div>
 
         {/* Category Quick Slide Tabs */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8">
-          {INDIVIDUAL_SERVICES_CATALOG.map((cat, idx) => {
-            const isSelected = currentSlide === idx;
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-8">
+          {ALL_CATALOG_SERVICES.map((cat, idx) => {
+            const isSelected = activeNumber === cat.number || currentSlide === idx;
             return (
               <button
                 key={cat.number}
-                onClick={() => handleTabClick(idx)}
-                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                onClick={() => handleTabClick(idx, cat.number)}
+                className={`px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
                     : 'bg-surface-subtle text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
@@ -123,10 +134,14 @@ export const ServiceCatalog: React.FC = () => {
             onSlideChange={(swiper) => {
               setCurrentSlide(swiper.realIndex);
             }}
-            modules={[Navigation, Pagination, FreeMode, Autoplay]}
+            modules={[Navigation, Pagination, Autoplay]}
+            loop={true}
+            grabCursor={true}
+            simulateTouch={true}
+            allowTouchMove={true}
+            touchRatio={1.2}
             spaceBetween={20}
             slidesPerView={1.15}
-            grabCursor={true}
             pagination={{
               clickable: true,
               dynamicBullets: true,
@@ -141,21 +156,19 @@ export const ServiceCatalog: React.FC = () => {
                 spaceBetween: 24,
               },
               1280: {
-                slidesPerView: 2.5,
+                slidesPerView: 2.6,
                 spaceBetween: 28,
               },
             }}
             className="!pb-16 px-2 -mx-2"
           >
-            {INDIVIDUAL_SERVICES_CATALOG.map((cat) => (
+            {ALL_CATALOG_SERVICES.map((cat) => (
               <SwiperSlide key={cat.number} className="!h-auto flex">
                 <div className="w-full h-full flex flex-col">
                   <CatalogCard
                     category={cat}
                     isActive={activeNumber === cat.number}
-                    onClick={() => {
-                      setActiveNumber((prev) => (prev === cat.number ? null : cat.number));
-                    }}
+                    onClick={() => handleCardClick(cat.number)}
                   />
                 </div>
               </SwiperSlide>
