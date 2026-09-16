@@ -289,7 +289,7 @@ export const WhatWeDo: React.FC = () => {
                   isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/20">
+                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
                   <Lightbulb className="w-5 h-5" />
                 </div>
                 <div>
@@ -306,7 +306,7 @@ export const WhatWeDo: React.FC = () => {
                   isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/20">
+                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
                   <Target className="w-5 h-5" />
                 </div>
                 <div>
@@ -323,7 +323,7 @@ export const WhatWeDo: React.FC = () => {
                   isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/20">
+                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
                   <Users className="w-5 h-5" />
                 </div>
                 <div>
@@ -340,7 +340,7 @@ export const WhatWeDo: React.FC = () => {
                   isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
                 }`}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/20">
+                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
                   <Rocket className="w-5 h-5" />
                 </div>
                 <div>

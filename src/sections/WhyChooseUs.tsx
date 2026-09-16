@@ -260,8 +260,8 @@ export const WhyChooseUs: React.FC = () => {
                   ref={(el) => {
                     iconRefs.current[index] = el;
                   }}
-                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center shadow-md shadow-brand-purple/20 transition-transform duration-300 ${
-                    isHovered ? '-translate-y-1 scale-110' : 'scale-100'
+                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/30 transition-transform duration-300 ${
+                    isHovered ? '-translate-y-1 scale-110 shadow-lg' : 'scale-100'
                   }`}
                 >
                   {IconComponent && <IconComponent className="w-5 h-5 sm:w-6 sm:h-6" />}
