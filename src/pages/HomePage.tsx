@@ -28,14 +28,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       <div className="max-w-[1320px] mx-auto px-6 -mt-8 mb-16 relative z-20">
         <div className="bg-gradient-to-r from-[#180D38] via-[#200d4d] to-[#0e0524] rounded-3xl p-8 sm:p-10 border border-white/10 shadow-[0_15px_40px_rgba(24,13,56,0.18)] flex flex-col md:flex-row items-center justify-between gap-6 text-white">
           <div className="space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-cyan text-xs font-mono font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-purple/30 border border-brand-cyan/40 text-brand-cyan text-xs font-mono font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
               <span>Full Spectrum Capabilities</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
               Looking for Retainer Plans or Individual Services?
             </h3>
-            <p className="text-white/70 text-sm max-w-xl">
+            <p className="text-purple-100/80 text-sm sm:text-base max-w-xl leading-relaxed">
               Explore our transparent packages, interactive 50+ service catalog, and production technology stack.
             </p>
           </div>
