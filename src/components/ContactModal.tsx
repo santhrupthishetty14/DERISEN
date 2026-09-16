@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
+import { SlideArrowButton } from './SlideArrowButton';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -118,16 +119,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
             />
           </div>
 
-          <button
+          <SlideArrowButton
             type="submit"
             disabled={isSubmitting}
-            className="w-full btn-pill-primary justify-center py-3.5 mt-2"
-          >
-            <span>{isSubmitting ? 'Sending Inquiry...' : 'Send Inquiry'}</span>
-            <span className="btn-icon-circle">
-              <ArrowRight className="w-4 h-4" />
-            </span>
-          </button>
+            label={isSubmitting ? 'Sending Inquiry...' : 'Send Inquiry'}
+            variant="purple"
+            size="lg"
+            className="w-full mt-2"
+          />
         </form>
       </div>
     </div>

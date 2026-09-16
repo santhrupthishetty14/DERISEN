@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ArrowRight, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { SlideArrowButton } from './SlideArrowButton';
 
 interface NavbarProps {
@@ -217,16 +217,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                 : 'translate-y-6 opacity-0'
             }`}
           >
-            <button
+            <SlideArrowButton
+              label="Let's Talk"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenModal();
               }}
-              className="w-full inline-flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-brand-purple to-brand-violet text-white text-base font-extrabold rounded-full shadow-[0_6px_25px_rgba(99,32,238,0.45)] hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
-            >
-              <span>Let's Talk</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              variant="purple"
+              size="lg"
+              className="w-full"
+            />
 
             <p className="text-center text-xs text-white/50 mt-4 tracking-wide font-medium">
               We Don't Just Build Brands. We Make Them Rise.

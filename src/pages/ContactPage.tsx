@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { Mail, Phone, MapPin, MessageSquare, ShieldCheck, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react';
 import { FinalCTA } from '../sections/FinalCTA';
+import { SlideArrowButton } from '../components/SlideArrowButton';
 
 interface ContactPageProps {
   onOpenModal: () => void;
@@ -284,20 +285,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                       />
                     </div>
 
-                    <button
+                    <SlideArrowButton
                       type="submit"
                       disabled={loading}
-                      className="w-full py-4 bg-gradient-to-r from-brand-purple to-brand-violet hover:opacity-95 text-white font-extrabold text-sm rounded-xl shadow-[0_8px_25px_rgba(99,32,238,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                    >
-                      {loading ? (
-                        <span>Submitting Your Inquiry...</span>
-                      ) : (
-                        <>
-                          <span>Submit Consultation Request</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
+                      label={loading ? 'Submitting Your Inquiry...' : 'Submit Consultation Request'}
+                      variant="purple"
+                      size="lg"
+                      className="w-full"
+                    />
                   </form>
                 )}
               </div>

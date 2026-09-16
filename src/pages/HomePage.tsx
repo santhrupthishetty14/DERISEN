@@ -5,7 +5,8 @@ import { WhatWeDo } from '../sections/WhatWeDo';
 import { WhyChooseUs } from '../sections/WhyChooseUs';
 import { WorkGallery } from '../sections/WorkGallery';
 import { FinalCTA } from '../sections/FinalCTA';
-import { ArrowRight, Sparkles, Users } from 'lucide-react';
+import { Sparkles, Users } from 'lucide-react';
+import { SlideArrowButton } from '../components/SlideArrowButton';
 
 interface HomePageProps {
   onOpenModal: () => void;
@@ -39,13 +40,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
               Explore our transparent packages, interactive 50+ service catalog, and production technology stack.
             </p>
           </div>
-          <button
+          <SlideArrowButton
+            label="Explore Services & Packages"
             onClick={() => onNavigate('services')}
-            className="flex-shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-brand-purple to-brand-cyan text-white text-sm font-extrabold hover:brightness-110 shadow-lg shadow-brand-purple/40 transition-all cursor-pointer group"
-          >
-            <span>Explore Services &amp; Packages</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
+            variant="purple"
+            size="lg"
+            className="flex-shrink-0"
+          />
         </div>
       </div>
 
@@ -67,13 +68,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
               Discover the founders, philosophy, and proprietary operating model that empower DE.RISEN to deliver unmatched brand elevation.
             </p>
           </div>
-          <button
+          <SlideArrowButton
+            label="Learn About DE.RISEN"
             onClick={() => onNavigate('about')}
-            className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-brand-navy hover:bg-brand-purple text-white text-sm font-bold shadow-md transition-all cursor-pointer group flex-shrink-0"
-          >
-            <span>Learn About DE.RISEN</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
+            variant="navy"
+            size="lg"
+            className="flex-shrink-0"
+          />
         </div>
       </div>
 

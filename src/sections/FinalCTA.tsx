@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
+import { SlideArrowButton } from '../components/SlideArrowButton';
 
 interface FinalCTAProps {
   onOpenModal: () => void;
@@ -64,17 +65,14 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenModal }) => {
             Whether you need a world-class brand identity, a high-converting digital marketing campaign, or custom web technology—we are ready to elevate your business.
           </p>
 
-          {/* Large Interactive CTA Button with Glow */}
+          {/* Large Interactive CTA Button with Sliding Arrow */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <SlideArrowButton
+              label="Let's Talk"
               onClick={onOpenModal}
-              className="group relative inline-flex items-center gap-4 py-4 pl-9 pr-5 bg-gradient-to-r from-brand-purple via-brand-violet to-brand-violetLight hover:brightness-110 text-white text-base sm:text-lg font-black rounded-full transition-all duration-300 shadow-[0_10px_35px_rgba(99,32,238,0.5)] hover:shadow-[0_15px_45px_rgba(99,32,238,0.7)] hover:-translate-y-1 active:scale-[0.98]"
-            >
-              <span>Let's Talk</span>
-              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white text-brand-dark shadow-md transition-transform duration-300 group-hover:translate-x-1.5 group-hover:rotate-[-15deg]">
-                <ArrowRight className="w-4 h-4 text-brand-purple" />
-              </span>
-            </button>
+              size="lg"
+              variant="purple"
+            />
           </div>
 
           {/* Micro-trust copy */}
