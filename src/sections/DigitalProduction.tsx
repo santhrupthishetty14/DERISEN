@@ -88,7 +88,8 @@ export const DigitalProduction: React.FC = () => {
 
         {/* Swipeable & Draggable Skidding Carousel */}
         <div
-          className={`transition-all duration-800 ease-out delay-150 ${
+          data-lenis-prevent
+          className={`transition-all duration-800 ease-out delay-150 relative ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >

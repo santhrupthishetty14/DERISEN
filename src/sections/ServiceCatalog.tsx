@@ -121,13 +121,17 @@ export const ServiceCatalog: React.FC = () => {
           })}
         </div>
 
-        {/* Swipeable Carousel */}
+        {/* Swipeable Carousel with data-lenis-prevent so Lenis does not block dragging */}
         <div
-          className={`transition-all duration-800 ease-out delay-150 ${
+          data-lenis-prevent
+          className={`transition-all duration-800 ease-out delay-150 relative ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
           <Swiper
+            onBeforeInit={(swiper) => {
+              swiperRef.current = swiper;
+            }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
@@ -139,7 +143,9 @@ export const ServiceCatalog: React.FC = () => {
             grabCursor={true}
             simulateTouch={true}
             allowTouchMove={true}
-            touchRatio={1.2}
+            touchRatio={1.5}
+            touchAngle={45}
+            nested={true}
             spaceBetween={20}
             slidesPerView={1.15}
             pagination={{
@@ -157,6 +163,10 @@ export const ServiceCatalog: React.FC = () => {
               },
               1280: {
                 slidesPerView: 2.6,
+                spaceBetween: 28,
+              },
+              1536: {
+                slidesPerView: 3.2,
                 spaceBetween: 28,
               },
             }}
