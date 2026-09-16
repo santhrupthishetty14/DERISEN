@@ -31,7 +31,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
       <WhatWeDo />
 
       {/* 3. Slide 10: Integrated Ecosystem Services & Packages */}
-      <ServicesPackages />
+      <ServicesPackages onOpenModal={onOpenModal} />
 
       {/* 4. Slide 11: Comprehensive Service Catalog (Filterable Categories) */}
       <ServiceCatalog />
