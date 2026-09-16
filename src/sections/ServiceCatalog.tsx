@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CatalogCard } from '../components/CatalogCard';
 import { INDIVIDUAL_SERVICES_CATALOG } from '../utils/constants';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Swiper modules and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, FreeMode } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+import { Navigation, Pagination, FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,8 +14,10 @@ import 'swiper/css/free-mode';
 
 export const ServiceCatalog: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,6 +36,13 @@ export const ServiceCatalog: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleTabClick = (idx: number) => {
+    setCurrentSlide(idx);
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(idx);
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -39,19 +50,64 @@ export const ServiceCatalog: React.FC = () => {
       className="py-20 sm:py-28 bg-white relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
-        {/* Header */}
-        <div
-          className={`text-center max-w-3xl mx-auto mb-12 sm:mb-16 transition-all duration-700 ease-out ${
-            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <span className="eyebrow">INDIVIDUAL SERVICES</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-4">
-            Choose what your brand needs.
-          </h2>
-          <p className="text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto">
-            A modular service catalog—from identity and content to digital experiences and production.
-          </p>
+        {/* Header with Navigation Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
+          <div
+            className={`max-w-2xl transition-all duration-700 ease-out ${
+              isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <span className="eyebrow">INDIVIDUAL SERVICES</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-3">
+              Choose what your brand needs.
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 font-medium">
+              A modular sliding service catalog—swipe or slide across each category.
+            </p>
+          </div>
+
+          {/* Slider Arrow Controls */}
+          <div className="flex items-center gap-3 self-start md:self-auto">
+            <button
+              onClick={() => swiperRef.current?.slidePrev()}
+              aria-label="Previous category"
+              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => swiperRef.current?.slideNext()}
+              aria-label="Next category"
+              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Category Quick Slide Tabs */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8">
+          {INDIVIDUAL_SERVICES_CATALOG.map((cat, idx) => {
+            const isSelected = currentSlide === idx;
+            return (
+              <button
+                key={cat.number}
+                onClick={() => handleTabClick(idx)}
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
+                    : 'bg-surface-subtle text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
+                }`}
+              >
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
+                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
+                }`}>
+                  {cat.number}
+                </span>
+                <span>{cat.title}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Swipeable Carousel */}
@@ -60,17 +116,19 @@ export const ServiceCatalog: React.FC = () => {
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
-          {/* We use negative margin and padding to allow box-shadows on cards to not be clipped, while remaining swipeable. */}
           <Swiper
-            modules={[Navigation, Pagination, FreeMode]}
-            spaceBetween={20}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => {
+              setCurrentSlide(swiper.realIndex);
+            }}
+            modules={[Navigation, Pagination, FreeMode, Autoplay]}
+            spaceBetween={24}
             slidesPerView={1.15}
             freeMode={{
               enabled: true,
               momentum: true,
-              momentumRatio: 0.9,
-              momentumVelocityRatio: 1.1,
-              momentumBounce: true,
             }}
             pagination={{
               clickable: true,
@@ -78,17 +136,16 @@ export const ServiceCatalog: React.FC = () => {
             }}
             breakpoints={{
               640: {
-                slidesPerView: 2.2,
+                slidesPerView: 1.8,
                 spaceBetween: 24,
               },
               1024: {
-                slidesPerView: 3.2,
+                slidesPerView: 2.6,
                 spaceBetween: 24,
               },
               1280: {
-                slidesPerView: 4,
-                spaceBetween: 24,
-                freeMode: false,
+                slidesPerView: 3.2,
+                spaceBetween: 28,
               },
             }}
             className="!pb-16 px-2 -mx-2"
@@ -114,7 +171,7 @@ export const ServiceCatalog: React.FC = () => {
       
       <style dangerouslySetInnerHTML={{__html: `
         .swiper-pagination-bullet-active {
-          background-color: var(--brand-purple) !important;
+          background-color: #51069E !important;
         }
       `}} />
     </section>
