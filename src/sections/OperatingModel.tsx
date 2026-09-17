@@ -180,7 +180,7 @@ export const OperatingModel: React.FC = () => {
                 <span>ONE OPERATING MODEL</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-black text-brand-dark tracking-tight leading-tight">
-                Four Services. <span className="gradient-text">One Unified Ecosystem.</span>
+                Four Services. <span className="gradient-text">One Operating Model.</span>
               </h2>
             </div>
 
@@ -348,7 +348,7 @@ export const OperatingModel: React.FC = () => {
             <span>ONE OPERATING MODEL</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight leading-tight">
-            Four Services. <span className="gradient-text">One Unified Model.</span>
+            Four Services. <span className="gradient-text">One Operating Model.</span>
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 font-medium mt-2">
             Everything your brand needs to scale under one unified roof.
