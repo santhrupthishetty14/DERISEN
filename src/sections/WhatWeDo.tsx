@@ -141,18 +141,26 @@ export const WhatWeDo: React.FC = () => {
               </p>
             </div>
 
-            {/* 4 Mini Service Badges */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+            {/* 4 Rich Visual Service Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
               <div
                 style={{ transitionDelay: '550ms' }}
-                className={`bg-surface-subtle border border-gray-200 rounded-xl p-3.5 hover:border-brand-purple hover:shadow-md transition-all duration-300 ${
+                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center mb-2 shadow-sm">
-                  <PenTool className="w-4 h-4" />
+                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
+                  <img
+                    src="/assets/service-creative-design.jpg"
+                    alt="Creative Design"
+                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
+                    <PenTool className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1">Creative Design</h5>
+                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Creative Design</h5>
                 <p className="text-[11px] text-gray-500 leading-normal">
                   Eye-catching visuals that communicate your brand story with clarity.
                 </p>
@@ -160,14 +168,22 @@ export const WhatWeDo: React.FC = () => {
 
               <div
                 style={{ transitionDelay: '630ms' }}
-                className={`bg-surface-subtle border border-gray-200 rounded-xl p-3.5 hover:border-brand-purple hover:shadow-md transition-all duration-300 ${
+                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center mb-2 shadow-sm">
-                  <Tag className="w-4 h-4" />
+                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
+                  <img
+                    src="/assets/service-branding.jpg"
+                    alt="Branding"
+                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
+                    <Tag className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1">Branding</h5>
+                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Branding</h5>
                 <p className="text-[11px] text-gray-500 leading-normal">
                   Strong identities that build trust, recognition &amp; lasting impressions.
                 </p>
@@ -175,14 +191,22 @@ export const WhatWeDo: React.FC = () => {
 
               <div
                 style={{ transitionDelay: '710ms' }}
-                className={`bg-surface-subtle border border-gray-200 rounded-xl p-3.5 hover:border-brand-purple hover:shadow-md transition-all duration-300 ${
+                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center mb-2 shadow-sm">
-                  <Megaphone className="w-4 h-4" />
+                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
+                  <img
+                    src="/assets/service-marketing.jpg"
+                    alt="Digital Marketing"
+                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
+                    <Megaphone className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1">Digital Marketing</h5>
+                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Digital Marketing</h5>
                 <p className="text-[11px] text-gray-500 leading-normal">
                   Smart strategies that engage your audience &amp; drive measurable growth.
                 </p>
@@ -190,14 +214,22 @@ export const WhatWeDo: React.FC = () => {
 
               <div
                 style={{ transitionDelay: '790ms' }}
-                className={`bg-surface-subtle border border-gray-200 rounded-xl p-3.5 hover:border-brand-purple hover:shadow-md transition-all duration-300 ${
+                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center mb-2 shadow-sm">
-                  <Code className="w-4 h-4" />
+                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
+                  <img
+                    src="/assets/service-it-solutions.jpg"
+                    alt="IT Solutions"
+                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
+                    <Code className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1">IT Solutions</h5>
+                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">IT Solutions</h5>
                 <p className="text-[11px] text-gray-500 leading-normal">
                   Innovative digital solutions that empower your business to scale.
                 </p>
