@@ -343,21 +343,21 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* =================================================================
-              Right Column: Premium Video Showcase (1st page.mp4)
+              Right Column: Premium 3D Motion Graphics Logo Showcase
               ================================================================= */}
           <div ref={rightVisualRef} className="lg:col-span-7 flex justify-center items-center relative w-full">
-            <div className="relative w-full max-w-[660px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(99,32,238,0.22)] border border-purple-200/50 bg-gradient-to-tr from-brand-card/40 to-transparent p-2 sm:p-3 backdrop-blur-sm group">
-              {/* Outer Glow Halo */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/30 via-brand-cyan/20 to-brand-violet/30 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="relative w-full max-w-[680px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(99,32,238,0.16)] border border-purple-200/60 bg-white/80 p-2 sm:p-3 backdrop-blur-md group transition-all duration-500 hover:shadow-[0_30px_70px_rgba(99,32,238,0.22)]">
+              {/* Outer Ambient Glow Halo */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/25 via-brand-cyan/15 to-brand-violet/25 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
               
-              <div className="relative rounded-2xl overflow-hidden bg-black/80 aspect-video flex items-center justify-center">
+              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#ebe6f4] via-[#f5f2fa] to-[#e4def0] aspect-video flex items-center justify-center shadow-inner">
                 <video
-                  src="/assets/hero-video.mp4"
+                  src="/assets/3D_motion_graphics_logo_animation.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover rounded-2xl transform transition-transform duration-700 hover:scale-[1.02]"
+                  className="w-full h-full object-cover rounded-2xl transform transition-transform duration-700 group-hover:scale-[1.02]"
                 />
               </div>
             </div>
