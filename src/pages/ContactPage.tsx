@@ -93,7 +93,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
       <PageHeader
         badge="CONTACT US / LET'S CONNECT"
         title="Let's Build Something"
-        highlightWord="Extraordinary Together."
+        highlightWord="Extra Ordinary Together."
         description="Whether you need a full brand overhaul, a high-converting web platform, or a monthly growth retainer, our executive team is ready to bring your vision to life."
         breadcrumb="Contact Us"
         onNavigateHome={() => onNavigate('home')}
