@@ -85,10 +85,23 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play video in 1 continuous natural flow: starts right at the logo formation climax and flows into the ending 2s sparkling
+    // Play ONLY the sparkling logo video portion (starting assembly sequence removed)
     const video = videoRef.current;
     if (video) {
-      video.currentTime = 6.8;
+      const applySparkleStart = () => {
+        try {
+          video.currentTime = 7.8;
+        } catch {
+          // ignore
+        }
+      };
+
+      if (video.readyState >= 1) {
+        applySparkleStart();
+      } else {
+        video.addEventListener("loadedmetadata", applySparkleStart, { once: true });
+      }
+
       video.playbackRate = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -107,10 +120,10 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       video.addEventListener("ended", handleVideoEnded);
     }
 
-    // After 3.3s of seamless natural flow (6.8s to 10.0s), smoothly dissolve into the homepage
+    // Only sparkling logo plays cleanly (~2.2s from 7.8s to 10.0s), then smoothly dissolves
     const fallbackTimer = setTimeout(() => {
       finishIntro();
-    }, 3400);
+    }, 2400);
 
     return () => {
       clearTimeout(fallbackTimer);
