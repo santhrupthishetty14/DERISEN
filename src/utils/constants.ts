@@ -137,7 +137,7 @@ export const LEADERS: LeaderProfile[] = [
     avatarSeed: 'lejai',
     bioParagraphs: [
       'Lejai Jayakumar is the Managing Director and Co-Founder of DE.RISEN, leading the company\'s business strategy, operations, and growth initiatives. With extensive experience in consulting, operations management, and business development, he plays a key role in delivering innovative solutions and building long-term client relationships.',
-      'As Director of Finizon Consulting Pvt. Ltd., Lejai has contributed to consulting projects across export businesses, real estate, and property development. He also brings nearly five years of operational leadership experience from Sanama Solution, where he managed budgeting, business operations, and organizational efficiency.',
+      'With extensive leadership experience in management consulting, Lejai has contributed to strategic advisory projects across export businesses, real estate, and property development. He also brings nearly five years of enterprise operational leadership, managing budgeting, business operations, and organizational efficiency.',
       'Beyond his corporate responsibilities, Lejai serves as the State IT & Social Media Head of Akhil Bharat Hindu Mahasabha, leading digital initiatives and communication strategies.',
       'At DE.RISEN, he is committed to driving innovation, operational excellence, and sustainable business growth while helping clients transform ideas into impactful brands.'
     ]
@@ -280,7 +280,7 @@ export const DIGITAL_PRODUCTION_SERVICES: DigitalProductionService[] = [
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     title: 'Corporate Brand Identity & Guidelines',
-    client: 'Finizon Consulting Pvt. Ltd.',
+    client: 'Global Strategy & Management Advisory',
     category: 'Branding & Identity',
     description: 'Complete visual identity system, corporate stationery, guidelines and typography.',
     imageUrl: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95',
@@ -288,7 +288,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   },
   {
     title: 'Full-Stack Scalable Web Platform',
-    client: 'Sanama Solution',
+    client: 'NextGen Cloud & Technology Solutions',
     category: 'IT & Web Development',
     description: 'High-performance responsive portal with speed optimization and custom workflows.',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=95',

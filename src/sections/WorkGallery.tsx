@@ -7,14 +7,14 @@ const CATEGORIES = ['All', 'Branding & Identity', 'IT & Web Development', 'Digit
 const TESTIMONIALS = [
   {
     name: 'Rajesh Malhotra',
-    company: 'Finizon Consulting',
+    company: 'Global Strategy & Management Advisory',
     quote: 'DE.RISEN completely transformed our corporate identity and digital presence. Their attention to detail, brand strategy, and execution speed exceeded every expectation.',
     rating: 5,
     role: 'Managing Director',
   },
   {
     name: 'Ananya Sharma',
-    company: 'Sanama Tech Solutions',
+    company: 'NextGen Cloud & Technology Solutions',
     quote: 'The high-performance web platform built by DE.RISEN increased our inbound client conversions by over 240%. True creative and technical masters under one roof.',
     rating: 5,
     role: 'Chief Technology Officer',
