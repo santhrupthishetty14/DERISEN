@@ -100,20 +100,49 @@ export const Leadership: React.FC = () => {
               </div>
             </div>
 
-            {/* Center Duo Portrait Artwork */}
+            {/* Center Duo Portrait Artwork - High-Resolution Clean Executive Portraits */}
             <div className="lg:col-span-6 flex items-center justify-center relative order-1 lg:order-2">
               {/* Background ambient glowing concentric rings */}
               <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-[#8447FF]/25 -z-10 animate-pulse" />
               <div className="absolute w-80 h-80 sm:w-[420px] sm:h-[420px] rounded-full border border-[#8447FF]/15 -z-10" />
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#6320EE]/15 via-[#8447FF]/10 to-transparent blur-3xl -z-10" />
 
-              <div className="relative w-full max-w-[560px] flex items-center justify-center">
-                <img
-                  src="/assets/visionaries-duo.jpg"
-                  alt="Shweta Deharkar and Lejai Jayakumar - The Visionaries Behind DE.RISEN"
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(99,32,238,0.18)] select-none pointer-events-none"
-                  loading="eager"
-                />
+              {/* Clean Executive Duo Display with Glowing Badges */}
+              <div className="relative w-full max-w-[560px] flex items-center justify-center gap-4 sm:gap-6 py-2">
+                {/* Shweta Sarkar */}
+                <div className="relative group flex flex-col items-center">
+                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#6320EE] to-[#9d68ff] transition-transform duration-500 group-hover:scale-105">
+                    <img
+                      src="/assets/leader-shweta-cleaned.jpg"
+                      alt="Shweta Deharkar - CEO"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="mt-3 px-3 py-1 rounded-full bg-white/95 border border-purple-100 shadow-sm text-center">
+                    <div className="text-xs sm:text-sm font-black text-[#111827]">Shweta Deharkar</div>
+                    <div className="text-[10px] sm:text-[11px] font-bold text-[#5b13d6]">Chief Executive Officer</div>
+                  </div>
+                </div>
+
+                {/* Center Synergy Icon Node */}
+                <div className="hidden sm:flex -mx-4 z-20 w-10 h-10 rounded-full bg-white border-2 border-[#5b13d6] shadow-md items-center justify-center text-[#5b13d6] shrink-0 animate-pulse">
+                  <Users className="w-5 h-5" />
+                </div>
+
+                {/* Lejai Jayakumar */}
+                <div className="relative group flex flex-col items-center">
+                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#5b13d6] to-[#7c3aed] transition-transform duration-500 group-hover:scale-105">
+                    <img
+                      src="/assets/leader-lejai-cleaned.jpg"
+                      alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="mt-3 px-3 py-1 rounded-full bg-white/95 border border-purple-100 shadow-sm text-center">
+                    <div className="text-xs sm:text-sm font-black text-[#111827]">Lejai Jayakumar</div>
+                    <div className="text-[10px] sm:text-[11px] font-bold text-[#5b13d6]">Managing Director & Co-Founder</div>
+                  </div>
+                </div>
               </div>
             </div>
 

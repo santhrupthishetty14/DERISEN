@@ -57,7 +57,7 @@ export const About: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="about"
+      id="about-content"
       className="py-24 sm:py-32 bg-white relative overflow-hidden w-full max-w-full"
     >
       {/* Ambient background dots */}

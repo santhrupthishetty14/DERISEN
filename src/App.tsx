@@ -152,7 +152,11 @@ export const App: React.FC = () => {
       if (cleanId === 'work-gallery') cleanId = 'work';
       if (PAGE_IDS.includes(cleanId)) {
         setCurrentPage(cleanId);
-        setTimeout(() => ScrollTrigger.refresh(), 200);
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          ScrollTrigger.refresh();
+        }, 100);
       }
     }
   }, []);
