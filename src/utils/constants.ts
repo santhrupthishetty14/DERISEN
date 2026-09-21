@@ -120,19 +120,20 @@ export const LEADERS: LeaderProfile[] = [
   {
     name: 'Shweta Deharkar',
     role: 'Founder & Chief Executive Officer (CEO)',
-    quote: '“Creativity is not just what we do—it is the foundation of everything we build.”',
+    quote: 'Creativity is not just what we do—it is the foundation of everything we build.',
     avatarSeed: 'shweta',
     bioParagraphs: [
       'Shweta Deharkar is the visionary Founder and CEO of DE.RISEN, leading the company with a passion for creativity, innovation, and business excellence. She established DE.RISEN with a clear mission—to help businesses transform bold ideas into powerful brands and meaningful digital experiences.',
       'She holds a Bachelor of Visual Arts (BVA) in Animation & Multimedia Design, has completed her MBA in Marketing, and is certified in Artificial Intelligence, bringing together creative expertise, strategic business knowledge, and emerging technologies to deliver impactful solutions.',
-      'With 4+ years of professional experience, Shweta has worked across healthcare, retail, education, real estate, corporate, manufacturing, hospitality, and other diverse industries, successfully delivering innovative branding, creative design, digital marketing, and technology-driven solutions.',
-      'Recognized with the Best Graphic Designer Trainer Award, she has successfully delivered 96+ creative projects, helping startups, SMEs, and established enterprises strengthen their market presence through strategic creativity and innovation.'
+      'With 4+ years of professional experience, Shweta has worked across healthcare, retail, education, real estate, corporate, manufacturing, hospitality, and other diverse industries, successfully delivering innovative branding, creative design, digital marketing, and technology-driven solutions. Her expertise lies in building strong brand identities, creating engaging user experiences, and driving sustainable business growth.',
+      'Recognized with the Best Graphic Designer Trainer Award, she has successfully delivered 96+ creative projects, helping startups, SMEs, and established enterprises strengthen their market presence through strategic creativity and innovation.',
+      'Under her leadership, DE.RISEN has grown into a trusted creative and digital solutions company, empowering businesses with world-class services in Creative Design, Branding, Digital Marketing, and IT Solutions. She believes every project is an opportunity to create value, inspire confidence, and shape the future of a brand.'
     ]
   },
   {
     name: 'Lejai Jayakumar',
     role: 'Managing Director & Co-Founder',
-    quote: '“Building businesses is about creating value, empowering people, and driving sustainable growth.”',
+    quote: 'Building businesses is about creating value, empowering people, and driving sustainable growth.',
     avatarSeed: 'lejai',
     bioParagraphs: [
       'Lejai Jayakumar is the Managing Director and Co-Founder of DE.RISEN, leading the company\'s business strategy, operations, and growth initiatives. With extensive experience in consulting, operations management, and business development, he plays a key role in delivering innovative solutions and building long-term client relationships.',

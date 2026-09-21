@@ -21,6 +21,12 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) =
         breadcrumb="Work & Testimonials"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Systems', 'Web Platforms', 'Campaign Creatives', 'Video & 3D Motion', 'Client Endorsements']}
+        imageSrc="/assets/banner-work.jpg"
+        imageAlt="DE.RISEN Work Gallery & Portfolio"
+        floatingBadge={{
+          text: '5.0 ★ Client Rating',
+          subtext: 'Proven Growth ROI',
+        }}
       />
 
       {/* 2. Slide 8: Work Gallery & Client Testimonials */}

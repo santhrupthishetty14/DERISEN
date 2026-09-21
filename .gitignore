@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 scratch/
 scratch_*.json
+.env
+.env*.local

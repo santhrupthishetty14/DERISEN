@@ -22,6 +22,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         breadcrumb="About Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
+        imageSrc="/assets/banner-about.jpg"
+        imageAlt="About DE.RISEN Leadership & Vision"
+        floatingBadge={{
+          text: 'Executive Leadership',
+          subtext: 'Global Strategic Delivery',
+        }}
       />
 
       {/* 2. Company Background, Vision, Mission & Goals */}

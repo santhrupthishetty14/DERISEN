@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
-import { Mail, Phone, MapPin, MessageSquare, ShieldCheck, CheckCircle2, ArrowRight, HelpCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, ShieldCheck, CheckCircle2, ArrowRight, HelpCircle, AlertCircle } from 'lucide-react';
 import { FinalCTA } from '../sections/FinalCTA';
 import { SlideArrowButton } from '../components/SlideArrowButton';
+import { sendInquiry, buildMailtoUrl } from '../utils/emailService';
 
 interface ContactPageProps {
   onOpenModal: () => void;
@@ -20,14 +21,51 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [dispatchData, setDispatchData] = useState<{
+    isDirectMail?: boolean;
+    mailtoUrl?: string;
+    whatsappUrl?: string;
+  } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.name || !formData.email) return;
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setErrorMsg(null);
+
+    const result = await sendInquiry({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      budget: formData.budget,
+      message: formData.message,
+      source: 'Full Consultation Page Form',
+    });
+
+    setLoading(false);
+
+    if (result.success) {
       setSubmitted(true);
-    }, 1000);
+      setErrorMsg(null);
+      setDispatchData({
+        isDirectMail: result.isDirectMail,
+        mailtoUrl: result.mailtoUrl,
+        whatsappUrl: result.whatsappUrl,
+      });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Branding & Identity',
+        budget: '₹25,000 - ₹50,000',
+        message: '',
+      });
+    } else {
+      setErrorMsg(result.message);
+    }
   };
 
   const faqs = [
@@ -60,6 +98,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         breadcrumb="Contact Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
+        imageSrc="/assets/banner-contact.jpg"
+        imageAlt="Contact DE.RISEN Communication Hub"
+        floatingBadge={{
+          text: 'Direct Executive Line',
+          subtext: '+91 78999 10917',
+        }}
       />
 
       {/* 2. Main Contact Grid & Direct Inquiry Section */}
@@ -166,20 +210,63 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                 <div className="absolute top-0 right-0 w-60 h-60 bg-brand-purple/5 rounded-full blur-3xl pointer-events-none" />
 
                 {submitted ? (
-                  <div className="py-16 text-center space-y-4">
+                  <div className="py-12 text-center space-y-5">
                     <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h3 className="text-2xl font-black text-brand-dark">Inquiry Submitted Successfully!</h3>
-                    <p className="text-gray-600 text-sm max-w-md mx-auto">
-                      Thank you for contacting DE.RISEN. An executive lead strategist will review your requirements and get in touch within 4 business hours.
-                    </p>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="mt-6 px-6 py-2.5 rounded-full bg-brand-purple text-white text-xs font-bold hover:bg-brand-dark transition-colors cursor-pointer"
-                    >
-                      Submit Another Inquiry
-                    </button>
+                    <div>
+                      <h3 className="text-2xl font-black text-brand-dark mb-2">
+                        {dispatchData?.isDirectMail
+                          ? 'Inquiry Prepared & Email App Opened!'
+                          : 'Inquiry Submitted Successfully!'}
+                      </h3>
+                      <p className="text-gray-600 text-sm max-w-md mx-auto leading-relaxed">
+                        {dispatchData?.isDirectMail ? (
+                          <>
+                            Your message details have been pre-filled for{' '}
+                            <span className="font-bold text-brand-purple">derisenofficial@gmail.com</span>.
+                            If your email app did not open automatically, choose a direct option below:
+                          </>
+                        ) : (
+                          'Thank you for contacting DE.RISEN. Your inquiry was delivered to derisenofficial@gmail.com and our strategy team will connect within 4 business hours.'
+                        )}
+                      </p>
+                    </div>
+
+                    {dispatchData?.isDirectMail && (
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 max-w-md mx-auto">
+                        {dispatchData.whatsappUrl && (
+                          <a
+                            href={dispatchData.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm hover:shadow-md"
+                          >
+                            <MessageSquare className="w-4 h-4" /> Send via WhatsApp (+91 78999 10917)
+                          </a>
+                        )}
+                        {dispatchData.mailtoUrl && (
+                          <a
+                            href={dispatchData.mailtoUrl}
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-purple hover:bg-brand-dark text-white text-xs font-bold transition-all"
+                          >
+                            <Mail className="w-4 h-4" /> Open Email Client (derisenofficial@gmail.com)
+                          </a>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="pt-4">
+                      <button
+                        onClick={() => {
+                          setSubmitted(false);
+                          setDispatchData(null);
+                        }}
+                        className="px-6 py-2.5 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-bold transition-colors cursor-pointer"
+                      >
+                        Submit Another Inquiry
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
@@ -284,6 +371,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                         className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-brand-purple focus:bg-white transition-all resize-none"
                       />
                     </div>
+
+                    {errorMsg && (
+                      <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-xs text-red-700 flex flex-col gap-2.5">
+                        <div className="flex items-start gap-2.5">
+                          <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-bold block text-red-900 mb-0.5">Could not deliver inquiry automatically</span>
+                            <span>{errorMsg}</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 ml-7 pt-1">
+                          <a
+                            href={buildMailtoUrl(formData)}
+                            className="inline-flex items-center gap-1.5 font-bold text-brand-purple hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Mail className="w-3.5 h-3.5" /> Send directly via Email App
+                          </a>
+                          <span className="text-gray-300">•</span>
+                          <a
+                            href={`https://wa.me/917899910917?text=${encodeURIComponent(`Hi DE.RISEN, I am ${formData.name}. I would like to inquire about ${formData.service}.`)}`}
+                            className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5" /> Send via WhatsApp (+91 78999 10917)
+                          </a>
+                        </div>
+                      </div>
+                    )}
 
                     <SlideArrowButton
                       type="submit"

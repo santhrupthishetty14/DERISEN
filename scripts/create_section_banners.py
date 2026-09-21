@@ -9,27 +9,34 @@ os.makedirs('public/assets', exist_ok=True)
 W, H = 1920, 760
 
 def create_dark_purple_canvas():
-    # Base dark studio gradient from deep obsidian #0B041A to rich violet #180D38
+    # Vibrant DE.RISEN Brand Purple Studio Gradient from rich royal purple #180D38 to iconic brand purple #51069E and #6320EE
     img = np.zeros((H, W, 3), dtype=np.uint8)
     for y in range(H):
         ratio = y / H
-        # BGR
-        b = int(26 * (1 - ratio) + 56 * ratio)
-        g = int(4 * (1 - ratio) + 13 * ratio)
-        r = int(11 * (1 - ratio) + 24 * ratio)
+        # Gradient from deep royal purple to vibrant brand purple (BGR)
+        b = int(60 * (1 - ratio) + 165 * ratio)
+        g = int(12 * (1 - ratio) + 25 * ratio)
+        r = int(28 * (1 - ratio) + 85 * ratio)
         img[y, :] = [b, g, r]
     
-    # Add ambient purple radial glow in center/right
-    center_x, center_y = int(W * 0.65), int(H * 0.5)
+    # Add ambient brand purple & violet radial glow in center/right
+    center_x, center_y = int(W * 0.65), int(H * 0.48)
     y_coords, x_coords = np.ogrid[:H, :W]
     dist = np.sqrt((x_coords - center_x)**2 + (y_coords - center_y)**2)
-    max_radius = 650
-    glow = np.clip(1.0 - (dist / max_radius), 0, 1) ** 2
+    max_radius = 850
+    glow = np.clip(1.0 - (dist / max_radius), 0, 1) ** 1.8
     
-    # Add purple aura (BGR: 238, 32, 99)
-    img[:, :, 0] = np.clip(img[:, :, 0] + glow * 120, 0, 255).astype(np.uint8)
-    img[:, :, 1] = np.clip(img[:, :, 1] + glow * 25, 0, 255).astype(np.uint8)
-    img[:, :, 2] = np.clip(img[:, :, 2] + glow * 80, 0, 255).astype(np.uint8)
+    # Add rich purple aura (BGR: 246, 92, 139 for #8B5CF6 / #6320EE)
+    img[:, :, 0] = np.clip(img[:, :, 0] + glow * 160, 0, 255).astype(np.uint8)
+    img[:, :, 1] = np.clip(img[:, :, 1] + glow * 50, 0, 255).astype(np.uint8)
+    img[:, :, 2] = np.clip(img[:, :, 2] + glow * 110, 0, 255).astype(np.uint8)
+
+    # Top-left ambient cyan/violet rim accent
+    tl_dist = np.sqrt((x_coords - int(W * 0.15))**2 + (y_coords - int(H * 0.2))**2)
+    tl_glow = np.clip(1.0 - (tl_dist / 600), 0, 1) ** 2.2
+    img[:, :, 0] = np.clip(img[:, :, 0] + tl_glow * 90, 0, 255).astype(np.uint8)
+    img[:, :, 1] = np.clip(img[:, :, 1] + tl_glow * 35, 0, 255).astype(np.uint8)
+    img[:, :, 2] = np.clip(img[:, :, 2] + tl_glow * 45, 0, 255).astype(np.uint8)
     
     return Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 

@@ -25,6 +25,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         breadcrumb="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
+        imageSrc="/assets/banner-services.jpg"
+        imageAlt="DE.RISEN Services & Technology Ecosystem"
+        floatingBadge={{
+          text: 'Ecosystem Suite',
+          subtext: '4 Integrated Verticals',
+        }}
       />
 
       {/* 2. Slide 3: What We Do (Creative Design, Branding, Marketing, IT) */}
