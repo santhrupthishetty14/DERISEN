@@ -140,11 +140,14 @@ export const Stats: React.FC = () => {
     <section
       ref={sectionRef}
       id="stats-section"
-      className="py-14 sm:py-20 bg-white border-y border-gray-100 relative overflow-hidden"
+      className="py-16 sm:py-24 bg-surface-subtle border-b border-gray-200/80 relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider mb-3">
+            <span>Proven Track Record</span>
+          </div>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-2 sm:mb-3">
             OUR PERFORMANCE. YOURS TRUST
           </h2>
