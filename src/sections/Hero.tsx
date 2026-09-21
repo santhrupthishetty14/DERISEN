@@ -266,19 +266,19 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[78px] sm:pt-[84px] md:pt-[88px] pb-5 sm:pb-7 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full border-b border-gray-200/90 shadow-[0_12px_24px_rgba(24,13,56,0.03)]"
+      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[76px] sm:pt-[82px] md:pt-[86px] pb-5 sm:pb-7 px-4 sm:px-6 lg:px-8 w-full max-w-full border-b border-gray-200/90 shadow-[0_12px_24px_rgba(24,13,56,0.03)]"
     >
-      {/* Background Soft Purple Aura & Ambient Radiance */}
+      {/* Background Subtle Ambient Aura */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div
           ref={auraRef}
-          className="absolute top-12 left-1/4 w-[600px] h-[600px] bg-brand-purple/6 rounded-full blur-3xl transition-transform"
+          className="absolute top-12 left-1/4 w-[500px] h-[500px] bg-brand-purple/4 rounded-full blur-3xl transition-transform"
         />
       </div>
 
       {/* Hero Core Content Stage (Directly below navbar with optimal compact spacing) */}
       <div className="w-full max-w-[1360px] mx-auto flex flex-col justify-start pt-1 sm:pt-2 pb-2 sm:pb-3 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-6 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* =================================================================
               Left Column: Headline, Subtitle, CTA Button & Floating Sphere
               ================================================================= */}
@@ -346,18 +346,16 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               Right Column: Premium Marketing Service Cards Motion Showcase
               ================================================================= */}
           <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-1">
-            <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px] rounded-[30px] overflow-hidden shadow-[0_22px_55px_rgba(99,32,238,0.18),0_4px_16px_rgba(0,0,0,0.06)] border border-purple-200/70 bg-gradient-to-br from-white/95 via-purple-50/60 to-white/90 p-2 sm:p-2.5 backdrop-blur-md group transition-all duration-500 hover:shadow-[0_28px_65px_rgba(99,32,238,0.26)]">
-              {/* Outer Ambient Glow Halo */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/25 via-brand-cyan/15 to-brand-violet/25 rounded-[30px] blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
-              
-              <div className="relative rounded-[22px] overflow-hidden bg-black aspect-[9/16] max-h-[440px] sm:max-h-[475px] flex items-center justify-center shadow-inner">
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[480px] rounded-[32px] sm:rounded-[36px] overflow-hidden shadow-[0_24px_55px_rgba(24,13,56,0.12),0_4px_16px_rgba(0,0,0,0.04)] border border-gray-200/80 bg-black group transition-all duration-500 hover:shadow-[0_30px_65px_rgba(24,13,56,0.18)]">
+              {/* Clean Portrait Frame with Bottom Excess Cropped */}
+              <div className="relative w-full aspect-[1/1.36] overflow-hidden bg-black flex items-center justify-center">
                 <video
                   src="/assets/Marketing_service_cards_emerge.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover rounded-[22px] transform transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-[1.02]"
                 />
               </div>
             </div>
