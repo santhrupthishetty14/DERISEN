@@ -477,94 +477,110 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             />
           </div>
 
-          {/* Right Column: Full-Background Floating HUD Layer OR Frame Card */}
-          {isFullBg ? (
+          {/* Right Column: Complete Animated Visual with Interactive Touch Nexus */}
+          {imageSrc && (
             <div
-              className={`lg:col-span-4 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out ${
-                isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{
-                transform: `perspective(1000px) rotateY(${mousePos.x * 0.25}deg) rotateX(${-mousePos.y * 0.25}deg)`,
-                transitionDelay: '400ms',
-              }}
-            >
-              {/* Floating Synergy HUD Card */}
-              <div
-                className="p-5 rounded-2xl bg-[#0e0728]/85 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-cyan/60 transition-all duration-500 hover:scale-105"
-                style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-cyan font-bold">Neural Synergy</span>
-                  <Zap className="w-4 h-4 text-brand-cyan animate-pulse" />
-                </div>
-                <div className="text-sm font-extrabold text-white leading-snug">
-                  Human Creativity × AI Matrix Architecture
-                </div>
-                <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Interactive Live Nexus</span>
-                </div>
-              </div>
-
-              {/* Floating Corner Badge */}
-              {floatingBadge && (
-                <div
-                  className="mt-6 px-4 py-2.5 rounded-2xl bg-[#12092c]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
-                  style={{ animation: 'floatHudChip 5s ease-in-out infinite alternate', animationDelay: '1s' }}
-                >
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                    <ShieldCheck className="w-4.5 h-4.5 text-brand-cyan" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-black text-white leading-tight">{floatingBadge.text}</div>
-                    {floatingBadge.subtext && (
-                      <div className="text-[10px] text-brand-cyan font-bold leading-tight">{floatingBadge.subtext}</div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : imageSrc ? (
-            <div
-              className={`lg:col-span-5 flex justify-center items-center relative transition-all duration-1000 ease-out mt-6 lg:mt-0 ${
+              className={`lg:col-span-5 flex justify-center items-center relative transition-all duration-1000 ease-out mt-8 lg:mt-0 ${
                 isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
               }`}
               style={{ transitionDelay: '350ms' }}
             >
               <div
-                className="relative w-full max-w-[500px] group select-none transition-transform duration-500 ease-out"
+                className="relative w-full max-w-[460px] group select-none transition-transform duration-500 ease-out"
                 style={{
                   transform: `perspective(1000px) rotateY(${mousePos.x * 0.3}deg) rotateX(${-mousePos.y * 0.3}deg)`,
                 }}
               >
-                {/* Brand Purple Pulsing Glow Aura */}
+                {/* Brand Purple & Cyan Pulsing Glow Aura */}
                 <div
                   className="absolute -inset-4 bg-gradient-to-tr from-brand-purple via-brand-violet to-brand-cyan rounded-3xl blur-2xl opacity-65 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                   style={{ animation: 'bannerAuraPulse 6s ease-in-out infinite alternate' }}
                 />
 
                 {/* Floating Top Mini HUD Chip */}
-                <div className="absolute -top-3.5 -left-2 z-20 px-3 py-1.5 rounded-full bg-[#12092c]/90 border border-brand-cyan/40 backdrop-blur-md shadow-lg flex items-center gap-1.5 animate-bounce" style={{ animationDuration: '3.5s' }}>
+                <div
+                  className="absolute -top-3.5 -left-2 z-30 px-3.5 py-1.5 rounded-full bg-[#12092c]/95 border border-brand-cyan/50 backdrop-blur-md shadow-lg flex items-center gap-2 animate-bounce"
+                  style={{ animationDuration: '3.5s' }}
+                >
                   <Zap className="w-3.5 h-3.5 text-brand-cyan animate-pulse" />
-                  <span className="text-[11px] font-bold text-white tracking-wide">Digital Architecture</span>
+                  <span className="text-[11px] font-bold text-white tracking-wide">Human × AI Synergy</span>
                 </div>
 
-                {/* Glassmorphic Brand Frame with image */}
-                <div className="relative rounded-3xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#12092c] to-[#0d0722] shadow-[0_25px_60px_rgba(10,5,25,0.7)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
+                {/* Complete Image Frame (Uncropped full aspect ratio with cyber ambient backdrop) */}
+                <div className="relative rounded-3xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#12092c] to-[#080315] shadow-[0_25px_60px_rgba(5,2,15,0.8)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
+                  {/* Complete Uncropped Image */}
                   <img
                     src={imageSrc}
                     alt={imageAlt || title}
-                    className="w-full h-[240px] sm:h-[300px] lg:h-[320px] object-cover rounded-3xl block transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-[360px] sm:h-[420px] lg:h-[460px] object-contain rounded-3xl block transition-transform duration-1000 group-hover:scale-105"
                   />
-                  {/* Glowing Edge Vignette */}
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-3xl pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d0722]/80 via-transparent to-brand-purple/20 pointer-events-none" />
 
-                  {/* Animated light sheen sweep across the photo */}
+                  {/* Luminous Animated Fingertip Touch Nexus - Aligned directly on the fingertip connection point */}
+                  <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20">
+                    {/* Concentric Ripple 1 */}
+                    <div
+                      className="absolute top-1/2 left-1/2 w-28 h-28 rounded-full border border-brand-cyan/80 pointer-events-none"
+                      style={{
+                        animation: 'bannerTouchRipple 3.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                        animationDelay: '0s',
+                      }}
+                    />
+
+                    {/* Concentric Ripple 2 */}
+                    <div
+                      className="absolute top-1/2 left-1/2 w-28 h-28 rounded-full border border-brand-violetLight/80 pointer-events-none"
+                      style={{
+                        animation: 'bannerTouchRipple 3.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                        animationDelay: '1.1s',
+                      }}
+                    />
+
+                    {/* Concentric Ripple 3 */}
+                    <div
+                      className="absolute top-1/2 left-1/2 w-28 h-28 rounded-full border border-purple-400/70 pointer-events-none"
+                      style={{
+                        animation: 'bannerTouchRipple 3.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                        animationDelay: '2.2s',
+                      }}
+                    />
+
+                    {/* Radial High-Intensity Photon Glow */}
+                    <div
+                      className="w-24 h-24 rounded-full pointer-events-none"
+                      style={{
+                        background:
+                          'radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(56, 189, 248, 0.85) 30%, rgba(168, 85, 247, 0.5) 60%, transparent 75%)',
+                        animation: 'bannerNexusPulse 3.5s ease-in-out infinite',
+                      }}
+                    />
+
+                    {/* Central Sparkle Star */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_15px_#ffffff,0_0_30px_#38bdf8] animate-ping" style={{ animationDuration: '1.8s' }} />
+                  </div>
+
+                  {/* Luminous Synaptic Blinks on the polygon lattice */}
+                  <div
+                    className="absolute top-[32%] left-[40%] w-2 h-2 rounded-full bg-brand-cyan pointer-events-none z-20"
+                    style={{ animation: 'bannerNodeBlink 3s ease-in-out infinite', animationDelay: '0.3s' }}
+                  />
+                  <div
+                    className="absolute top-[48%] left-[38%] w-2 h-2 rounded-full bg-brand-violetLight pointer-events-none z-20"
+                    style={{ animation: 'bannerNodeBlink 3.4s ease-in-out infinite', animationDelay: '1s' }}
+                  />
+                  <div
+                    className="absolute top-[58%] left-[46%] w-1.5 h-1.5 rounded-full bg-cyan-300 pointer-events-none z-20"
+                    style={{ animation: 'bannerNodeBlink 2.8s ease-in-out infinite', animationDelay: '1.7s' }}
+                  />
+
+                  {/* Glowing Edge Vignette */}
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-3xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080315]/80 via-transparent to-brand-purple/15 pointer-events-none" />
+
+                  {/* Animated light sheen sweep across the complete photo */}
                   <div
                     className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl"
                     style={{
-                      background: 'linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%)',
+                      background: 'linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.12) 50%, transparent 60%)',
                       backgroundSize: '200% 100%',
                       animation: 'bannerShimmerSweep 5s ease-in-out infinite',
                     }}
@@ -573,7 +589,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                 {/* Floating Corner Badge */}
                 {floatingBadge && (
-                  <div className="absolute -bottom-4 right-3 sm:-bottom-5 sm:right-5 px-4 py-2.5 rounded-2xl bg-[#12092c]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105">
+                  <div className="absolute -bottom-4 right-3 sm:-bottom-5 sm:right-5 z-30 px-4 py-2.5 rounded-2xl bg-[#12092c]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105">
                     <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
                       <ShieldCheck className="w-4.5 h-4.5 text-brand-cyan" />
                     </div>
@@ -587,7 +603,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 )}
               </div>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>
