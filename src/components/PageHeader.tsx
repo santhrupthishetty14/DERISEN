@@ -13,6 +13,11 @@ export interface PageHeaderProps {
   imageAlt?: string;
   backgroundImage?: string;
   fullBackground?: boolean;
+  hudInfo?: {
+    tag: string;
+    title: string;
+    status: string;
+  };
   floatingBadge?: {
     text: string;
     subtext?: string;
@@ -31,6 +36,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   imageAlt,
   backgroundImage = '/assets/banner-ai-future.jpg',
   fullBackground = false,
+  hudInfo,
   floatingBadge,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -494,15 +500,17 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-cyan font-bold">Neural Synergy</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-cyan font-bold">
+                    {hudInfo?.tag || 'Neural Synergy'}
+                  </span>
                   <Zap className="w-4 h-4 text-brand-cyan animate-pulse" />
                 </div>
                 <div className="text-sm font-extrabold text-white leading-snug">
-                  Human Creativity × AI Matrix Architecture
+                  {hudInfo?.title || 'Human Creativity × AI Matrix Architecture'}
                 </div>
                 <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Interactive Live Nexus</span>
+                  <span>{hudInfo?.status || 'Interactive Live Nexus'}</span>
                 </div>
               </div>
 

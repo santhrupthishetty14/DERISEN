@@ -16,7 +16,7 @@ interface ServicesPageProps {
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
     <div className="w-full max-w-full overflow-x-clip bg-white">
-      {/* 1. Page Header */}
+      {/* 1. Page Header with Complete Edge-to-Edge Animated Ecosystem Background */}
       <PageHeader
         badge="SERVICES & PACKAGES / COMPREHENSIVE SUITE"
         title="Unified Creative, Digital &"
@@ -25,8 +25,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         breadcrumb="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
-        imageSrc="/assets/banner-services.jpg"
-        imageAlt="DE.RISEN Services & Technology Ecosystem"
+        backgroundImage="/assets/banner-services-ecosystem.jpg"
+        fullBackground={true}
+        hudInfo={{
+          tag: 'Digital Ecosystem',
+          title: 'Full-Stack IT • Marketing • Design Stack',
+          status: 'High-Performance Architecture',
+        }}
         floatingBadge={{
           text: 'Ecosystem Suite',
           subtext: '4 Integrated Verticals',
