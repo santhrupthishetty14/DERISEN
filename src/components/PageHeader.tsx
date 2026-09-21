@@ -202,22 +202,22 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="absolute inset-0 w-full h-full bg-cover transition-transform duration-700 ease-out will-change-transform"
             style={{
               backgroundImage: `url(${backgroundImage})`,
-              backgroundPosition: isFullBg ? 'right 42% center' : 'center 35%',
+              backgroundPosition: isFullBg ? 'right 25% center' : 'center 35%',
               backgroundSize: isFullBg ? 'cover' : 'cover',
-              opacity: isFullBg ? 0.72 : 0.42,
+              opacity: isFullBg ? 0.86 : 0.45,
               transform: `scale(${isFullBg ? 1.05 : 1.06}) translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.45}px)`,
               filter: isFullBg
-                ? 'saturate(1.35) contrast(1.18) brightness(1.02)'
+                ? 'saturate(1.38) contrast(1.2) brightness(1.06)'
                 : 'saturate(1.25) contrast(1.15)',
               animation: 'bannerBgPulse 18s ease-in-out infinite alternate',
             }}
           />
 
-          {/* Glowing Fingertip Touchpoint Nexus - Coordinates aligned with touch intersection */}
+          {/* Glowing Fingertip / Ecosystem Nexus - Coordinates aligned with focal visual point */}
           <div
             className={`absolute pointer-events-none transition-transform duration-700 ease-out ${
               isFullBg
-                ? 'top-[42%] right-[22%] sm:right-[28%] md:right-[32%] lg:right-[26%] xl:right-[24%]'
+                ? 'top-[44%] right-[20%] sm:right-[24%] md:right-[26%] lg:right-[24%] xl:right-[23%]'
                 : 'top-[48%] right-[26%] sm:right-[32%]'
             }`}
             style={{
@@ -267,19 +267,19 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           {/* Luminous Synaptic Grid Intersection Blinks */}
           <div
-            className="absolute top-[32%] right-[38%] w-2 h-2 rounded-full bg-brand-cyan"
+            className="absolute top-[30%] right-[32%] w-2 h-2 rounded-full bg-brand-cyan"
             style={{ animation: 'bannerNodeBlink 3s ease-in-out infinite', animationDelay: '0.4s' }}
           />
           <div
-            className="absolute top-[48%] right-[35%] w-2.5 h-2.5 rounded-full bg-brand-violetLight"
+            className="absolute top-[48%] right-[30%] w-2.5 h-2.5 rounded-full bg-brand-violetLight"
             style={{ animation: 'bannerNodeBlink 3.5s ease-in-out infinite', animationDelay: '1.1s' }}
           />
           <div
-            className="absolute top-[58%] right-[29%] w-2 h-2 rounded-full bg-cyan-300"
+            className="absolute top-[62%] right-[25%] w-2 h-2 rounded-full bg-cyan-300"
             style={{ animation: 'bannerNodeBlink 2.8s ease-in-out infinite', animationDelay: '1.8s' }}
           />
           <div
-            className="absolute top-[28%] right-[25%] w-2 h-2 rounded-full bg-purple-300"
+            className="absolute top-[26%] right-[22%] w-2 h-2 rounded-full bg-purple-300"
             style={{ animation: 'bannerNodeBlink 4s ease-in-out infinite', animationDelay: '2.5s' }}
           />
 
@@ -288,7 +288,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="absolute inset-0"
             style={{
               background: isFullBg
-                ? 'linear-gradient(90deg, rgba(9, 4, 23, 0.97) 0%, rgba(12, 6, 30, 0.92) 36%, rgba(15, 7, 38, 0.68) 58%, rgba(15, 7, 38, 0.25) 78%, rgba(9, 4, 23, 0.7) 100%)'
+                ? 'linear-gradient(90deg, rgba(9, 4, 23, 0.98) 0%, rgba(10, 5, 26, 0.94) 34%, rgba(12, 6, 32, 0.52) 54%, rgba(12, 6, 32, 0.08) 72%, rgba(9, 4, 23, 0.35) 100%)'
                 : 'linear-gradient(90deg, rgba(13, 7, 34, 0.96) 0%, rgba(18, 9, 44, 0.88) 45%, rgba(26, 13, 61, 0.65) 80%, rgba(13, 7, 34, 0.92) 100%)',
             }}
           />
@@ -296,7 +296,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="absolute inset-0"
             style={{
               background: isFullBg
-                ? 'radial-gradient(circle at 74% 42%, transparent 22%, rgba(9, 4, 23, 0.6) 80%)'
+                ? 'radial-gradient(circle at 75% 44%, transparent 30%, rgba(9, 4, 23, 0.45) 85%)'
                 : 'radial-gradient(circle at 75% 45%, transparent 20%, rgba(13, 7, 34, 0.75) 85%)',
             }}
           />
