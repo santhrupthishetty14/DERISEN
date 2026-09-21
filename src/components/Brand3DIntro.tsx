@@ -85,23 +85,9 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play ONLY the sparkling logo video portion (starting assembly sequence removed)
+    // Play the clean 2s sparkling logo video clip
     const video = videoRef.current;
     if (video) {
-      const applySparkleStart = () => {
-        try {
-          video.currentTime = 7.8;
-        } catch {
-          // ignore
-        }
-      };
-
-      if (video.readyState >= 1) {
-        applySparkleStart();
-      } else {
-        video.addEventListener("loadedmetadata", applySparkleStart, { once: true });
-      }
-
       video.playbackRate = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -113,16 +99,25 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     }
 
     const handleVideoEnded = () => {
-      finishIntro();
+      if (containerRef.current) {
+        gsap.to(containerRef.current, {
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.out",
+          onComplete: finishIntro,
+        });
+      } else {
+        finishIntro();
+      }
     };
 
     if (video) {
       video.addEventListener("ended", handleVideoEnded);
     }
 
-    // Only sparkling logo plays cleanly (~2.2s from 7.8s to 10.0s), then smoothly dissolves
+    // Fallback: 2s video ends at ~2000ms; dissolve smoothly after 2400ms max if ended event is delayed
     const fallbackTimer = setTimeout(() => {
-      finishIntro();
+      handleVideoEnded();
     }, 2400);
 
     return () => {
@@ -171,7 +166,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       <div className="w-full h-full flex items-center justify-center overflow-hidden bg-white p-6">
         <video
           ref={videoRef}
-          src="/assets/purple_logo_glowing_animation.mp4"
+          src="/assets/purple_logo_sparkle_2s.mp4"
           autoPlay
           muted
           playsInline

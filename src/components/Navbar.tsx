@@ -76,8 +76,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
         <div className="max-w-[1320px] mx-auto px-6 h-full flex items-center justify-between">
           {/* 1. DE.RISEN Animated Logo */}
           <div
-            onClick={(e) => handleItemClick(e, 'home')}
-            className="cursor-pointer"
+            onClick={(e) => {
+              handleItemClick(e, 'home');
+              if (currentPage === 'home') {
+                window.dispatchEvent(new CustomEvent('play-logo-intro'));
+              }
+            }}
+            title="DE.RISEN - Click to view logo intro"
+            className="cursor-pointer group"
           >
             <Logo isAnimated={true} />
           </div>
