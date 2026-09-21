@@ -266,7 +266,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[95px] sm:pt-[105px] md:pt-[110px] pb-10 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full border-b border-gray-200/90 shadow-[0_12px_24px_rgba(24,13,56,0.03)]"
+      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[78px] sm:pt-[84px] md:pt-[88px] pb-5 sm:pb-7 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-lilacSoft/70 via-white to-white w-full max-w-full border-b border-gray-200/90 shadow-[0_12px_24px_rgba(24,13,56,0.03)]"
     >
       {/* Background Soft Purple Aura & Ambient Radiance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -276,15 +276,15 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         />
       </div>
 
-      {/* Hero Core Content Stage (Directly below navbar with optimal spacing) */}
-      <div className="w-full max-w-[1360px] mx-auto flex flex-col justify-start pt-2 sm:pt-4 pb-6 sm:pb-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+      {/* Hero Core Content Stage (Directly below navbar with optimal compact spacing) */}
+      <div className="w-full max-w-[1360px] mx-auto flex flex-col justify-start pt-1 sm:pt-2 pb-2 sm:pb-3 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-6 items-center">
           {/* =================================================================
               Left Column: Headline, Subtitle, CTA Button & Floating Sphere
               ================================================================= */}
-          <div ref={leftColRef} className="lg:col-span-5 flex flex-col items-start text-left relative w-full max-w-full">
+          <div ref={leftColRef} className="lg:col-span-6 flex flex-col items-start text-left relative w-full max-w-full">
             {/* Display Headline */}
-            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[48px] xl:text-[56px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-4 sm:mb-5 max-w-full break-words">
+            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[54px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
               <div className="relative inline-block text-brand-purple mt-1 max-w-full">
@@ -307,7 +307,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </h1>
 
             {/* Supporting Text matching reference exactly */}
-            <p className="reveal-item text-sm sm:text-lg text-gray-600 font-medium max-w-[460px] leading-relaxed mb-6 sm:mb-8">
+            <p className="reveal-item text-sm sm:text-base lg:text-lg text-gray-600 font-medium max-w-[460px] leading-relaxed mb-5 sm:mb-6">
               Creative Design, Branding, Digital Marketing &amp;<br className="hidden sm:inline" />
               IT Solutions under one roof.
             </p>
@@ -343,21 +343,21 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* =================================================================
-              Right Column: Premium 3D Motion Graphics Logo Showcase
+              Right Column: Premium Marketing Service Cards Motion Showcase
               ================================================================= */}
-          <div ref={rightVisualRef} className="lg:col-span-7 flex justify-center items-center relative w-full">
-            <div className="relative w-full max-w-[680px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(99,32,238,0.16)] border border-purple-200/60 bg-white/80 p-2 sm:p-3 backdrop-blur-md group transition-all duration-500 hover:shadow-[0_30px_70px_rgba(99,32,238,0.22)]">
+          <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-1">
+            <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px] rounded-[30px] overflow-hidden shadow-[0_22px_55px_rgba(99,32,238,0.18),0_4px_16px_rgba(0,0,0,0.06)] border border-purple-200/70 bg-gradient-to-br from-white/95 via-purple-50/60 to-white/90 p-2 sm:p-2.5 backdrop-blur-md group transition-all duration-500 hover:shadow-[0_28px_65px_rgba(99,32,238,0.26)]">
               {/* Outer Ambient Glow Halo */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/25 via-brand-cyan/15 to-brand-violet/25 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple/25 via-brand-cyan/15 to-brand-violet/25 rounded-[30px] blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
               
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#ebe6f4] via-[#f5f2fa] to-[#e4def0] aspect-video flex items-center justify-center shadow-inner">
+              <div className="relative rounded-[22px] overflow-hidden bg-black aspect-[9/16] max-h-[440px] sm:max-h-[475px] flex items-center justify-center shadow-inner">
                 <video
-                  src="/assets/3D_motion_graphics_logo_animation.mp4"
+                  src="/assets/Marketing_service_cards_emerge.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover rounded-2xl transform transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover rounded-[22px] transform transition-transform duration-700 group-hover:scale-[1.02]"
                 />
               </div>
             </div>
@@ -370,7 +370,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================================== */}
       <div
         ref={pillarsRef}
-        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[28px] shadow-[0_15px_40px_rgba(24,13,56,0.06)] border border-gray-100/90 p-3.5 sm:p-6 lg:p-7 relative z-20 transition-shadow duration-300 hover:shadow-[0_20px_50px_rgba(24,13,56,0.1)] mt-6 sm:mt-8"
+        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(24,13,56,0.05)] border border-gray-100/90 p-3 sm:p-4 lg:p-5 relative z-20 transition-shadow duration-300 hover:shadow-[0_18px_45px_rgba(24,13,56,0.08)] mt-3 sm:mt-4"
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
