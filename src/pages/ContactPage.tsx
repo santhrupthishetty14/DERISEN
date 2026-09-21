@@ -89,7 +89,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
   return (
     <div className="w-full max-w-full overflow-x-clip bg-white">
-      {/* 1. Page Header */}
+      {/* 1. Page Header with Complete Edge-to-Edge Animated Technology Background */}
       <PageHeader
         badge="CONTACT US / LET'S CONNECT"
         title="Let's Build Something"
@@ -98,8 +98,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         breadcrumb="Contact Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
-        imageSrc="/assets/banner-contact.jpg"
-        imageAlt="Contact DE.RISEN Communication Hub"
+        backgroundImage="/assets/banner-contact.jpg"
+        fullBackground={true}
+        hudInfo={{
+          tag: 'Executive Strategic Nexus',
+          title: 'Direct Strategic Delivery & AI Tech Stack',
+          status: 'Online • WhatsApp Available',
+        }}
         floatingBadge={{
           text: 'Direct Executive Line',
           subtext: '+91 78999 10917',
