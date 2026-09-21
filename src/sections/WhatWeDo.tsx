@@ -1,14 +1,72 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PenTool, Tag, Megaphone, Code, CheckCircle, Lightbulb, Target, Users, Rocket } from 'lucide-react';
+import { PenTool, Tag, Megaphone, Code, CheckCircle, Sparkles, Layers } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface CorePillar {
+  id: string;
+  num: string;
+  title: string;
+  tagline: string;
+  description: string;
+  image: string;
+  icon: typeof PenTool;
+  tags: string[];
+}
+
+const PILLARS: CorePillar[] = [
+  {
+    id: 'creative-design',
+    num: '01',
+    title: 'Creative Design',
+    tagline: 'Visuals That Command Attention',
+    description:
+      'High-impact brand assets, visual identities, packaging, and digital interfaces that articulate your story with elegance, precision, and clarity.',
+    image: '/assets/service-creative-design.jpg',
+    icon: PenTool,
+    tags: ['Brand Identity', 'Print & Packaging', 'UI/UX Layouts'],
+  },
+  {
+    id: 'branding',
+    num: '02',
+    title: 'Branding',
+    tagline: 'Identities Built to Endure',
+    description:
+      'Distinctive market positioning, comprehensive brand guidelines, and evocative narrative systems that earn customer trust and brand loyalty.',
+    image: '/assets/service-branding.jpg',
+    icon: Tag,
+    tags: ['Brand Strategy', 'Visual Positioning', 'Brand Bible'],
+  },
+  {
+    id: 'digital-marketing',
+    num: '03',
+    title: 'Digital Marketing',
+    tagline: 'Performance That Drives Growth',
+    description:
+      'Data-informed performance ads, organic search elevation, and high-conversion funnels engineered to capture intent and compound business ROI.',
+    image: '/assets/service-marketing.jpg',
+    icon: Megaphone,
+    tags: ['Performance Ads', 'Advanced SEO', 'Lead Funnels'],
+  },
+  {
+    id: 'it-solutions',
+    num: '04',
+    title: 'IT Solutions',
+    tagline: 'Engineering That Scales Seamlessly',
+    description:
+      'High-velocity modern web platforms, bespoke web applications, and resilient cloud architectures built for enterprise security and rapid scale.',
+    image: '/assets/service-it-solutions.jpg',
+    icon: Code,
+    tags: ['Custom Web Apps', 'Cloud Solutions', 'API Systems'],
+  },
+];
+
 export const WhatWeDo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const centerFrameRef = useRef<HTMLDivElement>(null);
-  const centerImgRef = useRef<HTMLImageElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [isRevealed, setIsRevealed] = useState(false);
 
   useEffect(() => {
@@ -19,7 +77,7 @@ export const WhatWeDo: React.FC = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -27,33 +85,23 @@ export const WhatWeDo: React.FC = () => {
     }
 
     const ctx = gsap.context(() => {
-      if (sectionRef.current) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            scrub: 1.2,
-          },
-        });
-
-        if (centerFrameRef.current) {
-          tl.fromTo(
-            centerFrameRef.current,
-            { y: 40 },
-            { y: -50, ease: 'none' },
-            0
-          );
-        }
-
-        if (centerImgRef.current) {
-          tl.fromTo(
-            centerImgRef.current,
-            { scale: 1.0 },
-            { scale: 1.18, ease: 'none' },
-            0
-          );
-        }
+      if (cardsRef.current.length > 0) {
+        gsap.fromTo(
+          cardsRef.current.filter(Boolean),
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 78%',
+              once: true,
+            },
+          }
+        );
       }
     }, sectionRef);
 
@@ -67,321 +115,143 @@ export const WhatWeDo: React.FC = () => {
     <section
       ref={sectionRef}
       id="what-we-do"
-      className="py-24 sm:py-32 bg-white relative overflow-hidden"
+      className="py-24 sm:py-32 bg-white relative overflow-hidden w-full max-w-full"
     >
-      {/* Background Dots */}
+      {/* Ambient background dots & soft gradient */}
       <div className="dot-pattern top-10 left-10 opacity-10" />
       <div className="dot-pattern bottom-10 right-10 opacity-10" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-brand-purple/3 rounded-full blur-3xl" />
+      </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* =================================================================
-              Left Column: WHAT WE DO (Line-by-Line Heading & 4 Mini Badges)
-              ================================================================= */}
-          <div className="lg:col-span-5 flex flex-col items-start">
-            <span
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1 bg-brand-card text-white text-[11px] font-extrabold uppercase tracking-wider rounded-full mb-5 shadow-sm transition-all duration-700 ${
-                isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
-              <CheckCircle className="w-3.5 h-3.5 text-brand-purple" />
-              <span>WHAT WE DO</span>
-            </span>
+        {/* ===================================================================
+            Symmetrical Centered Section Header
+            =================================================================== */}
+        <div
+          ref={headingRef}
+          className={`text-center max-w-3xl mx-auto mb-16 sm:mb-20 transition-all duration-700 ease-out ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <span className="eyebrow inline-flex items-center gap-1.5 px-4 py-1.5 bg-brand-card text-white text-xs font-extrabold uppercase tracking-wider rounded-full mb-5 shadow-sm">
+            <CheckCircle className="w-3.5 h-3.5 text-brand-purple" />
+            <span>WHAT WE DO / CORE CAPABILITIES</span>
+          </span>
 
-            {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 flex flex-col gap-1 leading-[1.22]">
-              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
-                <div
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  We Create Brands
-                </div>
-              </div>
-              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
-                <div
-                  style={{ transitionDelay: '120ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  That Inspire,
-                </div>
-              </div>
-              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
-                <div
-                  style={{ transitionDelay: '240ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  <span className="gradient-text">Connect &amp; Grow</span>
-                </div>
-              </div>
-            </h3>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-5 leading-[1.18]">
+            We Create Brands That{' '}
+            <span className="gradient-text">Inspire, Connect &amp; Grow</span>
+          </h2>
 
-            {/* Body Text */}
-            <div className="space-y-3.5 text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">
-              <p
-                style={{ transitionDelay: '350ms' }}
-                className={`transition-all duration-700 ease-out ${
-                  isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
-              >
-                At DE.RISEN, we believe every brand has a story worth telling. We combine creativity, strategy, and technology to transform ideas into impactful brand experiences that capture attention and drive business growth.
-              </p>
-              <p
-                style={{ transitionDelay: '450ms' }}
-                className={`transition-all duration-700 ease-out ${
-                  isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
-              >
-                Whether you're launching a startup, rebranding an established business, or expanding your digital presence, we deliver solutions that create lasting value.
-              </p>
-            </div>
+          <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            At DE.RISEN, we combine creativity, strategy, and technology to transform ideas into impactful brand experiences that capture attention, build trust, and fuel sustainable growth.
+          </p>
 
-            {/* 4 Rich Visual Service Badges */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
+          <div className="w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto mt-6" />
+        </div>
+
+        {/* ===================================================================
+            Symmetrical 4-Card Pillar Grid (Equal heights & balanced columns)
+            =================================================================== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-stretch">
+          {PILLARS.map((pillar, index) => {
+            const IconComponent = pillar.icon;
+            return (
               <div
-                style={{ transitionDelay: '550ms' }}
-                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
+                key={pillar.id}
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                className="group relative bg-white rounded-3xl border border-gray-200/90 hover:border-brand-purple/50 p-5 sm:p-6 shadow-sm hover:shadow-[0_20px_45px_rgba(99,32,238,0.16)] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 flex flex-col justify-between overflow-hidden"
               >
-                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
-                  <img
-                    src="/assets/service-creative-design.jpg"
-                    alt="Creative Design"
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
-                    <PenTool className="w-3.5 h-3.5" />
+                {/* Cyber Accent Line on Hover */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div>
+                  {/* Aspect-Ratio Visual Frame */}
+                  <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-5 bg-gray-100 shadow-inner">
+                    <img
+                      src={pillar.image}
+                      alt={pillar.title}
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-108"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+
+                    {/* Floating Corner Icon Badge */}
+                    <div className="absolute top-3 left-3 w-9 h-9 rounded-xl bg-[#180D38]/90 text-white flex items-center justify-center backdrop-blur-md shadow-md border border-white/20 group-hover:bg-brand-purple transition-colors duration-300">
+                      <IconComponent className="w-4 h-4 text-brand-cyan" />
+                    </div>
+
+                    {/* Index Number Chip */}
+                    <div className="absolute bottom-3 right-3 px-2.5 py-0.5 rounded-lg bg-black/60 backdrop-blur-md text-white/90 text-[11px] font-mono font-black border border-white/10">
+                      {pillar.num}
+                    </div>
+                  </div>
+
+                  {/* Title & Tagline */}
+                  <div className="mb-2.5">
+                    <h3 className="text-xl font-black text-brand-dark tracking-tight group-hover:text-brand-purple transition-colors">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs font-bold text-brand-purple mt-0.5">
+                      {pillar.tagline}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-5">
+                    {pillar.description}
+                  </p>
+                </div>
+
+                {/* Capability Tags Footer */}
+                <div className="pt-4 border-t border-gray-100 mt-auto">
+                  <div className="flex flex-wrap gap-1.5">
+                    {pillar.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-lg bg-[#F8F9FD] group-hover:bg-brand-lilacSoft/50 text-gray-600 group-hover:text-brand-purple text-[11px] font-semibold transition-colors duration-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Creative Design</h5>
-                <p className="text-[11px] text-gray-500 leading-normal">
-                  Eye-catching visuals that communicate your brand story with clarity.
-                </p>
               </div>
+            );
+          })}
+        </div>
 
-              <div
-                style={{ transitionDelay: '630ms' }}
-                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
-                  <img
-                    src="/assets/service-branding.jpg"
-                    alt="Branding"
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
-                    <Tag className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Branding</h5>
-                <p className="text-[11px] text-gray-500 leading-normal">
-                  Strong identities that build trust, recognition &amp; lasting impressions.
-                </p>
+        {/* ===================================================================
+            Symmetrical Bottom Highlight Banner: Creative Production Studio
+            =================================================================== */}
+        <div
+          className={`mt-14 max-w-4xl mx-auto rounded-2xl bg-gradient-to-r from-[#F8F9FD] via-white to-[#F8F9FD] border border-gray-200/80 p-6 sm:p-7 shadow-sm transition-all duration-700 ease-out ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center shadow-lg shadow-brand-purple/25 flex-shrink-0">
+                <Layers className="w-6 h-6 text-brand-cyan" />
               </div>
-
-              <div
-                style={{ transitionDelay: '710ms' }}
-                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
-                  <img
-                    src="/assets/service-marketing.jpg"
-                    alt="Digital Marketing"
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
-                    <Megaphone className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">Digital Marketing</h5>
-                <p className="text-[11px] text-gray-500 leading-normal">
-                  Smart strategies that engage your audience &amp; drive measurable growth.
-                </p>
-              </div>
-
-              <div
-                style={{ transitionDelay: '790ms' }}
-                className={`group bg-white border border-gray-200/90 rounded-2xl p-3 hover:border-brand-purple hover:shadow-[0_12px_28px_rgba(99,32,238,0.12)] transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-              >
-                <div className="w-full h-24 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
-                  <img
-                    src="/assets/service-it-solutions.jpg"
-                    alt="IT Solutions"
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md">
-                    <Code className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-                <h5 className="text-xs font-bold text-brand-dark mb-1 group-hover:text-brand-purple transition-colors">IT Solutions</h5>
-                <p className="text-[11px] text-gray-500 leading-normal">
-                  Innovative digital solutions that empower your business to scale.
+              <div>
+                <h4 className="text-base font-black text-brand-dark">
+                  One Unified Team. Zero Fragmented Handoffs.
+                </h4>
+                <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
+                  Design, branding, performance marketing, and engineering coordinated under one roof.
                 </p>
               </div>
             </div>
-          </div>
 
-          {/* =================================================================
-              Center Column: Real Extracted Visual Frame with Parallax & Glow
-              ================================================================= */}
-          <div
-            ref={centerFrameRef}
-            className={`lg:col-span-2 flex justify-center py-4 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
-              isRevealed
-                ? 'clip-path-reveal-full scale-100 opacity-100'
-                : 'clip-path-reveal-left scale-[1.06] opacity-0'
-            }`}
-          >
-            <div className="relative w-48 sm:w-56 h-80 sm:h-96 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(99,32,238,0.35)] border-2 border-brand-purple/50 group/center">
-              <img
-                ref={centerImgRef}
-                src="/assets/what-we-do-center.jpg"
-                alt="DE.RISEN Creative Workshop"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover/center:scale-105 will-change-transform"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-black/20 flex flex-col justify-end p-4 text-white text-center">
-                <span className="font-black text-xs tracking-widest text-brand-lilac">
-                  DE.RISEN
-                </span>
-                <span className="text-[10px] text-white/70 font-mono mt-0.5">
-                  IDEAS • STRATEGY • IMPACT
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* =================================================================
-              Right Column: WHY CHOOSE DE.RISEN? (Line-by-Line & 4 Features)
-              ================================================================= */}
-          <div className="lg:col-span-5 flex flex-col items-start">
-            <span
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1 bg-brand-card text-white text-[11px] font-extrabold uppercase tracking-wider rounded-full mb-5 shadow-sm transition-all duration-700 ${
-                isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
-              <Rocket className="w-3.5 h-3.5 text-brand-purple" />
-              <span>WHY CHOOSE DE.RISEN?</span>
-            </span>
-
-            {/* Line-by-Line Masked Heading */}
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-5 flex flex-col gap-1 leading-[1.22]">
-              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
-                <div
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  Creating Brands That
-                </div>
-              </div>
-              <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
-                <div
-                  style={{ transitionDelay: '120ms' }}
-                  className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  <span className="gradient-text">Leave a Lasting Impression</span>
-                </div>
-              </div>
-            </h3>
-
-            {/* Body Text */}
-            <p
-              style={{ transitionDelay: '350ms' }}
-              className={`text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed transition-all duration-700 ease-out ${
-                isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-              }`}
-            >
-              Your brand deserves more than ordinary solutions. At DE.RISEN, we combine creativity, strategy, and innovation to craft powerful brand experiences that capture attention, build trust, and fuel business growth.
-            </p>
-
-            {/* 4 Feature Items with Icons */}
-            <div className="space-y-4 w-full">
-              <div
-                style={{ transitionDelay: '480ms' }}
-                className={`flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-surface-subtle transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-                }`}
-              >
-                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
-                  <Lightbulb className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xs font-extrabold text-brand-dark mb-0.5">Creative &amp; Strategic Approach</h5>
-                  <p className="text-[11px] text-gray-500 leading-normal">
-                    We blend creativity with strategy to design solutions that are innovative, effective, and results-driven.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                style={{ transitionDelay: '580ms' }}
-                className={`flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-surface-subtle transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-                }`}
-              >
-                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
-                  <Target className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xs font-extrabold text-brand-dark mb-0.5">Results That Matter</h5>
-                  <p className="text-[11px] text-gray-500 leading-normal">
-                    Our solutions are crafted to deliver measurable results that contribute to your business growth.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                style={{ transitionDelay: '680ms' }}
-                className={`flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-surface-subtle transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-                }`}
-              >
-                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
-                  <Users className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xs font-extrabold text-brand-dark mb-0.5">Client-Centric Mindset</h5>
-                  <p className="text-[11px] text-gray-500 leading-normal">
-                    We listen, understand, and collaborate closely to deliver solutions tailored to your unique goals.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                style={{ transitionDelay: '780ms' }}
-                className={`flex items-start gap-3.5 p-2.5 rounded-xl hover:bg-surface-subtle transition-all duration-300 ${
-                  isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-                }`}
-              >
-                <div className="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-brand-purple/30">
-                  <Rocket className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xs font-extrabold text-brand-dark mb-0.5">Innovation at Every Step</h5>
-                  <p className="text-[11px] text-gray-500 leading-normal">
-                    We embrace the latest technologies and trends to keep your brand ahead of the competition.
-                  </p>
-                </div>
-              </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                <span>100% In-House Delivery</span>
+              </span>
             </div>
           </div>
         </div>
