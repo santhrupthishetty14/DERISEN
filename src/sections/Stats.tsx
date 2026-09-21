@@ -140,7 +140,7 @@ export const Stats: React.FC = () => {
     <section
       ref={sectionRef}
       id="stats-section"
-      className="py-16 sm:py-24 bg-surface-subtle border-b border-gray-200/80 relative overflow-hidden"
+      className="py-16 sm:py-24 bg-[#F4F3F9] border-t border-b border-gray-200/90 relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
