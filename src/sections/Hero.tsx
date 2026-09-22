@@ -350,7 +350,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               {/* Clean Portrait Frame with Bottom Excess Cropped */}
               <div className="relative w-full aspect-[1/1.36] overflow-hidden bg-black flex items-center justify-center">
                 <video
-                  src="/assets/Marketing_service_cards_emerge.mp4"
+                  src="/assets/erasio_Digital_marketing_cards_popping_20260922230116.mp4"
                   autoPlay
                   loop
                   muted
