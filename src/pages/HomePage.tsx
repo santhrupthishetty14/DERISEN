@@ -1,7 +1,6 @@
 import React from 'react';
 import { Hero } from '../sections/Hero';
 import { Stats } from '../sections/Stats';
-import { WhatWeDo } from '../sections/WhatWeDo';
 import { WhyChooseUs } from '../sections/WhyChooseUs';
 import { WorkGallery } from '../sections/WorkGallery';
 import { FinalCTA } from '../sections/FinalCTA';
@@ -21,9 +20,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
       {/* 2. Key Performance Metrics & Statistics */}
       <Stats />
-
-      {/* 3. Core Verticals Overview (Creative Design, Branding, Marketing, IT) */}
-      <WhatWeDo />
 
       {/* Bridge Card to Explore Comprehensive Services */}
       <div className="max-w-[1320px] mx-auto px-6 -mt-8 mb-16 relative z-20">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageHeader } from '../components/PageHeader';
+import { WhatWeDo } from '../sections/WhatWeDo';
 import { About } from '../sections/About';
 import { Leadership } from '../sections/Leadership';
 import { OperatingModel } from '../sections/OperatingModel';
@@ -30,7 +31,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         }}
       />
 
-      {/* 2. Company Background, Vision, Mission & Goals */}
+      {/* 2. Slide 7: What We Do & Why Choose DE.RISEN */}
+      <WhatWeDo />
+
+      {/* 3. Company Background, Vision, Mission & Goals */}
       <About />
 
       {/* 3. The Visionaries Behind DE.RISEN */}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { PageHeader } from '../components/PageHeader';
-import { WhatWeDo } from '../sections/WhatWeDo';
 import { ServicesPackages } from '../sections/ServicesPackages';
 import { ServiceCatalog } from '../sections/ServiceCatalog';
 import { DigitalProduction } from '../sections/DigitalProduction';
@@ -38,10 +37,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         }}
       />
 
-      {/* 2. Slide 3: What We Do (Creative Design, Branding, Marketing, IT) */}
-      <WhatWeDo />
-
-      {/* 3. Slide 10: Integrated Ecosystem Services & Packages */}
+      {/* 2. Slide 10: Integrated Ecosystem Services & Packages */}
       <ServicesPackages onOpenModal={onOpenModal} />
 
       {/* 4. Slide 11: Comprehensive Service Catalog (Filterable Categories) */}
