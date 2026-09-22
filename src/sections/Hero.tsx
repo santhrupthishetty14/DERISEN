@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { PenTool, Tag, Megaphone, Code } from 'lucide-react';
 import { SlideArrowButton } from '../components/SlideArrowButton';
+import { TransparentVideo } from '../components/TransparentVideo';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -346,16 +347,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               Right Column: Premium Marketing Service Cards Motion Showcase
               ================================================================= */}
           <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-1">
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[480px] rounded-[32px] sm:rounded-[36px] overflow-hidden shadow-[0_24px_55px_rgba(24,13,56,0.12),0_4px_16px_rgba(0,0,0,0.04)] border border-gray-200/80 bg-black group transition-all duration-500 hover:shadow-[0_30px_65px_rgba(24,13,56,0.18)]">
-              {/* Clean Portrait Frame with Bottom Excess Cropped */}
-              <div className="relative w-full aspect-[1/1.36] overflow-hidden bg-black flex items-center justify-center">
-                <video
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[480px] flex items-center justify-center group transition-all duration-500">
+              {/* Clean Transparent Stage with black background keyed out */}
+              <div className="relative w-full aspect-[1/1.45] flex items-center justify-center filter drop-shadow-[0_20px_35px_rgba(75,0,110,0.15)]">
+                <TransparentVideo
                   src="/assets/erasio_Digital_marketing_cards_popping_20260922230116.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-[1.02]"
+                  threshold={0.06}
+                  softness={0.10}
+                  className="w-full h-full object-contain transform transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
             </div>
