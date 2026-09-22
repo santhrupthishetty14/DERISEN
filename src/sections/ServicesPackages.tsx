@@ -296,13 +296,13 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                     }}
                     className={`w-full rounded-2xl p-7 sm:p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
                       isDark
-                        ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white shadow-2xl shadow-brand-dark/40 border-2 border-[#51069E]/90 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
+                        ? 'bg-gradient-to-br from-[#51069E] via-[#5F0DAF] to-[#6320EE] text-white shadow-2xl shadow-brand-purple/40 border-2 border-white/40 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
                         : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:border-[#51069E]/60 hover:shadow-xl hover:-translate-y-1.5 hover:translate-x-0.5 hover:-rotate-[0.3deg]'
                     }`}
                   >
-                    {/* Ambient background glow when dark */}
+                    {/* Ambient background glow when active */}
                     {isDark && (
-                      <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#51069E]/30 rounded-full blur-3xl pointer-events-none transition-opacity duration-700" />
+                      <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/15 rounded-full blur-2xl pointer-events-none transition-opacity duration-700" />
                     )}
 
                     {/* Skidding Gloss / Light sheen sweep on hover & touch */}
@@ -310,8 +310,8 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
 
                     {/* Top Active Indicator Badge */}
                     {isDark && (
-                      <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#51069E]/40 border border-brand-cyan/50 text-brand-cyan text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.25)] animate-in fade-in duration-300">
-                        <Check className="w-3.5 h-3.5" />
+                      <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-white text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-sm animate-in fade-in duration-300">
+                        <Check className="w-3.5 h-3.5 text-brand-cyan" />
                         <span>Active</span>
                       </div>
                     )}
@@ -322,7 +322,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                         <div
                           className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
                             isDark
-                              ? 'bg-brand-cyan text-brand-dark shadow-[0_0_20px_rgba(0,240,255,0.35)] scale-105'
+                              ? 'bg-white text-[#51069E] shadow-[0_4px_16px_rgba(0,0,0,0.2)] scale-105'
                               : 'bg-[#51069E] text-white shadow-[#51069E]/25 group-hover:scale-110'
                           }`}
                         >
@@ -330,7 +330,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                         </div>
                         <span
                           className={`text-3xl font-black font-mono transition-colors ${
-                            isDark ? 'text-brand-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]' : 'text-gray-200 group-hover:text-[#51069E]/30'
+                            isDark ? 'text-white/40' : 'text-gray-200 group-hover:text-[#51069E]/30'
                           }`}
                         >
                           {pkg.num}
@@ -347,7 +347,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                       </h4>
                       <p
                         className={`text-xs sm:text-[13px] font-bold mb-4 transition-colors ${
-                          isDark ? 'text-brand-cyan' : 'text-[#51069E]'
+                          isDark ? 'text-brand-cyan font-extrabold' : 'text-[#51069E]'
                         }`}
                       >
                         {pkg.desc}
@@ -355,7 +355,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
 
                       <p
                         className={`text-xs leading-relaxed mb-6 transition-colors ${
-                          isDark ? 'text-white/80' : 'text-gray-500'
+                          isDark ? 'text-white/90' : 'text-gray-500'
                         }`}
                       >
                         {pkg.detail}
@@ -364,12 +364,12 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                       {/* Deliverables Bullet List */}
                       <div
                         className={`space-y-2.5 mb-8 pt-4 border-t transition-colors ${
-                          isDark ? 'border-white/15' : 'border-gray-100'
+                          isDark ? 'border-white/20' : 'border-gray-100'
                         }`}
                       >
                         <span
                           className={`text-[11px] font-mono font-bold uppercase tracking-wider block mb-2 transition-colors ${
-                            isDark ? 'text-brand-cyan/80' : 'text-gray-400'
+                            isDark ? 'text-white/80' : 'text-gray-400'
                           }`}
                         >
                           Key Deliverables:
@@ -378,13 +378,13 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                           <div
                             key={i}
                             className={`flex items-center gap-2.5 text-xs font-medium transition-colors ${
-                              isDark ? 'text-white/90' : 'text-gray-700'
+                              isDark ? 'text-white' : 'text-gray-700'
                             }`}
                           >
                             <span
                               className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
                                 isDark
-                                  ? 'bg-[#51069E]/60 text-brand-cyan'
+                                  ? 'bg-white text-[#51069E]'
                                   : 'bg-brand-lilacSoft text-[#51069E]'
                               }`}
                             >
@@ -399,7 +399,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                     {/* Bottom Action */}
                     <div
                       className={`pt-4 border-t flex items-center justify-between gap-4 transition-colors ${
-                        isDark ? 'border-white/15' : 'border-gray-100'
+                        isDark ? 'border-white/20' : 'border-gray-100'
                       }`}
                     >
                       <div onClick={(e) => e.stopPropagation()}>
@@ -408,13 +408,13 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                           onClick={() => {
                             if (onOpenModal) onOpenModal();
                           }}
-                          variant="purple"
+                          variant={isDark ? 'navy' : 'purple'}
                           size="sm"
                         />
                       </div>
                       <span
                         className={`text-xs font-mono font-bold transition-colors ${
-                          isDark ? 'text-brand-cyan/70' : 'text-gray-400'
+                          isDark ? 'text-white/70' : 'text-gray-400'
                         }`}
                       >
                         {pkg.num}/04

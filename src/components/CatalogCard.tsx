@@ -31,13 +31,13 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
       }}
       className={`rounded-2xl p-7 sm:p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
         isDark
-          ? 'bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c] text-white shadow-2xl shadow-brand-dark/40 border-2 border-brand-purple/90 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
+          ? 'bg-gradient-to-br from-[#51069E] via-[#5F0DAF] to-[#6320EE] text-white shadow-2xl shadow-brand-purple/40 border-2 border-white/40 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
           : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:border-brand-purple/60 hover:shadow-xl hover:-translate-y-1.5 hover:translate-x-0.5 hover:-rotate-[0.3deg]'
       }`}
     >
-      {/* Ambient background glow when dark */}
+      {/* Ambient background glow when active */}
       {isDark && (
-        <div className="absolute -top-12 -right-12 w-44 h-44 bg-brand-purple/30 rounded-full blur-3xl pointer-events-none transition-opacity duration-700" />
+        <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/15 rounded-full blur-2xl pointer-events-none transition-opacity duration-700" />
       )}
 
       {/* Skidding Gloss / Light sheen sweep on hover & touch */}
@@ -45,8 +45,8 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
 
       {/* Top Active Indicator Badge */}
       {isDark && (
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-purple/40 border border-brand-cyan/50 text-brand-cyan text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.25)] animate-in fade-in duration-300">
-          <Check className="w-3.5 h-3.5" />
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-white text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-sm animate-in fade-in duration-300">
+          <Check className="w-3.5 h-3.5 text-brand-cyan" />
           <span>Active</span>
         </div>
       )}
@@ -55,7 +55,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
         {/* Number Badge */}
         <div
           className={`text-sm font-black mb-1.5 transition-colors duration-300 ${
-            isDark ? 'text-brand-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]' : 'text-brand-purple'
+            isDark ? 'text-white/40' : 'text-brand-purple'
           }`}
         >
           {category.number}
