@@ -141,10 +141,10 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
 
   const glowColorClass =
     accentGlow === 'cyan'
-      ? 'from-[#00E5FF]/20 via-[#6320EE]/15 to-transparent'
+      ? 'from-[#00E5FF]/20 via-[#620d9c]/15 to-transparent'
       : accentGlow === 'violet'
-      ? 'from-[#8B5CF6]/25 via-[#6320EE]/20 to-transparent'
-      : 'from-[#6320EE]/30 via-[#B388FF]/15 to-transparent';
+      ? 'from-[#8B5CF6]/25 via-[#620d9c]/20 to-transparent'
+      : 'from-[#620d9c]/30 via-[#B388FF]/15 to-transparent';
 
   return (
     <div

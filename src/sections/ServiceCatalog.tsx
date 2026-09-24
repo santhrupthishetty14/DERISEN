@@ -95,14 +95,14 @@ export const ServiceCatalog: React.FC = () => {
             <button
               onClick={handlePrev}
               aria-label="Previous category"
-              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#620d9c] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next category"
-              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#51069E] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#51069E] shadow-sm hover:shadow-[0_8px_20px_rgba(81,6,158,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#620d9c] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -119,8 +119,8 @@ export const ServiceCatalog: React.FC = () => {
                 onClick={() => handleTabClick(idx, cat.number)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
-                    : 'bg-surface-subtle text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
+                    ? 'bg-[#620d9c] text-white shadow-[0_4px_16px_rgba(98,13,156,0.3)] scale-105'
+                    : 'bg-surface-subtle text-gray-600 border border-gray-200 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
@@ -216,7 +216,7 @@ export const ServiceCatalog: React.FC = () => {
       
       <style dangerouslySetInnerHTML={{__html: `
         .swiper-pagination-bullet-active {
-          background-color: #51069E !important;
+          background-color: #620d9c !important;
         }
       `}} />
     </section>

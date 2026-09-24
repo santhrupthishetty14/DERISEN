@@ -87,7 +87,7 @@ export const Promise: React.FC = () => {
             {/* Connecting Background Line */}
             <div className="hidden md:block absolute top-7 left-12 right-12 h-1 bg-gray-200 rounded-full z-0 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_10px_#6320EE]"
+                className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_10px_#620d9c]"
                 style={{
                   width: `${((activeWorkflowIndex + 1) / WORKFLOW_PIPELINE.length) * 100}%`,
                 }}
@@ -110,7 +110,7 @@ export const Promise: React.FC = () => {
                     <div
                       className={`w-14 h-14 rounded-full font-black text-sm flex items-center justify-center mb-3 transition-all duration-500 border-2 ${
                         isActive
-                          ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white border-white scale-125 shadow-[0_0_25px_#6320EE]'
+                          ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white border-white scale-125 shadow-[0_0_25px_#620d9c]'
                           : isPassed
                           ? 'bg-brand-dark text-white border-brand-purple shadow-md'
                           : 'bg-white text-gray-400 border-gray-200 group-hover:border-brand-purple/50'
@@ -154,3 +154,4 @@ export const Promise: React.FC = () => {
     </section>
   );
 };
+

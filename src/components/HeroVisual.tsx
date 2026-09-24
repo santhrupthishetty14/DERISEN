@@ -109,7 +109,7 @@ export const HeroVisual: React.FC = () => {
         <div
           ref={auraRef}
           id="hero-ambient-aura"
-          className="w-[340px] sm:w-[560px] h-[340px] sm:h-[560px] rounded-full bg-gradient-to-tr from-[#6320EE]/25 via-[#8B5CF6]/18 to-[#00E5FF]/14 blur-3xl transition-transform duration-700 will-change-transform"
+          className="w-[340px] sm:w-[560px] h-[340px] sm:h-[560px] rounded-full bg-gradient-to-tr from-[#620d9c]/25 via-[#8B5CF6]/18 to-[#00E5FF]/14 blur-3xl transition-transform duration-700 will-change-transform"
           style={{
             transform: isDesktop && !prefersReducedMotion
               ? `translate3d(${mousePos.x * -14}px, ${mousePos.y * -12}px, -40px)`

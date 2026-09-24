@@ -41,7 +41,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
       <Leadership />
 
       {/* 4. Strategic Operating Model & Execution Architecture */}
-      <OperatingModel />
+      <OperatingModel onOpenModal={onOpenModal} onNavigate={onNavigate} />
 
       {/* 5. Direct Conversion CTA */}
       <FinalCTA onOpenModal={onOpenModal} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { DigitalProductionService } from '../utils/types';
-import { Check, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 interface DigitalProdCardProps {
   service: DigitalProductionService;
@@ -29,50 +29,48 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
           onClick?.();
         }
       }}
-      className={`rounded-2xl p-7 sm:p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
+      className={`rounded-2xl p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
         isDark
-          ? 'bg-gradient-to-br from-[#4B006E] via-[#640F8C] to-[#A855F7] text-white shadow-2xl shadow-[#4B006E]/40 border-2 border-white/40 -translate-y-2.5 translate-x-0.5 -rotate-[0.5deg] scale-[1.015]'
-          : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#A855F7]/60 hover:-translate-y-1.5 hover:translate-x-0.5 hover:-rotate-[0.3deg]'
+          ? 'bg-[#620d9c] text-white shadow-2xl shadow-[#620d9c]/40 border border-purple-300/20 -translate-y-1.5'
+          : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#620d9c]/40 hover:-translate-y-1'
       }`}
     >
       {/* Ambient background glow when active */}
       {isDark && (
-        <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/20 rounded-full blur-2xl pointer-events-none transition-opacity duration-700" />
+        <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/15 rounded-full blur-2xl pointer-events-none transition-opacity duration-700" />
       )}
 
       {/* Skidding Gloss / Light sheen sweep on hover & touch */}
       <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
-      {/* Top Active Indicator Badge */}
-      {isDark && (
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-white text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-sm animate-in fade-in duration-300">
-          <Check className="w-3.5 h-3.5 text-[#E0D4FC]" />
-          <span>Active</span>
-        </div>
-      )}
-
       <div>
-        {/* Header with Number and Title */}
-        <div
-          className={`flex items-center gap-3 mb-5 pb-3 border-b transition-colors duration-300 ${
-            isDark ? 'border-white/15' : 'border-gray-100'
-          }`}
-        >
+        {/* Top Header with Inverted Circle Icon and Number */}
+        <div className="flex items-center justify-between mb-4">
+          <div
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
+              isDark
+                ? 'bg-white/20 text-white backdrop-blur-sm group-hover:scale-110'
+                : 'bg-[#620d9c] text-white shadow-md shadow-[#620d9c]/25 group-hover:scale-110'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-white" />
+          </div>
           <span
-            className={`text-base sm:text-lg font-black transition-colors duration-300 ${
-              isDark ? 'text-white/40' : 'text-[#4B006E]'
+            className={`text-xs font-mono font-bold tracking-wider transition-colors duration-300 ${
+              isDark ? 'text-white/80' : 'text-gray-300'
             }`}
           >
             {service.number}
           </span>
-          <h4
-            className={`text-xl sm:text-[22px] font-black tracking-tight transition-colors duration-300 ${
-              isDark ? 'text-white' : 'text-brand-dark group-hover:text-brand-purple'
-            }`}
-          >
-            {service.title}
-          </h4>
         </div>
+
+        <h4
+          className={`text-xl sm:text-[22px] font-black tracking-tight mb-4 pb-3 border-b transition-colors duration-300 ${
+            isDark ? 'text-white border-white/15' : 'text-brand-dark border-gray-100 group-hover:text-[#620d9c]'
+          }`}
+        >
+          {service.title}
+        </h4>
 
         {/* Services List Grid */}
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-4">
@@ -85,7 +83,7 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
             >
               <span
                 className={`font-bold text-sm transition-colors duration-300 ${
-                  isDark ? 'text-brand-cyan' : 'text-brand-purple'
+                  isDark ? 'text-purple-200' : 'text-[#620d9c]'
                 }`}
               >
                 •
@@ -100,20 +98,19 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
       <div
         className={`pt-3 mt-4 border-t text-[11px] font-semibold flex items-center justify-between transition-colors duration-300 ${
           isDark
-            ? 'border-white/10 text-brand-violetLight'
-            : 'border-gray-100 text-gray-400 group-hover:text-brand-purple'
+            ? 'border-white/15 text-purple-200'
+            : 'border-gray-100 text-gray-400 group-hover:text-[#620d9c]'
         }`}
       >
         <span className="flex items-center gap-1.5">
-          {isDark && <Sparkles className="w-3 h-3 text-brand-cyan" />}
-          <span>{isDark ? 'Active Service Module' : 'Touch or hover for details'}</span>
+          <span>{isDark ? 'Production Vertical' : 'Explore Capabilities'}</span>
         </span>
         <span
           className={`text-xs font-bold transition-colors duration-300 ${
-            isDark ? 'text-brand-cyan' : 'text-gray-300 group-hover:text-brand-purple'
+            isDark ? 'text-white font-extrabold' : 'text-gray-400 group-hover:text-[#620d9c]'
           }`}
         >
-          {isDark ? '● Dark Mode Active' : '○ Tap to activate'}
+          {isDark ? 'Selected' : 'Tap to select'}
         </span>
       </div>
     </div>

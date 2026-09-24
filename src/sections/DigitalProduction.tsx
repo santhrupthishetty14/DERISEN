@@ -101,14 +101,14 @@ export const DigitalProduction: React.FC = () => {
             <button
               onClick={handlePrev}
               aria-label="Previous Slide"
-              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#51069E] hover:text-white hover:border-[#51069E] hover:shadow-lg hover:shadow-[#51069E]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next Slide"
-              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#51069E] hover:text-white hover:border-[#51069E] hover:shadow-lg hover:shadow-[#51069E]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
             </button>
@@ -125,12 +125,12 @@ export const DigitalProduction: React.FC = () => {
                 onClick={() => handleTabClick(idx, service.number)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-[#51069E] text-white shadow-[0_4px_16px_rgba(81,6,158,0.3)] scale-105'
-                    : 'bg-white text-gray-600 border border-gray-200 hover:border-[#51069E]/40 hover:text-[#51069E]'
+                    ? 'bg-gradient-to-r from-[#4A0573] via-[#620d9c] to-[#7312B3] text-white shadow-[0_4px_18px_rgba(94,10,148,0.35)] scale-105 border border-purple-300/30'
+                    : 'bg-white text-gray-700 border border-gray-200/90 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
-                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
+                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'
                 }`}>
                   {service.number}
                 </span>
@@ -222,3 +222,4 @@ export const DigitalProduction: React.FC = () => {
     </section>
   );
 };
+

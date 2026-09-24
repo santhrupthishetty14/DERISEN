@@ -204,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                     </span>
                     <span>{item.label}</span>
                     {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-brand-purple shadow-[0_0_8px_#6320EE]" />
+                      <span className="w-2 h-2 rounded-full bg-brand-purple shadow-[0_0_8px_#620d9c]" />
                     )}
                   </div>
                 </a>

@@ -25,7 +25,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ isActive, target
     >
       {/* Dynamic Top Gradient Loading Sweep */}
       <div
-        className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#6320EE] via-[#a855f7] to-[#38bdf8] shadow-[0_0_20px_#6320EE] transition-transform duration-500 ease-out ${
+        className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#620d9c] via-[#a855f7] to-[#38bdf8] shadow-[0_0_20px_#620d9c] transition-transform duration-500 ease-out ${
           isActive ? 'scale-x-100 origin-left' : 'scale-x-0 origin-right'
         }`}
       />
@@ -43,8 +43,8 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ isActive, target
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <div className="relative flex items-center justify-center mb-5">
             {/* Pulsing ring */}
-            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#c084fc] opacity-30 animate-ping absolute" />
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#6320EE] via-[#9333ea] to-[#c084fc] shadow-[0_0_30px_rgba(147,51,234,0.7)] flex items-center justify-center text-white font-black text-xs tracking-wider">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#620d9c] to-[#c084fc] opacity-30 animate-ping absolute" />
+            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#620d9c] via-[#9333ea] to-[#c084fc] shadow-[0_0_30px_rgba(147,51,234,0.7)] flex items-center justify-center text-white font-black text-xs tracking-wider">
               DR
             </div>
           </div>

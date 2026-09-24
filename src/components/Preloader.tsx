@@ -173,7 +173,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                 y1="4"
                 x2="2.5"
                 y2="56"
-                stroke="#6320EE"
+                stroke="#620d9c"
                 strokeWidth="4"
                 strokeLinecap="round"
               />
@@ -217,7 +217,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               fontSize: 'clamp(52px, 8vw, 82px)',
               fontFamily: "'Inter', 'Outfit', system-ui, sans-serif",
               fontWeight: 800,
-              color: '#6320EE',
+              color: '#620d9c',
               lineHeight: 1,
               display: 'inline-block',
             }}

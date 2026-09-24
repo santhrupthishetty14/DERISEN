@@ -48,15 +48,15 @@ export const Leadership: React.FC = () => {
           {/* Connector Badge: ---o [Users Icon] o--- */}
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="flex items-center">
-              <span className="h-[1.5px] w-8 sm:w-14 bg-gradient-to-r from-transparent to-[#6320EE]" />
-              <span className="w-2 h-2 rounded-full bg-[#6320EE]" />
+              <span className="h-[1.5px] w-8 sm:w-14 bg-gradient-to-r from-transparent to-[#620d9c]" />
+              <span className="w-2 h-2 rounded-full bg-[#620d9c]" />
             </div>
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#5b13d6] text-white flex items-center justify-center shadow-lg shadow-[#5b13d6]/30">
               <Users className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div className="flex items-center">
-              <span className="w-2 h-2 rounded-full bg-[#6320EE]" />
-              <span className="h-[1.5px] w-8 sm:w-14 bg-gradient-to-l from-transparent to-[#6320EE]" />
+              <span className="w-2 h-2 rounded-full bg-[#620d9c]" />
+              <span className="h-[1.5px] w-8 sm:w-14 bg-gradient-to-l from-transparent to-[#620d9c]" />
             </div>
           </div>
 
@@ -87,7 +87,7 @@ export const Leadership: React.FC = () => {
             <div className="lg:col-span-3 flex flex-col items-center lg:items-end text-center lg:text-right px-4 z-20 order-2 lg:order-1">
               <div className="flex flex-col items-center lg:items-end group">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white border-2 border-[#5b13d6]/30 p-2 shadow-[0_10px_30px_rgba(99,32,238,0.15)] flex items-center justify-center mb-3 group-hover:scale-105 group-hover:border-[#5b13d6] transition-all duration-300">
-                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#6320EE]/10 to-[#8447FF]/20 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#620d9c]/10 to-[#8447FF]/20 flex items-center justify-center">
                     <Lightbulb className="w-8 h-8 text-[#5b13d6]" />
                   </div>
                 </div>
@@ -105,13 +105,13 @@ export const Leadership: React.FC = () => {
               {/* Background ambient glowing concentric rings */}
               <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-[#8447FF]/25 -z-10 animate-pulse" />
               <div className="absolute w-80 h-80 sm:w-[420px] sm:h-[420px] rounded-full border border-[#8447FF]/15 -z-10" />
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#6320EE]/15 via-[#8447FF]/10 to-transparent blur-3xl -z-10" />
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#620d9c]/15 via-[#8447FF]/10 to-transparent blur-3xl -z-10" />
 
               {/* Clean Executive Duo Display with Glowing Badges */}
               <div className="relative w-full max-w-[560px] flex items-center justify-center gap-4 sm:gap-6 py-2">
                 {/* Shweta Sarkar */}
                 <div className="relative group flex flex-col items-center">
-                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#6320EE] to-[#9d68ff] transition-transform duration-500 group-hover:scale-105">
+                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620d9c] to-[#9d68ff] transition-transform duration-500 group-hover:scale-105">
                     <img
                       src="/assets/leader-shweta-cleaned.jpg"
                       alt="Shweta Deharkar - CEO"
@@ -150,7 +150,7 @@ export const Leadership: React.FC = () => {
             <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left px-4 z-20 order-3">
               <div className="flex flex-col items-center lg:items-start group">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white border-2 border-[#5b13d6]/30 p-2 shadow-[0_10px_30px_rgba(99,32,238,0.15)] flex items-center justify-center mb-3 group-hover:scale-105 group-hover:border-[#5b13d6] transition-all duration-300">
-                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#6320EE]/10 to-[#8447FF]/20 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#620d9c]/10 to-[#8447FF]/20 flex items-center justify-center">
                     <Target className="w-8 h-8 text-[#5b13d6]" />
                   </div>
                 </div>

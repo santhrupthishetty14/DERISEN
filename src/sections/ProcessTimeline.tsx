@@ -52,7 +52,7 @@ export const ProcessTimeline: React.FC = () => {
         >
           <span className="eyebrow">OUR WORK PROCESS</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4">
-            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#6320ee] via-[#8b5cf6] to-[#a855f7]">Measurable Success</span>
+            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#620d9c] via-[#8b5cf6] to-[#a855f7]">Measurable Success</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
             A clear, strategy-led process moves every project from insight to impact.
@@ -64,7 +64,7 @@ export const ProcessTimeline: React.FC = () => {
         <div className="hidden lg:block relative max-w-4xl mx-auto mb-12">
           <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_12px_#6320EE]"
+              className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_12px_#620d9c]"
               style={{
                 width: `${((activeStep + 1) / PROCESS_STEPS.length) * 100}%`,
               }}
@@ -114,7 +114,7 @@ export const ProcessTimeline: React.FC = () => {
                   <div
                     className={`w-12 h-12 rounded-full font-black text-base flex items-center justify-center transition-all duration-500 ${
                       isActive
-                        ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white shadow-[0_0_20px_#6320EE]'
+                        ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white shadow-[0_0_20px_#620d9c]'
                         : 'bg-surface-subtle text-brand-purple border border-gray-200'
                     }`}
                   >
@@ -173,3 +173,4 @@ export const ProcessTimeline: React.FC = () => {
     </section>
   );
 };
+

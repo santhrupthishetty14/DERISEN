@@ -9,7 +9,7 @@
     --brand-navy-dark: #12092c;
     --brand-indigo-dark: #180D38;
     --brand-card-dark: #1E1147;
-    --brand-purple: #51069E;
+    --brand-purple: #620d9c;
     --brand-violet: #7C3AED;
     --brand-violet-light: #8B5CF6;
     --brand-lilac: #EDE9FE;
@@ -87,7 +87,7 @@
 
   .dot-pattern {
     @apply absolute w-64 h-64 pointer-events-none opacity-15;
-    background-image: radial-gradient(#6320EE 1.5px, transparent 1.5px);
+    background-image: radial-gradient(#620d9c 1.5px, transparent 1.5px);
     background-size: 16px 16px;
   }
 }

@@ -12,7 +12,7 @@ const WHY_FEATURES = [
     heading: 'Creative & Strategic Approach',
     description:
       'We blend creativity with strategy to design solutions that are not just visually stunning but also purpose-driven, effective, and rooted in measurable business outcomes.',
-    accentColor: '#6320EE',
+    accentColor: '#620d9c',
   },
   {
     id: 'results-matter',
@@ -28,7 +28,7 @@ const WHY_FEATURES = [
     heading: 'Client-Centric Mindset',
     description:
       "We listen deeply, collaborate closely, and adapt continuously to make sure every deliverable is perfectly aligned to your unique goals and your audience's expectations.",
-    accentColor: '#6320EE',
+    accentColor: '#620d9c',
   },
   {
     id: 'innovation',
@@ -44,7 +44,7 @@ const WHY_FEATURES = [
     heading: 'Uncompromising Quality',
     description:
       'From the first sketch to final delivery, quality is embedded in our process. We apply rigorous standards so every output is polished, precise, and production-ready.',
-    accentColor: '#6320EE',
+    accentColor: '#620d9c',
   },
   {
     id: 'data-backed',
@@ -60,7 +60,7 @@ const WHY_FEATURES = [
     heading: 'Full-Service Under One Roof',
     description:
       'Design, branding, marketing, and IT — all handled seamlessly within a single agency. No fragmented workflows. No missed handoffs. Just coordinated, cohesive execution.',
-    accentColor: '#6320EE',
+    accentColor: '#620d9c',
   },
   {
     id: 'proven-track',
