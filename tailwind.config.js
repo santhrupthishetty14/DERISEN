@@ -32,13 +32,13 @@ export default {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'brand-grad': 'linear-gradient(135deg, #180D38 0%, #6320EE 60%, #9333EA 100%)',
-        'text-grad': 'linear-gradient(135deg, #180D38 0%, #6320EE 55%, #8B5CF6 100%)',
-        'badge-grad': 'linear-gradient(135deg, #6320EE 0%, #7C3AED 100%)',
+        'brand-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 60%, #9333EA 100%)',
+        'text-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 55%, #8B5CF6 100%)',
+        'badge-grad': 'linear-gradient(135deg, #620d9c 0%, #7C3AED 100%)',
         'dark-card-grad': 'linear-gradient(145deg, #1E1147 0%, #150A33 100%)',
       },
       boxShadow: {
-        'glow-purple': '0 0 25px rgba(99, 32, 238, 0.35)',
+        'glow-purple': '0 0 25px rgba(98, 13, 156, 0.35)',
         'dark-card': '0 15px 35px rgba(18, 9, 44, 0.25)',
       },
       borderRadius: {
