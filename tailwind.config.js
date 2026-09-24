@@ -14,7 +14,7 @@ export default {
           cardHover: '#27175c',
           purple: '#620d9c',
           purpleHover: '#4e087e',
-          violet: '#7C3AED',
+          violet: '#620d9c',
           violetLight: '#8B5CF6',
           electric: '#7000FF',
           cyan: '#38BDF8',
@@ -32,9 +32,9 @@ export default {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'brand-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 60%, #9333EA 100%)',
-        'text-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 55%, #8B5CF6 100%)',
-        'badge-grad': 'linear-gradient(135deg, #620d9c 0%, #7C3AED 100%)',
+        'brand-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 100%)',
+        'text-grad': 'linear-gradient(135deg, #180D38 0%, #620d9c 100%)',
+        'badge-grad': 'linear-gradient(135deg, #620d9c 0%, #4A0573 100%)',
         'dark-card-grad': 'linear-gradient(145deg, #1E1147 0%, #150A33 100%)',
       },
       boxShadow: {

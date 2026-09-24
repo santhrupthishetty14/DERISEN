@@ -16,7 +16,7 @@ export const ServiceCatalog: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activeNumber, setActiveNumber] = useState<string | null>(null);
+  const [activeNumber, setActiveNumber] = useState<string | null>('01');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -152,6 +152,9 @@ export const ServiceCatalog: React.FC = () => {
             }}
             onSlideChange={(swiper) => {
               setCurrentSlide(swiper.activeIndex);
+              if (INDIVIDUAL_SERVICES_CATALOG[swiper.activeIndex]) {
+                setActiveNumber(INDIVIDUAL_SERVICES_CATALOG[swiper.activeIndex].number);
+              }
             }}
             modules={[Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard]}
             grabCursor={true}

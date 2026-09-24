@@ -93,7 +93,7 @@ export const WorkGallery: React.FC = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#4A0573] via-[#620d9c] to-[#7312B3] text-white shadow-[0_4px_18px_rgba(94,10,148,0.35)] scale-105 border border-purple-300/30'
+                  ? 'bg-[#620d9c] text-white shadow-[0_4px_16px_rgba(98,13,156,0.3)] scale-105'
                   : 'bg-white text-gray-700 hover:text-[#620d9c] hover:border-[#620d9c]/40 border border-gray-200/90 shadow-sm'
               }`}
             >

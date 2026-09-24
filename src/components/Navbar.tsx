@@ -109,8 +109,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                   <span
                     className={`absolute bottom-0 left-0 h-[2.5px] rounded-full transition-all duration-300 ease-out ${
                       isActive
-                        ? 'w-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-violetLight opacity-100 shadow-[0_2px_8px_rgba(99,32,238,0.4)]'
-                        : 'w-0 bg-brand-purple/60 opacity-0 group-hover:w-full group-hover:opacity-100'
+                        ? 'w-full bg-[#620d9c] opacity-100 shadow-[0_2px_8px_rgba(98,13,156,0.4)]'
+                        : 'w-0 bg-[#620d9c]/60 opacity-0 group-hover:w-full group-hover:opacity-100'
                     }`}
                   />
                 </a>

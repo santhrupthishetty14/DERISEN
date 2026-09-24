@@ -16,7 +16,7 @@ export const DigitalProduction: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [activeNumber, setActiveNumber] = useState<string | null>(null);
+  const [activeNumber, setActiveNumber] = useState<string | null>('05');
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export const DigitalProduction: React.FC = () => {
                 onClick={() => handleTabClick(idx, service.number)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-[#4A0573] via-[#620d9c] to-[#7312B3] text-white shadow-[0_4px_18px_rgba(94,10,148,0.35)] scale-105 border border-purple-300/30'
+                    ? 'bg-[#620d9c] text-white shadow-[0_4px_16px_rgba(98,13,156,0.3)] scale-105'
                     : 'bg-white text-gray-700 border border-gray-200/90 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
                 }`}
               >
@@ -158,6 +158,9 @@ export const DigitalProduction: React.FC = () => {
             }}
             onSlideChange={(swiper) => {
               setCurrentSlide(swiper.activeIndex);
+              if (DIGITAL_PRODUCTION_SERVICES[swiper.activeIndex]) {
+                setActiveNumber(DIGITAL_PRODUCTION_SERVICES[swiper.activeIndex].number);
+              }
             }}
             modules={[Navigation, Pagination, FreeMode, Mousewheel, Autoplay, Keyboard]}
             grabCursor={true}
