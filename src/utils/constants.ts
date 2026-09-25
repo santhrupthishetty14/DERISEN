@@ -292,7 +292,8 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'NextGen Cloud & Technology Solutions',
     category: 'IT & Web Development',
     description: 'High-performance responsive portal with speed optimization and custom workflows.',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=95',
+    imageUrl: '/assets/fullstack-web-platform.jpg',
+    videoUrl: '/assets/fullstack-web-platform.mp4',
     metrics: '<0.8s Load Time'
   },
   {
