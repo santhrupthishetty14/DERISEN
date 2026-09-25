@@ -316,7 +316,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'Organic Wellness Essentials',
     category: 'Branding & Identity',
     description: 'Eco-friendly premium packaging suite, tactile finish print and exhibition booth banners.',
-    imageUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=2000&q=95',
+    imageUrl: '/assets/luxury-wellness-packaging.jpg',
     metrics: 'Gold Packaging Award'
   },
   {
@@ -324,7 +324,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'HyperGrowth Cloud Platform',
     category: 'IT & Web Development',
     description: 'Intuitive micro-interactions, dark glassmorphism dashboard, and cross-platform native feel.',
-    imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=2000&q=95',
+    imageUrl: '/assets/saas-cloud-mobile-app.jpg',
     metrics: '4.9 App Store Rating'
   }
 ];
