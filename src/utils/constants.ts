@@ -283,8 +283,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'Global Strategy & Management Advisory',
     category: 'Branding & Identity',
     description: 'Complete visual identity system, corporate stationery, guidelines and typography.',
-    imageUrl: '/assets/corporate-brand-identity.jpg',
-    videoUrl: '/assets/corporate-brand-identity.mp4',
+    imageUrl: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95',
     metrics: '+180% Brand Recall'
   },
   {
@@ -292,8 +291,8 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'NextGen Cloud & Technology Solutions',
     category: 'IT & Web Development',
     description: 'High-performance responsive portal with speed optimization and custom workflows.',
-    imageUrl: '/assets/fullstack-web-platform.jpg',
-    videoUrl: '/assets/fullstack-web-platform.mp4',
+    imageUrl: '/assets/corporate-brand-identity.jpg',
+    videoUrl: '/assets/corporate-brand-identity.mp4',
     metrics: '<0.8s Load Time'
   },
   {

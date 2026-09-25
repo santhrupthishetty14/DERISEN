@@ -119,13 +119,28 @@ export const WorkGallery: React.FC = () => {
                 <div className="h-56 relative overflow-hidden bg-brand-navy">
                   {item.videoUrl ? (
                     <video
+                      key={item.videoUrl}
+                      ref={(el) => {
+                        if (el) {
+                          el.defaultMuted = true;
+                          el.muted = true;
+                          const p = el.play();
+                          if (p !== undefined) {
+                            p.catch(() => {
+                              el.muted = true;
+                              el.play().catch(() => {});
+                            });
+                          }
+                        }
+                      }}
                       src={item.videoUrl}
                       poster={imgSrc}
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
+                      preload="auto"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
                     />
                   ) : (
                     <img
