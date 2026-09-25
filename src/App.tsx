@@ -205,10 +205,10 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">
+    <div className="min-h-screen flex flex-col bg-[#180128] text-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">
       {/* Dynamic Global Scroll Progress Indicator Bar */}
       <div
-        className="fixed top-0 left-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-brand-cyan z-[60] origin-left shadow-[0_0_12px_rgba(99,32,238,0.85)] pointer-events-none transition-[width] duration-100 ease-out"
+        className="fixed top-0 left-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-[#B063FF] z-[60] origin-left shadow-[0_0_12px_rgba(176,99,255,0.85)] pointer-events-none transition-[width] duration-100 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 

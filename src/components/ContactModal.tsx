@@ -63,12 +63,15 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-navy/70 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl w-full max-w-xl p-8 sm:p-10 shadow-2xl relative border border-gray-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="bg-[#1A0B2E]/95 backdrop-blur-2xl rounded-3xl w-full max-w-xl p-8 sm:p-10 shadow-[0_25px_70px_rgba(0,0,0,0.8)] relative border border-purple-500/30 text-white">
+        {/* Ambient Top Glow */}
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-72 h-36 bg-[#B063FF]/20 rounded-full blur-3xl pointer-events-none" />
+
         {/* Close button */}
         <button
           onClick={handleModalClose}
-          className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-100 hover:bg-brand-lilac text-brand-dark hover:text-brand-purple flex items-center justify-center transition-colors"
+          className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white hover:text-purple-200 border border-white/10 flex items-center justify-center transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -76,16 +79,16 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
 
         {dispatchInfo ? (
           <div className="py-6 text-center space-y-5">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+            <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-2xl font-black text-brand-dark mb-1">
+              <h3 className="text-2xl font-black text-white mb-1">
                 Inquiry Details Prepared!
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-purple-200/80 max-w-md mx-auto leading-relaxed">
                 Your email client was triggered to send your project details to{' '}
-                <span className="font-bold text-brand-purple">{TARGET_EMAIL}</span>.
+                <span className="font-bold text-[#B063FF]">{TARGET_EMAIL}</span>.
                 You can also connect instantly via WhatsApp:
               </p>
             </div>
@@ -95,14 +98,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
                 href={dispatchInfo.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition-all shadow-md"
+                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md"
               >
                 <MessageSquare className="w-4 h-4" /> Send Instantly via WhatsApp (+91 78999 10917)
               </a>
 
               <a
                 href={dispatchInfo.mailtoUrl}
-                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-brand-purple hover:bg-brand-navy text-white text-xs sm:text-sm font-bold transition-all"
+                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#4B006E] to-[#620D9C] hover:from-[#620D9C] hover:to-[#B063FF] text-white text-xs sm:text-sm font-bold transition-all shadow-md"
               >
                 <Mail className="w-4 h-4" /> Re-open Email Client ({TARGET_EMAIL})
               </a>
@@ -110,7 +113,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
               <button
                 type="button"
                 onClick={handleModalClose}
-                className="w-full py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-bold transition-colors cursor-pointer mt-1"
+                className="w-full py-2.5 rounded-xl border border-white/15 text-purple-200 hover:bg-white/10 text-xs font-bold transition-colors cursor-pointer mt-1"
               >
                 Done / Close
               </button>
@@ -120,11 +123,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
           <>
             {/* Header */}
             <div className="mb-6">
-              <span className="eyebrow">START A PROJECT</span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-dark mb-1">
+              <span className="eyebrow text-[#B063FF]">START A PROJECT</span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-1 tracking-tight">
                 Let's Talk About Your Brand
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-purple-200/80">
                 Tell us what you're looking to build, and our leadership team will connect within 24 hours.
               </p>
             </div>
@@ -132,7 +135,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-extrabold uppercase tracking-wider text-brand-dark mb-1.5">
+                <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-200 mb-1.5">
                   Your Name *
                 </label>
                 <input
@@ -141,12 +144,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Rahul Sharma"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-surface-subtle focus:bg-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 text-sm text-gray-900 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:bg-white/10 focus:border-[#B063FF] focus:ring-2 focus:ring-[#B063FF]/20 text-sm text-white placeholder:text-purple-300/40 outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-extrabold uppercase tracking-wider text-brand-dark mb-1.5">
+                <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-200 mb-1.5">
                   Email Address *
                 </label>
                 <input
@@ -155,33 +158,33 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="e.g. rahul@company.com"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-surface-subtle focus:bg-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 text-sm text-gray-900 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:bg-white/10 focus:border-[#B063FF] focus:ring-2 focus:ring-[#B063FF]/20 text-sm text-white placeholder:text-purple-300/40 outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-extrabold uppercase tracking-wider text-brand-dark mb-1.5">
+                <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-200 mb-1.5">
                   Service Vertical
                 </label>
                 <select
                   value={service}
                   onChange={(e) => setService(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-surface-subtle focus:bg-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 text-sm text-gray-900 outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:bg-[#1A0B2E] focus:border-[#B063FF] focus:ring-2 focus:ring-[#B063FF]/20 text-sm text-white outline-none transition-all"
                 >
-                  <option value="Full Service Suite">All Solutions (Design, Branding, Marketing, IT)</option>
-                  <option value="Brand Identity">01 Brand Identity & Strategy</option>
-                  <option value="Graphic Design">02 Graphic Design & Creatives</option>
-                  <option value="Print & Marketing">03 Print & Collateral Marketing</option>
-                  <option value="Digital UI/UX">04 Website & Mobile UI/UX</option>
-                  <option value="Motion & Video">05 Motion Graphics & Video Editing</option>
-                  <option value="Photography & Production">06 Photography & Video Shoots</option>
-                  <option value="Digital Marketing">07 Digital Marketing & SEO/Ads</option>
-                  <option value="Website & IT Solutions">08 Custom Web Applications & IT</option>
+                  <option value="Full Service Suite" className="bg-[#1A0B2E] text-white">All Solutions (Design, Branding, Marketing, IT)</option>
+                  <option value="Brand Identity" className="bg-[#1A0B2E] text-white">01 Brand Identity & Strategy</option>
+                  <option value="Graphic Design" className="bg-[#1A0B2E] text-white">02 Graphic Design & Creatives</option>
+                  <option value="Print & Marketing" className="bg-[#1A0B2E] text-white">03 Print & Collateral Marketing</option>
+                  <option value="Digital UI/UX" className="bg-[#1A0B2E] text-white">04 Website & Mobile UI/UX</option>
+                  <option value="Motion & Video" className="bg-[#1A0B2E] text-white">05 Motion Graphics & Video Editing</option>
+                  <option value="Photography & Production" className="bg-[#1A0B2E] text-white">06 Photography & Video Shoots</option>
+                  <option value="Digital Marketing" className="bg-[#1A0B2E] text-white">07 Digital Marketing & SEO/Ads</option>
+                  <option value="Website & IT Solutions" className="bg-[#1A0B2E] text-white">08 Custom Web Applications & IT</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-extrabold uppercase tracking-wider text-brand-dark mb-1.5">
+                <label className="block text-xs font-extrabold uppercase tracking-wider text-purple-200 mb-1.5">
                   Project Scope or Vision
                 </label>
                 <textarea
@@ -189,19 +192,19 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Share your objectives, timelines, or requirements..."
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-surface-subtle focus:bg-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 text-sm text-gray-900 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-white/15 bg-white/5 focus:bg-white/10 focus:border-[#B063FF] focus:ring-2 focus:ring-[#B063FF]/20 text-sm text-white placeholder:text-purple-300/40 outline-none transition-all resize-none"
                 />
               </div>
 
               {errorMsg && (
-                <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex flex-col gap-2">
+                <div className="p-3.5 rounded-xl bg-red-950/50 border border-red-500/30 text-xs text-red-300 flex flex-col gap-2">
                   <div className="flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
                     <span>{errorMsg}</span>
                   </div>
                   <a
                     href={buildMailtoUrl({ name, email, service, message })}
-                    className="inline-flex items-center gap-1.5 font-bold text-red-800 hover:text-brand-purple underline ml-6"
+                    className="inline-flex items-center gap-1.5 font-bold text-red-300 hover:text-white underline ml-6"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

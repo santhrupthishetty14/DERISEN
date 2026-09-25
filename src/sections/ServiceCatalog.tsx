@@ -71,7 +71,7 @@ export const ServiceCatalog: React.FC = () => {
     <section
       ref={sectionRef}
       id="individual-services"
-      className="py-20 sm:py-28 bg-white relative overflow-hidden"
+      className="py-20 sm:py-28 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header with Navigation Controls */}
@@ -81,11 +81,11 @@ export const ServiceCatalog: React.FC = () => {
               isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <span className="eyebrow">INDIVIDUAL SERVICES</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-3">
+            <span className="eyebrow text-[#B063FF]">INDIVIDUAL SERVICES</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-3">
               Choose what your brand needs.
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 font-medium">
+            <p className="text-sm sm:text-base text-purple-200/80 font-medium">
               Explore our 4 core modular services—slide smoothly to view all capabilities.
             </p>
           </div>
@@ -95,14 +95,14 @@ export const ServiceCatalog: React.FC = () => {
             <button
               onClick={handlePrev}
               aria-label="Previous category"
-              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#620d9c] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#620d9c] text-white hover:text-white flex items-center justify-center border border-white/15 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next category"
-              className="w-12 h-12 rounded-full bg-surface-subtle hover:bg-[#620d9c] text-brand-dark hover:text-white flex items-center justify-center border border-gray-200 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-[#620d9c] text-white hover:text-white flex items-center justify-center border border-white/15 hover:border-[#620d9c] shadow-sm hover:shadow-[0_8px_20px_rgba(98,13,156,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -120,11 +120,11 @@ export const ServiceCatalog: React.FC = () => {
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_16px_rgba(176,99,255,0.4)] scale-105'
-                    : 'bg-surface-subtle text-gray-600 border border-gray-200 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
+                    : 'bg-white/10 text-purple-100 border border-white/15 hover:border-purple-300/40 hover:text-white hover:bg-white/15'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
-                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-600'
+                  isSelected ? 'bg-white/20 text-white' : 'bg-white/15 text-purple-200'
                 }`}>
                   {cat.number}
                 </span>

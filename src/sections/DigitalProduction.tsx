@@ -71,10 +71,10 @@ export const DigitalProduction: React.FC = () => {
     <section
       ref={sectionRef}
       id="digital-production"
-      className="py-20 sm:py-28 bg-surface-subtle relative overflow-hidden"
+      className="py-20 sm:py-28 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white relative overflow-hidden"
     >
       {/* Subtle Grid / Ambient Backdrop */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#180D380a_1px,transparent_1px),linear-gradient(to_bottom,#180D380a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Header with Navigation Arrows */}
@@ -84,14 +84,14 @@ export const DigitalProduction: React.FC = () => {
           }`}
         >
           <div className="max-w-2xl">
-            <span className="eyebrow flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-brand-purple" />
+            <span className="eyebrow flex items-center gap-1.5 text-[#B063FF]">
+              <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
               <span>DIGITAL + PRODUCTION STACK</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-3">
               Extend your brand into every touchpoint.
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 font-medium">
+            <p className="text-sm sm:text-base text-purple-200/80 font-medium">
               Explore our 4 production modules—slide smoothly to view all capabilities.
             </p>
           </div>
@@ -101,14 +101,14 @@ export const DigitalProduction: React.FC = () => {
             <button
               onClick={handlePrev}
               aria-label="Previous Slide"
-              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-white/15 bg-white/10 text-white flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next Slide"
-              className="w-12 h-12 rounded-full border border-gray-200 bg-white text-brand-dark flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
+              className="w-12 h-12 rounded-full border border-white/15 bg-white/10 text-white flex items-center justify-center hover:bg-[#620d9c] hover:text-white hover:border-[#620d9c] hover:shadow-lg hover:shadow-[#620d9c]/25 transition-all duration-300 active:scale-95 cursor-pointer group"
             >
               <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
             </button>
@@ -126,11 +126,11 @@ export const DigitalProduction: React.FC = () => {
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_16px_rgba(176,99,255,0.4)] scale-105'
-                    : 'bg-white text-gray-700 border border-gray-200/90 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
+                    : 'bg-white/10 text-purple-100 border border-white/15 hover:border-purple-300/40 hover:text-white hover:bg-white/15'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
-                  isSelected ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'
+                  isSelected ? 'bg-white/20 text-white' : 'bg-white/15 text-purple-200'
                 }`}>
                   {service.number}
                 </span>

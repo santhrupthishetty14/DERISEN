@@ -217,7 +217,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           );
         }
 
-        // Ambient Purple & Cyan Aura blooms and shifts with scroll
+        // Ambient Purple & Violet Aura blooms and shifts with scroll
         if (auraRef.current) {
           scrollTl.to(
             auraRef.current,
@@ -266,13 +266,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-white select-none overflow-hidden flex flex-col justify-start pt-[76px] sm:pt-[82px] md:pt-[86px] pb-5 sm:pb-7 px-4 sm:px-6 lg:px-8 w-full max-w-full border-b border-gray-200/90 shadow-[0_12px_24px_rgba(24,13,56,0.03)]"
+      className="relative bg-gradient-to-b from-[#24033b] via-[#200236] to-[#180128] text-white select-none overflow-hidden flex flex-col justify-start pt-[76px] sm:pt-[82px] md:pt-[86px] pb-5 sm:pb-7 px-4 sm:px-6 lg:px-8 w-full max-w-full border-b border-white/10 shadow-[0_12px_24px_rgba(0,0,0,0.3)]"
     >
       {/* Background Subtle Ambient Aura */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div
           ref={auraRef}
-          className="absolute top-12 left-1/4 w-[500px] h-[500px] bg-brand-purple/4 rounded-full blur-3xl transition-transform"
+          className="absolute top-12 left-1/4 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-3xl transition-transform"
         />
       </div>
 
@@ -284,14 +284,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               ================================================================= */}
           <div ref={leftColRef} className="lg:col-span-6 flex flex-col items-start text-left relative w-full max-w-full">
             {/* Display Headline */}
-            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[54px] font-black text-brand-dark leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
+            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[54px] font-black text-white leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
-              <div className="relative inline-block text-brand-purple mt-1 max-w-full">
+              <div className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#B063FF] to-[#D8B4FE] mt-1 max-w-full">
                 <span>We Make Them Rise.</span>
                 {/* Reference Curved Underline Swoop */}
                 <svg
-                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-brand-purple overflow-visible pointer-events-none"
+                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-[#B063FF] overflow-visible pointer-events-none"
                   viewBox="0 0 320 16"
                   fill="none"
                 >
@@ -307,7 +307,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </h1>
 
             {/* Supporting Text matching reference exactly */}
-            <p className="reveal-item text-sm sm:text-base lg:text-lg text-gray-600 font-medium max-w-[460px] leading-relaxed mb-5 sm:mb-6">
+            <p className="reveal-item text-sm sm:text-base lg:text-lg text-purple-200/85 font-medium max-w-[460px] leading-relaxed mb-5 sm:mb-6">
               Creative Design, Branding, Digital Marketing &amp;<br className="hidden sm:inline" />
               IT Solutions under one roof.
             </p>
@@ -317,7 +317,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               <SlideArrowButton
                 label="Explore Our Services"
                 onClick={() => onNavigate('services')}
-                variant="navy"
+                variant="purple"
                 size="md"
               />
 
@@ -332,8 +332,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     {/* Specular White Light Highlight */}
                     <div className="absolute top-2 left-2.5 w-4 h-3 rounded-full bg-white/75 blur-[0.5px] -rotate-30" />
                     <div className="absolute top-3.5 left-4 w-2 h-1 rounded-full bg-white" />
-                    {/* Bottom-right Cyan Rim Radiance */}
-                    <div className="absolute bottom-0 right-0 w-full h-full rounded-full bg-gradient-to-tl from-brand-cyan/25 to-transparent" />
+                    {/* Bottom-right Violet Rim Radiance */}
+                    <div className="absolute bottom-0 right-0 w-full h-full rounded-full bg-gradient-to-tl from-[#B063FF]/30 to-transparent" />
                   </div>
                   {/* Subtle Floor Contact Shadow */}
                   <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-10 h-2.5 rounded-full bg-brand-purple/20 blur-sm" />
@@ -368,7 +368,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================================== */}
       <div
         ref={pillarsRef}
-        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(24,13,56,0.05)] border border-gray-100/90 p-3 sm:p-4 lg:p-5 relative z-20 transition-shadow duration-300 hover:shadow-[0_18px_45px_rgba(24,13,56,0.08)] mt-3 sm:mt-4"
+        className="w-full max-w-[1360px] mx-auto bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(0,0,0,0.35)] border border-white/15 p-3 sm:p-4 lg:p-5 relative z-20 transition-all duration-300 hover:border-purple-300/30 mt-3 sm:mt-4 text-white"
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
@@ -379,61 +379,61 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Creative Design
               </h4>
-              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Unique and engaging designs that bring your ideas to life.
               </p>
             </div>
           </div>
 
           {/* 2. Branding */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Tag className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Branding
               </h4>
-              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Build a strong brand identity that connects and inspires trust.
               </p>
             </div>
           </div>
 
           {/* 3. Digital Marketing */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Megaphone className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Digital Marketing
               </h4>
-              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Result-driven marketing strategies that grow your brand online.
               </p>
             </div>
           </div>
 
           {/* 4. IT Solutions */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-gray-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Code className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-brand-dark leading-tight mb-0.5 sm:mb-1 group-hover:text-brand-purple transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 IT Solutions
               </h4>
-              <p className="text-[10px] sm:text-xs text-gray-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Reliable and scalable IT solutions to power your business.
               </p>
             </div>

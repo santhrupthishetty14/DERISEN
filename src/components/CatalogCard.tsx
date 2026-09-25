@@ -29,10 +29,10 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
           onClick?.();
         }
       }}
-      className={`rounded-2xl p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
+      className={`rounded-[26px] p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
         isDark
-          ? 'bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#8E24AA] text-white shadow-2xl shadow-[#620d9c]/50 border border-purple-300/30 -translate-y-1.5'
-          : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:border-[#620d9c]/40 hover:shadow-xl hover:-translate-y-1'
+          ? 'bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#8E24AA] text-white shadow-2xl shadow-[#620d9c]/50 border-2 border-purple-300/40 -translate-y-2'
+          : 'bg-white text-slate-900 border border-slate-100 shadow-xl hover:shadow-2xl hover:border-purple-200 hover:-translate-y-1.5'
       }`}
     >
       {/* Ambient background glow when active */}
@@ -41,7 +41,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
       )}
 
       {/* Skidding Gloss / Light sheen sweep on hover & touch */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-purple-500/10 to-transparent pointer-events-none" />
 
       <div>
         {/* Top Header: Inverted Circle Icon Badge & Number */}
@@ -57,7 +57,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
           </div>
           <span
             className={`text-xs font-mono font-bold tracking-wider transition-colors duration-300 ${
-              isDark ? 'text-white/80' : 'text-gray-300'
+              isDark ? 'text-white/80' : 'text-slate-300'
             }`}
           >
             {category.number}
@@ -69,7 +69,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
           className={`text-xl sm:text-[22px] font-black tracking-tight mb-4 pb-3 border-b transition-colors duration-300 ${
             isDark
               ? 'text-white border-white/15'
-              : 'text-brand-dark border-gray-100 group-hover:text-[#620d9c]'
+              : 'text-slate-900 border-slate-100 group-hover:text-[#620D9C]'
           }`}
         >
           {category.title}
@@ -81,12 +81,12 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
             <li
               key={idx}
               className={`flex items-center gap-2.5 text-xs sm:text-[12.5px] font-medium transition-colors duration-300 ${
-                isDark ? 'text-white/90' : 'text-gray-600'
+                isDark ? 'text-white/90' : 'text-slate-700'
               }`}
             >
               <span
                 className={`font-bold text-sm transition-colors duration-300 ${
-                  isDark ? 'text-purple-200' : 'text-[#620d9c]'
+                  isDark ? 'text-purple-200' : 'text-[#620D9C]'
                 }`}
               >
                 •
@@ -102,7 +102,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
         className={`pt-3 mt-auto border-t text-[11px] font-semibold flex items-center justify-between transition-colors duration-300 ${
           isDark
             ? 'border-white/15 text-purple-200'
-            : 'border-gray-100 text-gray-400 group-hover:text-[#620d9c]'
+            : 'border-slate-100 text-[#620D9C]'
         }`}
       >
         <span className="flex items-center gap-1.5">
@@ -110,7 +110,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
         </span>
         <span
           className={`text-xs font-bold transition-colors duration-300 ${
-            isDark ? 'text-white font-extrabold' : 'text-gray-400 group-hover:text-[#620d9c]'
+            isDark ? 'text-white font-extrabold' : 'text-[#620D9C] group-hover:text-[#4B006E]'
           }`}
         >
           {isDark ? 'Selected' : 'Tap to select'}

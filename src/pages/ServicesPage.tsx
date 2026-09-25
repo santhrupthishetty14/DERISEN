@@ -14,7 +14,7 @@ interface ServicesPageProps {
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-white">
+    <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
       {/* 1. Page Header with Complete Edge-to-Edge Animated Ecosystem Background */}
       <PageHeader
         badge="SERVICES & PACKAGES / COMPREHENSIVE SUITE"

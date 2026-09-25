@@ -191,7 +191,7 @@ export const WhyChooseUs: React.FC = () => {
     <section
       ref={sectionRef}
       id="why-choose-us"
-      className="py-24 sm:py-32 bg-[#F8F9FD] relative overflow-hidden w-full max-w-full"
+      className="py-24 sm:py-32 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white relative overflow-hidden w-full max-w-full"
     >
       {/* Subtle ambient dot patterns */}
       <div className="dot-pattern top-12 left-10 opacity-10" />
@@ -199,17 +199,17 @@ export const WhyChooseUs: React.FC = () => {
 
       {/* Soft gradient halo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-purple/4 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-violet/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-violet/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
 
         {/* ─── Section Header ─────────────────────────────────────────────── */}
         <div ref={headingRef} className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <span className="eyebrow">WHY CHOOSE DE.RISEN?</span>
+          <span className="eyebrow text-[#B063FF]">WHY CHOOSE DE.RISEN?</span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-[52px] font-black text-brand-dark tracking-tight leading-[1.14] mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-[52px] font-black text-white tracking-tight leading-[1.14] mb-5">
             <div className="overflow-visible">
               <div ref={headingLine1Ref}>Creating Brands That</div>
             </div>
@@ -225,7 +225,7 @@ export const WhyChooseUs: React.FC = () => {
 
           <p
             ref={subtitleRef}
-            className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl mx-auto"
+            className="text-sm sm:text-base text-purple-200/80 leading-relaxed max-w-xl mx-auto"
           >
             Your brand deserves more than ordinary solutions. At DE.RISEN, we combine
             creativity, strategy, and innovation to craft powerful brand experiences
@@ -247,20 +247,20 @@ export const WhyChooseUs: React.FC = () => {
                 }}
                 onMouseEnter={() => setHoveredId(feature.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`group relative bg-white rounded-2xl border p-6 sm:p-7 flex flex-col gap-4 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default overflow-hidden ${
+                className={`group relative bg-white rounded-[24px] border p-6 sm:p-7 flex flex-col gap-4 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default overflow-hidden ${
                   isHovered
-                    ? 'border-brand-purple/60 shadow-[0_16px_36px_rgba(99,32,238,0.18)] -translate-y-2'
-                    : 'border-gray-200/90 shadow-sm translate-y-0'
+                    ? 'border-purple-300 shadow-[0_20px_40px_rgba(98,13,156,0.2)] -translate-y-2'
+                    : 'border-slate-100 shadow-xl translate-y-0'
                 }`}
               >
                 {/* AI Card Cyber Accent Line on Hover */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#620D9C] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {/* ── Icon badge: scale 0.8 → 1 on scroll enter, translate-y on hover ── */}
                 <div
                   ref={(el) => {
                     iconRefs.current[index] = el;
                   }}
-                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-purple text-white flex items-center justify-center shadow-md shadow-brand-purple/30 transition-transform duration-300 ${
+                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 transition-transform duration-300 ${
                     isHovered ? '-translate-y-1 scale-110 shadow-lg' : 'scale-100'
                   }`}
                 >
@@ -272,8 +272,8 @@ export const WhyChooseUs: React.FC = () => {
                   ref={(el) => {
                     headingItemRefs.current[index] = el;
                   }}
-                  className={`text-sm sm:text-[15px] font-extrabold text-brand-dark leading-snug transition-colors duration-300 ${
-                    isHovered ? 'text-brand-purple' : ''
+                  className={`text-sm sm:text-[15px] font-black text-slate-900 leading-snug transition-colors duration-300 ${
+                    isHovered ? 'text-[#620D9C]' : ''
                   }`}
                 >
                   {feature.heading}
@@ -284,7 +284,7 @@ export const WhyChooseUs: React.FC = () => {
                   ref={(el) => {
                     descRefs.current[index] = el;
                   }}
-                  className="text-[12.5px] sm:text-xs text-gray-600 leading-relaxed flex-grow"
+                  className="text-[12.5px] sm:text-xs text-slate-600 leading-relaxed flex-grow font-normal"
                 >
                   {feature.description}
                 </p>
@@ -294,10 +294,10 @@ export const WhyChooseUs: React.FC = () => {
                   ref={(el) => {
                     accentRefs.current[index] = el;
                   }}
-                  className={`h-0.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`h-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isHovered
-                      ? 'w-full bg-gradient-to-r from-brand-purple to-brand-violet'
-                      : 'w-10 bg-gradient-to-r from-brand-purple to-brand-violet'
+                      ? 'w-full bg-gradient-to-r from-[#620D9C] to-[#B063FF]'
+                      : 'w-10 bg-gradient-to-r from-[#620D9C] to-[#B063FF]'
                   }`}
                   style={{
                     /* GSAP controls initial scaleX; override width with tailwind on hover only */

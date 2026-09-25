@@ -140,11 +140,9 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
   }, []);
 
   const glowColorClass =
-    accentGlow === 'cyan'
-      ? 'from-[#00E5FF]/20 via-[#620d9c]/15 to-transparent'
-      : accentGlow === 'violet'
-      ? 'from-[#8B5CF6]/25 via-[#620d9c]/20 to-transparent'
-      : 'from-[#620d9c]/30 via-[#B388FF]/15 to-transparent';
+    accentGlow === 'cyan' || accentGlow === 'violet'
+      ? 'from-[#B063FF]/25 via-[#620d9c]/20 to-transparent'
+      : 'from-[#620d9c]/30 via-[#B063FF]/15 to-transparent';
 
   return (
     <div
@@ -186,7 +184,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
                   key={i}
                   className="px-4 py-2.5 rounded-2xl bg-[#180D38]/80 backdrop-blur-md border border-white/20 shadow-lg text-right"
                 >
-                  <div className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-lilac to-brand-cyan">
+                  <div className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-[#B063FF]">
                     {stat.value}
                   </div>
                   <div className="text-[11px] font-mono text-white/70 uppercase tracking-wider">
@@ -204,8 +202,8 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           className="relative z-20 h-full flex flex-col justify-center p-6 sm:p-12 md:p-16 max-w-2xl text-white"
         >
           {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-lilac text-xs font-black uppercase tracking-wider mb-4 w-fit shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-purple-200 text-xs font-black uppercase tracking-wider mb-4 w-fit shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
             <span>{badge}</span>
           </div>
 
@@ -213,7 +211,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.2] mb-4 text-white">
             {title}{' '}
             {highlightWord && (
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-lilac via-brand-violetLight to-brand-cyan">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-300 to-[#B063FF]">
                 {highlightWord}
               </span>
             )}
@@ -232,7 +230,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
                   key={i}
                   className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/15 text-xs font-mono font-medium text-white/90 transition-colors"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B063FF]" />
                   {pill}
                 </span>
               ))}

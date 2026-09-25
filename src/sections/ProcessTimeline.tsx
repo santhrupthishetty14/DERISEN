@@ -37,7 +37,7 @@ export const ProcessTimeline: React.FC = () => {
     <section
       ref={sectionRef}
       id="work-process"
-      className="py-24 sm:py-32 bg-surface-subtle relative overflow-hidden"
+      className="py-24 sm:py-32 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white relative overflow-hidden"
     >
       {/* Background Dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
@@ -50,11 +50,11 @@ export const ProcessTimeline: React.FC = () => {
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <span className="eyebrow">OUR WORK PROCESS</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight mb-4">
-            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#620d9c] via-[#8b5cf6] to-[#a855f7]">Measurable Success</span>
+          <span className="eyebrow text-[#B063FF]">OUR WORK PROCESS</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#620d9c] via-[#8b5cf6] to-[#B063FF]">Measurable Success</span>
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-purple-200/80 font-medium max-w-2xl mx-auto leading-relaxed">
             A clear, strategy-led process moves every project from insight to impact.
           </p>
           <div className="w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto mt-5" />
@@ -62,23 +62,23 @@ export const ProcessTimeline: React.FC = () => {
 
         {/* Interactive Progress Indicator Bar (Desktop) */}
         <div className="hidden lg:block relative max-w-4xl mx-auto mb-12">
-          <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_12px_#620d9c]"
+              className="h-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] transition-all duration-700 ease-out shadow-[0_0_12px_#620d9c]"
               style={{
                 width: `${((activeStep + 1) / PROCESS_STEPS.length) * 100}%`,
               }}
             />
           </div>
-          <div className="flex justify-between mt-3 text-[11px] font-mono font-bold text-gray-400">
+          <div className="flex justify-between mt-3 text-[11px] font-mono font-bold text-purple-200/60">
             {PROCESS_STEPS.map((s, idx) => (
               <button
                 key={s.number}
                 onClick={() => setActiveStep(idx)}
                 className={`transition-colors duration-300 ${
                   activeStep === idx
-                    ? 'text-brand-purple font-black scale-105'
-                    : 'hover:text-gray-700'
+                    ? 'text-[#B063FF] font-black scale-105'
+                    : 'hover:text-white'
                 }`}
               >
                 {s.number}. {s.title.toUpperCase()}
@@ -106,7 +106,7 @@ export const ProcessTimeline: React.FC = () => {
                 } ${
                   isActive
                     ? 'bg-gradient-to-br from-[#2b0853] via-[#430f73] to-[#581c87] text-white border-purple-500/50 shadow-[0_20px_50px_rgba(74,14,120,0.42)] scale-[1.02] sm:scale-[1.03] -translate-y-1'
-                    : 'bg-white text-gray-900 border-gray-200 shadow-sm hover:border-brand-purple/40 hover:-translate-y-0.5'
+                    : 'bg-white/5 backdrop-blur-md text-white border-white/15 shadow-sm hover:border-[#B063FF]/50 hover:bg-white/10 hover:-translate-y-0.5'
                 }`}
               >
                 {/* Top Number & Active Indicator */}
@@ -115,7 +115,7 @@ export const ProcessTimeline: React.FC = () => {
                     className={`w-12 h-12 rounded-full font-black text-base flex items-center justify-center transition-all duration-500 ${
                       isActive
                         ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white shadow-[0_0_20px_#620d9c]'
-                        : 'bg-surface-subtle text-brand-purple border border-gray-200'
+                        : 'bg-white/10 text-purple-200 border border-white/15'
                     }`}
                   >
                     {step.number}
@@ -123,7 +123,7 @@ export const ProcessTimeline: React.FC = () => {
 
                   {isActive && (
                     <span className="flex items-center gap-1.5 text-xs font-mono font-bold text-brand-lilac bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                      <Sparkles className="w-3 h-3 text-brand-cyan" />
+                      <Sparkles className="w-3 h-3 text-[#B063FF]" />
                       ACTIVE
                     </span>
                   )}
@@ -132,15 +132,13 @@ export const ProcessTimeline: React.FC = () => {
                 {/* Title & Description */}
                 <div>
                   <h4
-                    className={`text-xl sm:text-2xl font-black mb-3 tracking-tight transition-colors ${
-                      isActive ? 'text-white' : 'text-brand-dark'
-                    }`}
+                    className="text-xl sm:text-2xl font-black mb-3 tracking-tight text-white transition-colors"
                   >
                     {step.title}
                   </h4>
                   <p
                     className={`text-xs sm:text-[13.5px] leading-relaxed transition-colors ${
-                      isActive ? 'text-white/80' : 'text-gray-600'
+                      isActive ? 'text-white/80' : 'text-purple-200/75'
                     }`}
                   >
                     {step.description}
@@ -149,14 +147,12 @@ export const ProcessTimeline: React.FC = () => {
 
                 {/* Bottom Step Indicator */}
                 <div
-                  className={`mt-6 pt-4 border-t flex items-center justify-between text-xs font-mono font-bold ${
-                    isActive ? 'border-white/10 text-brand-lilac' : 'border-gray-100 text-gray-400'
-                  }`}
+                  className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono font-bold text-purple-200/60"
                 >
                   <span>STEP 0{index + 1} OF 06</span>
                   <ArrowRight
                     className={`w-4 h-4 transition-transform duration-300 ${
-                      isActive ? 'translate-x-1 text-brand-cyan' : 'text-gray-300'
+                      isActive ? 'translate-x-1 text-[#B063FF]' : 'text-purple-300/40'
                     }`}
                   />
                 </div>

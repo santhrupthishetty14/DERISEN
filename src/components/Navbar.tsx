@@ -69,8 +69,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'h-[70px] bg-white/90 backdrop-blur-md shadow-[0_10px_30px_rgba(24,13,56,0.06)] border-b border-gray-200/50'
-            : 'h-[90px] bg-white/60 backdrop-blur-sm border-b border-transparent'
+            ? 'h-[70px] bg-[#180128]/92 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/10 text-white'
+            : 'h-[90px] bg-[#180128]/70 backdrop-blur-sm border-b border-white/5 text-white'
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 h-full flex items-center justify-between">
@@ -85,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
             title="DE.RISEN - Click to view logo intro"
             className="cursor-pointer group"
           >
-            <Logo isAnimated={true} />
+            <Logo variant="light" isAnimated={true} />
           </div>
 
           {/* 2. Desktop Navigation Menu */}
@@ -99,8 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                   onClick={(e) => handleItemClick(e, item.id)}
                   className={`relative text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 py-2 group cursor-pointer ${
                     isActive
-                      ? 'text-brand-purple font-bold'
-                      : 'text-gray-600 hover:text-brand-purple'
+                      ? 'text-white font-bold'
+                      : 'text-purple-200/80 hover:text-white'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -131,14 +131,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
           {/* 4. Premium Mobile Hamburger Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden relative p-2.5 rounded-full text-brand-dark hover:text-brand-purple hover:bg-brand-lilacSoft transition-colors focus:outline-none cursor-pointer"
+            className="lg:hidden relative p-2.5 rounded-full text-white hover:text-brand-purple hover:bg-white/10 transition-colors focus:outline-none cursor-pointer"
             aria-label="Open mobile menu"
             aria-expanded={mobileMenuOpen}
           >
             <div className="w-6 h-5 flex flex-col justify-between items-end">
-              <span className="w-6 h-0.5 bg-brand-dark rounded-full transition-all duration-300" />
-              <span className="w-4 h-0.5 bg-brand-purple rounded-full transition-all duration-300 group-hover:w-6" />
-              <span className="w-5 h-0.5 bg-brand-dark rounded-full transition-all duration-300" />
+              <span className="w-6 h-0.5 bg-white rounded-full transition-all duration-300" />
+              <span className="w-4 h-0.5 bg-[#B063FF] rounded-full transition-all duration-300 group-hover:w-6" />
+              <span className="w-5 h-0.5 bg-white rounded-full transition-all duration-300" />
             </div>
           </button>
         </div>

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { About } from '../sections/About';
 import { Leadership } from '../sections/Leadership';
@@ -12,7 +12,7 @@ interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-white">
+    <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
       {/* 1. Dedicated Page Header Banner with Complete Background and Futuristic Animations */}
       <PageHeader
         badge="ABOUT DE.RISEN / WHO WE ARE"

@@ -31,13 +31,13 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenModal }) => {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-28 sm:py-36 bg-gradient-to-br from-[#0B041A] via-[#180D38] to-[#100726] text-white text-center relative overflow-hidden w-full max-w-full"
+      className="py-28 sm:py-36 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white text-center relative overflow-hidden w-full max-w-full"
     >
       {/* Dynamic Ambient Background Glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-purple/25 rounded-full blur-[120px]" />
-        <div className="absolute top-10 left-10 w-72 h-72 bg-brand-violet/20 rounded-full blur-[90px]" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-brand-cyan/15 rounded-full blur-[90px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#620D9C]/25 rounded-full blur-[120px]" />
+        <div className="absolute top-10 left-10 w-72 h-72 bg-[#4B006E]/30 rounded-full blur-[90px]" />
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-[#B063FF]/20 rounded-full blur-[90px]" />
       </div>
 
       <div className="max-w-[1320px] mx-auto px-6 relative z-10">
@@ -47,15 +47,15 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenModal }) => {
           }`}
         >
           {/* Eyebrow Badge */}
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md text-brand-lilac text-xs font-black uppercase tracking-widest rounded-full mb-6 border border-white/20 shadow-inner">
-            <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md text-purple-200 text-xs font-black uppercase tracking-widest rounded-full mb-6 border border-white/20 shadow-inner">
+            <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
             <span>START YOUR TRANSFORMATION</span>
           </span>
 
           {/* Main Headline from Requirement 36 */}
           <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 max-w-4xl mx-auto leading-[1.1]">
             Let's Make Your<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-lilac to-brand-cyan">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C084FC] to-[#B063FF]">
               Brand Rise.
             </span>
           </h2>

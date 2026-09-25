@@ -11,7 +11,7 @@ interface WorkPageProps {
 
 export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-white">
+    <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
       {/* 1. Page Header with Complete Edge-to-Edge Animated Creative Portfolio Background */}
       <PageHeader
         badge="WORK GALLERY & TESTIMONIALS / IMPACT"

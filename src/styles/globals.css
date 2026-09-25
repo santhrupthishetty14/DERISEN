@@ -25,7 +25,9 @@
   }
 
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-[#180128] text-white antialiased;
+    background: linear-gradient(180deg, #24033b 0%, #200236 40%, #180128 100%);
+    background-attachment: fixed;
     overflow-x: hidden;
     overflow-x: clip;
     width: 100%;
@@ -65,7 +67,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-gray-900;
+    @apply font-bold tracking-tight text-white;
   }
 }
 
@@ -174,11 +176,11 @@
    ========================================================================== */
 @keyframes neuralGlowPulse {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(99, 32, 238, 0.5), 0 0 30px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 15px rgba(99, 32, 238, 0.5), 0 0 30px rgba(176, 99, 255, 0.3);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 25px rgba(124, 58, 237, 0.8), 0 0 45px rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.8), 0 0 45px rgba(176, 99, 255, 0.6);
     transform: scale(1.05);
   }
 }
@@ -352,7 +354,7 @@
   0% {
     transform: translate(-50%, -50%) scale(0.15);
     opacity: 0.95;
-    border-color: rgba(56, 189, 248, 0.9);
+    border-color: rgba(176, 99, 255, 0.9);
   }
   60% {
     opacity: 0.5;
@@ -388,7 +390,7 @@
   50% {
     transform: scale(1.7);
     opacity: 1;
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.9), 0 0 32px rgba(168, 85, 247, 0.8);
+    box-shadow: 0 0 18px rgba(176, 99, 255, 0.9), 0 0 32px rgba(168, 85, 247, 0.8);
   }
 }
 

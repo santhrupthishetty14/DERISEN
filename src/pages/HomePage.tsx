@@ -14,7 +14,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) => {
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-white">
+    <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
       {/* 1. Hero Banner with 4 Core Pillars & Interactive 3D Visual */}
       <Hero onOpenModal={onOpenModal} onNavigate={onNavigate} />
 
@@ -67,23 +67,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
       {/* 5. Company Story & Leadership Teaser Banner */}
       <div className="max-w-[1320px] mx-auto px-6 my-14 relative z-20">
-        <div className="bg-gradient-to-br from-[#FAFAFD] via-white to-[#F5F2FC] rounded-3xl p-8 sm:p-10 lg:p-12 border border-purple-100/90 shadow-[0_15px_35px_rgba(24,13,56,0.05)] flex flex-col lg:flex-row items-center justify-between gap-8 overflow-hidden relative group">
+        <div className="bg-white rounded-3xl p-8 sm:p-10 lg:p-12 border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.12)] flex flex-col lg:flex-row items-center justify-between gap-8 overflow-hidden relative group text-slate-900">
           <div className="space-y-3.5 max-w-xl z-10 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-[#620D9C] text-xs font-bold uppercase tracking-wider border border-purple-200">
               <Users className="w-3.5 h-3.5" />
               <span>Leadership &amp; Vision</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight leading-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
               Driven by Strategic Vision &amp; Creative Mastery
             </h3>
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
               Discover the founders, philosophy, and proprietary operating model that empower DE.RISEN to deliver unmatched brand elevation across industries.
             </p>
             <div className="pt-2 flex justify-center lg:justify-start">
               <SlideArrowButton
                 label="Learn About DE.RISEN"
                 onClick={() => onNavigate('about')}
-                variant="navy"
+                variant="purple"
                 size="lg"
               />
             </div>
@@ -91,7 +91,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
           {/* Real Duo Founders Image Showcase */}
           <div className="relative z-10 flex-shrink-0 flex items-center justify-center">
-            <div className="relative w-64 sm:w-72 lg:w-80 rounded-2xl overflow-hidden shadow-[0_20px_45px_rgba(99,32,238,0.16)] border-2 border-white bg-white">
+            <div className="relative w-64 sm:w-72 lg:w-80 rounded-2xl overflow-hidden shadow-xl border border-slate-100 bg-slate-50">
               <img
                 src="/assets/visionaries-duo-clean.png"
                 alt="DE.RISEN Visionary Founders"

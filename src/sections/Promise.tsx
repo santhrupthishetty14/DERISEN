@@ -34,7 +34,7 @@ export const Promise: React.FC = () => {
   }, [isRevealed]);
 
   return (
-    <section ref={sectionRef} className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 sm:py-32 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white relative overflow-hidden">
       {/* Background Dots */}
       <div className="dot-pattern top-8 left-8 opacity-10" />
       <div className="dot-pattern bottom-8 right-8 opacity-10" />
@@ -56,13 +56,13 @@ export const Promise: React.FC = () => {
 
           <div className="relative z-10 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white/10 backdrop-blur-md text-brand-lilac text-xs font-black uppercase tracking-widest rounded-full mb-6 border border-white/15 shadow-inner">
-              <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
+              <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
               <span>OUR PROMISE</span>
             </span>
 
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight mb-6 leading-tight">
               Creative Thinking. Strategic Execution.{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-lilac via-brand-violetLight to-brand-cyan">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-lilac via-[#B063FF] to-white">
                 Measurable Results.
               </span>
             </h3>
@@ -85,9 +85,9 @@ export const Promise: React.FC = () => {
 
           <div className="relative max-w-5xl mx-auto mb-12 px-4">
             {/* Connecting Background Line */}
-            <div className="hidden md:block absolute top-7 left-12 right-12 h-1 bg-gray-200 rounded-full z-0 overflow-hidden">
+            <div className="hidden md:block absolute top-7 left-12 right-12 h-1 bg-white/10 rounded-full z-0 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan transition-all duration-700 ease-out shadow-[0_0_10px_#620d9c]"
+                className="h-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] transition-all duration-700 ease-out shadow-[0_0_10px_#B063FF]"
                 style={{
                   width: `${((activeWorkflowIndex + 1) / WORKFLOW_PIPELINE.length) * 100}%`,
                 }}
@@ -110,10 +110,10 @@ export const Promise: React.FC = () => {
                     <div
                       className={`w-14 h-14 rounded-full font-black text-sm flex items-center justify-center mb-3 transition-all duration-500 border-2 ${
                         isActive
-                          ? 'bg-gradient-to-tr from-brand-purple to-brand-violet text-white border-white scale-125 shadow-[0_0_25px_#620d9c]'
+                          ? 'bg-gradient-to-tr from-[#620D9C] to-[#B063FF] text-white border-white scale-125 shadow-[0_0_25px_#B063FF]'
                           : isPassed
-                          ? 'bg-brand-dark text-white border-brand-purple shadow-md'
-                          : 'bg-white text-gray-400 border-gray-200 group-hover:border-brand-purple/50'
+                          ? 'bg-[#24033b] text-white border-[#B063FF] shadow-md'
+                          : 'bg-white/5 text-purple-200/50 border-white/15 group-hover:border-[#B063FF]/50'
                       }`}
                     >
                       {isPassed && !isActive ? <Check className="w-5 h-5" /> : item.step}
@@ -123,8 +123,8 @@ export const Promise: React.FC = () => {
                     <span
                       className={`text-xs sm:text-sm font-extrabold tracking-tight transition-colors duration-300 ${
                         isActive
-                          ? 'text-brand-purple scale-105'
-                          : 'text-gray-700 group-hover:text-brand-purple'
+                          ? 'text-[#B063FF] scale-105'
+                          : 'text-purple-200/80 group-hover:text-white'
                       }`}
                     >
                       {item.name}
@@ -136,18 +136,18 @@ export const Promise: React.FC = () => {
           </div>
 
           {/* Breadcrumb Strip matching PDF */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2.5 sm:py-3.5 bg-brand-lilacSoft border border-brand-lilacBorder rounded-2xl sm:rounded-full text-[10px] sm:text-xs font-black tracking-wider text-brand-purple uppercase shadow-sm max-w-full">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2.5 sm:py-3.5 bg-white/5 border border-white/15 rounded-2xl sm:rounded-full text-[10px] sm:text-xs font-black tracking-wider text-purple-200 uppercase shadow-sm max-w-full">
             <span>DISCOVER</span>
-            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#B063FF]" />
             <span>STRATEGIZE</span>
-            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#B063FF]" />
             <span>CREATE</span>
-            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#B063FF]" />
             <span>DEVELOP</span>
-            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#B063FF]" />
             <span>LAUNCH</span>
-            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-brand-violetLight" />
-            <span className="text-brand-dark">GROW</span>
+            <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#B063FF]" />
+            <span className="text-white">GROW</span>
           </div>
         </div>
       </div>

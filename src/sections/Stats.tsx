@@ -140,15 +140,15 @@ export const Stats: React.FC = () => {
     <section
       ref={sectionRef}
       id="stats-section"
-      className="py-16 sm:py-24 bg-[#F4F3F9] border-t border-b border-gray-200/90 relative overflow-hidden"
+      className="py-16 sm:py-24 bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white border-t border-b border-white/10 relative overflow-hidden"
     >
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/20 text-[#B063FF] text-xs font-bold uppercase tracking-wider mb-3 border border-[#B063FF]/30">
             <span>Proven Track Record</span>
           </div>
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-brand-dark tracking-tight mb-2 sm:mb-3">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight mb-2 sm:mb-3">
             OUR PERFORMANCE. YOURS TRUST
           </h2>
           <div className="w-14 sm:w-16 h-1 bg-gradient-to-r from-brand-purple to-brand-violet rounded-full mx-auto" />
@@ -169,7 +169,7 @@ export const Stats: React.FC = () => {
                   ref={(el) => {
                     iconRefs.current[idx] = el;
                   }}
-                  className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-brand-purple via-brand-violet to-brand-cyan text-white flex items-center justify-center mb-3 sm:mb-5 shadow-md transition-all duration-300 group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(99,32,238,0.4)] cursor-pointer"
+                  className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white flex items-center justify-center mb-3 sm:mb-5 shadow-md transition-all duration-300 group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(99,32,238,0.4)] cursor-pointer"
                 >
                   <IconComponent className="w-5 h-5 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:rotate-12" />
                 </div>
@@ -179,10 +179,10 @@ export const Stats: React.FC = () => {
                   ref={(el) => {
                     numberRefs.current[idx] = el;
                   }}
-                  className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-dark tracking-tight leading-none mb-1.5 sm:mb-2"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none mb-1.5 sm:mb-2"
                 >
                   {hasAnimated ? counts[idx] : 0}
-                  <span className="text-brand-purple">{stat.suffix}</span>
+                  <span className="text-[#B063FF]">{stat.suffix}</span>
                 </div>
 
                 {/* 3. Label */}
@@ -190,7 +190,7 @@ export const Stats: React.FC = () => {
                   ref={(el) => {
                     labelRefs.current[idx] = el;
                   }}
-                  className="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-gray-500 max-w-[150px] leading-tight"
+                  className="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-purple-200/80 max-w-[150px] leading-tight"
                 >
                   {stat.label}
                 </div>
@@ -201,7 +201,7 @@ export const Stats: React.FC = () => {
                     ref={(el) => {
                       separatorRefs.current[idx] = el;
                     }}
-                    className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-24 w-[1px] bg-gradient-to-b from-transparent via-gray-200 to-transparent"
+                    className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-24 w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent"
                   />
                 )}
               </div>

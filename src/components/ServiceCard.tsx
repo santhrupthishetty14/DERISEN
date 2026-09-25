@@ -35,18 +35,18 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
       style={{
         transitionDelay: `${index * 120}ms`,
       }}
-      className={`group relative bg-white rounded-2xl border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col cursor-view-target ${
+      className={`group relative bg-white/5 backdrop-blur-md rounded-2xl border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col cursor-view-target text-white ${
         isRevealed
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-[35px]'
       } ${
         isHovered
-          ? '-translate-y-2 border-brand-purple shadow-[0_20px_40px_rgba(99,32,238,0.14)]'
-          : 'border-gray-200/90 shadow-sm'
+          ? '-translate-y-2 border-purple-400/50 shadow-[0_20px_40px_rgba(98,13,156,0.3)] bg-white/10'
+          : 'border-white/10 shadow-sm'
       }`}
     >
       {/* Top Number Indicator Tag */}
-      <div className="absolute top-3.5 right-4 z-20 font-black text-xs sm:text-sm tracking-wider text-white bg-brand-dark/75 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+      <div className="absolute top-3.5 right-4 z-20 font-black text-xs sm:text-sm tracking-wider text-white bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-md">
         {numString}
       </div>
 
@@ -63,7 +63,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
               loading="lazy"
             />
             {/* Ambient Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-black/20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#180128]/90 via-transparent to-black/30 pointer-events-none" />
           </div>
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c]" />
@@ -71,7 +71,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
 
         {/* Overlapping Round Purple Gradient Icon Badge */}
         <div
-          className={`absolute bottom-3.5 left-5 w-12 h-12 rounded-full bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center shadow-lg border-2 border-white transition-all duration-300 z-10 ${
+          className={`absolute bottom-3.5 left-5 w-12 h-12 rounded-full bg-gradient-to-br from-[#4B006E] to-[#B063FF] text-white flex items-center justify-center shadow-lg border-2 border-white/20 transition-all duration-300 z-10 ${
             isHovered ? '-translate-y-1 scale-110 shadow-glow-purple' : 'translate-y-0 scale-100'
           }`}
         >
@@ -82,17 +82,17 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
       {/* Card Content Body */}
       <div className="p-6 sm:p-7 flex flex-col flex-grow">
         {/* Title */}
-        <h3 className="text-base sm:text-lg font-black uppercase tracking-wider text-brand-dark mb-1 transition-colors group-hover:text-brand-purple">
+        <h3 className="text-base sm:text-lg font-black uppercase tracking-wider text-white mb-1 transition-colors group-hover:text-purple-200">
           {service.title}
         </h3>
 
         {/* Tagline */}
-        <div className="text-xs sm:text-sm font-bold text-brand-purple mb-3">
+        <div className="text-xs sm:text-sm font-bold text-[#B063FF] mb-3">
           {service.tagline}
         </div>
 
         {/* Supporting Description */}
-        <p className="text-xs sm:text-[13px] text-gray-600 leading-relaxed flex-grow">
+        <p className="text-xs sm:text-[13px] text-purple-200/80 leading-relaxed flex-grow">
           {service.description}
         </p>
 
@@ -101,7 +101,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
           className={`h-0.5 mt-5 rounded-full transition-all duration-500 ease-out ${
             isHovered
               ? 'w-full bg-gradient-to-r from-brand-purple to-brand-violet'
-              : 'w-10 bg-gray-200'
+              : 'w-10 bg-white/20'
           }`}
         />
       </div>
