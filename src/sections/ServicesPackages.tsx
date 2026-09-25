@@ -172,7 +172,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                 onClick={() => setSelectedNum(pkg.num)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-[#620d9c] text-white shadow-[0_4px_20px_rgba(98,13,156,0.5)] scale-105 border border-purple-300/40'
+                    ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_20px_rgba(176,99,255,0.45)] scale-105 border border-purple-300/40'
                     : 'bg-white/10 text-purple-100 border border-white/15 hover:bg-white/15 hover:border-purple-300/40'
                 }`}
               >
@@ -214,7 +214,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                 }}
                 className={`relative rounded-[26px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group will-change-transform ${
                   isSelected
-                    ? 'bg-[#620d9c] text-white shadow-2xl shadow-[#620d9c]/50 -translate-y-2.5 scale-[1.015] border-2 border-purple-300/30'
+                    ? 'bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#8E24AA] text-white shadow-2xl shadow-[#620d9c]/60 -translate-y-2.5 scale-[1.015] border-2 border-purple-300/40'
                     : 'bg-white text-gray-900 border border-white/10 shadow-lg hover:shadow-2xl hover:border-[#620d9c]/30 hover:-translate-y-2'
                 }`}
               >
@@ -297,7 +297,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                           className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 group-hover:scale-110 ${
                             isSelected
                               ? 'bg-white text-[#620d9c] shadow-sm'
-                              : 'bg-[#620d9c] text-white shadow-sm shadow-[#620d9c]/25'
+                              : 'bg-gradient-to-r from-[#4B006E] to-[#620D9C] text-white shadow-sm shadow-[#620d9c]/25'
                           }`}
                         >
                           <Check className="w-2.5 h-2.5 stroke-[3]" />

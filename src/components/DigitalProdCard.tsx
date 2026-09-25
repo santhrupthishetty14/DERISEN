@@ -31,7 +31,7 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
       }}
       className={`rounded-2xl p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
         isDark
-          ? 'bg-[#620d9c] text-white shadow-2xl shadow-[#620d9c]/40 border border-purple-300/20 -translate-y-1.5'
+          ? 'bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#8E24AA] text-white shadow-2xl shadow-[#620d9c]/50 border border-purple-300/30 -translate-y-1.5'
           : 'bg-white text-gray-900 border border-gray-200/90 shadow-sm hover:shadow-xl hover:border-[#620d9c]/40 hover:-translate-y-1'
       }`}
     >
@@ -50,7 +50,7 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
               isDark
                 ? 'bg-white/20 text-white backdrop-blur-sm group-hover:scale-110'
-                : 'bg-[#620d9c] text-white shadow-md shadow-[#620d9c]/25 group-hover:scale-110'
+                : 'bg-gradient-to-r from-[#4B006E] to-[#620D9C] text-white shadow-md shadow-[#620d9c]/25 group-hover:scale-110'
             }`}
           >
             <Sparkles className="w-4 h-4 text-white" />

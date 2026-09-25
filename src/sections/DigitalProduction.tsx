@@ -125,7 +125,7 @@ export const DigitalProduction: React.FC = () => {
                 onClick={() => handleTabClick(idx, service.number)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-[#620d9c] text-white shadow-[0_4px_16px_rgba(98,13,156,0.3)] scale-105'
+                    ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_16px_rgba(176,99,255,0.4)] scale-105'
                     : 'bg-white text-gray-700 border border-gray-200/90 hover:border-[#620d9c]/40 hover:text-[#620d9c]'
                 }`}
               >
