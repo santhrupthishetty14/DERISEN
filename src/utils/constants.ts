@@ -283,7 +283,8 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'Global Strategy & Management Advisory',
     category: 'Branding & Identity',
     description: 'Complete visual identity system, corporate stationery, guidelines and typography.',
-    imageUrl: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95',
+    imageUrl: '/assets/corporate-brand-identity.jpg',
+    videoUrl: '/assets/corporate-brand-identity.mp4',
     metrics: '+180% Brand Recall'
   },
   {
