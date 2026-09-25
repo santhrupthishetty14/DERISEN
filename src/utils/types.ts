@@ -74,6 +74,7 @@ export interface PortfolioItem {
   category: string;
   description: string;
   imageUrl?: string;
+  videoUrl?: string;
   metrics?: string;
 }
 

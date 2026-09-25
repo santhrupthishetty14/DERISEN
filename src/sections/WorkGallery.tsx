@@ -117,12 +117,24 @@ export const WorkGallery: React.FC = () => {
               >
                 {/* Visual Header with Real Delivered Work Picture */}
                 <div className="h-56 relative overflow-hidden bg-brand-navy">
-                  <img
-                    src={imgSrc}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
-                    loading="lazy"
-                  />
+                  {item.videoUrl ? (
+                    <video
+                      src={item.videoUrl}
+                      poster={imgSrc}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
+                    />
+                  ) : (
+                    <img
+                      src={imgSrc}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
+                      loading="lazy"
+                    />
+                  )}
 
                   {/* Gradient Overlay for Readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-black/20" />

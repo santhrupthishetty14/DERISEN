@@ -307,7 +307,8 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'Global Lifestyle & Retail Brand',
     category: 'Motion & Video',
     description: 'High-definition 3D motion graphics, commercial reels, and promotional video shoots.',
-    imageUrl: '/assets/3d-product-animation.jpeg',
+    imageUrl: '/assets/3d-product-animation.jpg',
+    videoUrl: '/assets/3d-product-animation.mp4',
     metrics: '1.2M+ Viral Reach'
   },
   {
