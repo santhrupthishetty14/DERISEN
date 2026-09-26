@@ -60,7 +60,7 @@ export const OPERATING_MODEL_SERVICES: OperatingModelService[] = [
     tagline: 'Design That Captures Attention.',
     description: 'We bring your vision to life through high-impact visual assets. Whether it is premium logo design, corporate brochures, posters, or custom packaging, we deliver aesthetic precision that ensures your brand shines.',
     iconName: 'PenTool',
-    theme: 'indigo'
+    theme: 'purple'
   },
   {
     id: 'branding',

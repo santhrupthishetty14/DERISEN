@@ -25,8 +25,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       <div className="max-w-[1320px] mx-auto px-6 -mt-8 mb-16 relative z-20">
         <div className="bg-gradient-to-r from-[#180D38] via-[#200d4d] to-[#0e0524] rounded-3xl p-8 sm:p-10 border border-white/10 shadow-[0_20px_50px_rgba(24,13,56,0.22)] flex flex-col lg:flex-row items-center justify-between gap-8 text-white overflow-hidden relative group">
           <div className="space-y-3 text-center lg:text-left max-w-xl z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-purple/30 border border-brand-cyan/40 text-brand-cyan text-xs font-mono font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-brand-cyan" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-purple/30 border border-[#B063FF]/40 text-[#D8B4FE] text-xs font-mono font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
               <span>Full Spectrum Capabilities</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
@@ -55,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
-                <span className="text-[11px] font-bold text-brand-cyan uppercase tracking-wider">50+ Creative &amp; IT Services</span>
+                <span className="text-[11px] font-bold text-[#D8B4FE] uppercase tracking-wider">50+ Creative &amp; IT Services</span>
               </div>
             </div>
           </div>

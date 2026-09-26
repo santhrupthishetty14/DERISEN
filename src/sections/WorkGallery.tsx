@@ -392,7 +392,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                   {selectedItem.category}
                 </span>
                 {selectedItem.metrics && (
-                  <span className="text-xs font-bold text-brand-cyan bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold text-[#D8B4FE] bg-[#3B0764]/70 border border-[#B063FF]/40 px-3 py-1 rounded-full">
                     {selectedItem.metrics}
                   </span>
                 )}
@@ -530,7 +530,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                     </div>
 
                     <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-                      <div className="flex items-center gap-2 text-brand-cyan mb-2">
+                      <div className="flex items-center gap-2 text-[#C084FC] mb-2">
                         <Sparkles className="w-4 h-4" />
                         <span className="text-xs font-bold uppercase tracking-wider">Typography &amp; Modes</span>
                       </div>
@@ -620,7 +620,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                     </div>
 
                     <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-                      <div className="flex items-center gap-2 text-brand-cyan mb-2">
+                      <div className="flex items-center gap-2 text-[#C084FC] mb-2">
                         <Sparkles className="w-4 h-4" />
                         <span className="text-xs font-bold uppercase tracking-wider">3D CGI &amp; Vessel</span>
                       </div>

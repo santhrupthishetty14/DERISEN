@@ -25,7 +25,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ isActive, target
     >
       {/* Dynamic Top Gradient Loading Sweep */}
       <div
-        className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#620d9c] via-[#a855f7] to-[#38bdf8] shadow-[0_0_20px_#620d9c] transition-transform duration-500 ease-out ${
+        className={`absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#620d9c] via-[#a855f7] to-[#B063FF] shadow-[0_0_20px_#620d9c] transition-transform duration-500 ease-out ${
           isActive ? 'scale-x-100 origin-left' : 'scale-x-0 origin-right'
         }`}
       />

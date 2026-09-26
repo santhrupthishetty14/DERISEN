@@ -14,7 +14,7 @@ export interface AnimatedSectionBannerProps {
   imageSrc: string;
   pills?: string[];
   stats?: { value: string; label: string }[];
-  accentGlow?: 'purple' | 'cyan' | 'violet';
+  accentGlow?: 'purple' | 'violet' | 'magenta';
   align?: 'left' | 'right' | 'center';
 }
 
@@ -140,7 +140,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
   }, []);
 
   const glowColorClass =
-    accentGlow === 'cyan' || accentGlow === 'violet'
+    accentGlow === 'magenta' || accentGlow === 'violet'
       ? 'from-[#B063FF]/25 via-[#620d9c]/20 to-transparent'
       : 'from-[#620d9c]/30 via-[#B063FF]/15 to-transparent';
 

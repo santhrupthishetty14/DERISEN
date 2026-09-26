@@ -17,7 +17,6 @@ export default {
           violet: '#B063FF',
           violetLight: '#C084FC',
           electric: '#7000FF',
-          cyan: '#B063FF',
           lilac: '#EDE9FE',
           lilacSoft: '#F5F3FF',
           lilacBorder: '#DDD6FE',
