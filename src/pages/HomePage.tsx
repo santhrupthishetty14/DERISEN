@@ -89,17 +89,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
             </div>
           </div>
 
-          {/* Real Duo Founders Image Showcase */}
-          <div className="relative z-10 flex-shrink-0 flex items-center justify-center">
-            <div className="relative w-64 sm:w-72 lg:w-80 rounded-2xl overflow-hidden shadow-xl border border-slate-100 bg-slate-50">
-              <img
-                src="/assets/visionaries-duo-clean.png"
-                alt="DE.RISEN Visionary Founders"
-                className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2.5 text-white text-center">
-                <span className="text-[11px] font-bold tracking-wider uppercase text-purple-200">The Founders &amp; Leadership</span>
+          {/* Real Duo Founders Image Showcase: Clean Photos of Both Founders */}
+          <div className="relative z-10 flex-shrink-0 flex items-center justify-center gap-3 sm:gap-4">
+            {/* Shweta Deharkar - Founder & CEO */}
+            <div className="group/founder flex flex-col items-center">
+              <div className="relative w-28 sm:w-36 lg:w-40 h-36 sm:h-44 lg:h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-purple-200/80 bg-purple-50 transition-all duration-500 group-hover/founder:scale-105 group-hover/founder:border-[#620D9C] group-hover/founder:shadow-xl">
+                <img
+                  src="/assets/leader-shweta-cleaned.jpg"
+                  alt="Shweta Deharkar - Founder & CEO"
+                  className="w-full h-full object-cover object-top filter brightness-100 contrast-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#180128]/95 via-[#180128]/60 to-transparent p-2 text-center">
+                  <div className="text-xs sm:text-sm font-black text-white leading-tight">Shweta Deharkar</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-[#D8B4FE]">Founder &amp; CEO</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Lejai Jayakumar - Managing Director & Co-Founder */}
+            <div className="group/founder flex flex-col items-center">
+              <div className="relative w-28 sm:w-36 lg:w-40 h-36 sm:h-44 lg:h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-purple-200/80 bg-purple-50 transition-all duration-500 group-hover/founder:scale-105 group-hover/founder:border-[#620D9C] group-hover/founder:shadow-xl">
+                <img
+                  src="/assets/leader-lejai-cleaned.jpg"
+                  alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                  className="w-full h-full object-cover object-top filter brightness-100 contrast-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#180128]/95 via-[#180128]/60 to-transparent p-2 text-center">
+                  <div className="text-xs sm:text-sm font-black text-white leading-tight">Lejai Jayakumar</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold text-[#D8B4FE]">Managing Director</div>
+                </div>
               </div>
             </div>
           </div>
