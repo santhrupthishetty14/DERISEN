@@ -169,7 +169,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           ref={glowOrbRef}
           className={`absolute -top-20 -right-20 w-[420px] h-[420px] rounded-full bg-gradient-to-br ${glowColorClass} blur-3xl pointer-events-none will-change-transform`}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B041A]/95 via-[#180D38]/75 to-[#0B041A]/60 sm:to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B041A]/95 via-[#200236]/75 to-[#0B041A]/60 sm:to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B041A] via-transparent to-black/20 pointer-events-none" />
 
         {/* Floating Ambient Depth Grid & Badge Layer */}
@@ -182,7 +182,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="px-4 py-2.5 rounded-2xl bg-[#180D38]/80 backdrop-blur-md border border-white/20 shadow-lg text-right"
+                  className="px-4 py-2.5 rounded-2xl bg-[#200236]/80 backdrop-blur-md border border-white/20 shadow-lg text-right"
                 >
                   <div className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-[#B063FF]">
                     {stat.value}

@@ -8,10 +8,10 @@ export default {
     extend: {
       colors: {
         brand: {
-          navy: '#12092c',
-          dark: '#180D38',
-          card: '#1E1147',
-          cardHover: '#27175c',
+          navy: '#180128',
+          dark: '#200236',
+          card: '#2A0245',
+          cardHover: '#38035C',
           purple: '#620d9c',
           purpleHover: '#4e087e',
           violet: '#B063FF',
@@ -35,11 +35,11 @@ export default {
         'brand-grad-horizontal': 'linear-gradient(90deg, #4B006E 0%, #620D9C 48%, #B063FF 100%)',
         'text-grad': 'linear-gradient(135deg, #4B006E 0%, #620D9C 48%, #B063FF 100%)',
         'badge-grad': 'linear-gradient(135deg, #4B006E 0%, #620D9C 48%, #B063FF 100%)',
-        'dark-card-grad': 'linear-gradient(145deg, #1E1147 0%, #150A33 100%)',
+        'dark-card-grad': 'linear-gradient(145deg, #2A0245 0%, #180128 100%)',
       },
       boxShadow: {
         'glow-purple': '0 0 25px rgba(98, 13, 156, 0.35)',
-        'dark-card': '0 15px 35px rgba(18, 9, 44, 0.25)',
+        'dark-card': '0 15px 35px rgba(24, 1, 40, 0.35)',
       },
       borderRadius: {
         'full-pill': '9999px',

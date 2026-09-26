@@ -66,7 +66,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
             <div className="absolute inset-0 bg-gradient-to-t from-[#180128]/90 via-transparent to-black/30 pointer-events-none" />
           </div>
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#180D38] via-[#1E1147] to-[#12092c]" />
+          <div className="w-full h-full bg-gradient-to-br from-[#200236] via-[#2A0245] to-[#180128]" />
         )}
 
         {/* Overlapping Round Purple Gradient Icon Badge */}

@@ -32,7 +32,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ isActive, target
 
       {/* Main Luxury Gradient Curtain Backdrop (matches deep royal purple in reference) */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-[#120429] via-[#2d0752] to-[#430f73] transition-transform duration-500 cubic-bezier(0.77,0,0.175,1) ${
+        className={`absolute inset-0 bg-gradient-to-br from-[#180128] via-[#2d0752] to-[#430f73] transition-transform duration-500 cubic-bezier(0.77,0,0.175,1) ${
           isActive ? 'translate-y-0' : '-translate-y-full'
         }`}
       >

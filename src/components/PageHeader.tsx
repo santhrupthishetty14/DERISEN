@@ -496,7 +496,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             >
               {/* Floating Synergy HUD Card */}
               <div
-                className="p-5 rounded-2xl bg-[#0e0728]/85 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
+                className="p-5 rounded-2xl bg-[#180128]/90 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
                 style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
               >
                 <div className="flex items-center justify-between">
@@ -517,7 +517,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               {/* Floating Corner Badge */}
               {floatingBadge && (
                 <div
-                  className="mt-6 px-4 py-2.5 rounded-2xl bg-[#12092c]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
+                  className="mt-6 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
                   style={{ animation: 'floatHudChip 5s ease-in-out infinite alternate', animationDelay: '1s' }}
                 >
                   <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
@@ -553,7 +553,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                 {/* Floating Top Mini HUD Chip */}
                 <div
-                  className="absolute -top-3.5 -left-2 z-30 px-3.5 py-1.5 rounded-full bg-[#12092c]/95 border border-brand-violet/50 backdrop-blur-md shadow-lg flex items-center gap-2 animate-bounce"
+                  className="absolute -top-3.5 -left-2 z-30 px-3.5 py-1.5 rounded-full bg-[#180128]/95 border border-brand-violet/50 backdrop-blur-md shadow-lg flex items-center gap-2 animate-bounce"
                   style={{ animationDuration: '3.5s' }}
                 >
                   <Zap className="w-3.5 h-3.5 text-brand-violet animate-pulse" />
@@ -561,19 +561,19 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 </div>
 
                 {/* Frame with image */}
-                <div className="relative rounded-3xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#12092c] to-[#080315] shadow-[0_25px_60px_rgba(5,2,15,0.8)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
+                <div className="relative rounded-3xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#180128] to-[#0a0014] shadow-[0_25px_60px_rgba(5,2,15,0.8)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
                   <img
                     src={imageSrc}
                     alt={imageAlt || title}
                     className="w-full h-[280px] sm:h-[320px] lg:h-[340px] object-cover rounded-3xl block transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-3xl pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080315]/80 via-transparent to-brand-purple/15 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014]/80 via-transparent to-brand-purple/15 pointer-events-none" />
                 </div>
 
                 {/* Floating Corner Badge */}
                 {floatingBadge && (
-                  <div className="absolute -bottom-4 right-3 sm:-bottom-5 sm:right-5 z-30 px-4 py-2.5 rounded-2xl bg-[#12092c]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105">
+                  <div className="absolute -bottom-4 right-3 sm:-bottom-5 sm:right-5 z-30 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105">
                     <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
                       <ShieldCheck className="w-4.5 h-4.5 text-brand-violet" />
                     </div>

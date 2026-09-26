@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    --brand-navy-dark: #12092c;
-    --brand-indigo-dark: #180D38;
-    --brand-card-dark: #1E1147;
+    --brand-navy-dark: #180128;
+    --brand-indigo-dark: #200236;
+    --brand-card-dark: #2A0245;
     --brand-purple: #620d9c;
     --brand-violet: #B063FF;
     --brand-violet-light: #C084FC;

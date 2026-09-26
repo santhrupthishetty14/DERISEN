@@ -44,7 +44,7 @@ export const Promise: React.FC = () => {
             Promise Dark Gradient Feature Banner with Glow Aura
             =================================================================== */}
         <div
-          className={`bg-gradient-to-br from-[#12092c] via-[#180D38] to-[#1E1147] rounded-3xl p-8 sm:p-16 text-white text-center shadow-[0_25px_60px_rgba(24,13,56,0.35)] border border-white/20 mb-20 sm:mb-24 relative overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`bg-gradient-to-br from-[#180128] via-[#2D034A] to-[#3B0764] rounded-3xl p-8 sm:p-16 text-white text-center shadow-[0_25px_60px_rgba(45,3,74,0.4)] border border-white/20 mb-20 sm:mb-24 relative overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-[0.98]'
           }`}
         >

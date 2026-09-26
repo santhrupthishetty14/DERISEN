@@ -309,7 +309,7 @@ export const WhyChooseUs: React.FC = () => {
         </div>
 
         {/* ─── Bottom CTA Banner (Promise Strip) ──────────────────────────── */}
-        <div className="mt-16 bg-gradient-to-r from-brand-dark via-brand-card to-[#12092c] rounded-2xl p-8 sm:p-10 text-white text-center border border-white/10 shadow-[0_20px_50px_rgba(24,13,56,0.3)] relative overflow-hidden">
+        <div className="mt-16 bg-gradient-to-r from-brand-dark via-brand-card to-[#180128] rounded-2xl p-8 sm:p-10 text-white text-center border border-[#B063FF]/30 shadow-[0_20px_50px_rgba(32,2,54,0.4)] relative overflow-hidden">
           {/* Ambient radial glow inside banner */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,32,238,0.3),transparent_70%)] pointer-events-none" />
 

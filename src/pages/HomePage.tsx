@@ -23,7 +23,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
 
       {/* Bridge Card to Explore Comprehensive Services */}
       <div className="max-w-[1320px] mx-auto px-6 -mt-8 mb-16 relative z-20">
-        <div className="bg-gradient-to-r from-[#180D38] via-[#200d4d] to-[#0e0524] rounded-3xl p-8 sm:p-10 border border-white/10 shadow-[0_20px_50px_rgba(24,13,56,0.22)] flex flex-col lg:flex-row items-center justify-between gap-8 text-white overflow-hidden relative group">
+        <div className="bg-gradient-to-r from-[#2B0348] via-[#3B0764] to-[#180128] rounded-3xl p-8 sm:p-10 border border-[#B063FF]/30 shadow-[0_20px_50px_rgba(43,3,72,0.35)] flex flex-col lg:flex-row items-center justify-between gap-8 text-white overflow-hidden relative group">
           <div className="space-y-3 text-center lg:text-left max-w-xl z-10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-purple/30 border border-[#B063FF]/40 text-[#D8B4FE] text-xs font-mono font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />

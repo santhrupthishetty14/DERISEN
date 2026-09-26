@@ -39,7 +39,7 @@ export const SlideArrowButton: React.FC<SlideArrowButtonProps> = ({
   const bgStyle =
     variant === 'purple'
       ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] hover:brightness-110 shadow-[0_6px_22px_rgba(98,13,156,0.38)] hover:shadow-[0_10px_30px_rgba(176,99,255,0.45)]'
-      : 'bg-[#13063e] hover:bg-[#1f0a5c] shadow-[0_10px_26px_rgba(19,6,62,0.28)] hover:shadow-[0_14px_34px_rgba(81,6,158,0.42)]';
+      : 'bg-[#2A0245] hover:bg-[#38035C] shadow-[0_10px_26px_rgba(42,2,69,0.35)] hover:shadow-[0_14px_34px_rgba(98,13,156,0.45)]';
 
   const sizeStyle =
     size === 'sm'

@@ -366,10 +366,10 @@
 
 /* Laptop Mockup Box */
 .laptop-mockup {
-  background: linear-gradient(145deg, #180D38, #110729);
+  background: linear-gradient(145deg, #200236, #140121);
   border-radius: 16px 16px 4px 4px;
   padding: 12px 12px 18px 12px;
-  box-shadow: 0 25px 60px rgba(24, 13, 56, 0.35);
+  box-shadow: 0 25px 60px rgba(32, 2, 54, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.15);
   position: relative;
   z-index: 2;
@@ -457,7 +457,7 @@
 }
 
 .phone-screen {
-  background: #150A33;
+  background: #180128;
   border-radius: 22px;
   padding: 1rem 0.75rem;
   color: white;
@@ -843,7 +843,7 @@
 .intro-mug-center {
   width: 140px;
   height: 135px;
-  background: linear-gradient(145deg, #180D38, #2A1359);
+  background: linear-gradient(145deg, #200236, #3B0764);
   border-radius: 16px 16px 28px 28px;
   display: flex;
   flex-direction: column;
@@ -1197,7 +1197,7 @@
 }
 
 .center-mockup-frame {
-  background: linear-gradient(145deg, #180D38, #281358);
+  background: linear-gradient(145deg, #200236, #3B0764);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
   color: white;
