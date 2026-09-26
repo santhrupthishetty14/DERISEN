@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, AlertCircle, Mail, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { X, AlertCircle, Mail, CheckCircle2 } from 'lucide-react';
 import { SlideArrowButton } from './SlideArrowButton';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { sendInquiry, buildMailtoUrl, TARGET_EMAIL } from '../utils/emailService';
 
 interface ContactModalProps {
@@ -100,7 +101,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md"
               >
-                <MessageSquare className="w-4 h-4" /> Send Instantly via WhatsApp (+91 78999 10917)
+                <WhatsAppIcon className="w-4 h-4" /> Send Instantly via WhatsApp (+91 78999 10917)
               </a>
 
               <a

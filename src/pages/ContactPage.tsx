@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
-import { Mail, Phone, MapPin, MessageSquare, ShieldCheck, CheckCircle2, ArrowRight, HelpCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, ShieldCheck, CheckCircle2, ArrowRight, HelpCircle, AlertCircle } from 'lucide-react';
 import { FinalCTA } from '../sections/FinalCTA';
 import { SlideArrowButton } from '../components/SlideArrowButton';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { sendInquiry, buildMailtoUrl } from '../utils/emailService';
 
 interface ContactPageProps {
@@ -138,7 +139,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                     className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-emerald-500 hover:shadow-md transition-all group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                      <MessageSquare className="w-6 h-6" />
+                      <WhatsAppIcon className="w-6 h-6" />
                     </div>
                     <div className="flex-grow">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-300/60">Direct WhatsApp</div>
@@ -247,7 +248,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                             rel="noopener noreferrer"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm hover:shadow-md"
                           >
-                            <MessageSquare className="w-4 h-4" /> Send via WhatsApp (+91 78999 10917)
+                            <WhatsAppIcon className="w-4 h-4" /> Send via WhatsApp (+91 78999 10917)
                           </a>
                         )}
                         {dispatchData.mailtoUrl && (
@@ -402,7 +403,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <MessageSquare className="w-3.5 h-3.5" /> Send via WhatsApp (+91 78999 10917)
+                            <WhatsAppIcon className="w-3.5 h-3.5" /> Send via WhatsApp (+91 78999 10917)
                           </a>
                         </div>
                       </div>

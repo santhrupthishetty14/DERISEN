@@ -1,6 +1,7 @@
 import React from 'react';
 import { Logo } from '../components/Logo';
-import { Mail, Phone, MapPin, Linkedin, Instagram, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 interface FooterProps {
   onNavigate?: (page: string) => void;
@@ -42,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-emerald-600 flex items-center justify-center text-white transition-colors"
                 aria-label="WhatsApp"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4.5 h-4.5" />
               </a>
               <a
                 href="https://linkedin.com"
