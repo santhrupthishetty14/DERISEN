@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-purple flex items-center justify-center text-white transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#0A66C2] flex items-center justify-center text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -58,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-pink flex items-center justify-center text-white transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#E1306C] flex items-center justify-center text-white transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -171,19 +171,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <div className="space-y-3 text-xs text-white/70">
               <div className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
+                <Mail className="w-4 h-4 text-rose-400 flex-shrink-0" />
                 <a href="mailto:derisenofficial@gmail.com" className="hover:text-white transition-colors">
                   derisenofficial@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
+                <Phone className="w-4 h-4 text-sky-400 flex-shrink-0" />
                 <a href="tel:+917899910917" className="hover:text-white transition-colors">
                   +91 78999 10917
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-brand-violetLight flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>Karnataka, India &amp; Global Remote</span>
               </div>
             </div>

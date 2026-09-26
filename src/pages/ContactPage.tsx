@@ -154,48 +154,48 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                   {/* Email */}
                   <a
                     href="mailto:derisenofficial@gmail.com"
-                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-[#B063FF] hover:shadow-md transition-all group"
+                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500 hover:shadow-md transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-white/10 text-[#B063FF] flex items-center justify-center flex-shrink-0 group-hover:bg-[#620D9C] group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center flex-shrink-0 group-hover:bg-rose-500 group-hover:text-white transition-colors">
                       <Mail className="w-6 h-6" />
                     </div>
                     <div className="flex-grow">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-300/60">Official Inquiries</div>
-                      <div className="text-base font-bold text-white group-hover:text-[#B063FF] transition-colors">
+                      <div className="text-base font-bold text-white group-hover:text-rose-400 transition-colors">
                         derisenofficial@gmail.com
                       </div>
-                      <div className="text-xs text-purple-200/70">Replies within 4 business hours</div>
+                      <div className="text-xs text-rose-200/80">Replies within 4 business hours</div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-[#B063FF] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-rose-400 group-hover:translate-x-1 transition-all" />
                   </a>
 
                   {/* Phone */}
                   <a
                     href="tel:+917899910917"
-                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-[#B063FF] hover:shadow-md transition-all group"
+                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-sky-500 hover:shadow-md transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-white/10 text-[#B063FF] flex items-center justify-center flex-shrink-0 group-hover:bg-[#620D9C] group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-colors">
                       <Phone className="w-6 h-6" />
                     </div>
                     <div className="flex-grow">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-300/60">Direct Line</div>
-                      <div className="text-base font-bold text-white group-hover:text-[#B063FF] transition-colors">
+                      <div className="text-base font-bold text-white group-hover:text-sky-400 transition-colors">
                         +91 78999 10917
                       </div>
-                      <div className="text-xs text-purple-200/70">Mon - Sat, 9:00 AM - 8:00 PM IST</div>
+                      <div className="text-xs text-sky-200/80">Mon - Sat, 9:00 AM - 8:00 PM IST</div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-[#B063FF] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-sky-400 group-hover:translate-x-1 transition-all" />
                   </a>
 
                   {/* Location */}
                   <div className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 text-[#B063FF] flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-6 h-6" />
                     </div>
                     <div>
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-300/60">Headquarters</div>
                       <div className="text-base font-bold text-white">Karnataka, India</div>
-                      <div className="text-xs text-purple-200/70">Serving enterprise clients worldwide</div>
+                      <div className="text-xs text-amber-200/80">Serving enterprise clients worldwide</div>
                     </div>
                   </div>
                 </div>
@@ -203,7 +203,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
               {/* Trust highlights */}
               <div className="p-6 rounded-2xl bg-white/5 border border-white/15 flex items-center gap-4">
-                <ShieldCheck className="w-8 h-8 text-[#B063FF] flex-shrink-0" />
+                <ShieldCheck className="w-8 h-8 text-emerald-400 flex-shrink-0" />
                 <div className="text-xs text-purple-200/80 leading-relaxed font-medium">
                   <span className="font-bold text-white">Non-Disclosure &amp; IP Protection:</span> All client project discussions, concepts, and materials are held under strict confidentiality.
                 </div>
@@ -254,7 +254,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                         {dispatchData.mailtoUrl && (
                           <a
                             href={dispatchData.mailtoUrl}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-purple hover:bg-[#620D9C] text-white text-xs font-bold transition-all"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all"
                           >
                             <Mail className="w-4 h-4" /> Open Email Client (derisenofficial@gmail.com)
                           </a>
@@ -390,7 +390,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                         <div className="flex flex-wrap items-center gap-3 ml-7 pt-1">
                           <a
                             href={buildMailtoUrl(formData)}
-                            className="inline-flex items-center gap-1.5 font-bold text-[#B063FF] hover:underline"
+                            className="inline-flex items-center gap-1.5 font-bold text-rose-400 hover:underline"
                             target="_blank"
                             rel="noopener noreferrer"
                           >

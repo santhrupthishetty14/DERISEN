@@ -106,7 +106,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
 
               <a
                 href={dispatchInfo.mailtoUrl}
-                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#4B006E] to-[#620D9C] hover:from-[#620D9C] hover:to-[#B063FF] text-white text-xs sm:text-sm font-bold transition-all shadow-md"
+                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md"
               >
                 <Mail className="w-4 h-4" /> Re-open Email Client ({TARGET_EMAIL})
               </a>
