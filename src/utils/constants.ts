@@ -301,7 +301,8 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     client: 'Fintech & Real Estate Enterprise',
     category: 'Digital Marketing',
     description: 'Targeted Google Ads & Meta Funnels generating continuous qualified client leads.',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=2000&q=95',
+    imageUrl: '/assets/omnichannel-lead-generation.jpg',
+    videoUrl: '/assets/omnichannel-lead-generation.mp4',
     metrics: '3.8x Target ROAS'
   },
   {
