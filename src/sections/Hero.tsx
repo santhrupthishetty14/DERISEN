@@ -343,36 +343,37 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* =================================================================
-              Right Column: Premium Marketing Service Cards Motion Showcase
+              Right Column: Premium Marketing Service Cards Motion Showcase (Frameless)
               ================================================================= */}
-          <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-1">
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[480px] rounded-[32px] sm:rounded-[36px] overflow-hidden shadow-[0_24px_55px_rgba(24,13,56,0.12),0_4px_16px_rgba(0,0,0,0.04)] border border-gray-200/80 bg-black group transition-all duration-500 hover:shadow-[0_30px_65px_rgba(24,13,56,0.18)]">
-              {/* Clean Portrait Frame with Bottom Excess Cropped */}
-              <div className="relative w-full aspect-[1/1.36] overflow-hidden bg-black flex items-center justify-center">
-                <video
-                  ref={(el) => {
-                    if (el) {
-                      el.defaultMuted = true;
-                      el.muted = true;
-                      const p = el.play();
-                      if (p !== undefined) {
-                        p.catch(() => {
-                          el.muted = true;
-                          el.play().catch(() => {});
-                        });
-                      }
+          <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-2">
+            <div className="relative w-full max-w-[500px] sm:max-w-[540px] lg:max-w-[580px] xl:max-w-[620px] flex items-center justify-center">
+              {/* Soft Ambient Radiance Glow behind the animation */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[#620D9C]/35 via-[#B063FF]/25 to-transparent rounded-3xl blur-2xl pointer-events-none" />
+
+              {/* Frameless Hero Animation */}
+              <video
+                ref={(el) => {
+                  if (el) {
+                    el.defaultMuted = true;
+                    el.muted = true;
+                    const p = el.play();
+                    if (p !== undefined) {
+                      p.catch(() => {
+                        el.muted = true;
+                        el.play().catch(() => {});
+                      });
                     }
-                  }}
-                  src="/assets/hero-showcase.mp4"
-                  poster="/assets/hero-showcase.jpg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-[1.02]"
-                />
-              </div>
+                  }
+                }}
+                src="/assets/hero-marketing-bouquet.mp4"
+                poster="/assets/hero-marketing-bouquet.jpg"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="w-full h-auto aspect-[16/9] object-contain rounded-2xl sm:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform transition-transform duration-700 hover:scale-[1.02] relative z-10"
+              />
             </div>
           </div>
         </div>
