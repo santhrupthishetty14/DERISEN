@@ -107,7 +107,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       </div>
 
       {/* 6. Curated Work Gallery & Verified Client Testimonials */}
-      <WorkGallery />
+      <WorkGallery onOpenModal={onOpenModal} onNavigate={onNavigate} />
 
       {/* 7. High-Converting Conversion CTA */}
       <FinalCTA onOpenModal={onOpenModal} />

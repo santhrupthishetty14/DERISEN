@@ -350,12 +350,27 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               {/* Clean Portrait Frame with Bottom Excess Cropped */}
               <div className="relative w-full aspect-[1/1.36] overflow-hidden bg-black flex items-center justify-center">
                 <video
-                  src="/assets/erasio_Digital_marketing_cards_popping_20260922230116.mp4"
+                  ref={(el) => {
+                    if (el) {
+                      el.defaultMuted = true;
+                      el.muted = true;
+                      const p = el.play();
+                      if (p !== undefined) {
+                        p.catch(() => {
+                          el.muted = true;
+                          el.play().catch(() => {});
+                        });
+                      }
+                    }
+                  }}
+                  src="/assets/hero-showcase.mp4"
+                  poster="/assets/hero-showcase.jpg"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover object-top transform transition-transform duration-700 group-hover:scale-[1.02]"
+                  preload="auto"
+                  className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-[1.02]"
                 />
               </div>
             </div>

@@ -35,7 +35,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) =
       />
 
       {/* 2. Slide 8: Work Gallery & Client Testimonials */}
-      <WorkGallery />
+      <WorkGallery onOpenModal={onOpenModal} onNavigate={onNavigate} />
 
       {/* 3. Slide 9: Our Core Promise & Quality Assurance */}
       <Promise />
