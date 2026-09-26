@@ -61,6 +61,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
     setMobileMenuOpen(false);
   };
 
+  const isLight = currentPage === 'home' && !isScrolled;
+
   return (
     <>
       {/* =====================================================================
@@ -70,6 +72,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ease-in-out ${
           isScrolled
             ? 'h-[70px] bg-[#180128]/92 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/10 text-white'
+            : isLight
+            ? 'h-[90px] bg-[#F5F6F8]/85 backdrop-blur-md border-b border-slate-200/80 text-slate-900 shadow-sm'
             : 'h-[90px] bg-[#180128]/70 backdrop-blur-sm border-b border-white/5 text-white'
         }`}
       >
@@ -85,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
             title="DE.RISEN - Click to view logo intro"
             className="cursor-pointer group"
           >
-            <Logo variant="light" isAnimated={true} />
+            <Logo variant={isLight ? 'dark' : 'light'} isAnimated={true} />
           </div>
 
           {/* 2. Desktop Navigation Menu */}
@@ -99,7 +103,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                   onClick={(e) => handleItemClick(e, item.id)}
                   className={`relative text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 py-2 group cursor-pointer ${
                     isActive
-                      ? 'text-white font-bold'
+                      ? isLight
+                        ? 'text-[#620D9C] font-black'
+                        : 'text-white font-bold'
+                      : isLight
+                      ? 'text-slate-700 hover:text-[#620D9C]'
                       : 'text-purple-200/80 hover:text-white'
                   }`}
                 >
@@ -118,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
             })}
           </nav>
 
-          {/* 3. Right-side Premium CTA Button (Arrow starts on left, slides to right when pressed) */}
+          {/* 3. Right-side Premium CTA Button */}
           <div className="hidden lg:flex items-center">
             <SlideArrowButton
               label="Let's Talk"
@@ -131,14 +139,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
           {/* 4. Premium Mobile Hamburger Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden relative p-2.5 rounded-full text-white hover:text-brand-purple hover:bg-white/10 transition-colors focus:outline-none cursor-pointer"
+            className={`lg:hidden relative p-2.5 rounded-full transition-colors focus:outline-none cursor-pointer ${
+              isLight ? 'text-slate-900 hover:bg-black/5' : 'text-white hover:text-brand-purple hover:bg-white/10'
+            }`}
             aria-label="Open mobile menu"
             aria-expanded={mobileMenuOpen}
           >
             <div className="w-6 h-5 flex flex-col justify-between items-end">
-              <span className="w-6 h-0.5 bg-white rounded-full transition-all duration-300" />
+              <span className={`w-6 h-0.5 rounded-full transition-all duration-300 ${isLight ? 'bg-slate-900' : 'bg-white'}`} />
               <span className="w-4 h-0.5 bg-[#B063FF] rounded-full transition-all duration-300 group-hover:w-6" />
-              <span className="w-5 h-0.5 bg-white rounded-full transition-all duration-300" />
+              <span className={`w-5 h-0.5 rounded-full transition-all duration-300 ${isLight ? 'bg-slate-900' : 'bg-white'}`} />
             </div>
           </button>
         </div>
