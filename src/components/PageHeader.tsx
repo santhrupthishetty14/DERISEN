@@ -211,12 +211,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     <div
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className={`relative w-full pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden transition-colors duration-500 ${
+      className={`relative w-full min-h-[500px] lg:min-h-[calc(100vh-78px)] lg:max-h-[760px] flex items-center pt-24 pb-10 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10 overflow-hidden transition-colors duration-500 ${
         isWhite
           ? 'bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]'
           : 'bg-[#180128] text-white border-b border-brand-violetLight/20 shadow-2xl'
-      } ${
-        isFullBg ? 'min-h-[580px] lg:min-h-[660px]' : ''
       }`}
     >
       {/* ====== PURE PURPLE AURORA ANIMATION STAGE (NO BACKGROUND IMAGE) ====== */}
@@ -512,13 +510,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       />
 
       {/* ====== BANNER FOREGROUND CONTENT ====== */}
-      <div className="max-w-[1360px] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="max-w-[1360px] mx-auto px-6 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
           {/* Left Column: Editorial Typography & Actions */}
-          <div className={`${isFullBg ? 'lg:col-span-8' : imageSrc ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col items-start`}>
+          <div className={`${(purpleAnimationOnly || isFullBg || imageSrc) ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col items-start`}>
             {/* Breadcrumb Navigation */}
             <div
-              className={`flex items-center gap-2 text-xs font-mono mb-6 sm:mb-8 transition-all duration-700 ease-out ${
+              className={`flex items-center gap-2 text-xs font-mono mb-3 sm:mb-4 transition-all duration-700 ease-out ${
                 isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
@@ -538,7 +536,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
             {/* Animated Eyebrow Badge */}
             <div
-              className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-6 sm:mb-8 transition-all duration-700 ease-out ${
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-3.5 sm:mb-4 transition-all duration-700 ease-out ${
                 isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'
               }`}
               style={{
@@ -554,11 +552,11 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               }}
             >
               <Sparkles className={`w-3.5 h-3.5 ${isWhite ? 'text-[#620D9C]' : 'text-brand-violet'} animate-pulse`} />
-              <span className={`text-xs font-black uppercase tracking-[0.15em] ${isWhite ? 'text-[#620D9C]' : 'text-brand-lilac'}`}>{badge}</span>
+              <span className={`text-[11px] sm:text-xs font-black uppercase tracking-[0.14em] ${isWhite ? 'text-[#620D9C]' : 'text-brand-lilac'}`}>{badge}</span>
             </div>
 
             {/* Title with staggered line reveals */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.14] max-w-4xl mb-6">
+            <h1 className="text-2xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-black tracking-tight leading-[1.12] max-w-3xl mb-3.5 sm:mb-4">
               <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
                   className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -581,7 +579,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     style={{ transitionDelay: '450ms' }}
                   >
                     <span
-                      className="text-transparent bg-clip-text inline-block pb-1.5 pr-2"
+                      className="text-transparent bg-clip-text inline-block pb-1 pr-2"
                       style={{
                         backgroundImage: isWhite
                           ? 'linear-gradient(135deg, #620D9C 0%, #7C3AED 35%, #9333EA 70%, #620D9C 100%)'
@@ -600,7 +598,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {/* Description with elegant reveal */}
             <div className="overflow-hidden">
               <p
-                className={`text-sm sm:text-base lg:text-lg max-w-2xl font-medium leading-relaxed mb-8 transition-all duration-700 ease-out ${
+                className={`text-xs sm:text-sm lg:text-base max-w-xl font-medium leading-relaxed mb-4 sm:mb-5 transition-all duration-700 ease-out ${
                   isWhite ? 'text-slate-600' : 'text-white/80'
                 } ${
                   isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
@@ -614,7 +612,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {/* Premium Tags with shimmer */}
             {tags.length > 0 && (
               <div
-                className={`flex flex-wrap gap-2.5 transition-all duration-700 ease-out ${
+                className={`flex flex-wrap gap-2 transition-all duration-700 ease-out ${
                   isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
                 }`}
                 style={{ transitionDelay: '750ms' }}
@@ -622,7 +620,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 {tags.map((tag, idx) => (
                   <span
                     key={idx}
-                    className={`header-tag-pill px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold backdrop-blur-md cursor-default transition-all duration-300 hover:scale-105 ${
+                    className={`header-tag-pill px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold backdrop-blur-md cursor-default transition-all duration-300 hover:scale-105 ${
                       isWhite
                         ? 'bg-white/95 text-[#620D9C] border border-purple-200/90 shadow-[0_2px_8px_rgba(98,13,156,0.06)] hover:bg-purple-50 hover:border-[#620D9C]/50 hover:shadow-md'
                         : 'text-white/90 hover:text-white'
@@ -646,7 +644,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
             {/* Decorative bottom line */}
             <div
-              className={`mt-10 sm:mt-12 h-[1px] max-w-md transition-all duration-[1200ms] ease-out ${
+              className={`mt-4 sm:mt-5 h-[1px] max-w-xs transition-all duration-[1200ms] ease-out ${
                 isRevealed ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
               }`}
               style={{
@@ -663,7 +661,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           {isFullBg ? (
             purpleAnimationOnly ? (
               <div
-                className={`lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative transition-all duration-1000 ease-out ${
+                className={`lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative transition-all duration-1000 ease-out my-auto ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{
@@ -672,7 +670,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               >
                 {/* 3D Holographic Purple Cyber Core */}
                 <div
-                  className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center pointer-events-none select-none"
+                  className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center pointer-events-none select-none"
                   style={{
                     transform: `perspective(1000px) rotateY(${mousePos.x * 0.4}deg) rotateX(${-mousePos.y * 0.4}deg)`,
                   }}
@@ -687,7 +685,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                   {/* Outer Concentric Orbit Ring 2 with glowing gradient */}
                   <div
-                    className={`absolute inset-5 rounded-full border pointer-events-none ${
+                    className={`absolute inset-4 rounded-full border pointer-events-none ${
                       isWhite ? 'border-purple-300/60' : 'border-purple-400/50'
                     }`}
                     style={{ animation: 'orbitRotate 14s linear infinite reverse' }}
@@ -695,7 +693,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                   {/* Pulsing Purple Halo Core */}
                   <div
-                    className="absolute w-48 h-48 rounded-full pointer-events-none blur-xl"
+                    className="absolute w-36 h-36 rounded-full pointer-events-none blur-xl"
                     style={{
                       background: isWhite
                         ? 'radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(216, 180, 254, 0.2) 45%, transparent 75%)'
@@ -706,26 +704,26 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                   {/* High-Luminance Center Energy Gem */}
                   <div
-                    className={`relative w-28 h-28 rounded-full p-1 animate-pulse ${
+                    className={`relative w-24 h-24 rounded-full p-1 animate-pulse ${
                       isWhite
-                        ? 'bg-gradient-to-tr from-[#620D9C] via-[#7C3AED] to-[#B063FF] shadow-[0_10px_35px_rgba(124,58,237,0.25)]'
-                        : 'bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_0_50px_rgba(176,99,255,0.7)]'
+                        ? 'bg-gradient-to-tr from-[#620D9C] via-[#7C3AED] to-[#B063FF] shadow-[0_10px_30px_rgba(124,58,237,0.25)]'
+                        : 'bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_0_40px_rgba(176,99,255,0.7)]'
                     }`}
                   >
                     <div
-                      className={`w-full h-full rounded-full flex flex-col items-center justify-center text-center p-3 backdrop-blur-md ${
+                      className={`w-full h-full rounded-full flex flex-col items-center justify-center text-center p-2.5 backdrop-blur-md ${
                         isWhite ? 'bg-white/95 text-slate-800' : 'bg-[#180128]/85 text-white'
                       }`}
                     >
                       <span
-                        className={`w-2.5 h-2.5 rounded-full animate-ping mb-1.5 ${
-                          isWhite ? 'bg-[#7C3AED] shadow-[0_0_12px_#7C3AED]' : 'bg-[#B063FF] shadow-[0_0_12px_#B063FF]'
+                        className={`w-2 h-2 rounded-full animate-ping mb-1 ${
+                          isWhite ? 'bg-[#7C3AED] shadow-[0_0_10px_#7C3AED]' : 'bg-[#B063FF] shadow-[0_0_10px_#B063FF]'
                         }`}
                       />
-                      <span className={`text-[10px] font-mono font-black uppercase tracking-wider ${isWhite ? 'text-[#620D9C]' : 'text-white'}`}>
+                      <span className={`text-[9.5px] font-mono font-black uppercase tracking-wider ${isWhite ? 'text-[#620D9C]' : 'text-white'}`}>
                         LIVE NEXUS
                       </span>
-                      <span className={`text-[9px] font-bold ${isWhite ? 'text-slate-500' : 'text-[#D8B4FE]'}`}>
+                      <span className={`text-[8.5px] font-bold ${isWhite ? 'text-slate-500' : 'text-[#D8B4FE]'}`}>
                         Direct 24/7
                       </span>
                     </div>
@@ -733,7 +731,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
                   {/* Satellite Floating Micro Nodes */}
                   <div
-                    className={`absolute -top-2 right-6 px-3 py-1 rounded-full border shadow-lg text-[10px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
+                    className={`absolute 0 right-1 px-2.5 py-1 rounded-full border shadow-md text-[9px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
                       isWhite
                         ? 'bg-white/95 border-purple-200 text-slate-800 shadow-purple-900/5'
                         : 'bg-[#180128]/95 border-[#B063FF]/60 text-white'
@@ -745,7 +743,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   </div>
 
                   <div
-                    className={`absolute -bottom-2 left-4 px-3 py-1 rounded-full border shadow-lg text-[10px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
+                    className={`absolute 0 left-1 px-2.5 py-1 rounded-full border shadow-md text-[9px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
                       isWhite
                         ? 'bg-white/95 border-purple-200 text-slate-800 shadow-purple-900/5'
                         : 'bg-[#180128]/95 border-[#B063FF]/60 text-[#D8B4FE]'
@@ -759,7 +757,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               </div>
             ) : (hudInfo || floatingBadge) ? (
               <div
-                className={`lg:col-span-4 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out ${
+                className={`lg:col-span-5 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out my-auto ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{
@@ -770,19 +768,19 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 {/* Floating Synergy HUD Card */}
                 {hudInfo && (
                   <div
-                    className="p-5 rounded-2xl bg-[#180128]/90 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
+                    className="p-4 rounded-2xl bg-[#180128]/90 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_16px_40px_rgba(0,0,0,0.45)] flex flex-col gap-2 max-w-[260px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
                     style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-mono uppercase tracking-wider text-brand-violet font-bold">
                         {hudInfo.tag}
                       </span>
-                      <Zap className="w-4 h-4 text-brand-violet animate-pulse" />
+                      <Zap className="w-3.5 h-3.5 text-brand-violet animate-pulse" />
                     </div>
-                    <div className="text-sm font-extrabold text-white leading-snug">
+                    <div className="text-xs sm:text-sm font-extrabold text-white leading-snug">
                       {hudInfo.title}
                     </div>
-                    <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
+                    <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[10px] text-white/70 font-mono">
                       <span className="w-2 h-2 rounded-full bg-[#B063FF] shadow-[0_0_8px_#B063FF] animate-pulse" />
                       <span>{hudInfo.status}</span>
                     </div>
@@ -792,16 +790,16 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 {/* Floating Corner Badge */}
                 {floatingBadge && (
                   <div
-                    className="mt-6 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
+                    className="mt-4 px-3.5 py-2 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl flex items-center gap-2.5 transition-transform duration-300 hover:scale-105"
                     style={{ animation: 'floatHudChip 5s ease-in-out infinite alternate', animationDelay: '1s' }}
                   >
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                      <ShieldCheck className="w-4.5 h-4.5 text-brand-violet" />
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                      <ShieldCheck className="w-4 h-4 text-brand-violet" />
                     </div>
                     <div>
                       <div className="text-xs font-black text-white leading-tight">{floatingBadge.text}</div>
                       {floatingBadge.subtext && (
-                        <div className="text-[10px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
+                        <div className="text-[9px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
                       )}
                     </div>
                   </div>
@@ -810,53 +808,53 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             ) : null
           ) : imageSrc ? (
             <div
-              className={`lg:col-span-5 flex justify-center items-center relative transition-all duration-1000 ease-out mt-8 lg:mt-0 ${
+              className={`lg:col-span-5 flex justify-center items-center relative transition-all duration-1000 ease-out mt-6 lg:mt-0 ${
                 isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
               }`}
               style={{ transitionDelay: '350ms' }}
             >
               <div
-                className="relative w-full max-w-[460px] group select-none transition-transform duration-500 ease-out"
+                className="relative w-full max-w-[420px] group select-none transition-transform duration-500 ease-out"
                 style={{
                   transform: `perspective(1000px) rotateY(${mousePos.x * 0.3}deg) rotateX(${-mousePos.y * 0.3}deg)`,
                 }}
               >
                 {/* Brand Purple & Violet Pulsing Glow Aura */}
                 <div
-                  className="absolute -inset-4 bg-gradient-to-tr from-brand-purple via-brand-violet to-[#8447FF] rounded-3xl blur-2xl opacity-65 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  className="absolute -inset-3 bg-gradient-to-tr from-brand-purple via-brand-violet to-[#8447FF] rounded-3xl blur-2xl opacity-65 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                   style={{ animation: 'bannerAuraPulse 6s ease-in-out infinite alternate' }}
                 />
 
                 {/* Floating Top Mini HUD Chip */}
                 <div
-                  className="absolute -top-3.5 -left-2 z-30 px-3.5 py-1.5 rounded-full bg-[#180128]/95 border border-brand-violet/50 backdrop-blur-md shadow-lg flex items-center gap-2 animate-bounce"
+                  className="absolute -top-3 -left-2 z-30 px-3 py-1 rounded-full bg-[#180128]/95 border border-brand-violet/50 backdrop-blur-md shadow-lg flex items-center gap-2 animate-bounce"
                   style={{ animationDuration: '3.5s' }}
                 >
-                  <Zap className="w-3.5 h-3.5 text-brand-violet animate-pulse" />
-                  <span className="text-[11px] font-bold text-white tracking-wide">Digital Architecture</span>
+                  <Zap className="w-3 h-3 text-brand-violet animate-pulse" />
+                  <span className="text-[10px] font-bold text-white tracking-wide">Digital Architecture</span>
                 </div>
 
                 {/* Frame with image */}
-                <div className="relative rounded-3xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#180128] to-[#0a0014] shadow-[0_25px_60px_rgba(5,2,15,0.8)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-brand-violetLight/40 bg-gradient-to-b from-[#180128] to-[#0a0014] shadow-[0_20px_50px_rgba(5,2,15,0.7)] backdrop-blur-md transform transition-all duration-700 group-hover:scale-[1.02]">
                   <img
                     src={imageSrc}
                     alt={imageAlt || title}
-                    className="w-full h-[280px] sm:h-[320px] lg:h-[340px] object-cover rounded-3xl block transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-[230px] sm:h-[260px] lg:h-[280px] object-cover rounded-2xl block transition-transform duration-1000 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-3xl pointer-events-none" />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/15 rounded-2xl pointer-events-none" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014]/80 via-transparent to-brand-purple/15 pointer-events-none" />
                 </div>
 
                 {/* Floating Corner Badge */}
                 {floatingBadge && (
-                  <div className="absolute -bottom-4 right-3 sm:-bottom-5 sm:right-5 z-30 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                      <ShieldCheck className="w-4.5 h-4.5 text-brand-violet" />
+                  <div className="absolute -bottom-3 right-3 sm:-bottom-4 sm:right-4 z-30 px-3.5 py-2 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl flex items-center gap-2.5 transition-transform duration-300 hover:scale-105">
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                      <ShieldCheck className="w-4 h-4 text-brand-violet" />
                     </div>
                     <div>
                       <div className="text-xs font-black text-white leading-tight">{floatingBadge.text}</div>
                       {floatingBadge.subtext && (
-                        <div className="text-[10px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
+                        <div className="text-[9px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
                       )}
                     </div>
                   </div>

@@ -69,8 +69,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'h-[70px] bg-[#180128]/92 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/10 text-white'
-            : 'h-[90px] bg-[#180128]/70 backdrop-blur-sm border-b border-white/5 text-white'
+            ? 'h-[70px] bg-[#180128]/96 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/10 text-white'
+            : 'h-[78px] bg-[#180128]/95 backdrop-blur-md border-b border-white/10 text-white shadow-[0_4px_20px_rgba(0,0,0,0.35)]'
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 h-full flex items-center justify-between">
