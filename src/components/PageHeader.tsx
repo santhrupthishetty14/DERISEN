@@ -194,7 +194,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     <div
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className={`relative w-full pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden border-b border-brand-violetLight/20 shadow-2xl bg-[#090417] ${
+      className={`relative w-full pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden border-b border-brand-violetLight/20 shadow-2xl bg-[#180128] ${
         isFullBg ? 'min-h-[580px] lg:min-h-[660px]' : ''
       }`}
     >
@@ -292,16 +292,16 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="absolute inset-0"
             style={{
               background: isFullBg
-                ? 'linear-gradient(90deg, rgba(9, 4, 23, 0.98) 0%, rgba(10, 5, 26, 0.94) 34%, rgba(12, 6, 32, 0.52) 54%, rgba(12, 6, 32, 0.08) 72%, rgba(9, 4, 23, 0.35) 100%)'
-                : 'linear-gradient(90deg, rgba(13, 7, 34, 0.96) 0%, rgba(18, 9, 44, 0.88) 45%, rgba(26, 13, 61, 0.65) 80%, rgba(13, 7, 34, 0.92) 100%)',
+                ? 'linear-gradient(90deg, rgba(24, 1, 40, 0.98) 0%, rgba(24, 1, 40, 0.92) 35%, rgba(24, 1, 40, 0.50) 55%, rgba(24, 1, 40, 0.05) 75%, rgba(24, 1, 40, 0.40) 100%)'
+                : 'linear-gradient(90deg, rgba(24, 1, 40, 0.96) 0%, rgba(24, 1, 40, 0.88) 45%, rgba(32, 2, 54, 0.65) 80%, rgba(24, 1, 40, 0.92) 100%)',
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background: isFullBg
-                ? 'radial-gradient(circle at 75% 44%, transparent 30%, rgba(9, 4, 23, 0.45) 85%)'
-                : 'radial-gradient(circle at 75% 45%, transparent 20%, rgba(13, 7, 34, 0.75) 85%)',
+                ? 'radial-gradient(circle at 75% 44%, transparent 30%, rgba(24, 1, 40, 0.50) 85%)'
+                : 'radial-gradient(circle at 75% 45%, transparent 20%, rgba(24, 1, 40, 0.75) 85%)',
             }}
           />
         </div>
@@ -513,7 +513,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   {hudInfo?.title || 'Human Creativity × AI Matrix Architecture'}
                 </div>
                 <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#B063FF] shadow-[0_0_8px_#B063FF] animate-pulse" />
                   <span>{hudInfo?.status || 'Interactive Live Nexus'}</span>
                 </div>
               </div>
