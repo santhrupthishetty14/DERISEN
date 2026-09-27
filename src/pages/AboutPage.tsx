@@ -26,16 +26,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         backgroundVideo="/assets/about-banner-video.mp4"
         videoHueRotate="85deg"
         fullBackground={true}
-        backgroundPosition="right 18% center"
-        hudInfo={{
-          tag: 'Digital Command Center',
-          title: 'AI Ecosystem • High-Scale Tech • Strategy',
-          status: 'Neural Nexus Active',
-        }}
-        floatingBadge={{
-          text: 'Executive Leadership',
-          subtext: 'Global Strategic Delivery',
-        }}
+        backgroundPosition="right 24% center"
       />
 
       {/* 2. Company Background, Vision, Mission & Goals */}

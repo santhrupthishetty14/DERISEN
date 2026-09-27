@@ -26,6 +26,7 @@ export interface PageHeaderProps {
     text: string;
     subtext?: string;
   };
+  showNexus?: boolean;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -46,6 +47,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   backgroundOpacity,
   hudInfo,
   floatingBadge,
+  showNexus = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -238,75 +240,79 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             />
           )}
 
-          {/* Glowing Fingertip / Ecosystem Nexus - Coordinates aligned with focal visual point */}
-          <div
-            className={`absolute pointer-events-none transition-transform duration-700 ease-out ${
-              isFullBg
-                ? 'top-[44%] right-[20%] sm:right-[24%] md:right-[26%] lg:right-[24%] xl:right-[23%]'
-                : 'top-[48%] right-[26%] sm:right-[32%]'
-            }`}
-            style={{
-              transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.7}px)`,
-            }}
-          >
-            {/* Concentric Expanding Shockwave Ripple 1 */}
-            <div
-              className="absolute w-36 h-36 rounded-full border border-[#B063FF]/80 pointer-events-none"
-              style={{
-                animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
-                animationDelay: '0s',
-              }}
-            />
+          {/* Optional Glowing Fingertip / Ecosystem Nexus */}
+          {showNexus && (
+            <>
+              <div
+                className={`absolute pointer-events-none transition-transform duration-700 ease-out ${
+                  isFullBg
+                    ? 'top-[44%] right-[20%] sm:right-[24%] md:right-[26%] lg:right-[24%] xl:right-[23%]'
+                    : 'top-[48%] right-[26%] sm:right-[32%]'
+                }`}
+                style={{
+                  transform: `translate(${mousePos.x * 0.7}px, ${mousePos.y * 0.7}px)`,
+                }}
+              >
+                {/* Concentric Expanding Shockwave Ripple 1 */}
+                <div
+                  className="absolute w-36 h-36 rounded-full border border-[#B063FF]/80 pointer-events-none"
+                  style={{
+                    animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                    animationDelay: '0s',
+                  }}
+                />
 
-            {/* Concentric Expanding Shockwave Ripple 2 */}
-            <div
-              className="absolute w-36 h-36 rounded-full border border-brand-violetLight/80 pointer-events-none"
-              style={{
-                animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
-                animationDelay: '1.2s',
-              }}
-            />
+                {/* Concentric Expanding Shockwave Ripple 2 */}
+                <div
+                  className="absolute w-36 h-36 rounded-full border border-brand-violetLight/80 pointer-events-none"
+                  style={{
+                    animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                    animationDelay: '1.2s',
+                  }}
+                />
 
-            {/* Concentric Expanding Shockwave Ripple 3 */}
-            <div
-              className="absolute w-36 h-36 rounded-full border border-purple-400/70 pointer-events-none"
-              style={{
-                animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
-                animationDelay: '2.4s',
-              }}
-            />
+                {/* Concentric Expanding Shockwave Ripple 3 */}
+                <div
+                  className="absolute w-36 h-36 rounded-full border border-purple-400/70 pointer-events-none"
+                  style={{
+                    animation: 'bannerTouchRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite',
+                    animationDelay: '2.4s',
+                  }}
+                />
 
-            {/* Radial High-Intensity Luminous Photon Core */}
-            <div
-              className="w-40 h-40 rounded-full pointer-events-none"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(176, 99, 255, 0.9) 25%, rgba(98, 13, 156, 0.6) 55%, transparent 75%)',
-                animation: 'bannerNexusPulse 3.5s ease-in-out infinite',
-              }}
-            />
+                {/* Radial High-Intensity Luminous Photon Core */}
+                <div
+                  className="w-40 h-40 rounded-full pointer-events-none"
+                  style={{
+                    background:
+                      'radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(176, 99, 255, 0.9) 25%, rgba(98, 13, 156, 0.6) 55%, transparent 75%)',
+                    animation: 'bannerNexusPulse 3.5s ease-in-out infinite',
+                  }}
+                />
 
-            {/* Micro Sparkle Star Center */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_20px_#ffffff,0_0_35px_#b063ff,0_0_50px_#a855f7] animate-ping" style={{ animationDuration: '2s' }} />
-          </div>
+                {/* Micro Sparkle Star Center */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_20px_#ffffff,0_0_35px_#b063ff,0_0_50px_#a855f7] animate-ping" style={{ animationDuration: '2s' }} />
+              </div>
 
-          {/* Luminous Synaptic Grid Intersection Blinks */}
-          <div
-            className="absolute top-[30%] right-[32%] w-2 h-2 rounded-full bg-[#B063FF]"
-            style={{ animation: 'bannerNodeBlink 3s ease-in-out infinite', animationDelay: '0.4s' }}
-          />
-          <div
-            className="absolute top-[48%] right-[30%] w-2.5 h-2.5 rounded-full bg-brand-violetLight"
-            style={{ animation: 'bannerNodeBlink 3.5s ease-in-out infinite', animationDelay: '1.1s' }}
-          />
-          <div
-            className="absolute top-[62%] right-[25%] w-2 h-2 rounded-full bg-purple-300"
-            style={{ animation: 'bannerNodeBlink 2.8s ease-in-out infinite', animationDelay: '1.8s' }}
-          />
-          <div
-            className="absolute top-[26%] right-[22%] w-2 h-2 rounded-full bg-purple-300"
-            style={{ animation: 'bannerNodeBlink 4s ease-in-out infinite', animationDelay: '2.5s' }}
-          />
+              {/* Luminous Synaptic Grid Intersection Blinks */}
+              <div
+                className="absolute top-[30%] right-[32%] w-2 h-2 rounded-full bg-[#B063FF]"
+                style={{ animation: 'bannerNodeBlink 3s ease-in-out infinite', animationDelay: '0.4s' }}
+              />
+              <div
+                className="absolute top-[48%] right-[30%] w-2.5 h-2.5 rounded-full bg-brand-violetLight"
+                style={{ animation: 'bannerNodeBlink 3.5s ease-in-out infinite', animationDelay: '1.1s' }}
+              />
+              <div
+                className="absolute top-[62%] right-[25%] w-2 h-2 rounded-full bg-purple-300"
+                style={{ animation: 'bannerNodeBlink 2.8s ease-in-out infinite', animationDelay: '1.8s' }}
+              />
+              <div
+                className="absolute top-[26%] right-[22%] w-2 h-2 rounded-full bg-purple-300"
+                style={{ animation: 'bannerNodeBlink 4s ease-in-out infinite', animationDelay: '2.5s' }}
+              />
+            </>
+          )}
 
           {/* Premium Gradient Blend Overlays (Preserves 100% Typography Readability while letting artwork shine) */}
           <div
@@ -510,53 +516,57 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           {/* Right Column: Full-Background Floating HUD Layer OR Frame Card */}
           {isFullBg ? (
-            <div
-              className={`lg:col-span-4 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out ${
-                isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{
-                transform: `perspective(1000px) rotateY(${mousePos.x * 0.25}deg) rotateX(${-mousePos.y * 0.25}deg)`,
-                transitionDelay: '400ms',
-              }}
-            >
-              {/* Floating Synergy HUD Card */}
+            (hudInfo || floatingBadge) ? (
               <div
-                className="p-5 rounded-2xl bg-[#180128]/90 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
-                style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
+                className={`lg:col-span-4 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out ${
+                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transform: `perspective(1000px) rotateY(${mousePos.x * 0.25}deg) rotateX(${-mousePos.y * 0.25}deg)`,
+                  transitionDelay: '400ms',
+                }}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-violet font-bold">
-                    {hudInfo?.tag || 'Neural Synergy'}
-                  </span>
-                  <Zap className="w-4 h-4 text-brand-violet animate-pulse" />
-                </div>
-                <div className="text-sm font-extrabold text-white leading-snug">
-                  {hudInfo?.title || 'Human Creativity × AI Matrix Architecture'}
-                </div>
-                <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-[#B063FF] shadow-[0_0_8px_#B063FF] animate-pulse" />
-                  <span>{hudInfo?.status || 'Interactive Live Nexus'}</span>
-                </div>
-              </div>
+                {/* Floating Synergy HUD Card */}
+                {hudInfo && (
+                  <div
+                    className="p-5 rounded-2xl bg-[#180128]/90 border border-brand-violetLight/40 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-3 max-w-[280px] select-none hover:border-brand-violet/60 transition-all duration-500 hover:scale-105"
+                    style={{ animation: 'floatHudChip 6s ease-in-out infinite alternate' }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-brand-violet font-bold">
+                        {hudInfo.tag}
+                      </span>
+                      <Zap className="w-4 h-4 text-brand-violet animate-pulse" />
+                    </div>
+                    <div className="text-sm font-extrabold text-white leading-snug">
+                      {hudInfo.title}
+                    </div>
+                    <div className="flex items-center gap-2 pt-1 border-t border-white/10 text-[11px] text-white/70 font-mono">
+                      <span className="w-2 h-2 rounded-full bg-[#B063FF] shadow-[0_0_8px_#B063FF] animate-pulse" />
+                      <span>{hudInfo.status}</span>
+                    </div>
+                  </div>
+                )}
 
-              {/* Floating Corner Badge */}
-              {floatingBadge && (
-                <div
-                  className="mt-6 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
-                  style={{ animation: 'floatHudChip 5s ease-in-out infinite alternate', animationDelay: '1s' }}
-                >
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
-                    <ShieldCheck className="w-4.5 h-4.5 text-brand-violet" />
+                {/* Floating Corner Badge */}
+                {floatingBadge && (
+                  <div
+                    className="mt-6 px-4 py-2.5 rounded-2xl bg-[#180128]/95 border border-brand-violetLight/60 shadow-[0_12px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3 transition-transform duration-300 hover:scale-105"
+                    style={{ animation: 'floatHudChip 5s ease-in-out infinite alternate', animationDelay: '1s' }}
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-purple to-brand-violet text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                      <ShieldCheck className="w-4.5 h-4.5 text-brand-violet" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-white leading-tight">{floatingBadge.text}</div>
+                      {floatingBadge.subtext && (
+                        <div className="text-[10px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-xs font-black text-white leading-tight">{floatingBadge.text}</div>
-                    {floatingBadge.subtext && (
-                      <div className="text-[10px] text-brand-violet font-bold leading-tight">{floatingBadge.subtext}</div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            ) : null
           ) : imageSrc ? (
             <div
               className={`lg:col-span-5 flex justify-center items-center relative transition-all duration-1000 ease-out mt-8 lg:mt-0 ${
