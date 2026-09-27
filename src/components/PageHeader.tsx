@@ -28,6 +28,7 @@ export interface PageHeaderProps {
   };
   showNexus?: boolean;
   purpleAnimationOnly?: boolean;
+  theme?: 'dark' | 'white';
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -50,6 +51,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   floatingBadge,
   showNexus = false,
   purpleAnimationOnly = false,
+  theme = 'dark',
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -97,7 +99,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
 
-    const colors = [
+    const colors = theme === 'white' ? [
+      'rgba(99, 32, 238, ',   // deep royal purple
+      'rgba(124, 58, 237, ',  // violet-600
+      'rgba(147, 51, 234, ',  // purple-600
+      'rgba(168, 85, 247, ',  // purple-500
+      'rgba(98, 13, 156, ',   // brand purple
+    ] : [
       'rgba(99, 32, 238, ',   // purple
       'rgba(176, 99, 255, ',  // electric violet
       'rgba(192, 132, 252, ', // purple-400
@@ -117,7 +125,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.3,
           size: Math.random() * 2.5 + 0.6,
-          alpha: Math.random() * 0.5 + 0.1,
+          alpha: theme === 'white' ? Math.random() * 0.4 + 0.15 : Math.random() * 0.5 + 0.1,
           color: colors[Math.floor(Math.random() * colors.length)],
           pulse: Math.random() * Math.PI * 2,
           pulseSpeed: Math.random() * 0.02 + 0.005,
@@ -132,9 +140,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         const dy = p1.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 110) {
-          const alpha = (1 - dist / 110) * 0.08;
+          const alpha = (1 - dist / 110) * (theme === 'white' ? 0.12 : 0.08);
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+          ctx.strokeStyle = theme === 'white' ? `rgba(124, 58, 237, ${alpha})` : `rgba(139, 92, 246, ${alpha})`;
           ctx.lineWidth = 0.5;
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
@@ -194,60 +202,120 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [theme]);
 
   const isFullBg = purpleAnimationOnly || fullBackground || (!imageSrc && Boolean(backgroundImage || backgroundVideo));
+  const isWhite = theme === 'white';
 
   return (
     <div
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className={`relative w-full pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden border-b border-brand-violetLight/20 shadow-2xl bg-[#180128] ${
+      className={`relative w-full pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden transition-colors duration-500 ${
+        isWhite
+          ? 'bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]'
+          : 'bg-[#180128] text-white border-b border-brand-violetLight/20 shadow-2xl'
+      } ${
         isFullBg ? 'min-h-[580px] lg:min-h-[660px]' : ''
       }`}
     >
       {/* ====== PURE PURPLE AURORA ANIMATION STAGE (NO BACKGROUND IMAGE) ====== */}
       {purpleAnimationOnly && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-          {/* Deep Violet Cyber Matrix Base */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#120120] via-[#1a0129] to-[#0e0018]" />
+          {isWhite ? (
+            <>
+              {/* Luminous Pure White Canvas Base */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE]" />
 
-          {/* Glowing Animated Purple Aurora Plasma Waves */}
-          <div
-            className="absolute -inset-[30%] opacity-85 blur-3xl will-change-transform pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(ellipse 65% 55% at 75% 40%, rgba(176, 99, 255, 0.45) 0%, rgba(98, 13, 156, 0.35) 45%, transparent 70%), radial-gradient(ellipse 55% 45% at 30% 65%, rgba(147, 51, 234, 0.4) 0%, rgba(75, 0, 110, 0.3) 50%, transparent 75%), radial-gradient(ellipse 50% 50% at 85% 75%, rgba(216, 180, 254, 0.3) 0%, rgba(168, 85, 247, 0.25) 40%, transparent 65%)',
-              animation: 'purpleAuroraWave 14s ease-in-out infinite alternate',
-              transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.6}px)`,
-            }}
-          />
+              {/* Glowing Animated Purple Aurora Plasma Waves on White Canvas */}
+              <div
+                className="absolute -inset-[30%] opacity-75 blur-3xl will-change-transform pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(ellipse 65% 55% at 75% 40%, rgba(176, 99, 255, 0.28) 0%, rgba(147, 51, 234, 0.18) 45%, transparent 70%), radial-gradient(ellipse 55% 45% at 30% 65%, rgba(192, 132, 252, 0.25) 0%, rgba(124, 58, 237, 0.15) 50%, transparent 75%), radial-gradient(ellipse 50% 50% at 85% 75%, rgba(233, 213, 255, 0.4) 0%, rgba(168, 85, 247, 0.16) 40%, transparent 65%)',
+                  animation: 'purpleAuroraWave 14s ease-in-out infinite alternate',
+                  transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.6}px)`,
+                }}
+              />
 
-          {/* Secondary Floating Violet Energy Orb */}
-          <div
-            className="absolute top-1/3 right-[15%] w-[480px] h-[480px] rounded-full blur-2xl opacity-60 pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(176, 99, 255, 0.5) 0%, rgba(98, 13, 156, 0.25) 50%, transparent 75%)',
-              animation: 'purpleOrbFloat 10s ease-in-out infinite alternate',
-              transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)`,
-            }}
-          />
+              {/* Secondary Floating Violet Energy Orb */}
+              <div
+                className="absolute top-1/3 right-[15%] w-[480px] h-[480px] rounded-full blur-2xl opacity-45 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(124, 58, 237, 0.12) 50%, transparent 75%)',
+                  animation: 'purpleOrbFloat 10s ease-in-out infinite alternate',
+                  transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)`,
+                }}
+              />
 
-          {/* Tertiary Deep Purple Flare */}
-          <div
-            className="absolute -bottom-20 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-50 pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(98, 13, 156, 0.6) 0%, rgba(75, 0, 110, 0.3) 60%, transparent 80%)',
-              animation: 'bannerBgPulse 12s ease-in-out infinite alternate',
-            }}
-          />
+              {/* Tertiary Deep Purple Flare */}
+              <div
+                className="absolute -bottom-20 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-35 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(147, 51, 234, 0.3) 0%, rgba(98, 13, 156, 0.1) 60%, transparent 80%)',
+                  animation: 'bannerBgPulse 12s ease-in-out infinite alternate',
+                }}
+              />
 
-          {/* Subtle Cyber Grid Texture */}
-          <div className="absolute inset-0 circuit-grid-dark opacity-35" />
+              {/* Light Cyber Grid Pattern */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.08]"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, rgba(98, 13, 156, 0.45) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(98, 13, 156, 0.45) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '48px 48px',
+                }}
+              />
 
-          {/* Vignette / Edge Softeners */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#180128] via-transparent to-[#180128]/70" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#180128]/95 via-[#180128]/60 to-transparent lg:w-3/5" />
+              {/* Luminous Vignette Softener */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF5FF]/80 via-transparent to-white/90" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/60 to-transparent lg:w-3/5" />
+            </>
+          ) : (
+            <>
+              {/* Deep Violet Cyber Matrix Base */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#120120] via-[#1a0129] to-[#0e0018]" />
+
+              {/* Glowing Animated Purple Aurora Plasma Waves */}
+              <div
+                className="absolute -inset-[30%] opacity-85 blur-3xl will-change-transform pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(ellipse 65% 55% at 75% 40%, rgba(176, 99, 255, 0.45) 0%, rgba(98, 13, 156, 0.35) 45%, transparent 70%), radial-gradient(ellipse 55% 45% at 30% 65%, rgba(147, 51, 234, 0.4) 0%, rgba(75, 0, 110, 0.3) 50%, transparent 75%), radial-gradient(ellipse 50% 50% at 85% 75%, rgba(216, 180, 254, 0.3) 0%, rgba(168, 85, 247, 0.25) 40%, transparent 65%)',
+                  animation: 'purpleAuroraWave 14s ease-in-out infinite alternate',
+                  transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.6}px)`,
+                }}
+              />
+
+              {/* Secondary Floating Violet Energy Orb */}
+              <div
+                className="absolute top-1/3 right-[15%] w-[480px] h-[480px] rounded-full blur-2xl opacity-60 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(176, 99, 255, 0.5) 0%, rgba(98, 13, 156, 0.25) 50%, transparent 75%)',
+                  animation: 'purpleOrbFloat 10s ease-in-out infinite alternate',
+                  transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)`,
+                }}
+              />
+
+              {/* Tertiary Deep Purple Flare */}
+              <div
+                className="absolute -bottom-20 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-50 pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(98, 13, 156, 0.6) 0%, rgba(75, 0, 110, 0.3) 60%, transparent 80%)',
+                  animation: 'bannerBgPulse 12s ease-in-out infinite alternate',
+                }}
+              />
+
+              {/* Subtle Cyber Grid Texture */}
+              <div className="absolute inset-0 circuit-grid-dark opacity-35" />
+
+              {/* Vignette / Edge Softeners */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#180128] via-transparent to-[#180128]/70" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#180128]/95 via-[#180128]/60 to-transparent lg:w-3/5" />
+            </>
+          )}
         </div>
       )}
 
@@ -384,48 +452,54 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       {/* ====== AMBIENT BACKGROUND GLOW LAYERS ====== */}
 
       {/* Ambient glowing atmospheric orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full opacity-45"
-          style={{
-            background: 'radial-gradient(circle, rgba(99, 32, 238, 0.75) 0%, rgba(99, 32, 238, 0) 70%)',
-            animation: 'headerOrbFloat1 8s ease-in-out infinite alternate',
-          }}
-        />
-        <div
-          className="absolute top-1/4 -right-20 w-[450px] h-[450px] rounded-full opacity-35"
-          style={{
-            background: 'radial-gradient(circle, rgba(176, 99, 255, 0.45) 0%, rgba(176, 99, 255, 0) 70%)',
-            animation: 'headerOrbFloat2 10s ease-in-out infinite alternate',
-          }}
-        />
-        <div
-          className="absolute -bottom-20 left-1/3 w-[400px] h-[400px] rounded-full opacity-30"
-          style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(168, 85, 247, 0) 70%)',
-            animation: 'headerOrbFloat3 12s ease-in-out infinite alternate',
-          }}
-        />
-      </div>
+      {!isWhite && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full opacity-45"
+            style={{
+              background: 'radial-gradient(circle, rgba(99, 32, 238, 0.75) 0%, rgba(99, 32, 238, 0) 70%)',
+              animation: 'headerOrbFloat1 8s ease-in-out infinite alternate',
+            }}
+          />
+          <div
+            className="absolute top-1/4 -right-20 w-[450px] h-[450px] rounded-full opacity-35"
+            style={{
+              background: 'radial-gradient(circle, rgba(176, 99, 255, 0.45) 0%, rgba(176, 99, 255, 0) 70%)',
+              animation: 'headerOrbFloat2 10s ease-in-out infinite alternate',
+            }}
+          />
+          <div
+            className="absolute -bottom-20 left-1/3 w-[400px] h-[400px] rounded-full opacity-30"
+            style={{
+              background: 'radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(168, 85, 247, 0) 70%)',
+              animation: 'headerOrbFloat3 12s ease-in-out infinite alternate',
+            }}
+          />
+        </div>
+      )}
 
       {/* Futuristic animated subtle tech grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.06]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(139, 92, 246, 0.5) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(139, 92, 246, 0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: '48px 48px',
-          animation: 'headerGridShift 20s linear infinite',
-        }}
-      />
+      {!isWhite && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(139, 92, 246, 0.5) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(139, 92, 246, 0.5) 1px, transparent 1px)
+            `,
+            backgroundSize: '48px 48px',
+            animation: 'headerGridShift 20s linear infinite',
+          }}
+        />
+      )}
 
       {/* Horizontal glowing scan line */}
       <div
         className="absolute left-0 right-0 h-[1px] pointer-events-none opacity-60"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(99, 32, 238, 0.5) 20%, rgba(176, 99, 255, 0.7) 50%, rgba(99, 32, 238, 0.5) 80%, transparent 100%)',
+          background: isWhite
+            ? 'linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.25) 20%, rgba(147, 51, 234, 0.45) 50%, rgba(124, 58, 237, 0.25) 80%, transparent 100%)'
+            : 'linear-gradient(90deg, transparent 0%, rgba(99, 32, 238, 0.5) 20%, rgba(176, 99, 255, 0.7) 50%, rgba(99, 32, 238, 0.5) 80%, transparent 100%)',
           animation: 'headerScanline 6s ease-in-out infinite',
         }}
       />
@@ -434,7 +508,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: 0.55 }}
+        style={{ opacity: isWhite ? 0.75 : 0.55 }}
       />
 
       {/* ====== BANNER FOREGROUND CONTENT ====== */}
@@ -450,12 +524,16 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             >
               <button
                 onClick={onNavigateHome}
-                className="text-white/60 hover:text-white transition-colors cursor-pointer"
+                className={
+                  isWhite
+                    ? 'text-slate-500 hover:text-[#620D9C] font-semibold transition-colors cursor-pointer'
+                    : 'text-white/60 hover:text-white transition-colors cursor-pointer'
+                }
               >
                 Home
               </button>
-              <ChevronRight className="w-3.5 h-3.5 text-white/40" />
-              <span className="text-brand-violet font-semibold">{breadcrumb}</span>
+              <ChevronRight className={`w-3.5 h-3.5 ${isWhite ? 'text-slate-400' : 'text-white/40'}`} />
+              <span className={isWhite ? 'text-[#620D9C] font-black' : 'text-brand-violet font-semibold'}>{breadcrumb}</span>
             </div>
 
             {/* Animated Eyebrow Badge */}
@@ -465,21 +543,27 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               }`}
               style={{
                 transitionDelay: '150ms',
-                background: 'linear-gradient(135deg, rgba(99, 32, 238, 0.4) 0%, rgba(176, 99, 255, 0.2) 100%)',
-                border: '1px solid rgba(139, 92, 246, 0.45)',
+                background: isWhite
+                  ? 'linear-gradient(135deg, rgba(238, 230, 255, 0.95) 0%, rgba(245, 240, 255, 0.85) 100%)'
+                  : 'linear-gradient(135deg, rgba(99, 32, 238, 0.4) 0%, rgba(176, 99, 255, 0.2) 100%)',
+                border: isWhite ? '1px solid rgba(168, 85, 247, 0.45)' : '1px solid rgba(139, 92, 246, 0.45)',
                 backdropFilter: 'blur(14px)',
-                boxShadow: '0 0 24px rgba(99, 32, 238, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
+                boxShadow: isWhite
+                  ? '0 4px 16px rgba(98, 13, 156, 0.08), inset 0 1px 0 rgba(255,255,255,0.9)'
+                  : '0 0 24px rgba(99, 32, 238, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
               }}
             >
-              <Sparkles className="w-3.5 h-3.5 text-brand-violet animate-pulse" />
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-brand-lilac">{badge}</span>
+              <Sparkles className={`w-3.5 h-3.5 ${isWhite ? 'text-[#620D9C]' : 'text-brand-violet'} animate-pulse`} />
+              <span className={`text-xs font-black uppercase tracking-[0.15em] ${isWhite ? 'text-[#620D9C]' : 'text-brand-lilac'}`}>{badge}</span>
             </div>
 
             {/* Title with staggered line reveals */}
             <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-black tracking-tight leading-[1.14] max-w-4xl mb-6">
               <div className={isRevealed ? 'overflow-visible' : 'overflow-hidden'}>
                 <div
-                  className={`text-white transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isWhite ? 'text-slate-950' : 'text-white'
+                  } ${
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
                   }`}
                   style={{ transitionDelay: '300ms' }}
@@ -499,7 +583,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     <span
                       className="text-transparent bg-clip-text inline-block pb-1.5 pr-2"
                       style={{
-                        backgroundImage: 'linear-gradient(135deg, #EDE9FE 0%, #C4B5FD 25%, #B063FF 50%, #A78BFA 75%, #EDE9FE 100%)',
+                        backgroundImage: isWhite
+                          ? 'linear-gradient(135deg, #620D9C 0%, #7C3AED 35%, #9333EA 70%, #620D9C 100%)'
+                          : 'linear-gradient(135deg, #EDE9FE 0%, #C4B5FD 25%, #B063FF 50%, #A78BFA 75%, #EDE9FE 100%)',
                         backgroundSize: '200% 200%',
                         animation: 'headerGradientText 4s ease infinite',
                       }}
@@ -514,7 +600,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {/* Description with elegant reveal */}
             <div className="overflow-hidden">
               <p
-                className={`text-sm sm:text-base lg:text-lg text-white/80 max-w-2xl font-medium leading-relaxed mb-8 transition-all duration-700 ease-out ${
+                className={`text-sm sm:text-base lg:text-lg max-w-2xl font-medium leading-relaxed mb-8 transition-all duration-700 ease-out ${
+                  isWhite ? 'text-slate-600' : 'text-white/80'
+                } ${
                   isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
                 style={{ transitionDelay: '600ms' }}
@@ -534,13 +622,21 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 {tags.map((tag, idx) => (
                   <span
                     key={idx}
-                    className="header-tag-pill px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold text-white/90 backdrop-blur-md cursor-default transition-all duration-300 hover:scale-105 hover:text-white"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(139, 92, 246, 0.2) 100%)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                      boxShadow: '0 2px 12px rgba(0,0,0,0.25)',
-                      animationDelay: `${idx * 100}ms`,
-                    }}
+                    className={`header-tag-pill px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold backdrop-blur-md cursor-default transition-all duration-300 hover:scale-105 ${
+                      isWhite
+                        ? 'bg-white/95 text-[#620D9C] border border-purple-200/90 shadow-[0_2px_8px_rgba(98,13,156,0.06)] hover:bg-purple-50 hover:border-[#620D9C]/50 hover:shadow-md'
+                        : 'text-white/90 hover:text-white'
+                    }`}
+                    style={
+                      isWhite
+                        ? { animationDelay: `${idx * 100}ms` }
+                        : {
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(139, 92, 246, 0.2) 100%)',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            boxShadow: '0 2px 12px rgba(0,0,0,0.25)',
+                            animationDelay: `${idx * 100}ms`,
+                          }
+                    }
                   >
                     {tag}
                   </span>
@@ -556,7 +652,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               style={{
                 transitionDelay: '900ms',
                 transformOrigin: 'left',
-                background: 'linear-gradient(90deg, rgba(99, 32, 238, 0.8) 0%, rgba(176, 99, 255, 0.6) 50%, transparent 100%)',
+                background: isWhite
+                  ? 'linear-gradient(90deg, rgba(98, 13, 156, 0.75) 0%, rgba(147, 51, 234, 0.5) 50%, transparent 100%)'
+                  : 'linear-gradient(90deg, rgba(99, 32, 238, 0.8) 0%, rgba(176, 99, 255, 0.6) 50%, transparent 100%)',
               }}
             />
           </div>
@@ -581,13 +679,17 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 >
                   {/* Outer Concentric Orbit Ring 1 */}
                   <div
-                    className="absolute inset-0 rounded-full border-2 border-dashed border-[#B063FF]/40 pointer-events-none"
+                    className={`absolute inset-0 rounded-full border-2 border-dashed pointer-events-none ${
+                      isWhite ? 'border-[#7C3AED]/35' : 'border-[#B063FF]/40'
+                    }`}
                     style={{ animation: 'orbitRotate 22s linear infinite' }}
                   />
 
                   {/* Outer Concentric Orbit Ring 2 with glowing gradient */}
                   <div
-                    className="absolute inset-5 rounded-full border border-purple-400/50 pointer-events-none"
+                    className={`absolute inset-5 rounded-full border pointer-events-none ${
+                      isWhite ? 'border-purple-300/60' : 'border-purple-400/50'
+                    }`}
                     style={{ animation: 'orbitRotate 14s linear infinite reverse' }}
                   />
 
@@ -595,34 +697,62 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   <div
                     className="absolute w-48 h-48 rounded-full pointer-events-none blur-xl"
                     style={{
-                      background: 'radial-gradient(circle, rgba(176, 99, 255, 0.85) 0%, rgba(98, 13, 156, 0.6) 45%, transparent 75%)',
+                      background: isWhite
+                        ? 'radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(216, 180, 254, 0.2) 45%, transparent 75%)'
+                        : 'radial-gradient(circle, rgba(176, 99, 255, 0.85) 0%, rgba(98, 13, 156, 0.6) 45%, transparent 75%)',
                       animation: 'bannerNexusPulse 3.5s ease-in-out infinite',
                     }}
                   />
 
                   {/* High-Luminance Center Energy Gem */}
-                  <div className="relative w-28 h-28 rounded-full bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_0_50px_rgba(176,99,255,0.7)] flex items-center justify-center p-1 animate-pulse">
-                    <div className="w-full h-full rounded-full bg-[#180128]/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-3">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#B063FF] shadow-[0_0_12px_#B063FF] animate-ping mb-1.5" />
-                      <span className="text-[10px] font-mono font-black text-white uppercase tracking-wider">LIVE NEXUS</span>
-                      <span className="text-[9px] font-bold text-[#D8B4FE]">Direct 24/7</span>
+                  <div
+                    className={`relative w-28 h-28 rounded-full p-1 animate-pulse ${
+                      isWhite
+                        ? 'bg-gradient-to-tr from-[#620D9C] via-[#7C3AED] to-[#B063FF] shadow-[0_10px_35px_rgba(124,58,237,0.25)]'
+                        : 'bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_0_50px_rgba(176,99,255,0.7)]'
+                    }`}
+                  >
+                    <div
+                      className={`w-full h-full rounded-full flex flex-col items-center justify-center text-center p-3 backdrop-blur-md ${
+                        isWhite ? 'bg-white/95 text-slate-800' : 'bg-[#180128]/85 text-white'
+                      }`}
+                    >
+                      <span
+                        className={`w-2.5 h-2.5 rounded-full animate-ping mb-1.5 ${
+                          isWhite ? 'bg-[#7C3AED] shadow-[0_0_12px_#7C3AED]' : 'bg-[#B063FF] shadow-[0_0_12px_#B063FF]'
+                        }`}
+                      />
+                      <span className={`text-[10px] font-mono font-black uppercase tracking-wider ${isWhite ? 'text-[#620D9C]' : 'text-white'}`}>
+                        LIVE NEXUS
+                      </span>
+                      <span className={`text-[9px] font-bold ${isWhite ? 'text-slate-500' : 'text-[#D8B4FE]'}`}>
+                        Direct 24/7
+                      </span>
                     </div>
                   </div>
 
                   {/* Satellite Floating Micro Nodes */}
                   <div
-                    className="absolute -top-2 right-6 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/60 shadow-lg text-[10px] font-mono font-bold text-white flex items-center gap-1.5 backdrop-blur-md animate-bounce"
+                    className={`absolute -top-2 right-6 px-3 py-1 rounded-full border shadow-lg text-[10px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
+                      isWhite
+                        ? 'bg-white/95 border-purple-200 text-slate-800 shadow-purple-900/5'
+                        : 'bg-[#180128]/95 border-[#B063FF]/60 text-white'
+                    }`}
                     style={{ animationDuration: '4s' }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B063FF] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED] animate-pulse" />
                     <span>Instant Reply</span>
                   </div>
 
                   <div
-                    className="absolute -bottom-2 left-4 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/60 shadow-lg text-[10px] font-mono font-bold text-[#D8B4FE] flex items-center gap-1.5 backdrop-blur-md animate-bounce"
+                    className={`absolute -bottom-2 left-4 px-3 py-1 rounded-full border shadow-lg text-[10px] font-mono font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce ${
+                      isWhite
+                        ? 'bg-white/95 border-purple-200 text-slate-800 shadow-purple-900/5'
+                        : 'bg-[#180128]/95 border-[#B063FF]/60 text-[#D8B4FE]'
+                    }`}
                     style={{ animationDuration: '4.5s', animationDelay: '1s' }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                     <span>WhatsApp Ready</span>
                   </div>
                 </div>

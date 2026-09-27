@@ -90,7 +90,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Page Header with Dynamic Animated Purple Aurora & Hologram Core (No background image) */}
+      {/* 1. Page Header with Luminous White Canvas & Purple Animations */}
       <PageHeader
         badge="CONTACT US / LET'S CONNECT"
         title="Let's Build Something"
@@ -100,6 +100,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         onNavigateHome={() => onNavigate('home')}
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
         purpleAnimationOnly={true}
+        theme="white"
       />
 
       {/* 2. Main Contact Grid & Direct Inquiry Section */}
