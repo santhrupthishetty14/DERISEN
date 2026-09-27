@@ -203,22 +203,22 @@ export const Leadership: React.FC = () => {
                 </div>
 
                 {/* Quote with Luxury Editorial Styling */}
-                <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-r-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/25 to-transparent">
+                <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-serif italic font-normal text-slate-800 text-[16px] sm:text-[17.5px] leading-relaxed">
+                  <p className="font-serif italic font-normal text-slate-800 text-[16.5px] sm:text-[18px] leading-relaxed">
                     "{shweta.quote}"
                   </p>
                 </div>
 
-                {/* Bio Paragraphs in Elegant Editorial Lora */}
-                <div className="space-y-4 font-lora text-[14.5px] sm:text-[15.5px] text-slate-700 leading-[1.82] text-left">
+                {/* Bio Paragraphs: Stylish Italic Editorial (Zero Bold) */}
+                <div className="space-y-4 font-lora italic font-normal text-[14.5px] sm:text-[15.5px] text-slate-600 leading-[1.86] text-left">
                   {shweta.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'text-[15.5px] sm:text-[16.5px] font-medium text-slate-900 leading-[1.8]'
-                          : ''
+                          ? 'font-serif italic font-normal text-[16px] sm:text-[17.5px] text-slate-800 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
+                          : 'font-normal'
                       }
                     >
                       {paragraph}
@@ -276,22 +276,22 @@ export const Leadership: React.FC = () => {
                 </div>
 
                 {/* Quote with Luxury Editorial Styling */}
-                <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-r-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/25 to-transparent">
+                <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-serif italic font-normal text-slate-800 text-[16px] sm:text-[17.5px] leading-relaxed">
+                  <p className="font-serif italic font-normal text-slate-800 text-[16.5px] sm:text-[18px] leading-relaxed">
                     "{lejai.quote}"
                   </p>
                 </div>
 
-                {/* Bio Paragraphs in Elegant Editorial Lora */}
-                <div className="space-y-4 font-lora text-[14.5px] sm:text-[15.5px] text-slate-700 leading-[1.82] text-left">
+                {/* Bio Paragraphs: Stylish Italic Editorial (Zero Bold) */}
+                <div className="space-y-4 font-lora italic font-normal text-[14.5px] sm:text-[15.5px] text-slate-600 leading-[1.86] text-left">
                   {lejai.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'text-[15.5px] sm:text-[16.5px] font-medium text-slate-900 leading-[1.8]'
-                          : ''
+                          ? 'font-serif italic font-normal text-[16px] sm:text-[17.5px] text-slate-800 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
+                          : 'font-normal'
                       }
                     >
                       {paragraph}
