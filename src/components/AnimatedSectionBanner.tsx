@@ -26,29 +26,26 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
   imageSrc,
   pills = [],
   stats = [],
-  accentGlow = 'purple',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const floatingLayerRef = useRef<HTMLDivElement>(null);
-  const glowOrbRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (!containerRef.current || !imageRef.current) return;
 
-      // 1. Image Smooth Parallax & Subtle Zoom In/Out
+      // 1. Image Smooth Parallax
       gsap.fromTo(
         imageRef.current,
         {
-          yPercent: -12,
-          scale: 1.14,
+          yPercent: -8,
+          scale: 1.08,
         },
         {
-          yPercent: 12,
-          scale: 1.02,
+          yPercent: 8,
+          scale: 1.01,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -59,19 +56,21 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
         }
       );
 
-      // 2. Image Reveal Curtain / Mask Animation
-      if (imageWrapperRef.current) {
+      // 2. Fade + Slide Content Elements
+      if (contentRef.current) {
+        const textElements = contentRef.current.children;
         gsap.fromTo(
-          imageWrapperRef.current,
+          textElements,
           {
-            clipPath: 'inset(8% 4% 8% 4% round 24px)',
-            opacity: 0.85,
+            y: 30,
+            opacity: 0,
           },
           {
-            clipPath: 'inset(0% 0% 0% 0% round 24px)',
+            y: 0,
             opacity: 1,
-            duration: 1.2,
-            ease: 'power3.out',
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: containerRef.current,
               start: 'top 75%',
@@ -80,69 +79,10 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           }
         );
       }
-
-      // 3. Fade + Slide Content Elements
-      if (contentRef.current) {
-        const textElements = contentRef.current.children;
-        gsap.fromTo(
-          textElements,
-          {
-            y: 35,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 70%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      }
-
-      // 4. Floating Layer Depth Parallax
-      if (floatingLayerRef.current) {
-        gsap.to(floatingLayerRef.current, {
-          y: -30,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2.0,
-          },
-        });
-      }
-
-      // 5. Ambient Glowing Orb Movement
-      if (glowOrbRef.current) {
-        gsap.to(glowOrbRef.current, {
-          x: 40,
-          y: -25,
-          scale: 1.15,
-          ease: 'sine.inOut',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.8,
-          },
-        });
-      }
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
-
-  const glowColorClass =
-    accentGlow === 'magenta' || accentGlow === 'violet'
-      ? 'from-[#B063FF]/25 via-[#620d9c]/20 to-transparent'
-      : 'from-[#620d9c]/30 via-[#B063FF]/15 to-transparent';
 
   return (
     <div

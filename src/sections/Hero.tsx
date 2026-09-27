@@ -16,18 +16,16 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightVisualRef = useRef<HTMLDivElement>(null);
   const pillarsRef = useRef<HTMLDivElement>(null);
-  const sphereRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const auraRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const isAlreadyScrolled = window.scrollY > 40;
 
-      // 1. Initial entrance animation on mount (Synchronized with BrandIntro dock)
+      // Initial clean entrance reveal
       const entranceTl = gsap.timeline({
         defaults: { ease: 'power3.out' },
-        delay: isAlreadyScrolled ? 0.05 : 1.75,
+        delay: isAlreadyScrolled ? 0.05 : 1.2,
       });
 
       // Prepare SVG curved underline stroke draw
@@ -43,220 +41,30 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       entranceTl
         .fromTo(
           leftColRef.current?.querySelectorAll('.reveal-item') || [],
-          { opacity: 0, y: 35 },
-          { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.1 }
         )
         .to(
           pathRef.current,
           {
             strokeDashoffset: 0,
-            duration: 0.8,
+            duration: 0.7,
             ease: 'power2.inOut',
           },
-          '-=0.4'
+          '-=0.3'
         )
         .fromTo(
           rightVisualRef.current,
-          { opacity: 0, scale: 0.94, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.95, ease: 'power2.out' },
-          '-=0.7'
-        )
-        .fromTo(
-          sphereRef.current,
-          { opacity: 0, scale: 0 },
-          { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.8)' },
+          { opacity: 0, scale: 0.96, y: 20 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out' },
           '-=0.5'
         )
         .fromTo(
           pillarsRef.current,
-          { opacity: 0, y: 35 },
-          { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out' },
-          '-=0.6'
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+          '-=0.5'
         );
-
-      // 2. Continuous idle floating levitation on the prominent 3D purple sphere
-      if (sphereRef.current) {
-        gsap.to(sphereRef.current, {
-          y: '-=12',
-          x: '+=4',
-          duration: 3.2,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-      }
-
-      // 3. GSAP ScrollTrigger Multi-Layer Dynamic Scroll Scrub Animation
-      if (sectionRef.current) {
-        const scrollTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        // Parallax on Left Text Column (gently floats up and soft fade)
-        if (leftColRef.current) {
-          scrollTl.to(
-            leftColRef.current,
-            {
-              y: -90,
-              opacity: 0.35,
-              ease: 'power1.out',
-            },
-            0
-          );
-        }
-
-        // 1. Cinematic 3D Dolly Zoom & Perspective Tilt on Right Picture Visual
-        if (rightVisualRef.current) {
-          scrollTl.to(
-            rightVisualRef.current,
-            {
-              y: -50,
-              ease: 'power1.out',
-            },
-            0
-          );
-        }
-
-        // Zoom & 3D Tilt on the Master 3D Image itself
-        const mainPicture = document.getElementById('hero-main-picture');
-        if (mainPicture) {
-          scrollTl.to(
-            mainPicture,
-            {
-              scale: 1.09,
-              rotateX: 8,
-              rotateY: -4,
-              filter: 'drop-shadow(0 35px 70px rgba(99,32,238,0.25))',
-              ease: 'power1.out',
-            },
-            0
-          );
-        }
-
-        // Dynamic Light Sheen sweep across the picture on scroll
-        const pictureSheen = document.getElementById('hero-picture-sheen');
-        if (pictureSheen) {
-          scrollTl.to(
-            pictureSheen,
-            {
-              opacity: 0.7,
-              x: 100,
-              ease: 'power2.inOut',
-            },
-            0
-          );
-        }
-
-        // 2. Multi-Depth Dynamic Parallax Orbits on All 3D Floating Spheres
-        // Sphere next to CTA button (foreground deep parallax)
-        if (sphereRef.current) {
-          scrollTl.to(
-            sphereRef.current,
-            {
-              y: -180,
-              x: -45,
-              scale: 0.78,
-              rotate: 140,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        // Sphere left of mug
-        const sphereLeft = document.getElementById('hero-sphere-left');
-        if (sphereLeft) {
-          scrollTl.to(
-            sphereLeft,
-            {
-              y: -150,
-              x: -30,
-              scale: 1.22,
-              rotate: -90,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        // Sphere top above iMac
-        const sphereTop = document.getElementById('hero-sphere-top');
-        if (sphereTop) {
-          scrollTl.to(
-            sphereTop,
-            {
-              y: 80,
-              x: 40,
-              scale: 0.82,
-              rotate: 110,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        // Sphere right behind phone
-        const sphereRight = document.getElementById('hero-sphere-right');
-        if (sphereRight) {
-          scrollTl.to(
-            sphereRight,
-            {
-              y: -160,
-              x: 50,
-              scale: 1.28,
-              rotate: 180,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        // Ambient Purple & Violet Aura blooms and shifts with scroll
-        if (auraRef.current) {
-          scrollTl.to(
-            auraRef.current,
-            {
-              y: -110,
-              scale: 1.35,
-              opacity: 0.9,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        const ambientAura = document.getElementById('hero-ambient-aura');
-        if (ambientAura) {
-          scrollTl.to(
-            ambientAura,
-            {
-              scale: 1.3,
-              opacity: 0.85,
-              ease: 'none',
-            },
-            0
-          );
-        }
-
-        // Bottom 4-Pillars Card Strip gently floats and transitions smoothly
-        if (pillarsRef.current) {
-          scrollTl.to(
-            pillarsRef.current,
-            {
-              y: -30,
-              boxShadow: '0 25px 50px rgba(24,13,56,0.12)',
-              ease: 'power1.out',
-            },
-            0
-          );
-        }
-      }
     }, sectionRef);
 
     return () => ctx.revert();
