@@ -224,9 +224,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                       playsInline
                       className="w-full h-full object-cover object-center filter brightness-[1.03] contrast-[1.04]"
                       style={{
-                        imageRendering: 'high-quality',
                         transform: 'translateZ(0)',
-                        WebkitBackfaceVisibility: 'hidden',
                       }}
                     />
                     {/* Subtle Top & Bottom Vignette Ring */}
