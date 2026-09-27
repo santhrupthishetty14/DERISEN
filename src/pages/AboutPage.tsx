@@ -23,6 +23,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
         backgroundImage="/assets/banner-about-command-center.jpg"
+        backgroundVideo="/assets/about-banner-video.mp4"
+        videoHueRotate="85deg"
         fullBackground={true}
         backgroundPosition="right 18% center"
         hudInfo={{

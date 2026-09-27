@@ -12,6 +12,8 @@ export interface PageHeaderProps {
   imageSrc?: string;
   imageAlt?: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
+  videoHueRotate?: string;
   fullBackground?: boolean;
   backgroundPosition?: string;
   backgroundOpacity?: number;
@@ -37,6 +39,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   imageSrc,
   imageAlt,
   backgroundImage = '/assets/banner-ai-future.jpg',
+  backgroundVideo,
+  videoHueRotate = '85deg',
   fullBackground = false,
   backgroundPosition,
   backgroundOpacity,
@@ -188,7 +192,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     };
   }, []);
 
-  const isFullBg = fullBackground || (!imageSrc && Boolean(backgroundImage));
+  const isFullBg = fullBackground || (!imageSrc && Boolean(backgroundImage || backgroundVideo));
 
   return (
     <div
@@ -198,24 +202,41 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         isFullBg ? 'min-h-[580px] lg:min-h-[660px]' : ''
       }`}
     >
-      {/* ====== COMPLETE ANIMATED BACKGROUND IMAGE LAYER ====== */}
-      {backgroundImage && (
+      {/* ====== COMPLETE ANIMATED BACKGROUND IMAGE / VIDEO LAYER ====== */}
+      {(backgroundVideo || backgroundImage) && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-          {/* Main Background Image with Breathing Zoom & Mouse Parallax */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover transition-transform duration-700 ease-out will-change-transform"
-            style={{
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundPosition: backgroundPosition || (isFullBg ? 'right 25% center' : 'center 35%'),
-              backgroundSize: isFullBg ? 'cover' : 'cover',
-              opacity: backgroundOpacity !== undefined ? backgroundOpacity : isFullBg ? 0.86 : 0.45,
-              transform: `scale(${isFullBg ? 1.05 : 1.06}) translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.45}px)`,
-              filter: isFullBg
-                ? 'saturate(1.38) contrast(1.2) brightness(1.06)'
-                : 'saturate(1.25) contrast(1.15)',
-              animation: 'bannerBgPulse 18s ease-in-out infinite alternate',
-            }}
-          />
+          {backgroundVideo ? (
+            <video
+              src={backgroundVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform"
+              style={{
+                objectPosition: backgroundPosition || (isFullBg ? 'right 20% center' : 'center 35%'),
+                opacity: backgroundOpacity !== undefined ? backgroundOpacity : isFullBg ? 0.90 : 0.50,
+                transform: `scale(${isFullBg ? 1.05 : 1.06}) translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.45}px)`,
+                filter: `hue-rotate(${videoHueRotate}) saturate(1.4) contrast(1.15) brightness(1.05)`,
+                animation: 'bannerBgPulse 18s ease-in-out infinite alternate',
+              }}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 w-full h-full bg-cover transition-transform duration-700 ease-out will-change-transform"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundPosition: backgroundPosition || (isFullBg ? 'right 25% center' : 'center 35%'),
+                backgroundSize: isFullBg ? 'cover' : 'cover',
+                opacity: backgroundOpacity !== undefined ? backgroundOpacity : isFullBg ? 0.86 : 0.45,
+                transform: `scale(${isFullBg ? 1.05 : 1.06}) translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.45}px)`,
+                filter: isFullBg
+                  ? 'saturate(1.38) contrast(1.2) brightness(1.06)'
+                  : 'saturate(1.25) contrast(1.15)',
+                animation: 'bannerBgPulse 18s ease-in-out infinite alternate',
+              }}
+            />
+          )}
 
           {/* Glowing Fingertip / Ecosystem Nexus - Coordinates aligned with focal visual point */}
           <div
