@@ -61,6 +61,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
     setMobileMenuOpen(false);
   };
 
+  return (
+    <>
       {/* =====================================================================
           Sticky Translucent Header
           ===================================================================== */}
