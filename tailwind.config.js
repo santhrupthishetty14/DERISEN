@@ -29,9 +29,10 @@ export default {
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['"Playfair Display"', '"Lora"', '"Cormorant Garamond"', 'Georgia', 'serif'],
         playfair: ['"Playfair Display"', 'Georgia', 'serif'],
         cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        lora: ['"Lora"', '"Playfair Display"', 'Georgia', 'serif'],
         syne: ['Syne', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'],
       },
