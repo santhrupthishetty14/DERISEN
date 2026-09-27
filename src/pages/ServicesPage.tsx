@@ -15,7 +15,7 @@ interface ServicesPageProps {
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Page Header - Clean White Theme */}
+      {/* 1. Page Header - Royal Dark Theme with Pristine Cyber Animation */}
       <PageHeader
         badge="SERVICES & PACKAGES / COMPREHENSIVE SUITE"
         title="Unified Creative, Digital &"
@@ -24,11 +24,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         breadcrumb="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
-        hudInfo={{
-          tag: 'Comprehensive Suite',
-          title: '4 Core Verticals • Retainer SLAs',
-          status: 'Turnaround Guaranteed',
-        }}
+        backgroundVideo="/assets/services-banner-video.mp4"
+        theme="dark"
         floatingBadge={{
           text: 'Certified IT & Creative',
           subtext: 'Zero Silos, One Agency',
