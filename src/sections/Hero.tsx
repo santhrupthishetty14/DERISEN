@@ -74,32 +74,30 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 select-none overflow-hidden flex flex-col justify-start pt-[88px] sm:pt-[94px] md:pt-[98px] pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 w-full max-w-full border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]"
+      className="relative bg-gradient-to-b from-[#24033b] via-[#200236] to-[#180128] text-white select-none overflow-hidden flex flex-col justify-start pt-[90px] sm:pt-[96px] md:pt-[102px] pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 w-full max-w-full border-b border-white/10 shadow-[0_12px_24px_rgba(0,0,0,0.3)]"
     >
-      {/* Background Static Soft Purple Ambient Accents (Zero Animation) */}
+      {/* Background Subtle Ambient Aura */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div
-          className="absolute top-8 right-1/4 w-[600px] h-[600px] bg-purple-200/35 rounded-full blur-3xl pointer-events-none"
-        />
-        <div
-          className="absolute -bottom-12 -left-12 w-[450px] h-[450px] bg-purple-100/40 rounded-full blur-3xl pointer-events-none"
-        />
+        <div className="absolute top-12 left-1/4 w-[500px] h-[500px] bg-[#B063FF]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-10 right-1/4 w-[400px] h-[400px] bg-[#620D9C]/25 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* Hero Core Content Stage */}
       <div className="w-full max-w-[1360px] mx-auto flex flex-col justify-start pt-1 sm:pt-2 pb-2 sm:pb-3 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          {/* Left Column: Headline, Subtitle, CTA Button */}
+          {/* =================================================================
+              Left Column: Headline, Subtitle, CTA Button
+              ================================================================= */}
           <div ref={leftColRef} className="lg:col-span-6 flex flex-col items-start text-left relative w-full max-w-full">
             {/* Display Headline */}
-            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[52px] font-black text-slate-950 leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
+            <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[54px] font-black text-white leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
-              <div className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#620D9C] via-[#7C3AED] to-[#9333EA] mt-1 max-w-full">
+              <div className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#B063FF] to-[#D8B4FE] mt-1 max-w-full">
                 <span>We Make Them Rise.</span>
                 {/* Reference Curved Underline Swoop */}
                 <svg
-                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-[#620D9C] overflow-visible pointer-events-none"
+                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-[#B063FF] overflow-visible pointer-events-none"
                   viewBox="0 0 320 16"
                   fill="none"
                 >
@@ -115,7 +113,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </h1>
 
             {/* Supporting Text */}
-            <p className="reveal-item text-sm sm:text-base lg:text-lg text-slate-600 font-medium max-w-[460px] leading-relaxed mb-5 sm:mb-6">
+            <p className="reveal-item text-sm sm:text-base lg:text-lg text-purple-200/80 font-medium max-w-[460px] leading-relaxed mb-5 sm:mb-6">
               Creative Design, Branding, Digital Marketing &amp;<br className="hidden sm:inline" />
               IT Solutions under one roof.
             </p>
@@ -131,14 +129,38 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right Column: Clean Static Showcase Card */}
+          {/* =================================================================
+              Right Column: Marketing Bouquet Motion Showcase in Sleek Card Frame
+              ================================================================= */}
           <div ref={rightVisualRef} className="lg:col-span-6 flex justify-center items-center relative w-full py-1">
             <div className="relative w-full max-w-[500px] sm:max-w-[540px] lg:max-w-[580px] xl:max-w-[620px] flex items-center justify-center">
-              <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_15px_40px_rgba(98,13,156,0.1)] border-2 border-purple-200/90 bg-white">
-                <img
-                  src="/assets/hero-marketing-bouquet.jpg"
-                  alt="DE.RISEN Creative, Branding, Digital Marketing & IT Solutions"
-                  className="w-full h-auto aspect-[16/9] object-cover"
+              {/* Soft Ambient Radiance Glow behind the animation */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[#6320EE]/40 via-[#B063FF]/30 to-transparent rounded-3xl blur-2xl pointer-events-none" />
+
+              {/* Frameless Hero Animation Container with crisp rounded glow border */}
+              <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20 bg-white transform transition-transform duration-700 hover:scale-[1.02]">
+                <video
+                  ref={(el) => {
+                    if (el) {
+                      el.defaultMuted = true;
+                      el.muted = true;
+                      const p = el.play();
+                      if (p !== undefined) {
+                        p.catch(() => {
+                          el.muted = true;
+                          el.play().catch(() => {});
+                        });
+                      }
+                    }
+                  }}
+                  src="/assets/hero-marketing-bouquet.mp4"
+                  poster="/assets/hero-marketing-bouquet.jpg"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-auto aspect-[16/9] object-contain"
                 />
               </div>
             </div>
@@ -151,72 +173,72 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================================== */}
       <div
         ref={pillarsRef}
-        className="w-full max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-[24px] shadow-[0_10px_35px_rgba(98,13,156,0.08)] border border-purple-200/90 p-3 sm:p-4 lg:p-5 relative z-20 mt-3 sm:mt-5 text-slate-900"
+        className="w-full max-w-[1360px] mx-auto bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(0,0,0,0.35)] border border-white/15 p-3 sm:p-4 lg:p-5 relative z-20 transition-all duration-300 hover:border-purple-300/30 mt-3 sm:mt-5 text-white"
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
           <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#620D9C]/25 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Creative Design
               </h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Unique and engaging designs that bring your ideas to life.
               </p>
             </div>
           </div>
 
           {/* 2. Branding */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-purple-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#620D9C]/25 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Tag className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Branding
               </h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Build a strong brand identity that connects and inspires trust.
               </p>
             </div>
           </div>
 
           {/* 3. Digital Marketing */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-purple-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#620D9C]/25 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Megaphone className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Digital Marketing
               </h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Result-driven marketing strategies that grow your brand online.
               </p>
             </div>
           </div>
 
           {/* 4. IT Solutions */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-purple-200/80 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#620D9C]/25 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Code className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 IT Solutions
               </h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
+              <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
                 Reliable and scalable IT solutions to power your business.
               </p>
             </div>
