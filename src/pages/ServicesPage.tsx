@@ -24,17 +24,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         breadcrumb="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
-        backgroundImage="/assets/banner-services-ecosystem.jpg"
+        backgroundImage="/assets/banner-services-clean.jpg"
+        backgroundVideo="/assets/services-banner-video.mp4"
+        videoHueRotate="0deg"
         fullBackground={true}
-        hudInfo={{
-          tag: 'Digital Ecosystem',
-          title: 'Full-Stack IT • Marketing • Design Stack',
-          status: 'High-Performance Architecture',
-        }}
-        floatingBadge={{
-          text: 'Ecosystem Suite',
-          subtext: '4 Integrated Verticals',
-        }}
+        backgroundPosition="center 65%"
       />
 
       {/* 2. Slide 10: Integrated Ecosystem Services & Packages */}
