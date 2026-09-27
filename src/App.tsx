@@ -76,15 +76,37 @@ export const App: React.FC = () => {
   }, []);
 
   // Multi-page navigation handler with gradient tab transition
-  const handleNavigate = useCallback((targetPage: string) => {
-    let cleanId = targetPage.toLowerCase().replace('#', '');
+  const handleNavigate = useCallback((targetPage: string, targetAnchor?: string) => {
+    let cleanId = targetPage.toLowerCase();
+    let anchor = targetAnchor;
+    if (cleanId.includes('#')) {
+      const parts = cleanId.split('#');
+      cleanId = parts[0] || 'home';
+      if (!anchor && parts[1]) anchor = parts[1];
+    }
+    cleanId = cleanId.replace('#', '');
     if (cleanId === 'services-packages') cleanId = 'services';
     if (cleanId === 'work-gallery') cleanId = 'work';
     if (!PAGE_IDS.includes(cleanId)) cleanId = 'home';
 
+    const scrollToAnchor = (anchorId: string) => {
+      const el = document.getElementById(anchorId);
+      if (el) {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(el, { offset: -90, duration: 1.2 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
+
     if (cleanId === currentPage) {
-      if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: false });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (anchor) {
+        scrollToAnchor(anchor);
+      } else {
+        if (lenisRef.current) lenisRef.current.scrollTo(0, { immediate: false });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
       return;
     }
 
@@ -94,13 +116,19 @@ export const App: React.FC = () => {
     // After luxury gradient curtain sweeps in, swap page & reset scroll
     setTimeout(() => {
       setCurrentPage(cleanId);
-      window.history.pushState(null, '', `#${cleanId}`);
+      window.history.pushState(null, '', anchor ? `#${cleanId}` : `#${cleanId}`);
 
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
+      if (anchor) {
+        setTimeout(() => {
+          scrollToAnchor(anchor!);
+        }, 220);
+      } else {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        setScrollProgress(0);
       }
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      setScrollProgress(0);
 
       // Gracefully sweep curtain out
       setTimeout(() => {

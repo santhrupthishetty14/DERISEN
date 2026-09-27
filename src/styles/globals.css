@@ -416,4 +416,19 @@
   50% { transform: translateY(-7px); }
 }
 
+@keyframes leaderFloatLeft {
+  0%, 100% { transform: translateY(0px) rotate(-0.5deg); }
+  50% { transform: translateY(-9px) rotate(0.6deg); }
+}
+
+@keyframes leaderFloatRight {
+  0%, 100% { transform: translateY(0px) rotate(0.5deg); }
+  50% { transform: translateY(-9px) rotate(-0.6deg); }
+}
+
+@keyframes leaderAuraGlow {
+  0%, 100% { opacity: 0.45; transform: scale(0.96); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
 

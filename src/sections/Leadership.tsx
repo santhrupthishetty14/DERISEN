@@ -177,7 +177,7 @@ export const Leadership: React.FC = () => {
             {/* -------------------------------------------------------------
                 LEFT PANEL: Shweta Deharkar
                 ------------------------------------------------------------- */}
-            <div className="lg:col-span-6 flex flex-col justify-between">
+            <div id="leader-shweta" className="lg:col-span-6 flex flex-col justify-between scroll-mt-28">
               <div>
                 {/* Header: User Icon + Name with Designation Below */}
                 <div className="flex items-center gap-4 mb-5">
@@ -222,7 +222,7 @@ export const Leadership: React.FC = () => {
             {/* -------------------------------------------------------------
                 RIGHT PANEL: Lejai Jayakumar
                 ------------------------------------------------------------- */}
-            <div className="lg:col-span-6 flex flex-col justify-between">
+            <div id="leader-lejai" className="lg:col-span-6 flex flex-col justify-between scroll-mt-28">
               <div>
                 {/* Header: User Icon + Name with Designation Below */}
                 <div className="flex items-center gap-4 mb-5">
