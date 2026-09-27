@@ -28,7 +28,12 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        playfair: ['"Playfair Display"', 'Georgia', 'serif'],
+        cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        syne: ['Syne', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
       },
       backgroundImage: {
         'brand-grad': 'linear-gradient(135deg, #180D38 0%, #6320EE 60%, #9333EA 100%)',
