@@ -86,39 +86,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                 tabIndex={0}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('about', 'leader-shweta'); }}
                 title="Click to view Shweta Deharkar's Executive Bio & Vision"
-                className="group/leader relative cursor-pointer select-none transition-all duration-500 hover:scale-105 active:scale-95 focus:outline-none w-full max-w-[270px]"
+                className="group/leader relative cursor-pointer select-none transition-all duration-500 hover:scale-105 active:scale-95 focus:outline-none w-full max-w-[280px] sm:max-w-[290px]"
                 style={{ animation: 'leaderFloatLeft 6s ease-in-out infinite alternate' }}
               >
                 {/* Purple Neon Pulsing Aura */}
                 <div
-                  className="absolute -inset-2 rounded-[2rem] bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#9333EA] blur-xl opacity-50 group-hover/leader:opacity-90 transition-opacity duration-500 pointer-events-none"
+                  className="absolute -inset-2.5 rounded-[2.2rem] bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#9333EA] blur-xl opacity-50 group-hover/leader:opacity-90 transition-opacity duration-500 pointer-events-none"
                   style={{ animation: 'leaderAuraGlow 4s ease-in-out infinite' }}
                 />
 
                 {/* Executive Glass Card Container */}
-                <div className="relative w-full p-5 sm:p-6 rounded-[2rem] border-2 border-[#B063FF]/40 group-hover/leader:border-[#B063FF] shadow-2xl bg-gradient-to-b from-[#2a0445]/95 via-[#1c0230]/95 to-[#120120]/95 backdrop-blur-xl flex flex-col items-center text-center transition-all duration-500">
+                <div className="relative w-full p-4 sm:p-5 rounded-[2.2rem] border-2 border-[#B063FF]/40 group-hover/leader:border-[#B063FF] shadow-2xl bg-gradient-to-b from-[#2a0445]/95 via-[#1c0230]/95 to-[#120120]/95 backdrop-blur-xl flex flex-col items-center text-center transition-all duration-500">
                   {/* Top Role Badge */}
-                  <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#180128]/90 border border-[#B063FF]/50 shadow-sm">
+                  <div className="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/50 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-[#B063FF] animate-pulse" />
                     <span className="text-[10px] font-extrabold text-[#D8B4FE] uppercase tracking-wider">Founder &amp; CEO</span>
                   </div>
 
-                  {/* Circular Executive Portrait Medallion Frame */}
-                  <div className="relative w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_10px_30px_rgba(176,99,255,0.4)] group-hover/leader:shadow-[0_15px_40px_rgba(176,99,255,0.65)] transition-all duration-500">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-[#180128]">
-                      <img
-                        src="/assets/leader-shweta-cleaned.jpg"
-                        alt="Shweta Deharkar - Founder & CEO"
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-108 filter brightness-105 contrast-105"
-                        loading="lazy"
-                      />
-                    </div>
-                    {/* Concentric Ambient Ring */}
-                    <div className="absolute -inset-2 rounded-full border border-[#B063FF]/40 pointer-events-none animate-pulse" />
+                  {/* Executive Studio Portrait Frame (3:4 ratio for full executive posture) */}
+                  <div className="relative w-full aspect-[3/4] max-h-[300px] sm:max-h-[320px] rounded-2xl overflow-hidden border-2 border-white/20 group-hover/leader:border-[#B063FF]/70 shadow-lg bg-gradient-to-b from-white to-purple-50 transition-all duration-500">
+                    <img
+                      src="/assets/leader-shweta-studio.jpg"
+                      alt="Shweta Deharkar - Founder & CEO"
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-105 filter brightness-[1.02] contrast-[1.02]"
+                      loading="lazy"
+                    />
+                    {/* Subtle Bottom Vignette */}
+                    <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#120120]/60 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Typography & Bio Action */}
-                  <div className="mt-4 flex flex-col items-center">
+                  <div className="mt-3.5 flex flex-col items-center w-full">
                     <h4 className="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
                       Shweta Deharkar
                     </h4>
@@ -127,7 +125,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                     </p>
 
                     {/* Interactive CTA Pill */}
-                    <div className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 group-hover/leader:bg-[#B063FF] text-white group-hover/leader:text-[#180128] border border-white/15 group-hover/leader:border-[#B063FF] text-xs font-bold transition-all duration-300 shadow-md">
+                    <div className="mt-3 inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-full bg-gradient-to-r from-[#620D9C]/80 to-[#B063FF]/80 group-hover/leader:from-[#B063FF] group-hover/leader:to-[#D8B4FE] text-white group-hover/leader:text-[#180128] border border-[#B063FF]/60 text-xs font-bold transition-all duration-300 shadow-md">
                       <span>View Bio &amp; Vision</span>
                       <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/leader:translate-x-0.5 group-hover/leader:-translate-y-0.5" />
                     </div>
@@ -188,39 +186,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                 tabIndex={0}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate('about', 'leader-lejai'); }}
                 title="Click to view Lejai Jayakumar's Strategic Roadmap & Bio"
-                className="group/leader relative cursor-pointer select-none transition-all duration-500 hover:scale-105 active:scale-95 focus:outline-none w-full max-w-[270px]"
+                className="group/leader relative cursor-pointer select-none transition-all duration-500 hover:scale-105 active:scale-95 focus:outline-none w-full max-w-[280px] sm:max-w-[290px]"
                 style={{ animation: 'leaderFloatRight 6s ease-in-out infinite alternate', animationDelay: '1.2s' }}
               >
                 {/* Purple Neon Pulsing Aura */}
                 <div
-                  className="absolute -inset-2 rounded-[2rem] bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#9333EA] blur-xl opacity-50 group-hover/leader:opacity-90 transition-opacity duration-500 pointer-events-none"
+                  className="absolute -inset-2.5 rounded-[2.2rem] bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#9333EA] blur-xl opacity-50 group-hover/leader:opacity-90 transition-opacity duration-500 pointer-events-none"
                   style={{ animation: 'leaderAuraGlow 4s ease-in-out infinite', animationDelay: '1.5s' }}
                 />
 
                 {/* Executive Glass Card Container */}
-                <div className="relative w-full p-5 sm:p-6 rounded-[2rem] border-2 border-[#B063FF]/40 group-hover/leader:border-[#B063FF] shadow-2xl bg-gradient-to-b from-[#2a0445]/95 via-[#1c0230]/95 to-[#120120]/95 backdrop-blur-xl flex flex-col items-center text-center transition-all duration-500">
+                <div className="relative w-full p-4 sm:p-5 rounded-[2.2rem] border-2 border-[#B063FF]/40 group-hover/leader:border-[#B063FF] shadow-2xl bg-gradient-to-b from-[#2a0445]/95 via-[#1c0230]/95 to-[#120120]/95 backdrop-blur-xl flex flex-col items-center text-center transition-all duration-500">
                   {/* Top Role Badge */}
-                  <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#180128]/90 border border-[#B063FF]/50 shadow-sm">
+                  <div className="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/50 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-[#B063FF] animate-pulse" />
                     <span className="text-[10px] font-extrabold text-[#D8B4FE] uppercase tracking-wider">Managing Director</span>
                   </div>
 
-                  {/* Circular Executive Portrait Medallion Frame */}
-                  <div className="relative w-40 h-40 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_10px_30px_rgba(176,99,255,0.4)] group-hover/leader:shadow-[0_15px_40px_rgba(176,99,255,0.65)] transition-all duration-500">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-[#180128]">
-                      <img
-                        src="/assets/leader-lejai-cleaned.jpg"
-                        alt="Lejai Jayakumar - Managing Director & Co-Founder"
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-108 filter brightness-105 contrast-105"
-                        loading="lazy"
-                      />
-                    </div>
-                    {/* Concentric Ambient Ring */}
-                    <div className="absolute -inset-2 rounded-full border border-[#B063FF]/40 pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
+                  {/* Executive Studio Portrait Frame (3:4 ratio for full executive posture) */}
+                  <div className="relative w-full aspect-[3/4] max-h-[300px] sm:max-h-[320px] rounded-2xl overflow-hidden border-2 border-white/20 group-hover/leader:border-[#B063FF]/70 shadow-lg bg-gradient-to-b from-white to-purple-50 transition-all duration-500">
+                    <img
+                      src="/assets/leader-lejai-studio.jpg"
+                      alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-105 filter brightness-[1.02] contrast-[1.02]"
+                      loading="lazy"
+                    />
+                    {/* Subtle Bottom Vignette */}
+                    <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#120120]/60 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Typography & Bio Action */}
-                  <div className="mt-4 flex flex-col items-center">
+                  <div className="mt-3.5 flex flex-col items-center w-full">
                     <h4 className="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
                       Lejai Jayakumar
                     </h4>
@@ -229,7 +225,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                     </p>
 
                     {/* Interactive CTA Pill */}
-                    <div className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 group-hover/leader:bg-[#B063FF] text-white group-hover/leader:text-[#180128] border border-white/15 group-hover/leader:border-[#B063FF] text-xs font-bold transition-all duration-300 shadow-md">
+                    <div className="mt-3 inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-full bg-gradient-to-r from-[#620D9C]/80 to-[#B063FF]/80 group-hover/leader:from-[#B063FF] group-hover/leader:to-[#D8B4FE] text-white group-hover/leader:text-[#180128] border border-[#B063FF]/60 text-xs font-bold transition-all duration-300 shadow-md">
                       <span>View Bio &amp; Strategy</span>
                       <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/leader:translate-x-0.5 group-hover/leader:-translate-y-0.5" />
                     </div>

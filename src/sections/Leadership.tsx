@@ -109,13 +109,13 @@ export const Leadership: React.FC = () => {
 
               {/* Clean Executive Duo Display with Glowing Badges */}
               <div className="relative w-full max-w-[560px] flex items-center justify-center gap-4 sm:gap-6 py-2">
-                {/* Shweta Sarkar */}
+                {/* Shweta Deharkar */}
                 <div className="relative group flex flex-col items-center">
                   <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
-                      src="/assets/leader-shweta-cleaned.jpg"
+                      src="/assets/leader-shweta-studio.jpg"
                       alt="Shweta Deharkar - CEO"
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>
                   <div className="mt-3 px-3 py-1 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
@@ -133,9 +133,9 @@ export const Leadership: React.FC = () => {
                 <div className="relative group flex flex-col items-center">
                   <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
-                      src="/assets/leader-lejai-cleaned.jpg"
+                      src="/assets/leader-lejai-studio.jpg"
                       alt="Lejai Jayakumar - Managing Director & Co-Founder"
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>
                   <div className="mt-3 px-3 py-1 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
