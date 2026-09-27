@@ -22,8 +22,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         breadcrumb="About Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
-        backgroundImage="/assets/banner-about-touch.jpg"
+        backgroundImage="/assets/banner-about-command-center.jpg"
         fullBackground={true}
+        backgroundPosition="right 18% center"
+        hudInfo={{
+          tag: 'Digital Command Center',
+          title: 'AI Ecosystem • High-Scale Tech • Strategy',
+          status: 'Neural Nexus Active',
+        }}
         floatingBadge={{
           text: 'Executive Leadership',
           subtext: 'Global Strategic Delivery',

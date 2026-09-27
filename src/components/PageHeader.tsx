@@ -13,6 +13,8 @@ export interface PageHeaderProps {
   imageAlt?: string;
   backgroundImage?: string;
   fullBackground?: boolean;
+  backgroundPosition?: string;
+  backgroundOpacity?: number;
   hudInfo?: {
     tag: string;
     title: string;
@@ -36,6 +38,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   imageAlt,
   backgroundImage = '/assets/banner-ai-future.jpg',
   fullBackground = false,
+  backgroundPosition,
+  backgroundOpacity,
   hudInfo,
   floatingBadge,
 }) => {
@@ -202,9 +206,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="absolute inset-0 w-full h-full bg-cover transition-transform duration-700 ease-out will-change-transform"
             style={{
               backgroundImage: `url(${backgroundImage})`,
-              backgroundPosition: isFullBg ? 'right 25% center' : 'center 35%',
+              backgroundPosition: backgroundPosition || (isFullBg ? 'right 25% center' : 'center 35%'),
               backgroundSize: isFullBg ? 'cover' : 'cover',
-              opacity: isFullBg ? 0.86 : 0.45,
+              opacity: backgroundOpacity !== undefined ? backgroundOpacity : isFullBg ? 0.86 : 0.45,
               transform: `scale(${isFullBg ? 1.05 : 1.06}) translate(${mousePos.x * 0.45}px, ${mousePos.y * 0.45}px)`,
               filter: isFullBg
                 ? 'saturate(1.38) contrast(1.2) brightness(1.06)'
