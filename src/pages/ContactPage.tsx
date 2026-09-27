@@ -90,7 +90,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Page Header with Complete Edge-to-Edge Animated AI Hologram Tech Background */}
+      {/* 1. Page Header with Dynamic Animated Purple Aurora & Hologram Core (No background image) */}
       <PageHeader
         badge="CONTACT US / LET'S CONNECT"
         title="Let's Build Something"
@@ -99,17 +99,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         breadcrumb="Contact Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
-        backgroundImage="/assets/banner-contact-tech.jpg"
-        fullBackground={true}
-        hudInfo={{
-          tag: 'Executive Hotline',
-          title: 'Direct Strategy Line • AI & Tech Roadmap',
-          status: 'Active & Responding',
-        }}
-        floatingBadge={{
-          text: 'Direct Executive Line',
-          subtext: '+91 78999 10917',
-        }}
+        purpleAnimationOnly={true}
       />
 
       {/* 2. Main Contact Grid & Direct Inquiry Section */}

@@ -27,6 +27,7 @@ export interface PageHeaderProps {
     subtext?: string;
   };
   showNexus?: boolean;
+  purpleAnimationOnly?: boolean;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -48,6 +49,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   hudInfo,
   floatingBadge,
   showNexus = false,
+  purpleAnimationOnly = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -194,7 +196,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     };
   }, []);
 
-  const isFullBg = fullBackground || (!imageSrc && Boolean(backgroundImage || backgroundVideo));
+  const isFullBg = purpleAnimationOnly || fullBackground || (!imageSrc && Boolean(backgroundImage || backgroundVideo));
 
   return (
     <div
@@ -204,8 +206,53 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         isFullBg ? 'min-h-[580px] lg:min-h-[660px]' : ''
       }`}
     >
+      {/* ====== PURE PURPLE AURORA ANIMATION STAGE (NO BACKGROUND IMAGE) ====== */}
+      {purpleAnimationOnly && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          {/* Deep Violet Cyber Matrix Base */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#120120] via-[#1a0129] to-[#0e0018]" />
+
+          {/* Glowing Animated Purple Aurora Plasma Waves */}
+          <div
+            className="absolute -inset-[30%] opacity-85 blur-3xl will-change-transform pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 65% 55% at 75% 40%, rgba(176, 99, 255, 0.45) 0%, rgba(98, 13, 156, 0.35) 45%, transparent 70%), radial-gradient(ellipse 55% 45% at 30% 65%, rgba(147, 51, 234, 0.4) 0%, rgba(75, 0, 110, 0.3) 50%, transparent 75%), radial-gradient(ellipse 50% 50% at 85% 75%, rgba(216, 180, 254, 0.3) 0%, rgba(168, 85, 247, 0.25) 40%, transparent 65%)',
+              animation: 'purpleAuroraWave 14s ease-in-out infinite alternate',
+              transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.6}px)`,
+            }}
+          />
+
+          {/* Secondary Floating Violet Energy Orb */}
+          <div
+            className="absolute top-1/3 right-[15%] w-[480px] h-[480px] rounded-full blur-2xl opacity-60 pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(176, 99, 255, 0.5) 0%, rgba(98, 13, 156, 0.25) 50%, transparent 75%)',
+              animation: 'purpleOrbFloat 10s ease-in-out infinite alternate',
+              transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)`,
+            }}
+          />
+
+          {/* Tertiary Deep Purple Flare */}
+          <div
+            className="absolute -bottom-20 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-50 pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(98, 13, 156, 0.6) 0%, rgba(75, 0, 110, 0.3) 60%, transparent 80%)',
+              animation: 'bannerBgPulse 12s ease-in-out infinite alternate',
+            }}
+          />
+
+          {/* Subtle Cyber Grid Texture */}
+          <div className="absolute inset-0 circuit-grid-dark opacity-35" />
+
+          {/* Vignette / Edge Softeners */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#180128] via-transparent to-[#180128]/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#180128]/95 via-[#180128]/60 to-transparent lg:w-3/5" />
+        </div>
+      )}
+
       {/* ====== COMPLETE ANIMATED BACKGROUND IMAGE / VIDEO LAYER ====== */}
-      {(backgroundVideo || backgroundImage) && (
+      {!purpleAnimationOnly && (backgroundVideo || backgroundImage) && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
           {backgroundVideo ? (
             <video
@@ -514,9 +561,73 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             />
           </div>
 
-          {/* Right Column: Full-Background Floating HUD Layer OR Frame Card */}
+          {/* Right Column: Full-Background Floating HUD Layer OR Frame Card OR 3D Purple Core */}
           {isFullBg ? (
-            (hudInfo || floatingBadge) ? (
+            purpleAnimationOnly ? (
+              <div
+                className={`lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative transition-all duration-1000 ease-out ${
+                  isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transitionDelay: '400ms',
+                }}
+              >
+                {/* 3D Holographic Purple Cyber Core */}
+                <div
+                  className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center pointer-events-none select-none"
+                  style={{
+                    transform: `perspective(1000px) rotateY(${mousePos.x * 0.4}deg) rotateX(${-mousePos.y * 0.4}deg)`,
+                  }}
+                >
+                  {/* Outer Concentric Orbit Ring 1 */}
+                  <div
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-[#B063FF]/40 pointer-events-none"
+                    style={{ animation: 'orbitRotate 22s linear infinite' }}
+                  />
+
+                  {/* Outer Concentric Orbit Ring 2 with glowing gradient */}
+                  <div
+                    className="absolute inset-5 rounded-full border border-purple-400/50 pointer-events-none"
+                    style={{ animation: 'orbitRotate 14s linear infinite reverse' }}
+                  />
+
+                  {/* Pulsing Purple Halo Core */}
+                  <div
+                    className="absolute w-48 h-48 rounded-full pointer-events-none blur-xl"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(176, 99, 255, 0.85) 0%, rgba(98, 13, 156, 0.6) 45%, transparent 75%)',
+                      animation: 'bannerNexusPulse 3.5s ease-in-out infinite',
+                    }}
+                  />
+
+                  {/* High-Luminance Center Energy Gem */}
+                  <div className="relative w-28 h-28 rounded-full bg-gradient-to-tr from-[#620D9C] via-[#B063FF] to-[#D8B4FE] shadow-[0_0_50px_rgba(176,99,255,0.7)] flex items-center justify-center p-1 animate-pulse">
+                    <div className="w-full h-full rounded-full bg-[#180128]/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-3">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#B063FF] shadow-[0_0_12px_#B063FF] animate-ping mb-1.5" />
+                      <span className="text-[10px] font-mono font-black text-white uppercase tracking-wider">LIVE NEXUS</span>
+                      <span className="text-[9px] font-bold text-[#D8B4FE]">Direct 24/7</span>
+                    </div>
+                  </div>
+
+                  {/* Satellite Floating Micro Nodes */}
+                  <div
+                    className="absolute -top-2 right-6 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/60 shadow-lg text-[10px] font-mono font-bold text-white flex items-center gap-1.5 backdrop-blur-md animate-bounce"
+                    style={{ animationDuration: '4s' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B063FF] animate-pulse" />
+                    <span>Instant Reply</span>
+                  </div>
+
+                  <div
+                    className="absolute -bottom-2 left-4 px-3 py-1 rounded-full bg-[#180128]/95 border border-[#B063FF]/60 shadow-lg text-[10px] font-mono font-bold text-[#D8B4FE] flex items-center gap-1.5 backdrop-blur-md animate-bounce"
+                    style={{ animationDuration: '4.5s', animationDelay: '1s' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>WhatsApp Ready</span>
+                  </div>
+                </div>
+              </div>
+            ) : (hudInfo || floatingBadge) ? (
               <div
                 className={`lg:col-span-4 hidden lg:flex flex-col items-end justify-center relative transition-all duration-1000 ease-out ${
                   isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
