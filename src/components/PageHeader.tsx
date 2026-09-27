@@ -202,7 +202,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           {/* Right Column: Visual Showcase (Zero Quality Loss 1:1 Rendering) */}
           {hasRightVisual && (
-            <div className="lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative my-auto">
+            <div className="lg:col-span-5 flex flex-col items-center justify-center relative my-auto mt-6 lg:mt-0">
               {backgroundVideo ? (
                 /* Native Resolution Pristine 1:1 Video Showcase (Zero Quality Loss) */
                 <div

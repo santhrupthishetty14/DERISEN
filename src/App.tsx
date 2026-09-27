@@ -10,6 +10,7 @@ import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
 import { PageTransition } from './components/PageTransition';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -262,38 +263,40 @@ export const App: React.FC = () => {
       />
 
       {/* 2. Main Multi-Page Content Area */}
-      <main className="flex-grow w-full max-w-full overflow-x-clip">
-        {currentPage === 'home' && (
-          <HomePage
-            onOpenModal={handleOpenModal}
-            onNavigate={handleNavigate}
-          />
-        )}
-        {currentPage === 'about' && (
-          <AboutPage
-            onOpenModal={handleOpenModal}
-            onNavigate={handleNavigate}
-          />
-        )}
-        {currentPage === 'services' && (
-          <ServicesPage
-            onOpenModal={handleOpenModal}
-            onNavigate={handleNavigate}
-          />
-        )}
-        {currentPage === 'work' && (
-          <WorkPage
-            onOpenModal={handleOpenModal}
-            onNavigate={handleNavigate}
-          />
-        )}
-        {currentPage === 'contact' && (
-          <ContactPage
-            onOpenModal={handleOpenModal}
-            onNavigate={handleNavigate}
-          />
-        )}
-      </main>
+      <ErrorBoundary fallbackPageName={currentPage}>
+        <main className="flex-grow w-full max-w-full overflow-x-clip">
+          {currentPage === 'home' && (
+            <HomePage
+              onOpenModal={handleOpenModal}
+              onNavigate={handleNavigate}
+            />
+          )}
+          {currentPage === 'about' && (
+            <AboutPage
+              onOpenModal={handleOpenModal}
+              onNavigate={handleNavigate}
+            />
+          )}
+          {currentPage === 'services' && (
+            <ServicesPage
+              onOpenModal={handleOpenModal}
+              onNavigate={handleNavigate}
+            />
+          )}
+          {currentPage === 'work' && (
+            <WorkPage
+              onOpenModal={handleOpenModal}
+              onNavigate={handleNavigate}
+            />
+          )}
+          {currentPage === 'contact' && (
+            <ContactPage
+              onOpenModal={handleOpenModal}
+              onNavigate={handleNavigate}
+            />
+          )}
+        </main>
+      </ErrorBoundary>
 
       {/* 3. Site Footer with Navigation */}
       <Footer onNavigate={handleNavigate} />

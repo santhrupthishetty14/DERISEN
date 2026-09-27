@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PenTool, Megaphone, Code, Check } from 'lucide-react';
+import { PenTool, Megaphone, Code, Check, Tag, Sparkles, ArrowRight } from 'lucide-react';
+import { AnimatedSectionBanner } from '../components/AnimatedSectionBanner';
 
 interface ServicesPackagesProps {
   onOpenModal?: () => void;
