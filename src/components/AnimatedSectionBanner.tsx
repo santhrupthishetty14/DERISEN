@@ -151,74 +151,64 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
     >
       <div
         ref={imageWrapperRef}
-        className="relative w-full min-h-[360px] sm:min-h-[440px] md:min-h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 shadow-[0_24px_65px_rgba(11,4,26,0.35)] bg-[#0B041A] will-change-transform"
+        className="relative w-full min-h-[360px] sm:min-h-[440px] md:min-h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-200/90 shadow-[0_20px_50px_rgba(98,13,156,0.08)] bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900"
       >
-        {/* Parallax Background Visual */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Subtle Watermark Visual */}
+        <div className="absolute inset-0 overflow-hidden opacity-25">
           <img
             ref={imageRef}
             src={imageSrc}
             alt={title}
             loading="lazy"
-            className="w-full h-full object-cover object-center will-change-transform filter brightness-95 contrast-105"
+            className="w-full h-full object-cover object-center filter brightness-105 contrast-95"
           />
         </div>
 
-        {/* Ambient Radial Gradient Overlays */}
-        <div
-          ref={glowOrbRef}
-          className={`absolute -top-20 -right-20 w-[420px] h-[420px] rounded-full bg-gradient-to-br ${glowColorClass} blur-3xl pointer-events-none will-change-transform`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B041A]/95 via-[#200236]/75 to-[#0B041A]/60 sm:to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B041A] via-transparent to-black/20 pointer-events-none" />
+        {/* Ambient Gradient Overlays for High Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60 sm:to-white/40 pointer-events-none" />
 
-        {/* Floating Ambient Depth Grid & Badge Layer */}
-        <div
-          ref={floatingLayerRef}
-          className="absolute inset-0 pointer-events-none z-10 hidden sm:block will-change-transform"
-        >
-          {stats.length > 0 && (
-            <div className="absolute top-8 right-8 flex flex-col gap-3">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="px-4 py-2.5 rounded-2xl bg-[#200236]/80 backdrop-blur-md border border-white/20 shadow-lg text-right"
-                >
-                  <div className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-[#B063FF]">
-                    {stat.value}
-                  </div>
-                  <div className="text-[11px] font-mono text-white/70 uppercase tracking-wider">
-                    {stat.label}
-                  </div>
+        {/* Stats Layer */}
+        {stats.length > 0 && (
+          <div className="absolute top-8 right-8 hidden sm:flex flex-col gap-3 z-20">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                className="px-4 py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-purple-200/90 shadow-md text-right"
+              >
+                <div className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#620D9C] to-[#7C3AED]">
+                  {stat.value}
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
+                <div className="text-[11px] font-mono text-slate-600 uppercase tracking-wider font-semibold">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Banner Interactive Foreground Content */}
         <div
           ref={contentRef}
-          className="relative z-20 h-full flex flex-col justify-center p-6 sm:p-12 md:p-16 max-w-2xl text-white"
+          className="relative z-20 h-full flex flex-col justify-center p-6 sm:p-12 md:p-16 max-w-2xl text-slate-900"
         >
           {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-purple-200 text-xs font-black uppercase tracking-wider mb-4 w-fit shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200/90 text-[#620D9C] text-xs font-black uppercase tracking-wider mb-4 w-fit shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#620D9C]" />
             <span>{badge}</span>
           </div>
 
-          {/* Headline with Glowing Gradient Accent */}
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.2] mb-4 text-white">
+          {/* Headline */}
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black tracking-tight leading-[1.2] mb-4 text-slate-950">
             {title}{' '}
             {highlightWord && (
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-300 to-[#B063FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#620D9C] via-[#7C3AED] to-[#9333EA]">
                 {highlightWord}
               </span>
             )}
           </h3>
 
           {/* Description */}
-          <p className="text-sm sm:text-base text-white/80 leading-relaxed font-medium mb-6 max-w-xl">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-medium mb-6 max-w-xl">
             {description}
           </p>
 
@@ -228,9 +218,9 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
               {pills.map((pill, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/15 text-xs font-mono font-medium text-white/90 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-purple-200 text-xs font-mono font-semibold text-[#620D9C] shadow-sm hover:bg-purple-50 transition-colors"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#B063FF]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]" />
                   {pill}
                 </span>
               ))}
@@ -238,8 +228,8 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           )}
         </div>
 
-        {/* Sleek Bottom Border Highlight */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-purple to-transparent opacity-70" />
+        {/* Bottom Border Highlight */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#620D9C] to-transparent opacity-60" />
       </div>
     </div>
   );

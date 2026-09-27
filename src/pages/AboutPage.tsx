@@ -13,7 +13,7 @@ interface AboutPageProps {
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Dedicated Page Header Banner with Complete Background and Futuristic Animations */}
+      {/* 1. Dedicated Page Header Banner - Clean White Theme */}
       <PageHeader
         badge="ABOUT DE.RISEN / WHO WE ARE"
         title="Architecting Scalable Brands &"
@@ -22,11 +22,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         breadcrumb="About Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
-        backgroundImage="/assets/banner-about-command-center.jpg"
-        backgroundVideo="/assets/about-banner-video.mp4"
-        videoHueRotate="85deg"
-        fullBackground={true}
-        backgroundPosition="right 24% center"
+        hudInfo={{
+          tag: 'Executive Leadership',
+          title: 'Visionary Direction • Scalable Systems',
+          status: 'Global Delivery Active',
+        }}
+        floatingBadge={{
+          text: 'Executive Strategic Model',
+          subtext: 'End-to-End Synergy',
+        }}
       />
 
       {/* 2. Company Background, Vision, Mission & Goals */}

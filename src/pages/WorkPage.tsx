@@ -12,7 +12,7 @@ interface WorkPageProps {
 export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) => {
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Page Header with Complete Edge-to-Edge Animated Creative Portfolio Background */}
+      {/* 1. Page Header - Clean White Theme */}
       <PageHeader
         badge="WORK GALLERY & TESTIMONIALS / IMPACT"
         title="Crafted for Influence,"
@@ -21,8 +21,6 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) =
         breadcrumb="Work & Testimonials"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Systems', 'Web Platforms', 'Campaign Creatives', 'Video & 3D Motion', 'Client Endorsements']}
-        backgroundImage="/assets/banner-work-gallery.jpg"
-        fullBackground={true}
         hudInfo={{
           tag: 'Creative Showcase',
           title: 'Brand Systems • Digital Platforms • 3D Motion',
