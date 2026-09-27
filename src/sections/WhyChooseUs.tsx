@@ -12,7 +12,7 @@ const WHY_FEATURES = [
     heading: 'Creative & Strategic Approach',
     description:
       'We blend creativity with strategy to design solutions that are not just visually stunning but also purpose-driven, effective, and rooted in measurable business outcomes.',
-    accentColor: '#620d9c',
+    accentColor: '#6320EE',
   },
   {
     id: 'results-matter',
@@ -28,7 +28,7 @@ const WHY_FEATURES = [
     heading: 'Client-Centric Mindset',
     description:
       "We listen deeply, collaborate closely, and adapt continuously to make sure every deliverable is perfectly aligned to your unique goals and your audience's expectations.",
-    accentColor: '#620d9c',
+    accentColor: '#6320EE',
   },
   {
     id: 'innovation',
@@ -44,7 +44,7 @@ const WHY_FEATURES = [
     heading: 'Uncompromising Quality',
     description:
       'From the first sketch to final delivery, quality is embedded in our process. We apply rigorous standards so every output is polished, precise, and production-ready.',
-    accentColor: '#620d9c',
+    accentColor: '#6320EE',
   },
   {
     id: 'data-backed',
@@ -60,7 +60,7 @@ const WHY_FEATURES = [
     heading: 'Full-Service Under One Roof',
     description:
       'Design, branding, marketing, and IT — all handled seamlessly within a single agency. No fragmented workflows. No missed handoffs. Just coordinated, cohesive execution.',
-    accentColor: '#620d9c',
+    accentColor: '#6320EE',
   },
   {
     id: 'proven-track',
@@ -249,18 +249,18 @@ export const WhyChooseUs: React.FC = () => {
                 onMouseLeave={() => setHoveredId(null)}
                 className={`group relative bg-white rounded-[24px] border p-6 sm:p-7 flex flex-col gap-4 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default overflow-hidden ${
                   isHovered
-                    ? 'border-purple-300 shadow-[0_20px_40px_rgba(98,13,156,0.2)] -translate-y-2'
+                    ? 'border-purple-300 shadow-[0_20px_40px_rgba(99,32,238,0.2)] -translate-y-2'
                     : 'border-slate-100 shadow-xl translate-y-0'
                 }`}
               >
                 {/* AI Card Cyber Accent Line on Hover */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#620D9C] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#6320EE] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {/* ── Icon badge: scale 0.8 → 1 on scroll enter, translate-y on hover ── */}
                 <div
                   ref={(el) => {
                     iconRefs.current[index] = el;
                   }}
-                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 transition-transform duration-300 ${
+                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 transition-transform duration-300 ${
                     isHovered ? '-translate-y-1 scale-110 shadow-lg' : 'scale-100'
                   }`}
                 >
@@ -273,7 +273,7 @@ export const WhyChooseUs: React.FC = () => {
                     headingItemRefs.current[index] = el;
                   }}
                   className={`text-sm sm:text-[15px] font-black text-slate-900 leading-snug transition-colors duration-300 ${
-                    isHovered ? 'text-[#620D9C]' : ''
+                    isHovered ? 'text-[#6320EE]' : ''
                   }`}
                 >
                   {feature.heading}
@@ -296,8 +296,8 @@ export const WhyChooseUs: React.FC = () => {
                   }}
                   className={`h-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isHovered
-                      ? 'w-full bg-gradient-to-r from-[#620D9C] to-[#B063FF]'
-                      : 'w-10 bg-gradient-to-r from-[#620D9C] to-[#B063FF]'
+                      ? 'w-full bg-gradient-to-r from-[#6320EE] to-[#7C3AED]'
+                      : 'w-10 bg-gradient-to-r from-[#6320EE] to-[#7C3AED]'
                   }`}
                   style={{
                     /* GSAP controls initial scaleX; override width with tailwind on hover only */

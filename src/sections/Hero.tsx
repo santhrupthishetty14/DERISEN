@@ -287,11 +287,11 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             <h1 className="reveal-item text-[28px] xs:text-[32px] sm:text-5xl lg:text-[46px] xl:text-[54px] font-black text-[#120020] leading-[1.1] tracking-[-0.035em] mb-3 sm:mb-4 max-w-full break-words">
               <div>We Don't Just</div>
               <div>Build Brands.</div>
-              <div className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] mt-1 max-w-full">
+              <div className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#9333EA] mt-1 max-w-full">
                 <span>We Make Them Rise.</span>
                 {/* Reference Curved Underline Swoop */}
                 <svg
-                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-[#620D9C] overflow-visible pointer-events-none"
+                  className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-3 sm:h-4 text-[#6320EE] overflow-visible pointer-events-none"
                   viewBox="0 0 320 16"
                   fill="none"
                 >
@@ -386,13 +386,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
           <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#6320EE] transition-colors">
                 Creative Design
               </h4>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -403,13 +403,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
           {/* 2. Branding */}
           <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-slate-200 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Tag className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#6320EE] transition-colors">
                 Branding
               </h4>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -420,13 +420,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
           {/* 3. Digital Marketing */}
           <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-slate-200 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Megaphone className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#6320EE] transition-colors">
                 Digital Marketing
               </h4>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -437,13 +437,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
           {/* 4. IT Solutions */}
           <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-slate-200 lg:pl-6 transition-all duration-300 hover:translate-x-1">
-            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#4B006E] to-[#620D9C] text-white flex items-center justify-center shadow-md shadow-[#620d9c]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Code className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#620D9C] transition-colors">
+              <h4 className="text-xs sm:text-base font-black text-slate-900 leading-tight mb-0.5 sm:mb-1 group-hover:text-[#6320EE] transition-colors">
                 IT Solutions
               </h4>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">

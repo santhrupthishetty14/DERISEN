@@ -31,7 +31,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
       }}
       className={`rounded-[26px] p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
         isDark
-          ? 'bg-gradient-to-br from-[#4B006E] via-[#620D9C] to-[#8E24AA] text-white shadow-2xl shadow-[#620d9c]/50 border-2 border-purple-300/40 -translate-y-2'
+          ? 'bg-gradient-to-br from-[#6320EE] via-[#7C3AED] to-[#9333EA] text-white shadow-2xl shadow-[#6320EE]/50 border-2 border-purple-300/40 -translate-y-2'
           : 'bg-white text-slate-900 border border-slate-100 shadow-xl hover:shadow-2xl hover:border-purple-200 hover:-translate-y-1.5'
       }`}
     >
@@ -50,7 +50,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
               isDark
                 ? 'bg-white/20 text-white backdrop-blur-sm group-hover:scale-110'
-                : 'bg-gradient-to-r from-[#4B006E] to-[#620D9C] text-white shadow-md shadow-[#620d9c]/25 group-hover:scale-110'
+                : 'bg-gradient-to-r from-[#6320EE] to-[#7C3AED] text-white shadow-md shadow-[#6320EE]/25 group-hover:scale-110'
             }`}
           >
             <Sparkles className="w-4 h-4 text-white" />
@@ -69,7 +69,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
           className={`text-xl sm:text-[22px] font-black tracking-tight mb-4 pb-3 border-b transition-colors duration-300 ${
             isDark
               ? 'text-white border-white/15'
-              : 'text-slate-900 border-slate-100 group-hover:text-[#620D9C]'
+              : 'text-slate-900 border-slate-100 group-hover:text-[#6320EE]'
           }`}
         >
           {category.title}
@@ -86,7 +86,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
             >
               <span
                 className={`font-bold text-sm transition-colors duration-300 ${
-                  isDark ? 'text-purple-200' : 'text-[#620D9C]'
+                  isDark ? 'text-purple-200' : 'text-[#6320EE]'
                 }`}
               >
                 •
@@ -102,7 +102,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
         className={`pt-3 mt-auto border-t text-[11px] font-semibold flex items-center justify-between transition-colors duration-300 ${
           isDark
             ? 'border-white/15 text-purple-200'
-            : 'border-slate-100 text-[#620D9C]'
+            : 'border-slate-100 text-[#6320EE]'
         }`}
       >
         <span className="flex items-center gap-1.5">
@@ -110,7 +110,7 @@ export const CatalogCard: React.FC<CatalogCardProps> = ({
         </span>
         <span
           className={`text-xs font-bold transition-colors duration-300 ${
-            isDark ? 'text-white font-extrabold' : 'text-[#620D9C] group-hover:text-[#4B006E]'
+            isDark ? 'text-white font-extrabold' : 'text-[#6320EE] group-hover:text-[#5214db]'
           }`}
         >
           {isDark ? 'Selected' : 'Tap to select'}

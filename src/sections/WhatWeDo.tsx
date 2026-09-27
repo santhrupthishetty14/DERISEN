@@ -75,7 +75,7 @@ export const WhatWeDo: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col items-start pt-0 pr-0 lg:pr-2">
             {/* Tag Badge */}
             <div
-              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#620D9C] text-white text-[11px] font-extrabold uppercase tracking-wider mb-5 shadow-sm transition-all duration-700 ${
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6320EE] text-white text-[11px] font-extrabold uppercase tracking-wider mb-5 shadow-sm transition-all duration-700 ${
                 isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
@@ -90,13 +90,13 @@ export const WhatWeDo: React.FC = () => {
               }`}
             >
               <span>We Create Brands That</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#620D9C] via-[#A855F7] to-[#B063FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6]">
                 Inspire, Connect &amp; Grow
               </span>
             </h2>
 
             {/* Accent divider line */}
-            <div className="w-16 h-1 bg-gradient-to-r from-[#620D9C] to-[#B063FF] rounded-full mb-6" />
+            <div className="w-16 h-1 bg-gradient-to-r from-[#6320EE] to-[#7C3AED] rounded-full mb-6" />
 
             {/* Paragraphs */}
             <div className="space-y-3.5 text-xs sm:text-[13px] text-purple-200/80 leading-relaxed mb-7">
@@ -132,10 +132,10 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '450ms' }}
               >
-                <div className="w-9 h-9 rounded-xl bg-[#620D9C] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                <div className="w-9 h-9 rounded-xl bg-[#6320EE] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                   <PenTool className="w-4 h-4 text-[#B063FF]" />
                 </div>
-                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#620D9C] transition-colors">
+                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#6320EE] transition-colors">
                   Creative Design
                 </h4>
                 <p className="text-[10.5px] text-slate-600 leading-snug">
@@ -150,10 +150,10 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '520ms' }}
               >
-                <div className="w-9 h-9 rounded-xl bg-[#620D9C] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                <div className="w-9 h-9 rounded-xl bg-[#6320EE] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                   <Tag className="w-4 h-4 text-[#B063FF]" />
                 </div>
-                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#620D9C] transition-colors">
+                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#6320EE] transition-colors">
                   Branding
                 </h4>
                 <p className="text-[10.5px] text-slate-600 leading-snug">
@@ -168,10 +168,10 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '590ms' }}
               >
-                <div className="w-9 h-9 rounded-xl bg-[#620D9C] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                <div className="w-9 h-9 rounded-xl bg-[#6320EE] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                   <Megaphone className="w-4 h-4 text-[#B063FF]" />
                 </div>
-                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#620D9C] transition-colors">
+                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#6320EE] transition-colors">
                   Digital Marketing
                 </h4>
                 <p className="text-[10.5px] text-slate-600 leading-snug">
@@ -186,10 +186,10 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '660ms' }}
               >
-                <div className="w-9 h-9 rounded-xl bg-[#620D9C] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                <div className="w-9 h-9 rounded-xl bg-[#6320EE] text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-110 transition-transform duration-300">
                   <Code className="w-4 h-4 text-[#B063FF]" />
                 </div>
-                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#620D9C] transition-colors">
+                <h4 className="text-xs font-black text-slate-900 mb-1 group-hover:text-[#6320EE] transition-colors">
                   IT Solutions
                 </h4>
                 <p className="text-[10.5px] text-slate-600 leading-snug">
@@ -207,12 +207,12 @@ export const WhatWeDo: React.FC = () => {
             <div className="relative w-48 sm:w-56 lg:w-44 xl:w-52 h-[440px] sm:h-[480px] lg:h-[500px] flex items-center justify-center">
               
               {/* Subtle Ambient Radial Glow Behind Center Image */}
-              <div className="absolute inset-0 bg-[#620D9C]/30 rounded-full blur-xl pointer-events-none" />
+              <div className="absolute inset-0 bg-[#6320EE]/30 rounded-full blur-xl pointer-events-none" />
 
               {/* Masked Photo Frame */}
               <div
                 ref={centerFrameRef}
-                className="w-full h-full rounded-full overflow-hidden shadow-[0_20px_45px_rgba(99,32,238,0.25)] border-[3.5px] border-[#620D9C] bg-brand-dark relative group/img z-10"
+                className="w-full h-full rounded-full overflow-hidden shadow-[0_20px_45px_rgba(99,32,238,0.25)] border-[3.5px] border-[#6320EE] bg-brand-dark relative group/img z-10"
               >
                 <img
                   ref={centerImgRef}
@@ -239,7 +239,7 @@ export const WhatWeDo: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col items-start pt-0 lg:pl-8 xl:pl-12 2xl:pl-14">
             {/* Tag Badge */}
             <div
-              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#620D9C] text-white text-[11px] font-extrabold uppercase tracking-wider mb-5 shadow-sm transition-all duration-700 ${
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6320EE] text-white text-[11px] font-extrabold uppercase tracking-wider mb-5 shadow-sm transition-all duration-700 ${
                 isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
@@ -254,13 +254,13 @@ export const WhatWeDo: React.FC = () => {
               }`}
             >
               <span>Creating Brands That</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#620D9C] via-[#A855F7] to-[#B063FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6]">
                 Leave a Lasting Impression
               </span>
             </h2>
 
             {/* Accent divider line */}
-            <div className="w-16 h-1 bg-gradient-to-r from-[#620D9C] to-[#B063FF] rounded-full mb-6" />
+            <div className="w-16 h-1 bg-gradient-to-r from-[#6320EE] to-[#7C3AED] rounded-full mb-6" />
 
             {/* Paragraphs */}
             <div className="space-y-3.5 text-xs sm:text-[13px] text-purple-200/80 leading-relaxed mb-7">
@@ -296,7 +296,7 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '450ms' }}
               >
-                <div className="w-10 h-10 rounded-full bg-[#620D9C] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#620D9C]/30 group-hover:scale-110 group-hover:bg-[#B063FF] transition-all duration-300">
+                <div className="w-10 h-10 rounded-full bg-[#6320EE] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#6320EE]/30 group-hover:scale-110 group-hover:bg-[#7C3AED] transition-all duration-300">
                   <Lightbulb className="w-5 h-5 text-[#B063FF] group-hover:text-white" />
                 </div>
                 <div>
@@ -316,7 +316,7 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '520ms' }}
               >
-                <div className="w-10 h-10 rounded-full bg-[#620D9C] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#620D9C]/30 group-hover:scale-110 group-hover:bg-[#B063FF] transition-all duration-300">
+                <div className="w-10 h-10 rounded-full bg-[#6320EE] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#6320EE]/30 group-hover:scale-110 group-hover:bg-[#7C3AED] transition-all duration-300">
                   <Target className="w-5 h-5 text-[#B063FF] group-hover:text-white" />
                 </div>
                 <div>
@@ -336,7 +336,7 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '590ms' }}
               >
-                <div className="w-10 h-10 rounded-full bg-[#620D9C] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#620D9C]/30 group-hover:scale-110 group-hover:bg-[#B063FF] transition-all duration-300">
+                <div className="w-10 h-10 rounded-full bg-[#6320EE] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#6320EE]/30 group-hover:scale-110 group-hover:bg-[#7C3AED] transition-all duration-300">
                   <Users className="w-5 h-5 text-[#B063FF] group-hover:text-white" />
                 </div>
                 <div>
@@ -356,7 +356,7 @@ export const WhatWeDo: React.FC = () => {
                 }`}
                 style={{ transitionDelay: '660ms' }}
               >
-                <div className="w-10 h-10 rounded-full bg-[#620D9C] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#620D9C]/30 group-hover:scale-110 group-hover:bg-[#B063FF] transition-all duration-300">
+                <div className="w-10 h-10 rounded-full bg-[#6320EE] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#6320EE]/30 group-hover:scale-110 group-hover:bg-[#7C3AED] transition-all duration-300">
                   <Rocket className="w-5 h-5 text-[#B063FF] group-hover:text-white" />
                 </div>
                 <div>

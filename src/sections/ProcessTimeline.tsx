@@ -52,7 +52,7 @@ export const ProcessTimeline: React.FC = () => {
         >
           <span className="eyebrow text-[#B063FF]">OUR WORK PROCESS</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#620d9c] via-[#8b5cf6] to-[#B063FF]">Measurable Success</span>
+            Turning Vision into <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6]">Measurable Success</span>
           </h2>
           <p className="text-sm sm:text-base text-purple-200/80 font-medium max-w-2xl mx-auto leading-relaxed">
             A clear, strategy-led process moves every project from insight to impact.
@@ -64,7 +64,7 @@ export const ProcessTimeline: React.FC = () => {
         <div className="hidden lg:block relative max-w-4xl mx-auto mb-12">
           <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] transition-all duration-700 ease-out shadow-[0_0_12px_#620d9c]"
+              className="h-full bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] transition-all duration-700 ease-out shadow-[0_0_12px_#6320EE]"
               style={{
                 width: `${((activeStep + 1) / PROCESS_STEPS.length) * 100}%`,
               }}

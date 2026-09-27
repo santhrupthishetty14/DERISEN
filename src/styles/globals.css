@@ -9,11 +9,12 @@
     --brand-navy-dark: #180128;
     --brand-indigo-dark: #200236;
     --brand-card-dark: #2A0245;
-    --brand-purple: #620d9c;
-    --brand-violet: #B063FF;
-    --brand-violet-light: #C084FC;
+    --brand-purple: #6320EE;
+    --brand-purple-hover: #5214db;
+    --brand-violet: #7C3AED;
+    --brand-violet-light: #8B5CF6;
     --brand-lilac: #EDE9FE;
-    --brand-grad: linear-gradient(135deg, #4B006E 0%, #620D9C 48%, #B063FF 100%);
+    --brand-grad: linear-gradient(135deg, #180D38 0%, #6320EE 60%, #9333EA 100%);
   }
 
   html {
@@ -85,12 +86,12 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] inline-block pb-2.5 sm:pb-3 pr-2 leading-[1.3];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#9333EA] inline-block pb-2.5 sm:pb-3 pr-2 leading-[1.3];
   }
 
   .dot-pattern {
     @apply absolute w-64 h-64 pointer-events-none opacity-15;
-    background-image: radial-gradient(#620d9c 1.5px, transparent 1.5px);
+    background-image: radial-gradient(#6320EE 1.5px, transparent 1.5px);
     background-size: 16px 16px;
   }
 }

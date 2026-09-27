@@ -214,8 +214,8 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_16px_rgba(176,99,255,0.4)] scale-105'
-                  : 'bg-white/10 text-purple-100 hover:text-white hover:border-[#B063FF]/50 border border-white/15 shadow-sm'
+                  ? 'bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_4px_16px_rgba(99,32,238,0.4)] scale-105'
+                  : 'bg-white/10 text-purple-100 hover:text-white hover:border-[#7C3AED]/50 border border-white/15 shadow-sm'
               }`}
             >
               {cat}
@@ -286,10 +286,10 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
 
                   <div className="relative z-10 p-5 flex flex-col justify-between h-full">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-white bg-[#620D9C]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-purple-300/30 shadow-sm">
+                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-white bg-[#6320EE]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-purple-300/30 shadow-sm">
                         {item.category}
                       </span>
-                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#620D9C] shadow-sm">
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#6320EE] shadow-sm">
                         <ArrowUpRight className="w-4 h-4" />
                       </div>
                     </div>
@@ -299,7 +299,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                         0{idx + 1}
                       </div>
                       {item.metrics && (
-                        <span className="text-[10px] font-bold text-white bg-[#620D9C] border border-purple-300/40 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm">
+                        <span className="text-[10px] font-bold text-white bg-[#6320EE] border border-purple-300/40 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm">
                           {item.metrics}
                         </span>
                       )}
@@ -310,10 +310,10 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                 {/* Body */}
                 <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
                   <div>
-                    <span className="text-xs font-bold text-[#620D9C] mb-1.5 block">
+                    <span className="text-xs font-bold text-[#6320EE] mb-1.5 block">
                       {item.client}
                     </span>
-                    <h4 className="text-base sm:text-lg font-black text-slate-900 mb-2 leading-snug group-hover:text-[#620D9C] transition-colors">
+                    <h4 className="text-base sm:text-lg font-black text-slate-900 mb-2 leading-snug group-hover:text-[#6320EE] transition-colors">
                       {item.title}
                     </h4>
                     <p className="text-xs text-slate-600 leading-relaxed font-normal">
@@ -324,7 +324,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                   {/* Bottom Card Line */}
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-400">
                     <span>CASE STUDY</span>
-                    <span className="text-[#620D9C] font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                    <span className="text-[#6320EE] font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
                       EXPLORE →
                     </span>
                   </div>
@@ -364,7 +364,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                 </div>
 
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4B006E] to-[#620D9C] text-white font-bold text-xs flex items-center justify-center shadow-md shadow-[#620d9c]/25">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white font-bold text-xs flex items-center justify-center shadow-md shadow-[#6320EE]/25">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -388,7 +388,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
             {/* Modal Header */}
             <div className="sticky top-0 z-30 flex items-center justify-between p-5 sm:p-6 bg-[#180128]/95 backdrop-blur-md border-b border-white/10">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-white bg-[#620D9C] px-3 py-1 rounded-full border border-purple-300/30">
+                <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-white bg-[#6320EE] px-3 py-1 rounded-full border border-purple-300/30">
                   {selectedItem.category}
                 </span>
                 {selectedItem.metrics && (
@@ -504,7 +504,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
 
                   {/* Active Slide Feature Card */}
                   <div className="bg-gradient-to-r from-purple-950/60 to-brand-navy/60 p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-[#620D9C]/50 border border-purple-300/30 text-white shrink-0">
+                    <div className="p-2.5 rounded-xl bg-[#6320EE]/50 border border-purple-300/30 text-white shrink-0">
                       <Grid className="w-5 h-5" />
                     </div>
                     <div>
@@ -594,7 +594,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
 
                   {/* Active Slide Feature Card */}
                   <div className="bg-gradient-to-r from-purple-950/60 to-brand-navy/60 p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-[#620D9C]/50 border border-purple-300/30 text-white shrink-0">
+                    <div className="p-2.5 rounded-xl bg-[#6320EE]/50 border border-purple-300/30 text-white shrink-0">
                       <Grid className="w-5 h-5" />
                     </div>
                     <div>
@@ -657,7 +657,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                   </button>
                   <button
                     onClick={handleInquire}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white text-xs font-bold hover:shadow-[0_4px_20px_rgba(176,99,255,0.5)] transition-all cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] text-white text-xs font-bold hover:shadow-[0_4px_20px_rgba(99,32,238,0.5)] transition-all cursor-pointer"
                   >
                     {selectedItem.title === 'Corporate Brand Identity & Guidelines'
                       ? 'Request Brand Guidelines Service →'

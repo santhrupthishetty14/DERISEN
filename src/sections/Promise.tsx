@@ -87,7 +87,7 @@ export const Promise: React.FC = () => {
             {/* Connecting Background Line */}
             <div className="hidden md:block absolute top-7 left-12 right-12 h-1 bg-white/10 rounded-full z-0 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] transition-all duration-700 ease-out shadow-[0_0_10px_#B063FF]"
+                className="h-full bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] transition-all duration-700 ease-out shadow-[0_0_10px_#6320EE]"
                 style={{
                   width: `${((activeWorkflowIndex + 1) / WORKFLOW_PIPELINE.length) * 100}%`,
                 }}

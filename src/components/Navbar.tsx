@@ -104,10 +104,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                   className={`relative text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 py-2 group cursor-pointer ${
                     isActive
                       ? isLight
-                        ? 'text-[#620D9C] font-black'
+                        ? 'text-[#6320EE] font-black'
                         : 'text-white font-bold'
                       : isLight
-                      ? 'text-slate-700 hover:text-[#620D9C]'
+                      ? 'text-slate-700 hover:text-[#6320EE]'
                       : 'text-purple-200/80 hover:text-white'
                   }`}
                 >
@@ -117,8 +117,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, currentPage, onNavi
                   <span
                     className={`absolute bottom-0 left-0 h-[2.5px] rounded-full transition-all duration-300 ease-out ${
                       isActive
-                        ? 'w-full bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] opacity-100 shadow-[0_2px_10px_rgba(176,99,255,0.5)]'
-                        : 'w-0 bg-gradient-to-r from-[#4B006E] to-[#B063FF] opacity-0 group-hover:w-full group-hover:opacity-100'
+                        ? 'w-full bg-gradient-to-r from-[#6320EE] to-[#7C3AED] opacity-100 shadow-[0_2px_10px_rgba(99,32,238,0.5)]'
+                        : 'w-0 bg-gradient-to-r from-[#6320EE] to-[#7C3AED] opacity-0 group-hover:w-full group-hover:opacity-100'
                     }`}
                   />
                 </a>

@@ -127,7 +127,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
       className="py-20 sm:py-28 bg-gradient-to-b from-[#24033b] via-[#200236] to-[#180128] text-white relative overflow-hidden"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#620d9c]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#6320EE]/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-[#4A0573]/25 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 relative z-10">
@@ -159,7 +159,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
         </div>
 
         {/* =====================================================================
-            QUICK TABS: 4 category filter buttons (using exact #620d9c active color)
+            QUICK TABS: 4 category filter buttons (using vibrant electric purple active color)
             ===================================================================== */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-10">
           {packages.map((pkg) => {
@@ -172,7 +172,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                 onClick={() => setSelectedNum(pkg.num)}
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-[#4B006E] via-[#620D9C] to-[#B063FF] text-white shadow-[0_4px_20px_rgba(176,99,255,0.45)] scale-105 border border-purple-300/40'
+                    ? 'bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_4px_20px_rgba(99,32,238,0.45)] scale-105 border border-purple-300/40'
                     : 'bg-white/10 text-purple-100 border border-white/15 hover:bg-white/15 hover:border-purple-300/40'
                 }`}
               >
@@ -214,7 +214,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                 }}
                 className={`relative rounded-[28px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group will-change-transform ${
                   isSelected
-                    ? 'bg-gradient-to-b from-[#620D9C] to-[#45056E] text-white shadow-2xl shadow-[#620d9c]/60 -translate-y-3 scale-[1.02] border-2 border-purple-300/40 z-10'
+                    ? 'bg-gradient-to-b from-[#6320EE] to-[#45056E] text-white shadow-2xl shadow-[#6320EE]/60 -translate-y-3 scale-[1.02] border-2 border-purple-300/40 z-10'
                     : 'bg-white text-slate-900 border border-slate-100 shadow-xl hover:shadow-2xl hover:border-purple-200 hover:-translate-y-2'
                 }`}
               >
@@ -224,11 +224,11 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                     <span
                       className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-black tracking-wider uppercase shadow-md ${
                         isSelected
-                          ? 'bg-white text-[#620D9C] shadow-lg border border-purple-200'
-                          : 'bg-[#620D9C] text-white border border-purple-300/40'
+                          ? 'bg-white text-[#6320EE] shadow-lg border border-purple-200'
+                          : 'bg-[#6320EE] text-white border border-purple-300/40'
                       }`}
                     >
-                      <Sparkles className={`w-3 h-3 ${isSelected ? 'text-[#620D9C]' : 'text-purple-200'}`} />
+                      <Sparkles className={`w-3 h-3 ${isSelected ? 'text-[#6320EE]' : 'text-purple-200'}`} />
                       <span>{pkg.badge}</span>
                     </span>
                   </div>
@@ -241,7 +241,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                   {/* Category Tag */}
                   <span
                     className={`text-[10.5px] font-mono font-bold tracking-[0.2em] uppercase block mb-3 transition-colors duration-300 ${
-                      isSelected ? 'text-purple-200' : 'text-[#620D9C]'
+                      isSelected ? 'text-purple-200' : 'text-[#6320EE]'
                     }`}
                   >
                     {pkg.tag}
@@ -251,7 +251,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                   <div className="flex items-center justify-between gap-2 mb-1.5">
                     <h3
                       className={`text-xl sm:text-[22px] font-black tracking-tight transition-colors duration-300 ${
-                        isSelected ? 'text-white' : 'text-slate-900 group-hover:text-[#620D9C]'
+                        isSelected ? 'text-white' : 'text-slate-900 group-hover:text-[#6320EE]'
                       }`}
                     >
                       {pkg.title}
@@ -268,7 +268,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                   {/* Subtitle / Tagline */}
                   <p
                     className={`text-xs font-bold leading-relaxed mb-4 transition-colors duration-300 ${
-                      isSelected ? 'text-purple-100 font-extrabold' : 'text-[#620D9C]'
+                      isSelected ? 'text-purple-100 font-extrabold' : 'text-[#6320EE]'
                     }`}
                   >
                     {pkg.desc}
@@ -306,8 +306,8 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                         <span
                           className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 group-hover:scale-110 ${
                             isSelected
-                              ? 'bg-white text-[#620d9c] shadow-sm'
-                              : 'bg-[#620D9C] text-white shadow-sm'
+                              ? 'bg-white text-[#6320EE] shadow-sm'
+                              : 'bg-[#6320EE] text-white shadow-sm'
                           }`}
                         >
                           <Check className="w-2.5 h-2.5 stroke-[3]" />
@@ -370,7 +370,7 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
                     className={`inline-flex items-center gap-2 text-xs font-bold transition-all duration-300 group/btn cursor-pointer ${
                       isSelected
                         ? 'text-white hover:text-purple-200'
-                        : 'text-[#620D9C] hover:text-[#45056E]'
+                        : 'text-[#6320EE] hover:text-[#5214db]'
                     }`}
                   >
                     <span>Book Consultation</span>
