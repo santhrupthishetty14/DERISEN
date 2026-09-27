@@ -66,24 +66,34 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           : 'bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]'
       }`}
     >
-      {/* Background Video Layer - Full Banner Background (Crisp 1:1, Zero Quality Loss) */}
+      {/* Background Video Layer - COMPLETE 3D CYBER DESIGN (Uncropped, Full 1:1 Quality) */}
       {backgroundVideo && (
-        <div
-          className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0"
-          style={{ opacity: backgroundOpacity ?? (isDark ? 0.72 : 0.45) }}
-        >
-          <video
-            src={backgroundVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover object-center lg:object-right filter brightness-[1.04] contrast-[1.04]"
-            style={{ transform: 'translateZ(0)' }}
-          />
-          {/* Deep Dark Royal Gradient Overlays to preserve text readability & seamless integration */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/85 lg:via-[#180128]/55 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#180128] via-transparent to-[#180128]/50 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+          {/* Ambient Cyber Neon Backlight & Particle Glow */}
+          <div className="absolute right-0 lg:right-16 top-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-gradient-to-br from-[#620D9C]/50 via-[#7C3AED]/40 to-[#00F0FF]/25 blur-[120px] rounded-full pointer-events-none" />
+
+          {/* Complete Uncropped 3D Cyber Laptop Video Animation */}
+          <div className="absolute right-0 lg:right-6 xl:right-16 top-0 bottom-0 w-full lg:w-[55%] flex items-center justify-center lg:justify-end overflow-visible">
+            <div className="relative h-[92%] sm:h-[96%] max-h-[660px] aspect-[464/688] flex items-center justify-center">
+              {/* Native uncropped video */}
+              <video
+                src={backgroundVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-contain filter brightness-[1.06] contrast-[1.06] drop-shadow-[0_20px_50px_rgba(99,32,238,0.55)]"
+                style={{ transform: 'translateZ(0)' }}
+              />
+              {/* Feathered gradient edges to blend naturally into #180128 */}
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#180128] via-transparent to-transparent opacity-75 lg:opacity-30" />
+              <div className="absolute inset-x-0 top-0 h-16 pointer-events-none bg-gradient-to-b from-[#180128] to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-16 pointer-events-none bg-gradient-to-t from-[#180128] to-transparent" />
+            </div>
+          </div>
+
+          {/* Left Text Safety Gradient Curtain */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/95 lg:via-[#180128]/70 to-transparent pointer-events-none w-full lg:w-[60%]" />
         </div>
       )}
 

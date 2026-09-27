@@ -388,13 +388,14 @@ export const ServicesPackages: React.FC<ServicesPackagesProps> = ({ onOpenModal 
           title="Architecting Resilient"
           highlightWord="Digital Platforms."
           description="From custom enterprise web applications and API architectures to cloud-native platforms, we bridge cutting-edge technology with high-conversion creative design."
-          imageSrc="/assets/banner-services.jpg"
+          videoSrc="/assets/services-banner-video.mp4"
           pills={['Enterprise Web Apps', 'Cloud Architecture', '24/7 Monitoring', 'High-Speed Stack']}
           stats={[
             { value: '4 Pillars', label: 'Ecosystem Suite' },
             { value: '99.9%', label: 'Platform Reliability' },
           ]}
           accentGlow="violet"
+          theme="dark"
         />
       </div>
     </section>
