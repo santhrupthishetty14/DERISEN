@@ -46,6 +46,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   floatingBadge,
   purpleAnimationOnly = false,
   theme = 'white',
+  backgroundOpacity,
 }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -55,7 +56,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   }, []);
 
   const isDark = theme === 'dark' || Boolean(backgroundVideo);
-  const hasRightVisual = Boolean(backgroundVideo) || purpleAnimationOnly || Boolean(hudInfo || floatingBadge) || Boolean(imageSrc);
+  const hasRightVisual = purpleAnimationOnly || Boolean(hudInfo || floatingBadge) || Boolean(imageSrc);
 
   return (
     <div
@@ -65,18 +66,24 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           : 'bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]'
       }`}
     >
-      {/* Background Video Ambient Motion Layer (Zero Distortion, Smooth Radial Bloom) */}
+      {/* Background Video Layer - Full Banner Background (Crisp 1:1, Zero Quality Loss) */}
       {backgroundVideo && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none opacity-25 lg:opacity-30 mix-blend-screen">
+        <div
+          className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0"
+          style={{ opacity: backgroundOpacity ?? (isDark ? 0.72 : 0.45) }}
+        >
           <video
             src={backgroundVideo}
             autoPlay
             loop
             muted
             playsInline
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-full lg:w-3/4 h-full object-cover filter blur-3xl"
+            className="absolute inset-0 w-full h-full object-cover object-center lg:object-right filter brightness-[1.04] contrast-[1.04]"
             style={{ transform: 'translateZ(0)' }}
           />
+          {/* Deep Dark Royal Gradient Overlays to preserve text readability & seamless integration */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/85 lg:via-[#180128]/55 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#180128] via-transparent to-[#180128]/50 pointer-events-none" />
         </div>
       )}
 
@@ -200,49 +207,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             />
           </div>
 
-          {/* Right Column: Visual Showcase (Zero Quality Loss 1:1 Rendering) */}
+          {/* Right Column: Visual Showcase or Floating Badges */}
           {hasRightVisual && (
-            <div className="lg:col-span-5 flex flex-col items-center justify-center relative my-auto mt-6 lg:mt-0">
-              {backgroundVideo ? (
-                /* Native Resolution Pristine 1:1 Video Showcase (Zero Quality Loss) */
-                <div
-                  className={`relative w-full max-w-[360px] sm:max-w-[400px] aspect-[464/688] max-h-[520px] flex items-center justify-center transition-all duration-1000 ease-out ${
-                    isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
-                  }`}
-                  style={{ transitionDelay: '250ms' }}
-                >
-                  {/* Ambient Neon Purple Aura Glow */}
-                  <div className="absolute -inset-4 bg-gradient-to-tr from-[#620D9C]/60 via-[#B063FF]/50 to-[#7000FF]/30 blur-2xl rounded-3xl opacity-80 pointer-events-none" />
-
-                  {/* 1:1 Sharp Video Container */}
-                  <div className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-[#B063FF]/60 shadow-[0_25px_60px_rgba(99,32,238,0.4)] bg-[#120e24] group">
-                    <video
-                      src={backgroundVideo}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover object-center filter brightness-[1.03] contrast-[1.04]"
-                      style={{
-                        transform: 'translateZ(0)',
-                      }}
-                    />
-                    {/* Subtle Top & Bottom Vignette Ring */}
-                    <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-3xl pointer-events-none" />
-                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#120e24]/80 to-transparent pointer-events-none" />
-                  </div>
-
-                  {/* Floating Mini Badge */}
-                  {floatingBadge && (
-                    <div className="absolute -bottom-3 -right-2 z-20 px-3.5 py-1.5 rounded-full bg-[#180128]/95 border border-[#B063FF]/70 shadow-lg flex items-center gap-2 backdrop-blur-md">
-                      <div className="w-2 h-2 rounded-full bg-[#B063FF] animate-pulse" />
-                      <span className="text-[10px] font-bold text-white tracking-wide uppercase">
-                        {floatingBadge.text}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ) : purpleAnimationOnly ? (
+            <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative my-auto mt-6 lg:mt-0">
+              {purpleAnimationOnly ? (
                 /* Clean Static 3D Nexus Graphic for Contact Us */
                 <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center select-none pointer-events-none">
                   {/* Outer Concentric Static Orbit Ring 1 */}
@@ -284,35 +252,51 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   </div>
                 </div>
               ) : (hudInfo || floatingBadge) ? (
-                /* Clean Static HUD Cards for Work / Services */
-                <div className="flex flex-col items-end justify-center gap-4 w-full max-w-[280px]">
+                /* Clean Luxury Floating HUD / Badges */
+                <div className="flex flex-col items-end justify-center gap-4 w-full max-w-[300px]">
                   {hudInfo && (
-                    <div className="p-4 rounded-2xl bg-white/95 border border-purple-200/90 shadow-[0_12px_30px_rgba(98,13,156,0.08)] flex flex-col gap-2 w-full transition-transform hover:scale-102">
+                    <div
+                      className={`p-4 rounded-2xl ${
+                        isDark
+                          ? 'bg-[#180128]/85 border border-[#B063FF]/40 text-white shadow-[0_12px_30px_rgba(0,0,0,0.5)] backdrop-blur-md'
+                          : 'bg-white/95 border border-purple-200/90 text-slate-900 shadow-[0_12px_30px_rgba(98,13,156,0.08)]'
+                      } flex flex-col gap-2 w-full transition-transform hover:scale-102`}
+                    >
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#620D9C] font-bold">
+                        <span className={`text-[10px] font-mono uppercase tracking-wider font-bold ${isDark ? 'text-purple-300' : 'text-[#620D9C]'}`}>
                           {hudInfo.tag}
                         </span>
-                        <Zap className="w-3.5 h-3.5 text-[#7C3AED]" />
+                        <Zap className={`w-3.5 h-3.5 ${isDark ? 'text-[#B063FF]' : 'text-[#7C3AED]'}`} />
                       </div>
-                      <div className="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug">
+                      <div className={`text-xs sm:text-sm font-extrabold leading-snug ${isDark ? 'text-white' : 'text-slate-900'}`}>
                         {hudInfo.title}
                       </div>
-                      <div className="flex items-center gap-2 pt-1 border-t border-purple-100 text-[10px] text-slate-600 font-mono">
-                        <span className="w-2 h-2 rounded-full bg-[#7C3AED]" />
+                      <div className={`flex items-center gap-2 pt-1 border-t ${isDark ? 'border-purple-500/20 text-purple-200/70' : 'border-purple-100 text-slate-600'} text-[10px] font-mono`}>
+                        <span className="w-2 h-2 rounded-full bg-[#B063FF]" />
                         <span>{hudInfo.status}</span>
                       </div>
                     </div>
                   )}
 
                   {floatingBadge && (
-                    <div className="px-3.5 py-2 rounded-2xl bg-white/95 border border-purple-200/90 shadow-[0_8px_24px_rgba(98,13,156,0.06)] flex items-center gap-2.5 w-full">
-                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <ShieldCheck className="w-4 h-4 text-white" />
+                    <div
+                      className={`px-4 py-3 rounded-2xl ${
+                        isDark
+                          ? 'bg-[#180128]/90 border border-[#B063FF]/50 text-white shadow-[0_10px_35px_rgba(99,32,238,0.4)] backdrop-blur-md'
+                          : 'bg-white/95 border border-purple-200/90 text-slate-900 shadow-[0_8px_24px_rgba(98,13,156,0.06)]'
+                      } flex items-center gap-3 w-full`}
+                    >
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#620D9C] to-[#B063FF] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <ShieldCheck className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="text-xs font-black text-slate-900 leading-tight">{floatingBadge.text}</div>
+                        <div className={`text-xs sm:text-sm font-black leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                          {floatingBadge.text}
+                        </div>
                         {floatingBadge.subtext && (
-                          <div className="text-[9px] text-[#620D9C] font-bold leading-tight">{floatingBadge.subtext}</div>
+                          <div className={`text-[10px] font-bold leading-tight mt-0.5 ${isDark ? 'text-[#D8B4FE]' : 'text-[#620D9C]'}`}>
+                            {floatingBadge.subtext}
+                          </div>
                         )}
                       </div>
                     </div>
