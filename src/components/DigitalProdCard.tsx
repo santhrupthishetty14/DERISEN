@@ -29,19 +29,14 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
           onClick?.();
         }
       }}
-      className={`rounded-[26px] p-7 sm:p-8 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col justify-between cursor-pointer select-none h-full relative overflow-hidden group will-change-transform ${
+      className={`relative rounded-[28px] p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group will-change-transform h-full ${
         isDark
-          ? 'bg-gradient-to-br from-[#6320EE] via-[#7C3AED] to-[#9333EA] text-white shadow-2xl shadow-[#6320EE]/50 border-2 border-purple-300/40 -translate-y-2'
-          : 'bg-white text-slate-900 border border-slate-100 shadow-xl hover:shadow-2xl hover:border-purple-200 hover:-translate-y-1.5'
+          ? 'bg-gradient-to-b from-[#6320EE] to-[#45056E] text-white shadow-2xl shadow-[#6320EE]/60 -translate-y-3 scale-[1.02] border-2 border-purple-300/40 z-10'
+          : 'bg-white text-slate-900 border border-slate-100 shadow-xl hover:shadow-2xl hover:border-purple-200 hover:-translate-y-2'
       }`}
     >
-      {/* Ambient background glow when active */}
-      {isDark && (
-        <div className="absolute -top-12 -right-12 w-44 h-44 bg-white/15 rounded-full blur-2xl pointer-events-none transition-opacity duration-700" />
-      )}
-
-      {/* Skidding Gloss / Light sheen sweep on hover & touch */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-purple-500/10 to-transparent pointer-events-none" />
+      {/* Light sheen sweep animation on hover */}
+      <div className="absolute inset-0 rounded-[28px] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-purple-500/10 to-transparent pointer-events-none overflow-hidden" />
 
       <div>
         {/* Top Header with Inverted Circle Icon and Number */}
@@ -49,15 +44,15 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
           <div
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm ${
               isDark
-                ? 'bg-white/20 text-white backdrop-blur-sm group-hover:scale-110'
+                ? 'bg-white text-[#6320EE] shadow-md shadow-white/20 group-hover:scale-110'
                 : 'bg-gradient-to-r from-[#6320EE] to-[#7C3AED] text-white shadow-md shadow-[#6320EE]/25 group-hover:scale-110'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-white" />
+            <Sparkles className={`w-4 h-4 ${isDark ? 'text-[#6320EE]' : 'text-white'}`} />
           </div>
           <span
             className={`text-xs font-mono font-bold tracking-wider transition-colors duration-300 ${
-              isDark ? 'text-white/80' : 'text-slate-300'
+              isDark ? 'text-white/60' : 'text-slate-300'
             }`}
           >
             {service.number}
@@ -66,24 +61,26 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
 
         <h4
           className={`text-xl sm:text-[22px] font-black tracking-tight mb-4 pb-3 border-b transition-colors duration-300 ${
-            isDark ? 'text-white border-white/15' : 'text-slate-900 border-slate-100 group-hover:text-[#6320EE]'
+            isDark ? 'text-white border-white/20' : 'text-slate-900 border-slate-100 group-hover:text-[#6320EE]'
           }`}
         >
           {service.title}
         </h4>
 
         {/* Services List Grid */}
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 mb-4">
+        <ul className="space-y-2.5 mb-6">
           {service.items.map((item, idx) => (
             <li
               key={idx}
-              className={`flex items-center gap-2.5 text-xs sm:text-[13px] font-medium transition-colors duration-300 ${
-                isDark ? 'text-white/90' : 'text-slate-700'
+              className={`flex items-start gap-2.5 text-xs font-medium leading-snug transition-colors duration-300 ${
+                isDark ? 'text-white/95' : 'text-slate-800'
               }`}
             >
               <span
-                className={`font-bold text-sm transition-colors duration-300 ${
-                  isDark ? 'text-purple-200' : 'text-[#6320EE]'
+                className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 group-hover:scale-110 ${
+                  isDark
+                    ? 'bg-white text-[#6320EE] shadow-sm'
+                    : 'bg-[#6320EE] text-white shadow-sm'
                 }`}
               >
                 •
@@ -96,9 +93,9 @@ export const DigitalProdCard: React.FC<DigitalProdCardProps> = ({
 
       {/* Interactive Bottom Hint */}
       <div
-        className={`pt-3 mt-4 border-t text-[11px] font-semibold flex items-center justify-between transition-colors duration-300 ${
+        className={`pt-3.5 mt-auto border-t text-[11px] font-semibold flex items-center justify-between transition-colors duration-300 ${
           isDark
-            ? 'border-white/15 text-purple-200'
+            ? 'border-white/20 text-purple-200'
             : 'border-slate-100 text-[#6320EE]'
         }`}
       >
