@@ -79,8 +79,8 @@ export const About: React.FC = () => {
               COMPANY INTRODUCTION
             </span>
 
-            {/* Line-by-Line Masked Heading in Luxury Editorial Serif */}
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold text-white tracking-tight mb-6 sm:mb-8 flex flex-col gap-1 sm:gap-2 leading-[1.22]">
+            {/* Line-by-Line Masked Heading */}
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-white tracking-tight mb-6 sm:mb-8 flex flex-col gap-1 sm:gap-2 leading-[1.22]">
               {/* Line 1 */}
               <div className={`pb-0.5 ${isRevealed ? 'overflow-visible' : 'overflow-hidden'}`}>
                 <div
@@ -112,20 +112,20 @@ export const About: React.FC = () => {
                     isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
                   }`}
                 >
-                  <span className="gradient-text pb-2 sm:pb-3 pr-2 leading-[1.35] inline-block italic font-normal">Driving Growth.</span>
+                  <span className="gradient-text pb-2 sm:pb-3 pr-2 leading-[1.35] inline-block font-extrabold">Driving Growth.</span>
                 </div>
               </div>
             </h2>
 
-            {/* Body Text: Editorial Lora Smooth Upward Fade */}
-            <div className="space-y-4 font-lora text-[15px] sm:text-[16px] text-purple-100/90 leading-[1.8] max-w-2xl font-normal">
+            {/* Body Text */}
+            <div className="space-y-4 text-[15px] sm:text-[16px] text-purple-100/90 leading-[1.8] max-w-2xl font-normal">
               <p
                 style={{ transitionDelay: '400ms' }}
                 className={`transition-all duration-700 ease-out ${
                   isRevealed ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
                 }`}
               >
-                At <strong className="text-white font-semibold">DE.RISEN</strong>, we believe every business deserves a powerful identity and a strong digital presence. We are a full-service creative agency delivering innovative solutions in <strong className="text-[#B063FF] font-medium">Creative Design, Branding, Digital Marketing, and IT Solutions</strong>.
+                At <strong className="text-white font-bold">DE.RISEN</strong>, we believe every business deserves a powerful identity and a strong digital presence. We are a full-service creative agency delivering innovative solutions in <strong className="text-[#B063FF] font-semibold">Creative Design, Branding, Digital Marketing, and IT Solutions</strong>.
               </p>
 
               <p

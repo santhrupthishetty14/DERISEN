@@ -60,16 +60,16 @@ export const Leadership: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Title in Luxury Editorial Serif */}
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white mb-3 leading-tight">
-            The Visionaries Behind <span className="text-[#B063FF] italic font-normal">DE.RISEN</span>
+          {/* Main Title */}
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black tracking-tight text-white mb-3 leading-tight">
+            The Visionaries Behind <span className="text-[#B063FF]">DE.RISEN</span>
           </h2>
 
-          {/* Subtitle in Refined Editorial Lora */}
-          <p className="font-lora text-sm sm:text-base lg:text-[17px] text-purple-200/90 font-normal max-w-2xl mx-auto leading-relaxed">
-            Driven by <strong className="text-[#B063FF] font-semibold">passion</strong>, guided by{' '}
-            <strong className="text-[#B063FF] font-semibold">strategy</strong>, and committed to building{' '}
-            <strong className="text-[#B063FF] font-semibold">impactful brands</strong>.
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base lg:text-[17px] text-purple-200/90 font-medium max-w-2xl mx-auto leading-relaxed">
+            Driven by <strong className="text-[#B063FF] font-bold">passion</strong>, guided by{' '}
+            <strong className="text-[#B063FF] font-bold">strategy</strong>, and committed to building{' '}
+            <strong className="text-[#B063FF] font-bold">impactful brands</strong>.
           </p>
         </div>
 
@@ -91,10 +91,10 @@ export const Leadership: React.FC = () => {
                     <Lightbulb className="w-8 h-8 text-[#B063FF]" />
                   </div>
                 </div>
-                <h4 className="font-serif text-xs sm:text-sm font-bold tracking-wider uppercase text-white">
+                <h4 className="text-xs sm:text-sm font-black tracking-wider uppercase text-white">
                   CREATIVE THINKING
                 </h4>
-                <p className="font-lora text-xs text-purple-200/80 font-normal max-w-[170px] mt-0.5">
+                <p className="text-xs text-purple-200/80 font-medium max-w-[170px] mt-0.5">
                   Ideas that inspire brands that last.
                 </p>
               </div>
@@ -119,7 +119,7 @@ export const Leadership: React.FC = () => {
                     />
                   </div>
                   <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
-                    <div className="font-serif text-sm sm:text-base font-bold text-white tracking-tight">Shweta Deharkar</div>
+                    <div className="text-sm sm:text-base font-bold text-white tracking-tight">Shweta Deharkar</div>
                     <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Chief Executive Officer</div>
                   </div>
                 </div>
@@ -139,7 +139,7 @@ export const Leadership: React.FC = () => {
                     />
                   </div>
                   <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
-                    <div className="font-serif text-sm sm:text-base font-bold text-white tracking-tight">Lejai Jayakumar</div>
+                    <div className="text-sm sm:text-base font-bold text-white tracking-tight">Lejai Jayakumar</div>
                     <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Managing Director &amp; Co-Founder</div>
                   </div>
                 </div>
@@ -154,10 +154,10 @@ export const Leadership: React.FC = () => {
                     <Target className="w-8 h-8 text-[#B063FF]" />
                   </div>
                 </div>
-                <h4 className="font-serif text-xs sm:text-sm font-bold tracking-wider uppercase text-white">
+                <h4 className="text-xs sm:text-sm font-black tracking-wider uppercase text-white">
                   STRATEGIC GROWTH
                 </h4>
-                <p className="font-lora text-xs text-purple-200/80 font-normal max-w-[170px] mt-0.5">
+                <p className="text-xs text-purple-200/80 font-medium max-w-[170px] mt-0.5">
                   Solutions that drive measurable impact.
                 </p>
               </div>
@@ -176,7 +176,7 @@ export const Leadership: React.FC = () => {
           {/* Subtle top section eyebrow */}
           <div className="flex items-center gap-2.5 pb-6 mb-8 border-b border-slate-100">
             <span className="w-2.5 h-2.5 rounded-full bg-[#620D9C] animate-pulse" />
-            <span className="font-serif text-xs sm:text-sm font-bold tracking-wide uppercase text-[#620D9C]">
+            <span className="text-xs sm:text-sm font-bold tracking-wide uppercase text-[#620D9C]">
               Executive Profiles &amp; Leadership Vision
             </span>
           </div>
@@ -193,7 +193,7 @@ export const Leadership: React.FC = () => {
                     <UserIcon className="w-6 h-6 fill-white" />
                   </div>
                   <div className="flex flex-col items-start gap-1">
-                    <h3 className="font-serif font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
+                    <h3 className="font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
                       {shweta.name}
                     </h3>
                     <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-[#620D9C] text-[11px] sm:text-xs font-semibold rounded-full tracking-wide border border-purple-200 shadow-xs">
@@ -202,23 +202,23 @@ export const Leadership: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Quote with Luxury Editorial Styling */}
+                {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-serif italic font-normal text-slate-800 text-[16.5px] sm:text-[18px] leading-relaxed">
+                  <p className="font-medium text-slate-800 text-[15px] sm:text-[16.5px] leading-relaxed">
                     "{shweta.quote}"
                   </p>
                 </div>
 
-                {/* Bio Paragraphs: Stylish Italic Editorial (Zero Bold) */}
-                <div className="space-y-4 font-lora italic font-normal text-[14.5px] sm:text-[15.5px] text-slate-600 leading-[1.86] text-left">
+                {/* Bio Paragraphs */}
+                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed text-left">
                   {shweta.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'font-serif italic font-normal text-[16px] sm:text-[17.5px] text-slate-800 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
-                          : 'font-normal'
+                          ? 'font-medium text-[15px] sm:text-[16px] text-slate-800 leading-relaxed pb-3 mb-2 border-b border-purple-100/80'
+                          : ''
                       }
                     >
                       {paragraph}
@@ -266,7 +266,7 @@ export const Leadership: React.FC = () => {
                     <UserIcon className="w-6 h-6 fill-white" />
                   </div>
                   <div className="flex flex-col items-start gap-1">
-                    <h3 className="font-serif font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
+                    <h3 className="font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
                       {lejai.name}
                     </h3>
                     <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-[#620D9C] text-[11px] sm:text-xs font-semibold rounded-full tracking-wide border border-purple-200 shadow-xs">
@@ -275,23 +275,23 @@ export const Leadership: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Quote with Luxury Editorial Styling */}
+                {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-serif italic font-normal text-slate-800 text-[16.5px] sm:text-[18px] leading-relaxed">
+                  <p className="font-medium text-slate-800 text-[15px] sm:text-[16.5px] leading-relaxed">
                     "{lejai.quote}"
                   </p>
                 </div>
 
-                {/* Bio Paragraphs: Stylish Italic Editorial (Zero Bold) */}
-                <div className="space-y-4 font-lora italic font-normal text-[14.5px] sm:text-[15.5px] text-slate-600 leading-[1.86] text-left">
+                {/* Bio Paragraphs */}
+                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed text-left">
                   {lejai.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'font-serif italic font-normal text-[16px] sm:text-[17.5px] text-slate-800 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
-                          : 'font-normal'
+                          ? 'font-medium text-[15px] sm:text-[16px] text-slate-800 leading-relaxed pb-3 mb-2 border-b border-purple-100/80'
+                          : ''
                       }
                     >
                       {paragraph}
