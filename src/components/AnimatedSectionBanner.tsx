@@ -131,8 +131,8 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
             <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/95 lg:via-[#180128]/70 to-transparent pointer-events-none w-full lg:w-[60%]" />
           </div>
         ) : imageSrc ? (
-          /* Subtle Watermark Visual */
-          <div className="absolute inset-0 overflow-hidden opacity-25">
+          /* Background Image Visual */
+          <div className={`absolute inset-0 overflow-hidden ${isDark ? 'opacity-50' : 'opacity-25'}`}>
             <img
               ref={imageRef}
               src={imageSrc}
@@ -140,6 +140,10 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
               loading="lazy"
               className="w-full h-full object-cover object-center filter brightness-105 contrast-95"
             />
+            {/* Dark mode: left gradient curtain for text legibility */}
+            {isDark && (
+              <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/85 lg:via-[#180128]/60 to-transparent pointer-events-none" />
+            )}
           </div>
         ) : null}
 
