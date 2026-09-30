@@ -205,20 +205,20 @@ export const Leadership: React.FC = () => {
                 {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-medium text-slate-800 text-[15px] sm:text-[16.5px] leading-relaxed">
-                    "{shweta.quote}"
+                  <p className="font-normal text-slate-700 text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
+                    {shweta.quote}
                   </p>
                 </div>
 
                 {/* Bio Paragraphs */}
-                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed text-left">
+                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-[1.85] text-left" style={{ fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif", fontWeight: 400 }}>
                   {shweta.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'font-medium text-[15px] sm:text-[16px] text-slate-800 leading-relaxed pb-3 mb-2 border-b border-purple-100/80'
-                          : ''
+                          ? 'text-[15px] sm:text-[15.5px] text-slate-700 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
+                          : 'text-slate-500'
                       }
                     >
                       {paragraph}
@@ -278,20 +278,20 @@ export const Leadership: React.FC = () => {
                 {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
                   <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-medium text-slate-800 text-[15px] sm:text-[16.5px] leading-relaxed">
-                    "{lejai.quote}"
+                  <p className="font-normal text-slate-700 text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
+                    {lejai.quote}
                   </p>
                 </div>
 
                 {/* Bio Paragraphs */}
-                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed text-left">
+                <div className="space-y-4 text-[14px] sm:text-[15px] text-slate-600 leading-[1.85] text-left" style={{ fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif", fontWeight: 400 }}>
                   {lejai.bioParagraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className={
                         index === 0
-                          ? 'font-medium text-[15px] sm:text-[16px] text-slate-800 leading-relaxed pb-3 mb-2 border-b border-purple-100/80'
-                          : ''
+                          ? 'text-[15px] sm:text-[15.5px] text-slate-700 leading-[1.85] pb-3 mb-2 border-b border-purple-100/80'
+                          : 'text-slate-500'
                       }
                     >
                       {paragraph}
