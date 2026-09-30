@@ -241,17 +241,30 @@ export const OperatingModel: React.FC = () => {
                       <div className="absolute top-4 right-5 z-20 font-mono font-black text-xs tracking-wider text-white bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-md">
                         0{index + 1}
                       </div>
-                      <div className="relative w-full h-full overflow-hidden">
+                      <div className="relative w-full h-full overflow-hidden bg-[#070114]">
                         {videoSrc ? (
-                          <video
-                            src={videoSrc}
-                            poster={imageSrc}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="card-parallax-image w-full h-full object-cover pointer-events-none filter brightness-[1.05] contrast-[1.05]"
-                          />
+                          <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                            {/* Ambient blurred backdrop so background matches video motion */}
+                            <video
+                              src={videoSrc}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              aria-hidden="true"
+                              className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-45 scale-125 pointer-events-none"
+                            />
+                            {/* Pristine uncropped video fitting completely inside the frame */}
+                            <video
+                              src={videoSrc}
+                              poster={imageSrc}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="relative z-10 w-full h-full object-contain pointer-events-none filter brightness-[1.05] contrast-[1.05] drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
+                            />
+                          </div>
                         ) : (
                           <img
                             src={imageSrc}
@@ -260,7 +273,7 @@ export const OperatingModel: React.FC = () => {
                             loading="lazy"
                           />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-10" />
                       </div>
                       <div className="card-parallax-badge absolute bottom-4 left-6 z-20 flex items-center gap-3">
                         <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#620D9C] to-[#B063FF] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(99,32,238,0.45)] border-2 border-white/90">
@@ -384,17 +397,28 @@ export const OperatingModel: React.FC = () => {
                 key={service.id}
                 className="mobile-op-card bg-white rounded-2xl sm:rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 flex flex-col text-slate-900"
               >
-                <div className="relative h-48 sm:h-56 bg-[#0B041A] overflow-hidden">
+                <div className="relative h-48 sm:h-56 bg-[#070114] overflow-hidden">
                   {videoSrc ? (
-                    <video
-                      src={videoSrc}
-                      poster={imageSrc}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover filter brightness-[1.05] contrast-[1.05]"
-                    />
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                      <video
+                        src={videoSrc}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-45 scale-125 pointer-events-none"
+                      />
+                      <video
+                        src={videoSrc}
+                        poster={imageSrc}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="relative z-10 w-full h-full object-contain pointer-events-none filter brightness-[1.05] contrast-[1.05] drop-shadow-[0_8px_18px_rgba(0,0,0,0.5)]"
+                      />
+                    </div>
                   ) : (
                     <img
                       src={imageSrc}
@@ -403,7 +427,7 @@ export const OperatingModel: React.FC = () => {
                       loading="lazy"
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10" />
                   <div className="absolute top-3 right-4 font-mono font-black text-xs text-white bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                     0{index + 1}
                   </div>
