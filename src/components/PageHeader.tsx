@@ -222,10 +222,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-black tracking-tight leading-[1.12] max-w-3xl mb-3.5 sm:mb-4">
+            <h1 className="text-2xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-black tracking-tight leading-[1.18] max-w-3xl mb-3.5 sm:mb-4 pb-2">
               <span className={isDark ? 'text-white' : 'text-slate-950'}>{title} </span>
               {highlightWord && (
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B063FF] via-[#C084FC] to-[#E9D5FF] inline-block pb-1 pr-2">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B063FF] via-[#C084FC] to-[#E9D5FF] inline-block pb-2 pr-2">
                   {highlightWord}
                 </span>
               )}
