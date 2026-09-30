@@ -268,7 +268,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           </div>
 
           {/* Right Column: Visual Showcase or Floating Badges */}
-          {hasRightVisual && (
+          {hasRightVisual ? (
             <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative my-auto mt-6 lg:mt-0">
               {purpleAnimationOnly ? (
                 /* Clean Static 3D Nexus Graphic for Contact Us */
