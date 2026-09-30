@@ -90,7 +90,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
 
   return (
     <div className="w-full max-w-full overflow-x-clip bg-[#180128] text-white">
-      {/* 1. Page Header with Cyber Showcase Video Banner */}
+      {/* 1. Page Header with Complete Cyber Background Video Animation */}
       <PageHeader
         badge="CONTACT US / LET'S CONNECT"
         title="Let's Build Something"
@@ -101,8 +101,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
         backgroundVideo="/assets/contact-banner-video.mp4"
         videoPoster="/assets/contact-banner-poster.jpg"
-        videoAspectRatio="aspect-[9/16]"
-        videoFit="contain"
+        fullBackground={true}
+        backgroundPosition="object-center lg:object-right"
+        backgroundOpacity={0.92}
         theme="dark"
       />
 
