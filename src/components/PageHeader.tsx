@@ -65,6 +65,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
   const isDark = theme === 'dark' || Boolean(backgroundVideo);
   const hasRightVisual = purpleAnimationOnly || Boolean(hudInfo || floatingBadge) || Boolean(imageSrc);
+  const hasRightColumn = hasRightVisual || Boolean(backgroundVideo && !fullBackground);
 
   return (
     <div
@@ -185,7 +186,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <div className="max-w-[1360px] mx-auto px-6 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
           {/* Left Column: Editorial Typography & Actions */}
-          <div className={`${hasRightVisual ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col items-start`}>
+          <div className={`${hasRightColumn ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col items-start`}>
             {/* Breadcrumb Navigation */}
             <div
               className={`flex items-center gap-2 text-xs font-mono mb-3 sm:mb-4 transition-all duration-500 ease-out ${
@@ -374,7 +375,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 </div>
               ) : null}
             </div>
-          )}
+          ) : hasRightColumn ? (
+            <div className="hidden lg:block lg:col-span-5 pointer-events-none" />
+          ) : null}
         </div>
       </div>
     </div>
