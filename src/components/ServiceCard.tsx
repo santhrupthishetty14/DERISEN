@@ -23,6 +23,7 @@ const serviceImageMap: Record<string, string> = {
 };
 
 const serviceVideoMap: Record<string, string> = {
+  'creative-design': '/assets/service-creative-design.mp4',
   'branding': '/assets/service-branding.mp4',
   'digital-marketing': '/assets/service-digital-marketing.mp4',
 };
