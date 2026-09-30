@@ -2,7 +2,9 @@ import React, { useEffect, useRef, ReactNode } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export type ImageRevealVariant =
   | 'clipReveal'   // Wipe reveal from left (clip-path)
@@ -18,6 +20,7 @@ interface ImageRevealProps {
   duration?: number;       // seconds
   threshold?: number;      // 0–1 viewport threshold
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const ImageReveal: React.FC<ImageRevealProps> = ({
@@ -27,6 +30,7 @@ export const ImageReveal: React.FC<ImageRevealProps> = ({
   duration = 0.9,
   threshold = 0.15,
   className = '',
+  style,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -127,7 +131,7 @@ export const ImageReveal: React.FC<ImageRevealProps> = ({
   }, [variant, delay, duration, threshold]);
 
   return (
-    <div ref={wrapRef} className={`img-reveal-wrap ${className}`}>
+    <div ref={wrapRef} className={`img-reveal-wrap ${className}`} style={style}>
       <div ref={innerRef} className="img-reveal-inner will-change-transform">
         {children}
       </div>
