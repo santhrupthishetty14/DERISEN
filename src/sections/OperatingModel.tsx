@@ -21,6 +21,10 @@ const serviceImageMap: Record<string, string> = {
   'it-solutions': '/assets/service-it-solutions.jpg',
 };
 
+const serviceVideoMap: Record<string, string> = {
+  'digital-marketing': '/assets/service-digital-marketing.mp4',
+};
+
 const serviceTagsMap: Record<string, string[]> = {
   'creative-design': ['Brand Identity', 'Logo & Guidelines', 'Packaging Design', 'Print Media'],
   'branding': ['Brand Architecture', 'Brand Storytelling', 'Visual Positioning', 'Tone & Voice'],
@@ -222,6 +226,7 @@ export const OperatingModel: React.FC = () => {
                 const IconComp = serviceIconMap[service.iconName] || PenTool;
                 const tags = serviceTagsMap[service.id] || [];
                 const imageSrc = serviceImageMap[service.id];
+                const videoSrc = serviceVideoMap[service.id];
 
                 return (
                   <div
@@ -237,12 +242,24 @@ export const OperatingModel: React.FC = () => {
                         0{index + 1}
                       </div>
                       <div className="relative w-full h-full overflow-hidden">
-                        <img
-                          src={imageSrc}
-                          alt={service.title}
-                          className="card-parallax-image w-full h-full object-cover will-change-transform pointer-events-none"
-                          loading="lazy"
-                        />
+                        {videoSrc ? (
+                          <video
+                            src={videoSrc}
+                            poster={imageSrc}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="card-parallax-image w-full h-full object-cover pointer-events-none filter brightness-[1.05] contrast-[1.05]"
+                          />
+                        ) : (
+                          <img
+                            src={imageSrc}
+                            alt={service.title}
+                            className="card-parallax-image w-full h-full object-cover will-change-transform pointer-events-none"
+                            loading="lazy"
+                          />
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                       </div>
                       <div className="card-parallax-badge absolute bottom-4 left-6 z-20 flex items-center gap-3">
@@ -360,6 +377,7 @@ export const OperatingModel: React.FC = () => {
             const IconComp = serviceIconMap[service.iconName] || PenTool;
             const tags = serviceTagsMap[service.id] || [];
             const imageSrc = serviceImageMap[service.id];
+            const videoSrc = serviceVideoMap[service.id];
 
             return (
               <div
@@ -367,12 +385,24 @@ export const OperatingModel: React.FC = () => {
                 className="mobile-op-card bg-white rounded-2xl sm:rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 flex flex-col text-slate-900"
               >
                 <div className="relative h-48 sm:h-56 bg-[#0B041A] overflow-hidden">
-                  <img
-                    src={imageSrc}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                  {videoSrc ? (
+                    <video
+                      src={videoSrc}
+                      poster={imageSrc}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover filter brightness-[1.05] contrast-[1.05]"
+                    />
+                  ) : (
+                    <img
+                      src={imageSrc}
+                      alt={service.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   <div className="absolute top-3 right-4 font-mono font-black text-xs text-white bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                     0{index + 1}

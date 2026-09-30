@@ -22,11 +22,16 @@ const serviceImageMap: Record<string, string> = {
   'it-solutions': '/assets/service-it-solutions.jpg',
 };
 
+const serviceVideoMap: Record<string, string> = {
+  'digital-marketing': '/assets/service-digital-marketing.mp4',
+};
+
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isRevealed }) => {
   const [isHovered, setIsHovered] = useState(false);
   const IconComponent = iconMap[service.iconName] || PenTool;
   const numString = `0${index + 1}`;
   const imageSrc = serviceImageMap[service.id];
+  const videoSrc = serviceVideoMap[service.id];
 
   return (
     <div
@@ -54,14 +59,28 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
       <div className="relative h-48 sm:h-52 bg-[#0B041A] overflow-hidden">
         {imageSrc ? (
           <div className="relative w-full h-full overflow-hidden">
-            <img
-              src={imageSrc}
-              alt={service.title}
-              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-                isRevealed ? 'clip-path-reveal-full scale-100' : 'clip-path-reveal-left scale-105'
-              } ${isHovered ? 'scale-110' : 'scale-100'}`}
-              loading="lazy"
-            />
+            {videoSrc ? (
+              <video
+                src={videoSrc}
+                poster={imageSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`w-full h-full object-cover ${
+                  isHovered ? 'scale-110' : 'scale-100'
+                } transition-transform duration-700 ease-out filter brightness-[1.05] contrast-[1.05]`}
+              />
+            ) : (
+              <img
+                src={imageSrc}
+                alt={service.title}
+                className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                  isRevealed ? 'clip-path-reveal-full scale-100' : 'clip-path-reveal-left scale-105'
+                } ${isHovered ? 'scale-110' : 'scale-100'}`}
+                loading="lazy"
+              />
+            )}
             {/* Ambient Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#180128]/90 via-transparent to-black/30 pointer-events-none" />
           </div>
