@@ -82,12 +82,12 @@ export const DigitalProduction: React.FC = () => {
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2.5 ${
                   isSelected
                     ? 'bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_4px_20px_rgba(99,32,238,0.45)] scale-105 border border-purple-300/40'
-                    : 'bg-white/10 text-purple-100 border border-white/15 hover:bg-white/15 hover:border-purple-300/40'
+                    : 'bg-[#2A0A40] text-purple-200 border border-purple-700/50 hover:bg-[#3A0D5C] hover:border-purple-500/60 hover:text-white'
                 }`}
               >
                 <span
                   className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black ${
-                    isSelected ? 'bg-white/20 text-white' : 'bg-white/15 text-purple-200'
+                    isSelected ? 'bg-white/20 text-white' : 'bg-purple-700/50 text-purple-200'
                   }`}
                 >
                   {service.number}

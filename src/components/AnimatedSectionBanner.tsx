@@ -132,17 +132,17 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
           </div>
         ) : imageSrc ? (
           /* Background Image Visual */
-          <div className={`absolute inset-0 overflow-hidden ${isDark ? 'opacity-50' : 'opacity-25'}`}>
+          <div className={`absolute inset-0 overflow-hidden ${isDark ? 'opacity-85' : 'opacity-40'}`}>
             <img
               ref={imageRef}
               src={imageSrc}
               alt={title}
               loading="lazy"
-              className="w-full h-full object-cover object-center filter brightness-105 contrast-95"
+              className="w-full h-full object-cover object-right sm:object-center filter brightness-110 contrast-105"
             />
-            {/* Dark mode: left gradient curtain for text legibility */}
+            {/* Dark mode: left gradient curtain for text legibility while keeping the graphic vivid */}
             {isDark && (
-              <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/85 lg:via-[#180128]/60 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/85 lg:via-[#180128]/45 to-transparent pointer-events-none w-full lg:w-[65%]" />
             )}
           </div>
         ) : null}
@@ -219,7 +219,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
                   key={i}
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold shadow-sm transition-colors ${
                     isDark
-                      ? 'bg-white/10 border border-white/15 text-purple-200 hover:bg-white/15'
+                      ? 'bg-[#2A0A40]/90 border border-purple-700/50 text-purple-200 hover:bg-[#3A0D5C]'
                       : 'bg-white border border-purple-200 text-[#620D9C] hover:bg-purple-50'
                   }`}
                 >

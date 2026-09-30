@@ -215,7 +215,7 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
               className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-gradient-to-r from-[#6320EE] via-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_4px_16px_rgba(99,32,238,0.4)] scale-105'
-                  : 'bg-white/10 text-purple-100 hover:text-white hover:border-[#7C3AED]/50 border border-white/15 shadow-sm'
+                  : 'bg-[#2A0A40] text-purple-200 border border-purple-700/50 hover:bg-[#3A0D5C] hover:border-purple-500/60 hover:text-white shadow-sm'
               }`}
             >
               {cat}
