@@ -19,13 +19,14 @@ const serviceImageMap: Record<string, string> = {
   'creative-design': '/assets/service-creative-design.jpg',
   'branding': '/assets/service-branding.jpg',
   'digital-marketing': '/assets/service-marketing.jpg',
-  'it-solutions': '/assets/service-it-solutions.jpg',
+  'it-solutions': '/assets/service-it-solutions-poster.jpg',
 };
 
 const serviceVideoMap: Record<string, string> = {
   'creative-design': '/assets/service-creative-design.mp4',
   'branding': '/assets/service-branding.mp4',
   'digital-marketing': '/assets/service-digital-marketing.mp4',
+  'it-solutions': '/assets/service-it-solutions.mp4',
 };
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isRevealed }) => {
