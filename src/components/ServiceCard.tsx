@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PenTool, Tag, Megaphone, Code, LucideIcon } from 'lucide-react';
 import { OperatingModelService } from '../utils/types';
-import { ImageReveal } from './ImageReveal';
 
 interface ServiceCardProps {
   service: OperatingModelService;
@@ -54,23 +53,18 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
       {/* Visual Thumbnail Area with Real High-Res Asset & Micro-Animations */}
       <div className="relative h-48 sm:h-52 bg-[#0B041A] overflow-hidden">
         {imageSrc ? (
-          <ImageReveal
-            variant="clipReveal"
-            delay={index * 0.1}
-            duration={0.85}
-            className="w-full h-full img-hover-zoom"
-          >
+          <div className="relative w-full h-full overflow-hidden">
             <img
               src={imageSrc}
               alt={service.title}
-              className={`w-full h-full object-cover ${
-                isHovered ? 'scale-110' : 'scale-100'
-              } transition-transform duration-700 ease-out`}
+              className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+                isRevealed ? 'clip-path-reveal-full scale-100' : 'clip-path-reveal-left scale-105'
+              } ${isHovered ? 'scale-110' : 'scale-100'}`}
               loading="lazy"
             />
             {/* Ambient Dark Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#180128]/90 via-transparent to-black/30 pointer-events-none" />
-          </ImageReveal>
+          </div>
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-[#200236] via-[#2A0245] to-[#180128]" />
         )}

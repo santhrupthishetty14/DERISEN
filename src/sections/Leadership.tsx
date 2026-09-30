@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { LEADERS } from '../utils/constants';
 import { Users, Lightbulb, Target, Quote, User as UserIcon } from 'lucide-react';
-import { ImageReveal } from '../components/ImageReveal';
 
 export const Leadership: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -112,16 +111,13 @@ export const Leadership: React.FC = () => {
               <div className="relative w-full max-w-[560px] flex items-center justify-center gap-4 sm:gap-6 py-2">
                 {/* Shweta Deharkar */}
                 <div className="relative group flex flex-col items-center">
-                  <ImageReveal variant="zoomFade" delay={0.1} duration={1.0} className="img-ambient-float">
-                    <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105 img-glow-ring">
-                      <img
-                        src="/assets/leader-shweta-studio.jpg"
-                        alt="Shweta Deharkar - CEO"
-                        className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02] transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    </div>
-                  </ImageReveal>
+                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
+                    <img
+                      src="/assets/leader-shweta-studio.jpg"
+                      alt="Shweta Deharkar - CEO"
+                      className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
+                    />
+                  </div>
                   <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
                     <div className="text-sm sm:text-base font-bold text-white tracking-tight">Shweta Deharkar</div>
                     <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Chief Executive Officer</div>
@@ -135,16 +131,13 @@ export const Leadership: React.FC = () => {
 
                 {/* Lejai Jayakumar */}
                 <div className="relative group flex flex-col items-center">
-                  <ImageReveal variant="zoomFade" delay={0.25} duration={1.0} className="img-ambient-float" style={{ animationDelay: '1.2s' }}>
-                    <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105 img-glow-ring">
-                      <img
-                        src="/assets/leader-lejai-studio.jpg"
-                        alt="Lejai Jayakumar - Managing Director & Co-Founder"
-                        className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02] transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    </div>
-                  </ImageReveal>
+                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
+                    <img
+                      src="/assets/leader-lejai-studio.jpg"
+                      alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                      className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
+                    />
+                  </div>
                   <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
                     <div className="text-sm sm:text-base font-bold text-white tracking-tight">Lejai Jayakumar</div>
                     <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Managing Director &amp; Co-Founder</div>
