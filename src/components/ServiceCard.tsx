@@ -56,32 +56,21 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
       </div>
 
       {/* Visual Thumbnail Area with Real High-Res Asset & Micro-Animations */}
-      <div className="relative h-48 sm:h-52 bg-[#070114] overflow-hidden">
+      <div className="relative h-48 sm:h-52 bg-[#0B041A] overflow-hidden">
         {imageSrc ? (
           <div className="relative w-full h-full overflow-hidden">
             {videoSrc ? (
-              <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                <video
-                  src={videoSrc}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-45 scale-125 pointer-events-none"
-                />
-                <video
-                  src={videoSrc}
-                  poster={imageSrc}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={`relative z-10 w-full h-full object-contain ${
-                    isHovered ? 'scale-105' : 'scale-100'
-                  } transition-transform duration-700 ease-out filter brightness-[1.05] contrast-[1.05] drop-shadow-[0_8px_18px_rgba(0,0,0,0.5)]`}
-                />
-              </div>
+              <video
+                src={videoSrc}
+                poster={imageSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`w-full h-full object-cover object-center ${
+                  isHovered ? 'scale-110' : 'scale-100'
+                } transition-transform duration-700 ease-out filter brightness-[1.05] contrast-[1.05]`}
+              />
             ) : (
               <img
                 src={imageSrc}
