@@ -25,6 +25,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
         backgroundVideo="/assets/services-banner-video.mp4"
+        fullBackground={true}
+        backgroundPosition="object-center lg:object-right"
+        backgroundOpacity={0.92}
         theme="dark"
         floatingBadge={{
           text: 'Certified IT & Creative',
