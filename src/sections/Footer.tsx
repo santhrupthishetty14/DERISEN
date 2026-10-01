@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
               {/* Instagram - Official Gradient */}
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/de.risen/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-[0_4px_12px_rgba(220,39,67,0.35)] hover:shadow-[0_0_18px_rgba(188,24,136,0.6)] cursor-pointer"
@@ -74,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
               {/* Facebook - Official Facebook Blue */}
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61556596557316"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#1877F2] text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-[0_4px_12px_rgba(24,119,242,0.35)] hover:shadow-[0_0_18px_rgba(24,119,242,0.6)] cursor-pointer"
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
               {/* LinkedIn - Official LinkedIn Blue */}
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/109275476/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#0A66C2] text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-[0_4px_12px_rgba(10,102,194,0.35)] hover:shadow-[0_0_18px_rgba(10,102,194,0.6)] cursor-pointer"
