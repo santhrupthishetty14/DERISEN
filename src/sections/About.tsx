@@ -10,9 +10,13 @@ gsap.registerPlugin(ScrollTrigger);
 export const About: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const artworkRef = useRef<HTMLDivElement>(null);
-  const [isRevealed, setIsRevealed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isRevealed, setIsRevealed] = useState(true);
 
   useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -148,23 +152,22 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Exact Visual Composition from PDF Page 5 */}
+          {/* Right Column: Visual Composition Video with Instant Fallback Poster */}
           <div className="lg:col-span-6 flex items-center justify-center relative">
             <div
               ref={artworkRef}
-              className={`relative w-full max-w-[620px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                isRevealed
-                  ? 'scale-100 opacity-100 translate-y-0'
-                  : 'scale-[0.96] opacity-0 translate-y-6'
-              }`}
+              className="relative w-full max-w-[620px] transition-all duration-700 ease-out"
             >
               <video
+                ref={videoRef}
                 src="/assets/company-intro.mp4"
+                poster="/assets/about-visual-composition.png"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.14)] transition-transform duration-500 hover:scale-[1.02]"
+                preload="auto"
+                className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.22)] transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
           </div>
