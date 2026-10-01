@@ -23,7 +23,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         breadcrumb="About Us"
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
-        backgroundVideo="/assets/about-banner-video.mp4"
+        backgroundVideo="/assets/about-banner-custom-video.mp4"
         videoPoster="/assets/about-banner-poster.jpg"
         fullBackground={true}
         theme="dark"
