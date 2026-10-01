@@ -3,6 +3,7 @@ import { PageHeader } from '../components/PageHeader';
 import { About } from '../sections/About';
 import { Leadership } from '../sections/Leadership';
 import { OperatingModel } from '../sections/OperatingModel';
+import { ClientTestimonials } from '../components/ClientTestimonials';
 import { FinalCTA } from '../sections/FinalCTA';
 
 interface AboutPageProps {
@@ -46,7 +47,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
       {/* 4. Strategic Operating Model & Execution Architecture */}
       <OperatingModel />
 
-      {/* 5. Direct Conversion CTA */}
+      {/* 5. Verified Client Endorsements & Proof of Excellence */}
+      <section className="py-12 sm:py-16 max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
+        <ClientTestimonials />
+      </section>
+
+      {/* 6. Direct Conversion CTA */}
       <FinalCTA onOpenModal={onOpenModal} />
     </div>
   );
