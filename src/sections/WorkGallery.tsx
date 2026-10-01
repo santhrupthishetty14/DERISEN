@@ -251,13 +251,15 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                       muted
                       playsInline
                       preload="auto"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform filter brightness-[1.03] contrast-[1.07] saturate-[1.08]"
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                     />
                   ) : (
                     <img
                       src={imgSrc}
                       alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform filter brightness-[1.02] contrast-[1.04] saturate-[1.05]"
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                       loading="lazy"
                     />
                   )}
@@ -377,7 +379,8 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                       loop
                       muted={isMuted}
                       playsInline
-                      className="w-full h-full object-contain bg-[#0a0012]"
+                      className="w-full h-full object-contain bg-[#0a0012] filter brightness-[1.03] contrast-[1.07] saturate-[1.08]"
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                     />
                     {/* Video Overlay Controls */}
                     <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-black/70 backdrop-blur-md px-3 py-2 rounded-full border border-white/20 opacity-90 hover:opacity-100 transition-opacity">

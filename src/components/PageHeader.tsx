@@ -88,12 +88,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 loop
                 muted
                 playsInline
-                className={`w-full h-full object-cover filter brightness-[1.08] contrast-[1.05] ${
+                className={`w-full h-full object-cover filter brightness-[1.04] contrast-[1.08] saturate-[1.10] ${
                   backgroundPosition || 'object-center lg:object-right'
                 }`}
                 style={{
-                  transform: 'translateZ(0)',
-                  opacity: backgroundOpacity ?? 0.88,
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: backgroundOpacity ?? 0.94,
                   willChange: 'transform',
                 }}
               />
@@ -130,8 +130,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     playsInline
                     className={`w-full h-full ${
                       videoFit === 'cover' ? 'object-cover' : 'object-contain'
-                    } filter brightness-[1.06] contrast-[1.06] drop-shadow-[0_20px_50px_rgba(99,32,238,0.55)]`}
-                    style={{ transform: 'translateZ(0)' }}
+                    } filter brightness-[1.04] contrast-[1.08] saturate-[1.10] drop-shadow-[0_20px_50px_rgba(99,32,238,0.55)]`}
+                    style={{ transform: 'translate3d(0, 0, 0)' }}
                   />
                   {/* Feathered gradient edges to blend naturally into #180128 */}
                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#180128] via-transparent to-transparent opacity-75 lg:opacity-30" />

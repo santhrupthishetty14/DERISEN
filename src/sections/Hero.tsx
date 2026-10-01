@@ -160,7 +160,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   muted
                   playsInline
                   preload="auto"
-                  className="w-full h-auto aspect-[16/9] object-contain"
+                  className="w-full h-auto aspect-[16/9] object-contain filter brightness-[1.03] contrast-[1.07] saturate-[1.08]"
+                  style={{ transform: 'translate3d(0, 0, 0)' }}
                 />
               </div>
             </div>
