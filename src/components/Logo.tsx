@@ -40,7 +40,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className="relative flex items-center">
           <img
             id={isDark ? "main-nav-logo" : undefined}
-            src={isDark ? '/assets/derisen-logo-transparent.png' : '/assets/derisen-logo-white.png'}
+            src={isDark ? '/assets/derisen-logo-transparent.png?v=clean' : '/assets/derisen-logo-white.png?v=clean'}
             alt="De.risen"
             className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105 active:scale-95"
             style={{ imageRendering: 'auto' }}
