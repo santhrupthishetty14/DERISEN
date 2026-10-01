@@ -173,51 +173,51 @@ export const ClientTestimonials: React.FC = () => {
   const priorityClients = TESTIMONIALS_DATA.filter((t) => t.isPriorityClient);
 
   return (
-    <div id="client-reviews" className="relative rounded-[2.5rem] bg-white border border-slate-200/90 p-6 sm:p-10 lg:p-12 shadow-[0_25px_60px_rgba(24,1,40,0.08)] overflow-hidden text-slate-900">
-      {/* Ambient Subtle Radial Glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-100/60 rounded-full blur-3xl pointer-events-none -z-0" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-100/50 rounded-full blur-3xl pointer-events-none -z-0" />
+    <div id="client-reviews" className="relative rounded-[2.5rem] bg-gradient-to-b from-[#1f0233]/95 via-[#190129]/95 to-[#130022]/98 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl overflow-hidden text-white">
+      {/* Ambient Radial Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#6320EE]/20 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#B063FF]/15 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Top Header & Metrics Bar */}
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-slate-100">
+      <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-[#620D9C] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#620D9C]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-purple-400/20 text-[#D8B4FE] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
             <span>Verified Client Endorsements</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
             Trusted by Ambitious Leaders &amp; Visionary Brands
           </h3>
-          <p className="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+          <p className="text-purple-200/80 text-sm sm:text-base mt-2 leading-relaxed">
             Real reviews from enterprise clients across luxury retail, institutional organizations, venture funds, healthcare, and technology.
           </p>
         </div>
 
         {/* Live Metrics Chips & Controls */}
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold shadow-xs">
+          <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-xs">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             <span>5.0 ★ Client Rating</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-[#620D9C] text-xs font-bold shadow-xs">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#620D9C]" />
+          <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-200 text-xs font-bold shadow-xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#B063FF]" />
             <span>100% Verified Partners</span>
           </div>
 
           <button
             onClick={() => setIsMarqueePaused(!isMarqueePaused)}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold transition-all cursor-pointer shadow-sm active:scale-95"
             title={isMarqueePaused ? 'Resume auto-scroll animation' : 'Pause auto-scroll animation'}
           >
             {isMarqueePaused ? (
               <>
-                <Play className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+                <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
                 <span>Play Stream</span>
               </>
             ) : (
               <>
-                <Pause className="w-3.5 h-3.5 text-[#620D9C]" />
+                <Pause className="w-3.5 h-3.5 text-[#B063FF]" />
                 <span>Pause Stream</span>
               </>
             )}
@@ -226,15 +226,15 @@ export const ClientTestimonials: React.FC = () => {
       </div>
 
       {/* Featured Priority Client Spotlight Ribbon */}
-      <div className="relative z-10 mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-50/80 via-slate-50 to-purple-50/80 border border-purple-200/80 backdrop-blur-md">
+      <div className="relative z-10 mb-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#2B0348]/70 via-[#3B0764]/70 to-[#180128]/70 border border-[#B063FF]/30 backdrop-blur-md">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#620D9C] to-[#7C3AED] text-white flex items-center justify-center shrink-0 shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#620D9C] to-[#B063FF] text-white flex items-center justify-center shrink-0 shadow-sm">
               <Building2 className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-slate-900">Featured Enterprise Clients:</span>
-              <p className="text-[11px] text-slate-500">Click client pill to toggle focus or view all 10 animated reviews</p>
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#D8B4FE]">Featured Enterprise Clients:</span>
+              <p className="text-[11px] text-purple-200/70">Click client pill to toggle focus or view all 10 animated reviews</p>
             </div>
           </div>
 
@@ -243,8 +243,8 @@ export const ClientTestimonials: React.FC = () => {
               onClick={() => setActiveFilter('all')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 activeFilter === 'all'
-                  ? 'bg-[#620D9C] text-white shadow-md shadow-[#620D9C]/25'
-                  : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200'
+                  ? 'bg-[#B063FF] text-white shadow-md shadow-[#B063FF]/30'
+                  : 'bg-white/5 hover:bg-white/15 text-purple-200 border border-white/10'
               }`}
             >
               All 10 Client Reviews
@@ -253,8 +253,8 @@ export const ClientTestimonials: React.FC = () => {
               onClick={() => setActiveFilter('priority')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeFilter === 'priority'
-                  ? 'bg-[#620D9C] text-white shadow-md shadow-[#620D9C]/25'
-                  : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200'
+                  ? 'bg-[#B063FF] text-white shadow-md shadow-[#B063FF]/30'
+                  : 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30'
               }`}
             >
               <span>⭐ Featured Clients (3)</span>
@@ -339,8 +339,8 @@ export const ClientTestimonials: React.FC = () => {
         <div className="relative z-10 space-y-6">
           {/* Stream 1: Forward Direction (Left) - Features AGNA GOLD, Hindu Mahasabha, BRICKBUNK */}
           <div className="relative w-full overflow-hidden marquee-track">
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-white to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-white to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-[#190129] to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-[#190129] to-transparent" />
 
             <div className={`animate-marquee-left flex gap-6 ${isMarqueePaused ? 'marquee-paused' : ''}`}>
               {[...row1, ...row1].map((t, idx) => (
@@ -417,8 +417,8 @@ export const ClientTestimonials: React.FC = () => {
 
           {/* Stream 2: Reverse Direction (Right) */}
           <div className="relative w-full overflow-hidden marquee-track">
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-white to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-white to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-[#190129] to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-[#190129] to-transparent" />
 
             <div className={`animate-marquee-right flex gap-6 ${isMarqueePaused ? 'marquee-paused' : ''}`}>
               {[...row2, ...row2].map((t, idx) => (
@@ -495,7 +495,7 @@ export const ClientTestimonials: React.FC = () => {
 
           {/* Micro Helper Note */}
           <div className="pt-2 text-center">
-            <span className="text-xs text-slate-400 font-medium">
+            <span className="text-xs text-purple-200/50 font-medium">
               Tip: Hover over or tap any card to pause stream and read details
             </span>
           </div>
