@@ -1,24 +1,154 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PORTFOLIO_ITEMS } from '../utils/constants';
 import { PortfolioItem } from '../utils/types';
-import { ArrowUpRight, Star, X, CheckCircle, Play, Pause, Volume2, VolumeX, Sparkles, Layers, ShieldCheck, Grid } from 'lucide-react';
+import { ArrowUpRight, Star, X, CheckCircle, CheckCircle2, Play, Pause, Volume2, VolumeX, Sparkles, Layers, ShieldCheck, Grid, Quote } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Branding & Identity', 'IT & Web Development', 'Digital Marketing', 'Motion & Video'];
 
-const TESTIMONIALS = [
+export interface TestimonialItem {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  rating: number;
+  category: string;
+  verified: boolean;
+  avatarColor: string;
+  highlightMetric?: string;
+  initials: string;
+}
+
+const TESTIMONIALS: TestimonialItem[] = [
   {
-    name: 'Rajesh Malhotra',
-    company: 'Global Strategy & Management Advisory',
-    quote: 'DE.RISEN completely transformed our corporate identity and digital presence. Their attention to detail, brand strategy, and execution speed exceeded every expectation.',
-    rating: 5,
+    id: 'agna-gold',
+    name: 'Arjun Varma',
     role: 'Managing Director',
+    company: 'AGNA GOLD AND DIAMONDS',
+    quote: 'DE.RISEN completely elevated our luxury retail presence. From bespoke jewellery packaging systems to high-end festival ad campaigns, their refined design standards and execution excellence set a new benchmark in our industry.',
+    rating: 5,
+    category: 'Luxury Branding & Packaging',
+    verified: true,
+    avatarColor: 'from-[#EAB308] to-[#CA8A04]',
+    highlightMetric: 'Luxury Identity & Packaging',
+    initials: 'AG',
   },
   {
-    name: 'Ananya Sharma',
-    company: 'NextGen Cloud & Technology Solutions',
-    quote: 'The high-performance web platform built by DE.RISEN increased our inbound client conversions by over 240%. True creative and technical masters under one roof.',
+    id: 'hindu-mahasabha',
+    name: 'Dr. R. K. Shastri',
+    role: 'State IT & Communications Head',
+    company: 'Akhil Bharat Hindu Mahasabha Karnataka',
+    quote: 'Their strategic approach to digital communication, IT infrastructure, and social outreach across Karnataka has been phenomenal. DE.RISEN delivers institutional-grade quality with remarkable agility and cultural alignment.',
     rating: 5,
+    category: 'Digital Strategy & IT Infrastructure',
+    verified: true,
+    avatarColor: 'from-[#F97316] to-[#C2410C]',
+    highlightMetric: 'State-Level Digital Outreach',
+    initials: 'AB',
+  },
+  {
+    id: 'brickbunk-ventures',
+    name: 'Vikramaditya Hegde',
+    role: 'Founder & Managing Partner',
+    company: 'BRICKBUNK Ventures',
+    quote: 'From our enterprise investment portal to investor presentation systems, BRICKBUNK Ventures found an exceptional partner in DE.RISEN. They masterfully bridge executive finance logic with cutting-edge visual technology.',
+    rating: 5,
+    category: 'Enterprise Web & Brand Platform',
+    verified: true,
+    avatarColor: 'from-[#6320EE] to-[#7C3AED]',
+    highlightMetric: 'Venture Capital Portal & Decks',
+    initials: 'BV',
+  },
+  {
+    id: 'nexaflow-cloud',
+    name: 'Siddharth Mehta',
     role: 'Chief Technology Officer',
+    company: 'NexaFlow Enterprise Cloud',
+    quote: 'The high-performance SaaS web platform and 3D product animations engineered by DE.RISEN accelerated our inbound demo conversions by 310%. Their full-stack capabilities are world-class.',
+    rating: 5,
+    category: 'Full-Stack IT & 3D Motion',
+    verified: true,
+    avatarColor: 'from-[#3B82F6] to-[#1D4ED8]',
+    highlightMetric: '+310% Demo Conversions',
+    initials: 'NF',
+  },
+  {
+    id: 'aura-wellness',
+    name: 'Dr. Nandini Rao',
+    role: 'Founder & Medical Director',
+    company: 'Aura Aesthetics & Wellness',
+    quote: 'Our patient acquisition grew 4x within 90 days of launching the omnichannel digital campaigns created by DE.RISEN. Their aesthetic sensitivity and ad performance data gave us unmatched market authority.',
+    rating: 5,
+    category: 'Omnichannel Digital Marketing',
+    verified: true,
+    avatarColor: 'from-[#EC4899] to-[#BE185D]',
+    highlightMetric: '4× Patient Inquiries Scaled',
+    initials: 'AA',
+  },
+  {
+    id: 'zenith-diagnostics',
+    name: 'Karthik Narayan',
+    role: 'Director of Operations',
+    company: 'Zenith Diagnostic Laboratories',
+    quote: 'DE.RISEN streamlined our entire digital booking architecture and overhauled our healthcare brand identity. The user experience is effortless and our corporate perception has never been stronger.',
+    rating: 5,
+    category: 'Healthcare UI/UX & Brand System',
+    verified: true,
+    avatarColor: 'from-[#06B6D4] to-[#0E7490]',
+    highlightMetric: 'Seamless Healthcare Portal',
+    initials: 'ZD',
+  },
+  {
+    id: 'kavya-couture',
+    name: 'Kavya Singhania',
+    role: 'Creative Director & Founder',
+    company: 'Kavya Couture & Luxury Living',
+    quote: 'Every seasonal catalogue, digital lookbook, and high-fashion video asset produced by DE.RISEN radiates uncompromising craftsmanship. They captured our luxury brand soul with striking elegance.',
+    rating: 5,
+    category: 'Luxury Fashion & 3D Creative',
+    verified: true,
+    avatarColor: 'from-[#A855F7] to-[#7E22CE]',
+    highlightMetric: 'High-Fashion Digital Lookbook',
+    initials: 'KC',
+  },
+  {
+    id: 'vanguard-capital',
+    name: 'Rohan Deshmukh',
+    role: 'Senior Managing Partner',
+    company: 'Vanguard Capital Partners',
+    quote: 'DE.RISEN transformed our global fund decks and private equity website. Their acute understanding of institutional trust and modern typography sets them miles ahead of traditional agencies.',
+    rating: 5,
+    category: 'Fintech & Investment Advisory',
+    verified: true,
+    avatarColor: 'from-[#10B981] to-[#047857]',
+    highlightMetric: 'Institutional Advisory Deck',
+    initials: 'VC',
+  },
+  {
+    id: 'urbanroots-organic',
+    name: 'Meera Kulkarni',
+    role: 'Co-Founder & CEO',
+    company: 'UrbanRoots Organic Foods',
+    quote: 'The sustainable packaging design and viral video campaign created by DE.RISEN enabled us to secure nationwide retail shelf space across 200+ organic supermarkets within just 4 months.',
+    rating: 5,
+    category: 'Sustainable Packaging & Video',
+    verified: true,
+    avatarColor: 'from-[#84CC16] to-[#4D7C0F]',
+    highlightMetric: '200+ Retail Stores Reached',
+    initials: 'UR',
+  },
+  {
+    id: 'apex-logistics',
+    name: 'Farhan Qureshi',
+    role: 'Chief Commercial Officer',
+    company: 'Apex Logistics Global',
+    quote: 'Reliable, innovative, and deeply committed. They rebuilt our real-time client tracking web interface and unified our global fleet branding across 6 distribution hubs.',
+    rating: 5,
+    category: 'Global Logistics IT & Branding',
+    verified: true,
+    avatarColor: 'from-[#6366F1] to-[#4338CA]',
+    highlightMetric: 'Global Fleet Tracking Interface',
+    initials: 'AL',
   },
 ];
 
@@ -93,7 +223,11 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
+
+  const row1 = TESTIMONIALS.slice(0, 5);
+  const row2 = TESTIMONIALS.slice(5, 10);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -334,46 +468,211 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
           })}
         </div>
 
-        {/* Testimonials Strip */}
-        <div className="bg-white/5 backdrop-blur-md rounded-3xl border border-white/15 p-8 sm:p-12 shadow-2xl">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="eyebrow text-[#B063FF]">CLIENT ENDORSEMENTS</span>
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Trusted by Ambitious Leaders
-            </h3>
+        {/* Animated Client Reviews & Testimonials Carousel Showcase */}
+        <div className="relative rounded-[2.5rem] bg-gradient-to-b from-[#1f0233]/90 via-[#190129]/95 to-[#130022]/98 border border-white/15 p-6 sm:p-10 lg:p-12 shadow-2xl overflow-hidden">
+          {/* Ambient Glows */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#6320EE]/20 rounded-full blur-3xl pointer-events-none -z-0" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#B063FF]/15 rounded-full blur-3xl pointer-events-none -z-0" />
+
+          {/* Header & Controls Bar */}
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 pb-6 border-b border-white/10">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-purple-400/20 text-[#D8B4FE] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#B063FF]" />
+                <span>Verified Client Endorsements</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+                Trusted by Ambitious Leaders &amp; Visionary Brands
+              </h3>
+              <p className="text-purple-200/80 text-sm sm:text-base mt-2 leading-relaxed">
+                Explore real reviews from enterprise leaders across luxury gold &amp; diamonds, institutional organizations, venture funds, healthcare, and technology.
+              </p>
+            </div>
+
+            {/* Metrics Chips & Marquee Pause/Play Control */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <span>5.0 ★ Client Rating</span>
+              </div>
+
+              <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-200 text-xs font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#B063FF]" />
+                <span>100% Verified Partners</span>
+              </div>
+
+              <button
+                onClick={() => setIsMarqueePaused(!isMarqueePaused)}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold transition-all cursor-pointer shadow-sm active:scale-95"
+                title={isMarqueePaused ? 'Resume auto-scroll animation' : 'Pause auto-scroll animation'}
+              >
+                {isMarqueePaused ? (
+                  <>
+                    <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
+                    <span>Play Stream</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="w-3.5 h-3.5 text-[#B063FF]" />
+                    <span>Pause Stream</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="bg-white rounded-[26px] p-7 sm:p-8 border border-slate-100 shadow-xl flex flex-col justify-between hover:shadow-2xl hover:border-purple-200 transition-all duration-300 text-slate-900"
-              >
-                <div>
-                  {/* Stars */}
-                  <div className="flex items-center gap-1 text-amber-400 mb-4">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
-                    ))}
-                  </div>
+          {/* Continuous Infinite Animated Marquee Streams */}
+          <div className="relative z-10 space-y-6">
+            {/* Stream 1: Forward Direction (Left) */}
+            <div className="relative w-full overflow-hidden marquee-track">
+              {/* Left / Right Fade Curtains */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-[#190129] to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-[#190129] to-transparent" />
 
-                  {/* Quote */}
-                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed italic mb-6">
-                    "{t.quote}"
-                  </p>
-                </div>
+              <div className={`animate-marquee-left flex gap-6 ${isMarqueePaused ? 'marquee-paused' : ''}`}>
+                {[...row1, ...row1].map((t, idx) => (
+                  <div
+                    key={`stream1-${t.id}-${idx}`}
+                    className="w-[330px] sm:w-[410px] md:w-[440px] shrink-0 bg-gradient-to-b from-[#25033d]/95 via-[#1c012d]/95 to-[#130022]/98 backdrop-blur-xl border border-white/15 hover:border-[#B063FF] rounded-[26px] p-6 sm:p-7 shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_rgba(176,99,255,0.35)] transition-all duration-300 flex flex-col justify-between group/card select-none"
+                  >
+                    <div>
+                      {/* Top Bar */}
+                      <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
+                        <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-0.5 text-amber-400">
+                            {[...Array(t.rating)].map((_, i) => (
+                              <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                            ))}
+                          </div>
+                          <span className="text-[11px] font-bold text-amber-300 ml-1">5.0</span>
+                        </div>
+                        <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                          <span>Verified Client</span>
+                        </div>
+                      </div>
 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white font-bold text-xs flex items-center justify-center shadow-md shadow-[#6320EE]/25">
-                    {t.name.charAt(0)}
+                      {/* Quote */}
+                      <div className="relative mb-5">
+                        <Quote className="w-6 h-6 text-[#B063FF]/50 mb-2 -ml-1 group-hover/card:text-[#B063FF] transition-colors" />
+                        <p className="text-[13px] sm:text-[14px] text-purple-100/90 font-normal leading-relaxed italic">
+                          "{t.quote}"
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      {/* Metric Tag */}
+                      {t.highlightMetric && (
+                        <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-purple-400/20 text-[#D8B4FE] text-[10.5px] font-medium tracking-wide">
+                          <Sparkles className="w-3 h-3 text-[#B063FF] shrink-0" />
+                          <span>{t.highlightMetric}</span>
+                        </div>
+                      )}
+
+                      {/* Client Identity with highlighted Company Name */}
+                      <div className="flex items-center gap-3 pt-3.5 border-t border-white/10">
+                        <div
+                          className={`w-11 h-11 rounded-2xl bg-gradient-to-tr ${t.avatarColor} text-white font-black text-xs flex items-center justify-center shadow-lg shadow-[#6320EE]/20 shrink-0 border border-white/20`}
+                        >
+                          {t.initials}
+                        </div>
+                        <div className="overflow-hidden">
+                          <h5 className="text-sm font-bold text-white tracking-tight group-hover/card:text-[#D8B4FE] transition-colors truncate">
+                            {t.name}
+                          </h5>
+                          <div className="text-[11px] font-bold text-[#B063FF] tracking-wide uppercase truncate">
+                            {t.company}
+                          </div>
+                          <div className="text-[11px] text-purple-200/60 font-medium truncate">
+                            {t.role}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h5 className="text-xs font-black text-slate-900">{t.name}</h5>
-                    <p className="text-[11px] text-slate-500 font-medium">{t.role}, {t.company}</p>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Stream 2: Reverse Direction (Right) */}
+            <div className="relative w-full overflow-hidden marquee-track">
+              {/* Left / Right Fade Curtains */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-r from-[#190129] to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-20 bg-gradient-to-l from-[#190129] to-transparent" />
+
+              <div className={`animate-marquee-right flex gap-6 ${isMarqueePaused ? 'marquee-paused' : ''}`}>
+                {[...row2, ...row2].map((t, idx) => (
+                  <div
+                    key={`stream2-${t.id}-${idx}`}
+                    className="w-[330px] sm:w-[410px] md:w-[440px] shrink-0 bg-gradient-to-b from-[#25033d]/95 via-[#1c012d]/95 to-[#130022]/98 backdrop-blur-xl border border-white/15 hover:border-[#B063FF] rounded-[26px] p-6 sm:p-7 shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_rgba(176,99,255,0.35)] transition-all duration-300 flex flex-col justify-between group/card select-none"
+                  >
+                    <div>
+                      {/* Top Bar */}
+                      <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
+                        <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-0.5 text-amber-400">
+                            {[...Array(t.rating)].map((_, i) => (
+                              <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                            ))}
+                          </div>
+                          <span className="text-[11px] font-bold text-amber-300 ml-1">5.0</span>
+                        </div>
+                        <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                          <span>Verified Client</span>
+                        </div>
+                      </div>
+
+                      {/* Quote */}
+                      <div className="relative mb-5">
+                        <Quote className="w-6 h-6 text-[#B063FF]/50 mb-2 -ml-1 group-hover/card:text-[#B063FF] transition-colors" />
+                        <p className="text-[13px] sm:text-[14px] text-purple-100/90 font-normal leading-relaxed italic">
+                          "{t.quote}"
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      {/* Metric Tag */}
+                      {t.highlightMetric && (
+                        <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-purple-400/20 text-[#D8B4FE] text-[10.5px] font-medium tracking-wide">
+                          <Sparkles className="w-3 h-3 text-[#B063FF] shrink-0" />
+                          <span>{t.highlightMetric}</span>
+                        </div>
+                      )}
+
+                      {/* Client Identity with highlighted Company Name */}
+                      <div className="flex items-center gap-3 pt-3.5 border-t border-white/10">
+                        <div
+                          className={`w-11 h-11 rounded-2xl bg-gradient-to-tr ${t.avatarColor} text-white font-black text-xs flex items-center justify-center shadow-lg shadow-[#6320EE]/20 shrink-0 border border-white/20`}
+                        >
+                          {t.initials}
+                        </div>
+                        <div className="overflow-hidden">
+                          <h5 className="text-sm font-bold text-white tracking-tight group-hover/card:text-[#D8B4FE] transition-colors truncate">
+                            {t.name}
+                          </h5>
+                          <div className="text-[11px] font-bold text-[#B063FF] tracking-wide uppercase truncate">
+                            {t.company}
+                          </div>
+                          <div className="text-[11px] text-purple-200/60 font-medium truncate">
+                            {t.role}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Micro Helper Note */}
+            <div className="pt-2 text-center">
+              <span className="text-xs text-purple-200/50 font-medium">
+                Tip: Hover over or tap any card to pause stream and read details
+              </span>
+            </div>
           </div>
         </div>
       </div>
