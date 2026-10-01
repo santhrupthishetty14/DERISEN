@@ -231,8 +231,8 @@ export const Leadership: React.FC = () => {
 
                 {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
-                  <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-normal text-slate-700 text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
+                  <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-90" />
+                  <p className="font-semibold text-[#620D9C] text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
                     {shweta.quote}
                   </p>
                 </div>
@@ -304,8 +304,8 @@ export const Leadership: React.FC = () => {
 
                 {/* Quote */}
                 <div className="relative pl-5 sm:pl-6 py-4 pr-4 mb-6 rounded-2xl border-l-[3.5px] border-[#620D9C] bg-gradient-to-r from-purple-50/80 via-purple-50/20 to-transparent">
-                  <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-80" />
-                  <p className="font-normal text-slate-700 text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
+                  <Quote className="w-5 h-5 text-[#620D9C] mb-2 opacity-90" />
+                  <p className="font-semibold text-[#620D9C] text-[15px] sm:text-[16.5px] leading-relaxed italic" style={{ fontFamily: "'Lora', 'Cormorant Garamond', Georgia, serif" }}>
                     {lejai.quote}
                   </p>
                 </div>
