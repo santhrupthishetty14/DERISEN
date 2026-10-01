@@ -23,6 +23,33 @@ export const Leadership: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  /**
+   * Helper to render text with any bracketed content (e.g. "(CEO)", "(BVA)")
+   * styled in the brand color (#620D9C) and light bold (font-semibold).
+   */
+  const renderWithBracketHighlight = (
+    text: string,
+    bracketColor = 'text-[#620D9C]',
+    bracketWeight = 'font-semibold'
+  ) => {
+    const parts = text.split(/(\([^)]+\))/g);
+    if (parts.length === 1) return text;
+
+    return parts.map((part, index) => {
+      if (part.startsWith('(') && part.endsWith(')')) {
+        return (
+          <span
+            key={index}
+            className={`${bracketColor} ${bracketWeight} tracking-normal`}
+          >
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
+
   const shweta = LEADERS[0];
   const lejai = LEADERS[1];
 
@@ -196,8 +223,8 @@ export const Leadership: React.FC = () => {
                     <h3 className="font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
                       {shweta.name}
                     </h3>
-                    <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-[#620D9C] text-[11px] sm:text-xs font-semibold rounded-full tracking-wide border border-purple-200 shadow-xs">
-                      {shweta.role}
+                    <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-slate-700 text-[11px] sm:text-xs font-medium rounded-full tracking-wide border border-purple-200 shadow-xs">
+                      {renderWithBracketHighlight(shweta.role)}
                     </span>
                   </div>
                 </div>
@@ -221,7 +248,7 @@ export const Leadership: React.FC = () => {
                           : 'text-slate-500'
                       }
                     >
-                      {paragraph}
+                      {renderWithBracketHighlight(paragraph)}
                     </p>
                   ))}
                 </div>
@@ -269,8 +296,8 @@ export const Leadership: React.FC = () => {
                     <h3 className="font-bold text-2xl sm:text-3xl text-slate-950 tracking-tight leading-snug">
                       {lejai.name}
                     </h3>
-                    <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-[#620D9C] text-[11px] sm:text-xs font-semibold rounded-full tracking-wide border border-purple-200 shadow-xs">
-                      {lejai.role}
+                    <span className="inline-flex items-center px-3.5 py-0.5 bg-purple-50 text-slate-700 text-[11px] sm:text-xs font-medium rounded-full tracking-wide border border-purple-200 shadow-xs">
+                      {renderWithBracketHighlight(lejai.role)}
                     </span>
                   </div>
                 </div>
@@ -294,7 +321,7 @@ export const Leadership: React.FC = () => {
                           : 'text-slate-500'
                       }
                     >
-                      {paragraph}
+                      {renderWithBracketHighlight(paragraph)}
                     </p>
                   ))}
                 </div>
