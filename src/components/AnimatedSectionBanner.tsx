@@ -118,8 +118,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-contain filter brightness-[1.04] contrast-[1.08] saturate-[1.10] drop-shadow-[0_20px_40px_rgba(99,32,238,0.5)]"
-                  style={{ transform: 'translate3d(0, 0, 0)' }}
+                  className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(99,32,238,0.5)]"
                 />
                 <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#180128] via-transparent to-transparent opacity-80 lg:opacity-30" />
                 <div className="absolute inset-x-0 top-0 h-12 pointer-events-none bg-gradient-to-b from-[#180128] to-transparent" />
@@ -138,8 +137,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
               src={imageSrc}
               alt={title}
               loading="lazy"
-              className="w-full h-full object-cover object-right sm:object-center filter brightness-[1.05] contrast-[1.07] saturate-[1.08]"
-              style={{ transform: 'translate3d(0, 0, 0)' }}
+              className="w-full h-full object-cover object-right sm:object-center filter brightness-110 contrast-105"
             />
             {/* Dark mode: left gradient curtain for text legibility while keeping the graphic vivid */}
             {isDark && (

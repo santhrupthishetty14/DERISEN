@@ -167,8 +167,7 @@ export const About: React.FC = () => {
                 muted
                 playsInline
                 preload="auto"
-                className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.22)] transition-transform duration-500 hover:scale-[1.02] filter brightness-[1.03] contrast-[1.07] saturate-[1.08]"
-                style={{ transform: 'translate3d(0, 0, 0)' }}
+                className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.22)] transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
           </div>

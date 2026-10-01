@@ -148,8 +148,7 @@ export const HeroVisual: React.FC = () => {
             preload="auto"
             disablePictureInPicture
             controls={false}
-            className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl block shadow-inner pointer-events-none filter brightness-[1.03] contrast-[1.07] saturate-[1.08]"
-            style={{ transform: 'translate3d(0, 0, 0)' }}
+            className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl block shadow-inner pointer-events-none"
           >
             <source src="/assets/website-ui-animation-preview.mp4" type="video/mp4" />
             <source src="/assets/website-ui-animation.mp4" type="video/mp4" />

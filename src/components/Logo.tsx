@@ -43,7 +43,9 @@ export const Logo: React.FC<LogoProps> = ({
             src={isDark ? '/assets/derisen-logo-transparent.png' : '/assets/derisen-logo-white.png'}
             alt="De.risen"
             className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105 active:scale-95"
+            style={{ imageRendering: 'auto' }}
             loading="eager"
+            decoding="async"
           />
         </div>
       </div>

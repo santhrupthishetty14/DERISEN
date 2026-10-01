@@ -36,34 +36,10 @@
     position: relative;
   }
 
-  img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: high-quality;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+  img, video {
+    image-rendering: auto;
   }
 
-  video {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: high-quality;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    /* Calibrated HDR vibrancy: eliminates washed-out gray tones, enriches dark midnight purple blacks and neon accents */
-    filter: contrast(1.05) saturate(1.07) brightness(1.02);
-  }
-
-  canvas, svg {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
 
   #root {
     width: 100%;
