@@ -65,7 +65,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onS
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-[#1A0B2E]/95 backdrop-blur-2xl rounded-3xl w-full max-w-xl p-8 sm:p-10 shadow-[0_25px_70px_rgba(0,0,0,0.8)] relative border border-purple-500/30 text-white">
+      <div className="bg-[#1A0B2E]/95 backdrop-blur-2xl rounded-3xl w-full max-w-xl p-5 xs:p-6 sm:p-8 md:p-10 max-h-[92vh] overflow-y-auto shadow-[0_25px_70px_rgba(0,0,0,0.8)] relative border border-purple-500/30 text-white">
         {/* Ambient Top Glow */}
         <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-72 h-36 bg-[#B063FF]/20 rounded-full blur-3xl pointer-events-none" />
 

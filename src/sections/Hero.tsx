@@ -173,18 +173,18 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================================== */}
       <div
         ref={pillarsRef}
-        className="w-full max-w-[1360px] mx-auto bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(0,0,0,0.35)] border border-white/15 p-3 sm:p-4 lg:p-5 relative z-20 transition-all duration-300 hover:border-purple-300/30 mt-3 sm:mt-5 text-white"
+        className="w-full max-w-[1360px] mx-auto bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-[24px] shadow-[0_12px_35px_rgba(0,0,0,0.35)] border border-white/15 p-2.5 xs:p-3 sm:p-4 lg:p-5 relative z-20 transition-all duration-300 hover:border-purple-300/30 mt-3 sm:mt-5 text-white"
       >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 xs:gap-3.5 sm:gap-6 items-center">
           {/* 1. Creative Design */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 xs:gap-2.5 sm:gap-4 transition-all duration-300">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <PenTool className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
+              <h4 className="text-[11px] xs:text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Creative Design
               </h4>
               <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -194,14 +194,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* 2. Branding */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 xs:gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Tag className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
+              <h4 className="text-[11px] xs:text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Branding
               </h4>
               <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -211,14 +211,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* 3. Digital Marketing */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 xs:gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Megaphone className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
+              <h4 className="text-[11px] xs:text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 Digital Marketing
               </h4>
               <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">
@@ -228,14 +228,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           {/* 4. IT Solutions */}
-          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300 hover:translate-x-1">
+          <div className="group flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-2 xs:gap-2.5 sm:gap-4 lg:border-l lg:border-white/10 lg:pl-6 transition-all duration-300">
             <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#6320EE] to-[#7C3AED] text-white flex items-center justify-center shadow-md shadow-[#6320EE]/25 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(99,32,238,0.4)]">
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md border border-white/60 rotate-45 flex items-center justify-center">
                 <Code className="w-3 sm:w-3.5 h-3 sm:h-3.5 -rotate-45" />
               </div>
             </div>
             <div>
-              <h4 className="text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
+              <h4 className="text-[11px] xs:text-xs sm:text-base font-black text-white leading-tight mb-0.5 sm:mb-1 group-hover:text-[#B063FF] transition-colors">
                 IT Solutions
               </h4>
               <p className="text-[10px] sm:text-xs text-purple-200/70 leading-tight sm:leading-relaxed max-w-[200px] hidden sm:block">

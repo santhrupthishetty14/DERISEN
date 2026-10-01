@@ -23,6 +23,7 @@
     overflow-x: clip;
     width: 100%;
     max-width: 100%;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -36,8 +37,15 @@
     position: relative;
   }
 
+  @media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+    }
+  }
+
   img, video {
     image-rendering: auto;
+    max-width: 100%;
   }
 
 

@@ -135,19 +135,19 @@ export const Leadership: React.FC = () => {
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#620D9C]/20 via-[#B063FF]/15 to-transparent blur-3xl -z-10" />
 
               {/* Clean Executive Duo Display with Glowing Badges */}
-              <div className="relative w-full max-w-[560px] flex items-center justify-center gap-4 sm:gap-6 py-2">
+              <div className="relative w-full max-w-[560px] flex items-center justify-center gap-3 xs:gap-4 sm:gap-6 py-2">
                 {/* Shweta Deharkar */}
                 <div className="relative group flex flex-col items-center">
-                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
+                  <div className="relative w-28 h-28 xs:w-36 xs:h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-2 xs:border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
                       src="/assets/leader-shweta-studio.jpg"
                       alt="Shweta Deharkar - CEO"
                       className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>
-                  <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
-                    <div className="text-sm sm:text-base font-bold text-white tracking-tight">Shweta Deharkar</div>
-                    <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Chief Executive Officer</div>
+                  <div className="mt-2.5 sm:mt-3 px-2.5 xs:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center max-w-[145px] xs:max-w-[170px] sm:max-w-none">
+                    <div className="text-xs xs:text-sm sm:text-base font-bold text-white tracking-tight leading-tight">Shweta Deharkar</div>
+                    <div className="text-[9px] xs:text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider leading-tight mt-0.5">Chief Executive Officer</div>
                   </div>
                 </div>
 
@@ -158,16 +158,16 @@ export const Leadership: React.FC = () => {
 
                 {/* Lejai Jayakumar */}
                 <div className="relative group flex flex-col items-center">
-                  <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
+                  <div className="relative w-28 h-28 xs:w-36 xs:h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-2 xs:border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
                       src="/assets/leader-lejai-studio.jpg"
                       alt="Lejai Jayakumar - Managing Director & Co-Founder"
                       className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>
-                  <div className="mt-3 px-3.5 py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center">
-                    <div className="text-sm sm:text-base font-bold text-white tracking-tight">Lejai Jayakumar</div>
-                    <div className="text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider">Managing Director &amp; Co-Founder</div>
+                  <div className="mt-2.5 sm:mt-3 px-2.5 xs:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#180128]/90 backdrop-blur-md border border-white/15 shadow-sm text-center max-w-[145px] xs:max-w-[170px] sm:max-w-none">
+                    <div className="text-xs xs:text-sm sm:text-base font-bold text-white tracking-tight leading-tight">Lejai Jayakumar</div>
+                    <div className="text-[9px] xs:text-[10px] sm:text-[11px] font-semibold text-[#B063FF] uppercase tracking-wider leading-tight mt-0.5">Managing Director &amp; Co-Founder</div>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@ export const Leadership: React.FC = () => {
             3. White Card Container: Dual Leader Bio Panels
             =================================================================== */}
         <div
-          className={`bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-6 sm:p-10 lg:p-14 relative transition-all duration-800 ease-out delay-200 text-slate-900 ${
+          className={`bg-white rounded-[1.75rem] sm:rounded-[2.5rem] border border-slate-100 shadow-[0_25px_60px_rgba(0,0,0,0.15)] p-5 sm:p-10 lg:p-14 relative transition-all duration-800 ease-out delay-200 text-slate-900 ${
             isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >

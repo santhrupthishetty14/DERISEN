@@ -69,7 +69,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
   return (
     <div
-      className={`relative w-full min-h-[480px] lg:min-h-[calc(100vh-78px)] lg:max-h-[760px] flex items-center pt-24 pb-10 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10 overflow-hidden select-none ${
+      className={`relative w-full min-h-[380px] sm:min-h-[460px] lg:min-h-[calc(100vh-78px)] lg:max-h-[760px] flex items-center pt-20 pb-8 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10 overflow-hidden select-none ${
         isDark
           ? 'bg-gradient-to-b from-[#180128] via-[#200236] to-[#180128] text-white border-b border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.5)]'
           : 'bg-gradient-to-b from-[#FFFFFF] via-[#FAF5FF] to-[#F5EEFE] text-slate-900 border-b border-purple-200/80 shadow-[0_10px_35px_rgba(98,13,156,0.06)]'
@@ -211,7 +211,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       </div>
 
       {/* ====== BANNER FOREGROUND CONTENT ====== */}
-      <div className="max-w-[1360px] mx-auto px-6 relative z-10 w-full">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
           {/* Left Column: Editorial Typography & Actions */}
           <div className={`${hasRightColumn ? 'lg:col-span-7' : 'lg:col-span-12'} flex flex-col items-start`}>
@@ -250,7 +250,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             </div>
 
             {/* Title */}
-            <h1 className="text-2xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-black tracking-tight leading-[1.18] max-w-3xl mb-3.5 sm:mb-4 pb-2">
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-black tracking-tight leading-[1.18] max-w-3xl mb-3.5 sm:mb-4 pb-2 break-words">
               <span className={isDark ? 'text-white' : 'text-slate-950'}>{title} </span>
               {highlightWord && (
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B063FF] via-[#C084FC] to-[#E9D5FF] inline-block pb-2 pr-2">
@@ -341,7 +341,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 </div>
               ) : (hudInfo || floatingBadge) ? (
                 /* Clean Luxury Floating HUD / Badges */
-                <div className="flex flex-col items-end justify-center gap-4 w-full max-w-[300px]">
+                <div className="flex flex-col items-center lg:items-end justify-center gap-4 w-full max-w-[300px] mx-auto lg:mx-0">
                   {hudInfo && (
                     <div
                       className={`p-4 rounded-2xl ${

@@ -85,7 +85,7 @@ export const WhatWeDo: React.FC = () => {
 
             {/* Heading */}
             <h2
-              className={`text-2xl sm:text-3xl xl:text-[36px] font-black text-white tracking-tight leading-[1.2] mb-5 min-h-[72px] sm:min-h-[86px] flex flex-col justify-start transition-all duration-700 delay-100 ${
+              className={`text-2xl sm:text-3xl xl:text-[36px] font-black text-white tracking-tight leading-[1.2] mb-5 min-h-0 lg:min-h-[72px] xl:min-h-[86px] flex flex-col justify-start transition-all duration-700 delay-100 ${
                 isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
@@ -202,9 +202,9 @@ export const WhatWeDo: React.FC = () => {
           {/* =================================================================
               CENTER COLUMN: CURVED CIRCULAR ARC ARTWORK (Slide 7 Center)
               ================================================================= */}
-          <div className="lg:col-span-2 flex flex-col items-center justify-start pt-2 lg:pt-0 relative px-1">
-            {/* Contained Curved Frame - No overflowing outer rings that collide with text */}
-            <div className="relative w-48 sm:w-56 lg:w-44 xl:w-52 h-[440px] sm:h-[480px] lg:h-[500px] flex items-center justify-center">
+          <div className="lg:col-span-2 flex flex-col items-center justify-start pt-2 lg:pt-0 relative px-1 my-4 lg:my-0">
+            {/* Contained Curved Frame - Responsive scaling for mobile */}
+            <div className="relative w-36 xs:w-44 sm:w-56 lg:w-44 xl:w-52 h-[260px] xs:h-[320px] sm:h-[420px] lg:h-[500px] flex items-center justify-center">
               
               {/* Subtle Ambient Radial Glow Behind Center Image */}
               <div className="absolute inset-0 bg-[#6320EE]/30 rounded-full blur-xl pointer-events-none" />
@@ -249,7 +249,7 @@ export const WhatWeDo: React.FC = () => {
 
             {/* Heading */}
             <h2
-              className={`text-2xl sm:text-3xl xl:text-[36px] font-black text-white tracking-tight leading-[1.2] mb-5 min-h-[72px] sm:min-h-[86px] flex flex-col justify-start transition-all duration-700 delay-100 ${
+              className={`text-2xl sm:text-3xl xl:text-[36px] font-black text-white tracking-tight leading-[1.2] mb-5 min-h-0 lg:min-h-[72px] xl:min-h-[86px] flex flex-col justify-start transition-all duration-700 delay-100 ${
                 isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
