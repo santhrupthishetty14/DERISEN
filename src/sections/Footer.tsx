@@ -62,7 +62,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
               {/* Twitter / X - Official Twitter Sky Blue */}
               <a
-                href="https://twitter.com"
+                href="https://x.com/de_derisen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#1DA1F2] text-white flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-[0_4px_12px_rgba(29,161,242,0.35)] hover:shadow-[0_0_18px_rgba(29,161,242,0.6)] cursor-pointer"
