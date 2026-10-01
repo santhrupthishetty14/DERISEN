@@ -82,12 +82,27 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             <div className="absolute inset-0 w-full h-full">
               {/* Full Background Video Animation - Pristine Native Quality */}
               <video
+                key={backgroundVideo}
+                ref={(el) => {
+                  if (el) {
+                    el.defaultMuted = true;
+                    el.muted = true;
+                    const p = el.play();
+                    if (p !== undefined) {
+                      p.catch(() => {
+                        el.muted = true;
+                        el.play().catch(() => {});
+                      });
+                    }
+                  }
+                }}
                 src={backgroundVideo}
                 poster={videoPoster}
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="auto"
                 className={`w-full h-full object-cover filter brightness-[1.04] contrast-[1.08] saturate-[1.10] ${
                   backgroundPosition || 'object-center lg:object-right'
                 }`}
@@ -122,12 +137,27 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 >
                   {/* Native uncropped video */}
                   <video
+                    key={backgroundVideo}
+                    ref={(el) => {
+                      if (el) {
+                        el.defaultMuted = true;
+                        el.muted = true;
+                        const p = el.play();
+                        if (p !== undefined) {
+                          p.catch(() => {
+                            el.muted = true;
+                            el.play().catch(() => {});
+                          });
+                        }
+                      }
+                    }}
                     src={backgroundVideo}
                     poster={videoPoster}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className={`w-full h-full ${
                       videoFit === 'cover' ? 'object-cover' : 'object-contain'
                     } filter brightness-[1.04] contrast-[1.08] saturate-[1.10] drop-shadow-[0_20px_50px_rgba(99,32,238,0.55)]`}
