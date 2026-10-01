@@ -17,7 +17,6 @@ import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { WorkPage } from './pages/WorkPage';
 import { ContactPage } from './pages/ContactPage';
-import { MaintenancePage } from './pages/MaintenancePage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -25,16 +24,6 @@ gsap.registerPlugin(ScrollTrigger);
 const PAGE_IDS = ['home', 'about', 'services', 'work', 'contact'];
 
 export const App: React.FC = () => {
-  // Temporary Maintenance Mode - Stops live site until user approves
-  const [isMaintenanceActive, setIsMaintenanceActive] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('preview') === 'true' || window.location.hash.includes('preview')) {
-        return false;
-      }
-    }
-    return true;
-  });
 
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [isNavigating, setIsNavigating] = useState(false);
@@ -245,12 +234,6 @@ export const App: React.FC = () => {
     ScrollTrigger.refresh();
   }, []);
 
-  // If maintenance mode is active, display the temporary Coming Soon screen
-  if (isMaintenanceActive) {
-    return (
-      <MaintenancePage onBypassPreview={() => setIsMaintenanceActive(false)} />
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#180128] text-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">
