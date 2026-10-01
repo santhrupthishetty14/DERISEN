@@ -24,7 +24,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenModal, onNavig
         breadcrumb="Services & Packages"
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Identity', 'Graphic & Print', 'Performance Marketing', 'Full-Stack IT', 'Production Stack', 'Retainer Plans']}
-        backgroundVideo="/assets/services-banner-video.mp4"
+        backgroundVideo="/assets/services-banner-custom-video.mp4"
         fullBackground={true}
         backgroundPosition="object-center lg:object-right"
         backgroundOpacity={0.92}
