@@ -10,7 +10,7 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({ onBypassPrevie
   return (
     <div className="min-h-screen w-full bg-[#180128] text-white flex flex-col justify-between relative overflow-hidden select-none px-6 py-10">
       {/* Background Cyber Ambient Lights */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#620D9C]/40 via-[#7C3AED]/30 to-[#00F0FF]/15 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#620D9C]/50 via-[#7C3AED]/40 to-[#B063FF]/30 blur-[140px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-[#B063FF]/20 blur-[130px] rounded-full pointer-events-none" />
 
       {/* Background Subtle Grid */}
@@ -39,7 +39,7 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({ onBypassPrevie
         {/* Cinematic Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] mb-6">
           Architecting an{' '}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#B063FF] via-[#D8B4FE] to-[#00F0FF]">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#B063FF] via-[#D8B4FE] to-[#9333EA]">
             Elevated Experience.
           </span>
         </h1>

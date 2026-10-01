@@ -167,19 +167,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
                   {/* Phone */}
                   <a
                     href="tel:+917899910917"
-                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-sky-500 hover:shadow-md transition-all group"
+                    className="flex items-center gap-4 p-4.5 rounded-2xl bg-white/5 border border-white/15 hover:border-[#B063FF] hover:shadow-[0_0_20px_rgba(176,99,255,0.25)] transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-300 flex items-center justify-center flex-shrink-0 group-hover:bg-[#6320EE] group-hover:text-white transition-colors">
                       <Phone className="w-6 h-6" />
                     </div>
                     <div className="flex-grow">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-300/60">Direct Line</div>
-                      <div className="text-base font-bold text-white group-hover:text-sky-400 transition-colors">
+                      <div className="text-base font-bold text-white group-hover:text-[#D8B4FE] transition-colors">
                         +91 78999 10917
                       </div>
-                      <div className="text-xs text-sky-200/80">Mon - Sat, 9:00 AM - 8:00 PM IST</div>
+                      <div className="text-xs text-purple-200/80">Mon - Sat, 9:00 AM - 8:00 PM IST</div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-sky-400 group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-purple-300/60 group-hover:text-[#D8B4FE] group-hover:translate-x-1 transition-all" />
                   </a>
 
                   {/* Location */}

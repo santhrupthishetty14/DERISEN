@@ -6,6 +6,10 @@
 
 @layer base {
   :root {
+    color-scheme: dark;
+    color-scheme: only dark;
+    forced-color-adjust: none;
+    -webkit-font-smoothing: antialiased;
     --brand-navy-dark: #180128;
     --brand-indigo-dark: #200236;
     --brand-card-dark: #2A0245;
@@ -18,6 +22,9 @@
   }
 
   html {
+    color-scheme: dark;
+    color-scheme: only dark;
+    forced-color-adjust: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
     overflow-x: clip;
@@ -27,6 +34,7 @@
   }
 
   body {
+    forced-color-adjust: none;
     @apply bg-[#180128] text-white antialiased;
     background: linear-gradient(180deg, #24033b 0%, #200236 40%, #180128 100%);
     background-attachment: fixed;
@@ -35,6 +43,15 @@
     width: 100%;
     max-width: 100%;
     position: relative;
+  }
+
+  /* Ensure OS dark mode or high-contrast browser overrides never alter purple colors to blue */
+  @media (prefers-color-scheme: dark) {
+    :root, html, body {
+      forced-color-adjust: none;
+      color-scheme: only dark;
+      background-color: #180128 !important;
+    }
   }
 
   @media (max-width: 768px) {

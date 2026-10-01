@@ -113,7 +113,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               />
 
               {/* Ambient Cyber Neon Backlight & Particle Glow */}
-              <div className="absolute right-0 lg:right-16 top-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-gradient-to-br from-[#620D9C]/40 via-[#7C3AED]/30 to-[#00F0FF]/20 blur-[130px] rounded-full pointer-events-none" />
+              <div className="absolute right-0 lg:right-16 top-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-gradient-to-br from-[#620D9C]/50 via-[#7C3AED]/40 to-[#B063FF]/30 blur-[130px] rounded-full pointer-events-none" />
 
               {/* Left Editorial Safe-Zone Gradient Curtain (Ensures typography & badges are crystal clear) */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#180128] via-[#180128]/92 md:via-[#180128]/80 lg:via-[#180128]/65 to-transparent pointer-events-none w-full lg:w-[65%]" />
@@ -125,7 +125,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           ) : (
             <>
               {/* Ambient Cyber Neon Backlight & Particle Glow */}
-              <div className="absolute right-0 lg:right-16 top-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-gradient-to-br from-[#620D9C]/50 via-[#7C3AED]/40 to-[#00F0FF]/25 blur-[120px] rounded-full pointer-events-none" />
+              <div className="absolute right-0 lg:right-16 top-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-gradient-to-br from-[#620D9C]/60 via-[#7C3AED]/50 to-[#B063FF]/35 blur-[120px] rounded-full pointer-events-none" />
 
               {/* Complete Uncropped 3D Video Animation */}
               <div className="absolute right-0 lg:right-6 xl:right-16 top-0 bottom-0 w-full lg:w-[55%] flex items-center justify-center lg:justify-end overflow-visible">

@@ -107,7 +107,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
         {videoSrc ? (
           <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
             {/* Ambient Cyber Neon Backlight */}
-            <div className="absolute right-0 lg:right-12 top-1/2 -translate-y-1/2 w-[460px] h-[460px] bg-gradient-to-br from-[#620D9C]/50 via-[#7C3AED]/40 to-[#00F0FF]/30 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute right-0 lg:right-12 top-1/2 -translate-y-1/2 w-[460px] h-[460px] bg-gradient-to-br from-[#620D9C]/50 via-[#7C3AED]/40 to-[#B063FF]/35 blur-[100px] rounded-full pointer-events-none" />
 
             {/* Complete Uncropped 3D Cyber Laptop Video Animation */}
             <div className="absolute right-0 lg:right-4 top-0 bottom-0 w-full lg:w-[50%] flex items-center justify-center lg:justify-end overflow-visible">
