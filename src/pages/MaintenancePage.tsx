@@ -51,11 +51,11 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({ onBypassPrevie
         {/* Enterprise Direct Contact Card */}
         <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
           <a
-            href="mailto:derisen.official@gmail.com"
+            href="mailto:derisenofficial@gmail.com"
             className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white text-sm font-semibold transition-all hover:scale-105"
           >
             <Mail className="w-4 h-4 text-[#B063FF]" />
-            <span>derisen.official@gmail.com</span>
+            <span>derisenofficial@gmail.com</span>
           </a>
 
           <a

@@ -29,7 +29,7 @@ export const AnimatedSectionBanner: React.FC<AnimatedSectionBannerProps> = ({
   videoSrc,
   pills = [],
   stats = [],
-  theme = 'light',
+  theme = 'dark',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);

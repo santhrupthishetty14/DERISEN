@@ -54,7 +54,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   hudInfo,
   floatingBadge,
   purpleAnimationOnly = false,
-  theme = 'white',
+  theme = 'dark',
 }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 

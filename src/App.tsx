@@ -17,6 +17,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { WorkPage } from './pages/WorkPage';
 import { ContactPage } from './pages/ContactPage';
+import { MaintenancePage } from './pages/MaintenancePage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +25,52 @@ gsap.registerPlugin(ScrollTrigger);
 const PAGE_IDS = ['home', 'about', 'services', 'work', 'contact'];
 
 export const App: React.FC = () => {
+  // Domain-aware maintenance control:
+  // - Vercel URL (https://derisen-eight.vercel.app), preview & localhost: 100% LIVE
+  // - www domain (e.g. www.derisen.com, www.*) & root derisen.com: STOP LIVE (Maintenance page active) until approved
+  const [isMaintenanceActive, setIsMaintenanceActive] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname.toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+
+      // Force maintenance mode for testing if ?maintenance=true is present
+      if (params.get('maintenance') === 'true' || window.location.hash.includes('maintenance')) {
+        return true;
+      }
+
+      // Explicit bypass via query parameter or hash
+      if (params.get('preview') === 'true' || window.location.hash.includes('preview')) {
+        return false;
+      }
+
+      // Check session storage if team already unlocked preview in this session
+      try {
+        if (sessionStorage.getItem('derisen_preview_bypass') === 'true') {
+          return false;
+        }
+      } catch {
+        // ignore
+      }
+
+      // Check if accessing via www. or official production domain (www.derisen.com / derisen.com)
+      const isWwwOrProd =
+        hostname.startsWith('www.') ||
+        hostname === 'derisen.com' ||
+        hostname.endsWith('.derisen.com');
+
+      return isWwwOrProd;
+    }
+    return false;
+  });
+
+  const handleBypassMaintenance = () => {
+    try {
+      sessionStorage.setItem('derisen_preview_bypass', 'true');
+    } catch {
+      // ignore
+    }
+    setIsMaintenanceActive(false);
+  };
 
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [isNavigating, setIsNavigating] = useState(false);
@@ -234,6 +281,12 @@ export const App: React.FC = () => {
     ScrollTrigger.refresh();
   }, []);
 
+  // Stop live on www. / custom domain: render temporary Maintenance / Coming Soon experience
+  if (isMaintenanceActive) {
+    return (
+      <MaintenancePage onBypassPreview={handleBypassMaintenance} />
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#180128] text-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">

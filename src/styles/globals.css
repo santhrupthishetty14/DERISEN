@@ -6,7 +6,6 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
     color-scheme: only dark;
     forced-color-adjust: none;
     -webkit-font-smoothing: antialiased;
@@ -22,7 +21,6 @@
   }
 
   html {
-    color-scheme: dark;
     color-scheme: only dark;
     forced-color-adjust: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -31,10 +29,12 @@
     width: 100%;
     max-width: 100%;
     -webkit-text-size-adjust: 100%;
+    background-color: #180128;
   }
 
   body {
     forced-color-adjust: none;
+    color-scheme: only dark;
     @apply bg-[#180128] text-white antialiased;
     background: linear-gradient(180deg, #24033b 0%, #200236 40%, #180128 100%);
     background-attachment: fixed;
@@ -43,15 +43,76 @@
     width: 100%;
     max-width: 100%;
     position: relative;
+    color: #ffffff;
   }
 
-  /* Ensure OS dark mode or high-contrast browser overrides never alter purple colors to blue */
+  /* Universal protection: lock forced-color-adjust: none so Windows High Contrast,
+     Edge Force Dark, and Android Auto Dark Mode never alter purple brand colors, cards, or fonts */
+  *, *::before, *::after {
+    forced-color-adjust: none !important;
+  }
+
+  /* Guarantee 100% identical appearance whether OS/browser is set to Light mode or Dark mode */
+  @media (prefers-color-scheme: light) {
+    :root, html, body {
+      forced-color-adjust: none !important;
+      color-scheme: only dark !important;
+      background-color: #180128 !important;
+      color: #ffffff !important;
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     :root, html, body {
-      forced-color-adjust: none;
-      color-scheme: only dark;
+      forced-color-adjust: none !important;
+      color-scheme: only dark !important;
       background-color: #180128 !important;
+      color: #ffffff !important;
     }
+  }
+
+  /* Form controls styling: prevent light/dark OS mode from inverting inputs, textareas, selects */
+  input, select, textarea, button {
+    color-scheme: only dark;
+    forced-color-adjust: none;
+  }
+
+  /* Chrome/Safari autofill styling */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #200236 inset !important;
+    box-shadow: 0 0 0px 1000px #200236 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: #ffffff;
+  }
+
+  /* Sleek custom scrollbars for laptops & desktops (prevents bright white scrollbar in light OS mode) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #180128;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3b0764;
+    border-radius: 9999px;
+    border: 2px solid #180128;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6320EE;
+  }
+  * {
+    scrollbar-color: #3b0764 #180128;
+    scrollbar-width: thin;
   }
 
   @media (max-width: 768px) {
