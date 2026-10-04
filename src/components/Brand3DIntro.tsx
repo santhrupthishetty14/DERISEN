@@ -37,11 +37,34 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       window.scrollTo(0, 0);
     }
 
+    const prevHtmlBg = document.documentElement.style.backgroundColor;
+    const prevBodyBg = document.body.style.backgroundColor;
+    const prevHtmlColorScheme = document.documentElement.style.colorScheme;
+    const prevBodyColorScheme = document.body.style.colorScheme;
+
+    // Temporarily set document root & body to white during intro so no dark gutters can ever appear
+    document.documentElement.style.setProperty("background-color", "#FFFFFF", "important");
+    document.body.style.setProperty("background-color", "#FFFFFF", "important");
+    document.documentElement.style.setProperty("color-scheme", "only light", "important");
+    document.body.style.setProperty("color-scheme", "only light", "important");
+
     document.body.style.overflow = "hidden";
     const navLogo = document.getElementById("main-nav-logo");
     if (navLogo) navLogo.style.opacity = "0";
 
     let isTerminated = false;
+
+    const restoreStyles = () => {
+      document.documentElement.style.removeProperty("background-color");
+      document.body.style.removeProperty("background-color");
+      document.documentElement.style.removeProperty("color-scheme");
+      document.body.style.removeProperty("color-scheme");
+      if (prevHtmlBg) document.documentElement.style.backgroundColor = prevHtmlBg;
+      if (prevBodyBg) document.body.style.backgroundColor = prevBodyBg;
+      if (prevHtmlColorScheme) document.documentElement.style.colorScheme = prevHtmlColorScheme;
+      if (prevBodyColorScheme) document.body.style.colorScheme = prevBodyColorScheme;
+      document.body.style.overflow = "";
+    };
 
     const finishIntro = () => {
       if (isTerminated) return;
@@ -49,7 +72,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
 
       window.removeEventListener("keydown", handleKeyDown);
       if (navLogo) navLogo.style.opacity = "1";
-      document.body.style.overflow = "";
+      restoreStyles();
 
       onCompleteRef.current();
     };
@@ -130,7 +153,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           // ignore
         }
       }
-      document.body.style.overflow = "";
+      restoreStyles();
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
@@ -139,13 +162,48 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     <div
       ref={containerRef}
       onClick={handleSkip}
-      className="fixed inset-0 z-[100] w-screen h-screen select-none cursor-pointer overflow-hidden bg-white flex items-center justify-center"
+      className="brand-intro-screen fixed inset-0 z-[100] w-full h-full min-h-[100dvh] select-none cursor-pointer overflow-hidden flex items-center justify-center"
       style={{
         backgroundColor: "#FFFFFF",
+        background: "#FFFFFF",
+        backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)",
+        colorScheme: "only light",
+        forcedColorAdjust: "none",
+        WebkitFontSmoothing: "antialiased",
       }}
       aria-label="DE.RISEN Animated Logo Intro"
     >
-      {/* Top Bar with Skip Button */}
+      {/* 1. Bulletproof pure white media layer: 1x1 white PNG image stretched 100% x 100% */}
+      {/* Mobile browsers (including Samsung Internet & Chrome Auto Dark Mode) NEVER darken <img> elements */}
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-20 select-none"
+        style={{
+          width: "100%",
+          height: "100%",
+          colorScheme: "only light",
+          forcedColorAdjust: "none",
+        }}
+      />
+
+      {/* 2. Bulletproof pure white SVG background canvas */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none -z-10 select-none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+        style={{
+          width: "100%",
+          height: "100%",
+          colorScheme: "only light",
+          forcedColorAdjust: "none",
+        }}
+      >
+        <rect width="100%" height="100%" fill="#FFFFFF" />
+      </svg>
+
+      {/* Top Bar with Skip Button: protected with light styling so dark mode never inverts text */}
       <div className="absolute top-5 right-5 sm:top-8 sm:right-8 z-30 pointer-events-auto">
         <button
           ref={skipBtnRef}
@@ -154,16 +212,35 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
             e.stopPropagation();
             handleSkip();
           }}
-          className="group flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 border border-black/10 backdrop-blur-md text-gray-700 hover:text-black text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+          className="group flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+          style={{
+            colorScheme: "only light",
+            forcedColorAdjust: "none",
+            backgroundColor: "rgba(0, 0, 0, 0.06)",
+            borderColor: "rgba(0, 0, 0, 0.12)",
+            color: "#1f2937",
+          }}
           aria-label="Skip Intro Animation"
         >
-          <span>Skip</span>
-          <span className="text-[10px] text-gray-400 group-hover:text-gray-600 transition-colors">ESC</span>
+          <span className="text-xs font-semibold tracking-wider uppercase" style={{ color: "#1f2937" }}>
+            Skip
+          </span>
+          <span className="text-[10px] font-mono transition-colors" style={{ color: "#6b7280" }}>
+            ESC
+          </span>
         </button>
       </div>
 
-      {/* Pure White Video Stage: Calibrated to be slightly smaller and elegant */}
-      <div className="w-full h-full flex items-center justify-center overflow-hidden bg-white p-6">
+      {/* Pure White Video Stage */}
+      <div
+        className="w-full h-full flex items-center justify-center overflow-hidden p-6"
+        style={{
+          backgroundColor: "#FFFFFF",
+          backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)",
+          colorScheme: "only light",
+          forcedColorAdjust: "none",
+        }}
+      >
         <video
           ref={videoRef}
           src="/assets/purple_logo_sparkle_2s.mp4"
@@ -177,6 +254,8 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           style={{
             backgroundColor: "#FFFFFF",
             filter: "contrast(1.18) brightness(1.09)",
+            colorScheme: "only light",
+            forcedColorAdjust: "none",
           }}
         />
       </div>

@@ -121,6 +121,19 @@
     }
   }
 
+  /* Brand 3D Intro: Guarantee 100% pure white full screen even in Samsung Internet & Mobile Auto Dark Mode */
+  .brand-intro-screen,
+  .brand-intro-screen * {
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
+  }
+
+  .brand-intro-screen {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%) !important;
+  }
+
   img, video {
     image-rendering: auto;
     max-width: 100%;
