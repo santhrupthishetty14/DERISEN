@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    color-scheme: only dark;
+    color-scheme: dark;
     forced-color-adjust: none;
     -webkit-font-smoothing: antialiased;
     --brand-navy-dark: #180128;
@@ -21,7 +21,7 @@
   }
 
   html {
-    color-scheme: only dark;
+    color-scheme: dark;
     forced-color-adjust: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
@@ -34,7 +34,7 @@
 
   body {
     forced-color-adjust: none;
-    color-scheme: only dark;
+    color-scheme: dark;
     @apply bg-[#180128] text-white antialiased;
     background: linear-gradient(180deg, #24033b 0%, #200236 40%, #180128 100%);
     background-attachment: fixed;
@@ -56,7 +56,7 @@
   @media (prefers-color-scheme: light) {
     :root, html, body {
       forced-color-adjust: none !important;
-      color-scheme: only dark !important;
+      color-scheme: dark !important;
       background-color: #180128 !important;
       color: #ffffff !important;
     }
@@ -65,7 +65,7 @@
   @media (prefers-color-scheme: dark) {
     :root, html, body {
       forced-color-adjust: none !important;
-      color-scheme: only dark !important;
+      color-scheme: dark !important;
       background-color: #180128 !important;
       color: #ffffff !important;
     }
@@ -73,7 +73,7 @@
 
   /* Form controls styling: prevent light/dark OS mode from inverting inputs, textareas, selects */
   input, select, textarea, button {
-    color-scheme: only dark;
+    color-scheme: dark;
     forced-color-adjust: none;
   }
 

@@ -8,15 +8,17 @@ interface Brand3DIntroProps {
 /**
  * Full-Screen Complete Pure White Logo Opening Animation for DE.RISEN
  * 
- * Powered by "Purple_logo_glowing_animation_20260911193702.mp4":
- *  - 100% edge-to-edge full-screen viewport presentation.
- *  - Calibrated with precision levels filter so background is 100% complete pure white (#FFFFFF).
- *  - Seamlessly blends with the surrounding white canvas without any gray box, borders, or lines.
- *  - Cleanly holds the final frame, then smoothly dissolves into the homepage.
- *  - Instant skip with tap/click anywhere or keyboard 'ESC'.
+ * Powered by dynamic HTML5 Canvas rendering:
+ *  - 100% edge-to-edge pure white (#FFFFFF) canvas background.
+ *  - Immune to Samsung Internet / Chrome Mobile Night Mode / Dark Mode inversion because
+ *    the entire viewport is a single bitmap canvas surface (no background divs).
+ *  - The logo video is painted directly onto the white canvas with precision contrast & brightness levels,
+ *    making it seamlessly blend into the surrounding white background without any dark frames or seams.
+ *  - Smooth dissolve into the homepage on end or skip.
  */
 export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const skipBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -37,42 +39,22 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       window.scrollTo(0, 0);
     }
 
-    const prevHtmlBg = document.documentElement.style.backgroundColor;
-    const prevBodyBg = document.body.style.backgroundColor;
-    const prevHtmlColorScheme = document.documentElement.style.colorScheme;
-    const prevBodyColorScheme = document.body.style.colorScheme;
-
-    // Temporarily set document root & body to white during intro so no dark gutters can ever appear
-    document.documentElement.style.setProperty("background-color", "#FFFFFF", "important");
-    document.body.style.setProperty("background-color", "#FFFFFF", "important");
-    document.documentElement.style.setProperty("color-scheme", "only light", "important");
-    document.body.style.setProperty("color-scheme", "only light", "important");
-
     document.body.style.overflow = "hidden";
     const navLogo = document.getElementById("main-nav-logo");
     if (navLogo) navLogo.style.opacity = "0";
 
     let isTerminated = false;
-
-    const restoreStyles = () => {
-      document.documentElement.style.removeProperty("background-color");
-      document.body.style.removeProperty("background-color");
-      document.documentElement.style.removeProperty("color-scheme");
-      document.body.style.removeProperty("color-scheme");
-      if (prevHtmlBg) document.documentElement.style.backgroundColor = prevHtmlBg;
-      if (prevBodyBg) document.body.style.backgroundColor = prevBodyBg;
-      if (prevHtmlColorScheme) document.documentElement.style.colorScheme = prevHtmlColorScheme;
-      if (prevBodyColorScheme) document.body.style.colorScheme = prevBodyColorScheme;
-      document.body.style.overflow = "";
-    };
+    let animFrameId: number;
 
     const finishIntro = () => {
       if (isTerminated) return;
       isTerminated = true;
 
+      cancelAnimationFrame(animFrameId);
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
       if (navLogo) navLogo.style.opacity = "1";
-      restoreStyles();
+      document.body.style.overflow = "";
 
       onCompleteRef.current();
     };
@@ -87,7 +69,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       }
       gsap.to(containerRef.current, {
         opacity: 0,
-        duration: 0.3,
+        duration: 0.35,
         ease: "power2.out",
         onComplete: finishIntro,
       });
@@ -108,8 +90,51 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
       { opacity: 1, y: 0, duration: 0.4, delay: 0.4, ease: "power2.out" }
     );
 
-    // Play the clean 2s sparkling logo video clip
+    // Setup Canvas and Video loop
+    const canvas = canvasRef.current;
     const video = videoRef.current;
+
+    const handleResize = () => {
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    const renderLoop = () => {
+      if (isTerminated) return;
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          // 1. Paint 100% solid pure white edge-to-edge
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // 2. Draw centered video frame when ready
+          if (video && video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0) {
+            const aspect = video.videoWidth / video.videoHeight;
+            // On mobile devices, ensure the logo is comfortably large but does not touch edges
+            const maxW = Math.min(canvas.width * 0.90, canvas.height * 0.85 * aspect);
+            const drawW = Math.min(maxW, 640 * (window.devicePixelRatio || 1));
+            const drawH = drawW / aspect;
+            const drawX = Math.round((canvas.width - drawW) / 2);
+            const drawY = Math.round((canvas.height - drawH) / 2);
+
+            ctx.filter = "contrast(1.18) brightness(1.09)";
+            ctx.drawImage(video, drawX, drawY, drawW, drawH);
+            ctx.filter = "none";
+          }
+        }
+      }
+      animFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    animFrameId = requestAnimationFrame(renderLoop);
+
+    // Play video
     if (video) {
       video.playbackRate = 1.0;
       const playPromise = video.play();
@@ -145,6 +170,9 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
 
     return () => {
       clearTimeout(fallbackTimer);
+      cancelAnimationFrame(animFrameId);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
       if (video) {
         video.removeEventListener("ended", handleVideoEnded);
         try {
@@ -153,8 +181,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           // ignore
         }
       }
-      restoreStyles();
-      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -162,48 +189,53 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
     <div
       ref={containerRef}
       onClick={handleSkip}
-      className="brand-intro-screen fixed inset-0 z-[100] w-full h-full min-h-[100dvh] select-none cursor-pointer overflow-hidden flex items-center justify-center"
+      className="fixed inset-0 select-none cursor-pointer overflow-hidden"
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: "100vw",
+        height: "100dvh",
+        zIndex: 99999,
         backgroundColor: "#FFFFFF",
-        background: "#FFFFFF",
-        backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)",
-        colorScheme: "only light",
-        forcedColorAdjust: "none",
-        WebkitFontSmoothing: "antialiased",
       }}
       aria-label="DE.RISEN Animated Logo Intro"
     >
-      {/* 1. Bulletproof pure white media layer: 1x1 white PNG image stretched 100% x 100% */}
-      {/* Mobile browsers (including Samsung Internet & Chrome Auto Dark Mode) NEVER darken <img> elements */}
-      <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-20 select-none"
+      {/* 1. Full-screen HTML5 Canvas: Guarantees 100% pure white edge-to-edge on all mobile browsers */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
         style={{
           width: "100%",
           height: "100%",
-          colorScheme: "only light",
-          forcedColorAdjust: "none",
+          display: "block",
+          backgroundColor: "#FFFFFF",
         }}
       />
 
-      {/* 2. Bulletproof pure white SVG background canvas */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none -z-10 select-none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
+      {/* 2. Hidden background video driving the canvas frames */}
+      <video
+        ref={videoRef}
+        src="/assets/purple_logo_sparkle_2s.mp4"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        controls={false}
+        className="absolute opacity-0 pointer-events-none"
         style={{
-          width: "100%",
-          height: "100%",
-          colorScheme: "only light",
-          forcedColorAdjust: "none",
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+          pointerEvents: "none",
         }}
-      >
-        <rect width="100%" height="100%" fill="#FFFFFF" />
-      </svg>
+      />
 
-      {/* Top Bar with Skip Button: protected with light styling so dark mode never inverts text */}
+      {/* 3. Top Bar with Skip Button */}
       <div className="absolute top-5 right-5 sm:top-8 sm:right-8 z-30 pointer-events-auto">
         <button
           ref={skipBtnRef}
@@ -214,8 +246,6 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           }}
           className="group flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           style={{
-            colorScheme: "only light",
-            forcedColorAdjust: "none",
             backgroundColor: "rgba(0, 0, 0, 0.06)",
             borderColor: "rgba(0, 0, 0, 0.12)",
             color: "#1f2937",
@@ -229,35 +259,6 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
             ESC
           </span>
         </button>
-      </div>
-
-      {/* Pure White Video Stage */}
-      <div
-        className="w-full h-full flex items-center justify-center overflow-hidden p-6"
-        style={{
-          backgroundColor: "#FFFFFF",
-          backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)",
-          colorScheme: "only light",
-          forcedColorAdjust: "none",
-        }}
-      >
-        <video
-          ref={videoRef}
-          src="/assets/purple_logo_sparkle_2s.mp4"
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          controls={false}
-          className="w-[78%] sm:w-[68%] max-w-[580px] h-auto max-h-[75vh] object-contain pointer-events-none transform scale-90 sm:scale-85"
-          style={{
-            backgroundColor: "#FFFFFF",
-            filter: "contrast(1.18) brightness(1.09)",
-            colorScheme: "only light",
-            forcedColorAdjust: "none",
-          }}
-        />
       </div>
     </div>
   );
