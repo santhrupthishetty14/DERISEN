@@ -31,18 +31,18 @@ export const Logo: React.FC<LogoProps> = ({
       href="#home"
       onClick={handleClick}
       className={`group relative inline-flex items-center select-none no-underline cursor-pointer ${className}`}
-      aria-label="De.risen — Click to play 3D Logo Animation"
+      aria-label="DE.RISEN — Click to play 3D Logo Animation"
       title="Click to play 3D Logo Animation"
     >
       {/* Container with smooth entrance */}
       <div className="inline-flex items-center transition-all duration-300">
-        {/* Exact Official De.risen Logo Image */}
+        {/* Exact Official DE.RISEN Logo Image */}
         <div className="relative flex items-center">
           <img
-            id={isDark ? "main-nav-logo" : undefined}
-            src={isDark ? '/assets/derisen-logo-transparent.png?v=clean' : '/assets/derisen-logo-white.png?v=clean'}
-            alt="De.risen"
-            className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105 active:scale-95"
+            id="main-nav-logo"
+            src="/derisen-icon.png?v=3"
+            alt="DE.RISEN"
+            className="h-9 sm:h-10 md:h-11 w-auto object-contain transition-transform duration-300 ease-out group-hover:scale-105 active:scale-95 drop-shadow-[0_0_14px_rgba(176,99,255,0.45)]"
             style={{ imageRendering: 'auto' }}
             loading="eager"
             decoding="async"
