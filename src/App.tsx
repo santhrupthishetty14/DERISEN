@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './sections/Footer';
 import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
+import { FloatingContactButtons } from './components/FloatingContactButtons';
 import { PageTransition } from './components/PageTransition';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
@@ -342,6 +343,9 @@ export const App: React.FC = () => {
 
       {/* 5. Feedback Toast Notification */}
       <Toast message={toastMessage} />
+
+      {/* 6. Persistent Floating WhatsApp & Call Buttons (Right Side) */}
+      <FloatingContactButtons />
     </div>
   );
 };
