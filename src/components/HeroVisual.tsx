@@ -140,12 +140,12 @@ export const HeroVisual: React.FC = () => {
           {/* Cinematic Website UI 3D Animation Video */}
           <video
             ref={videoRef}
-            poster="/assets/website-ui-animation-poster.jpg"
+            poster="/assets/website-ui-animation-poster.webp"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             disablePictureInPicture
             controls={false}
             className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl block shadow-inner pointer-events-none"

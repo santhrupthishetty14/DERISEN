@@ -52,13 +52,41 @@
   <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Google Fonts: Luxury Editorial, Lora, Cormorant, Playfair, Outfit, Plus Jakarta Sans -->
+  <!-- Preload Critical LCP Image & Official Logo -->
+  <link rel="preload" as="image" href="/assets/hero-marketing-bouquet.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/derisen-logo-transparent.webp" type="image/webp">
+
+  <!-- Google Fonts: Asynchronous non-render-blocking Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  </noscript>
 </head>
 <body class="bg-[#180128] text-white antialiased overflow-x-hidden overflow-x-clip w-full max-w-full relative">
-  <div id="root"></div>
+  <div id="root">
+    <div style="background-color: #180128; color: #ffffff; min-height: 100vh; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
+      <!-- Critical Pre-rendered Header -->
+      <header style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; max-width: 1360px; margin: 0 auto;">
+        <img src="/assets/derisen-logo-transparent.webp" alt="DE.RISEN" width="168" height="32" style="height: 32px; width: auto;" fetchpriority="high" />
+      </header>
+      <!-- Critical Pre-rendered Hero Stage -->
+      <section style="padding: 1.5rem 1.5rem 3rem; max-width: 1360px; margin: 0 auto;">
+        <h1 style="font-size: clamp(1.75rem, 5vw, 3.25rem); font-weight: 900; line-height: 1.1; margin: 0 0 1rem; color: #ffffff;">
+          We Don't Just<br />Build Brands.<br />
+          <span style="color: #D8B4FE;">We Make Them Rise.</span>
+        </h1>
+        <p style="font-size: 1rem; color: rgba(233, 213, 255, 0.8); max-width: 460px; margin: 0 0 1.5rem;">
+          Creative Design, Branding, Digital Marketing &amp; IT Solutions under one roof.
+        </p>
+        <div style="max-width: 620px; width: 100%; border-radius: 1rem; overflow: hidden; background: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+          <img src="/assets/hero-marketing-bouquet.webp" alt="DE.RISEN Solutions Showcase" width="620" height="349" fetchpriority="high" style="width: 100%; height: auto; aspect-ratio: 16/9; object-fit: contain; display: block;" />
+        </div>
+      </section>
+    </div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>

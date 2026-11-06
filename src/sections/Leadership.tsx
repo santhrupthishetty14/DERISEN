@@ -140,8 +140,12 @@ export const Leadership: React.FC = () => {
                 <div className="relative group flex flex-col items-center">
                   <div className="relative w-28 h-28 xs:w-36 xs:h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-2 xs:border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
-                      src="/assets/leader-shweta-studio.jpg"
+                      src="/assets/leader-shweta-studio.webp"
                       alt="Shweta Deharkar - CEO"
+                      width="208"
+                      height="208"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>
@@ -160,8 +164,12 @@ export const Leadership: React.FC = () => {
                 <div className="relative group flex flex-col items-center">
                   <div className="relative w-28 h-28 xs:w-36 xs:h-36 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-2 xs:border-4 border-white/80 shadow-[0_15px_35px_rgba(99,32,238,0.22)] bg-gradient-to-tr from-[#620D9C] to-[#B063FF] transition-transform duration-500 group-hover:scale-105">
                     <img
-                      src="/assets/leader-lejai-studio.jpg"
+                      src="/assets/leader-lejai-studio.webp"
                       alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                      width="208"
+                      height="208"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.02]"
                     />
                   </div>

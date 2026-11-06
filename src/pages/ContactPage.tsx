@@ -100,7 +100,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenModal, onNavigat
         onNavigateHome={() => onNavigate('home')}
         tags={['Instant WhatsApp', 'Custom Scopes', 'Quick Turnarounds', 'Global Remote Delivery']}
         backgroundVideo="/assets/contact-banner-video.mp4"
-        videoPoster="/assets/contact-banner-poster.jpg"
+        videoPoster="/assets/contact-banner-poster.webp"
         fullBackground={true}
         backgroundPosition="object-center lg:object-right"
         backgroundOpacity={0.92}

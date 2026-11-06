@@ -22,7 +22,7 @@ export const WorkPage: React.FC<WorkPageProps> = ({ onOpenModal, onNavigate }) =
         onNavigateHome={() => onNavigate('home')}
         tags={['Brand Systems', 'Web Platforms', 'Campaign Creatives', 'Video & 3D Motion', 'Client Endorsements']}
         backgroundVideo="/assets/work-gallery-banner.mp4"
-        videoPoster="/assets/work-gallery-banner-poster.jpg"
+        videoPoster="/assets/work-gallery-banner-poster.webp"
         fullBackground={true}
         backgroundPosition="object-center lg:object-right"
         backgroundOpacity={0.92}

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Hero } from '../sections/Hero';
 import { Stats } from '../sections/Stats';
 import { WhyChooseUs } from '../sections/WhyChooseUs';
-import { WorkGallery } from '../sections/WorkGallery';
-import { FinalCTA } from '../sections/FinalCTA';
 import { Sparkles, Users, ArrowUpRight } from 'lucide-react';
 import { SlideArrowButton } from '../components/SlideArrowButton';
+
+// Code-split below-the-fold heavy sections
+const WorkGallery = React.lazy(() => import('../sections/WorkGallery').then(m => ({ default: m.WorkGallery })));
+const FinalCTA = React.lazy(() => import('../sections/FinalCTA').then(m => ({ default: m.FinalCTA })));
 
 interface HomePageProps {
   onOpenModal: () => void;
@@ -49,10 +51,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
           <div className="relative z-10 flex-shrink-0 flex items-center justify-center">
             <div className="relative w-56 sm:w-64 lg:w-72 h-36 sm:h-40 rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.4)] border border-white/15 bg-white/5 backdrop-blur-md">
               <img
-                src="/assets/service-branding.jpg"
+                src="/assets/service-branding.webp"
                 alt="Comprehensive Creative Services"
+                width="288"
+                height="160"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
                 <span className="text-[11px] font-bold text-[#D8B4FE] uppercase tracking-wider">50+ Creative &amp; IT Services</span>
@@ -106,10 +111,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                   {/* Executive Studio Portrait Frame (3:4 ratio for full executive posture) */}
                   <div className="relative w-full aspect-[3/4] max-h-[300px] sm:max-h-[320px] rounded-2xl overflow-hidden border-2 border-white/20 group-hover/leader:border-[#B063FF]/70 shadow-lg bg-gradient-to-b from-white to-purple-50 transition-all duration-500">
                     <img
-                      src="/assets/leader-shweta-studio.jpg"
+                      src="/assets/leader-shweta-studio.webp"
                       alt="Shweta Deharkar - Founder & CEO"
+                      width="290"
+                      height="387"
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-105 filter brightness-[1.02] contrast-[1.02]"
                       loading="lazy"
+                      decoding="async"
                     />
                     {/* Subtle Bottom Vignette */}
                     <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#120120]/60 to-transparent pointer-events-none" />
@@ -206,10 +214,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
                   {/* Executive Studio Portrait Frame (3:4 ratio for full executive posture) */}
                   <div className="relative w-full aspect-[3/4] max-h-[300px] sm:max-h-[320px] rounded-2xl overflow-hidden border-2 border-white/20 group-hover/leader:border-[#B063FF]/70 shadow-lg bg-gradient-to-b from-white to-purple-50 transition-all duration-500">
                     <img
-                      src="/assets/leader-lejai-studio.jpg"
+                      src="/assets/leader-lejai-studio.webp"
                       alt="Lejai Jayakumar - Managing Director & Co-Founder"
+                      width="290"
+                      height="387"
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/leader:scale-105 filter brightness-[1.02] contrast-[1.02]"
                       loading="lazy"
+                      decoding="async"
                     />
                     {/* Subtle Bottom Vignette */}
                     <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#120120]/60 to-transparent pointer-events-none" />
@@ -239,10 +250,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenModal, onNavigate }) =
       </div>
 
       {/* 6. Curated Work Gallery & Verified Client Testimonials */}
-      <WorkGallery onOpenModal={onOpenModal} onNavigate={onNavigate} />
-
-      {/* 7. High-Converting Conversion CTA */}
-      <FinalCTA onOpenModal={onOpenModal} />
+      <Suspense fallback={<div className="min-h-[400px] w-full bg-[#180128]" />}>
+        <WorkGallery onOpenModal={onOpenModal} onNavigate={onNavigate} />
+        {/* 7. High-Converting Conversion CTA */}
+        <FinalCTA onOpenModal={onOpenModal} />
+      </Suspense>
     </div>
   );
 };

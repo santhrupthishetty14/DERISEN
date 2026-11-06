@@ -9,7 +9,7 @@ interface LeaderCardProps {
 export const LeaderCard: React.FC<LeaderCardProps> = ({ leader }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isShweta = leader.avatarSeed === 'shweta';
-  const avatarSrc = isShweta ? '/assets/leader-shweta-studio.jpg' : '/assets/leader-lejai-studio.jpg';
+  const avatarSrc = isShweta ? '/assets/leader-shweta-studio.webp' : '/assets/leader-lejai-studio.webp';
 
   return (
     <div

@@ -216,7 +216,7 @@ export const WhatWeDo: React.FC = () => {
               >
                 <img
                   ref={centerImgRef}
-                  src="/assets/what-we-do-center.jpg"
+                  src="/assets/what-we-do-center.webp"
                   alt="DE.RISEN Creative Desk & Mug"
                   className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover/img:scale-108"
                   loading="lazy"

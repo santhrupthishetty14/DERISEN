@@ -24,7 +24,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenModal, onNavigate })
         onNavigateHome={() => onNavigate('home')}
         tags={['Executive Leadership', 'Vision & Mission', 'Strategic Operating Model', 'Global Delivery']}
         backgroundVideo="/assets/about-custom-video-v3.mp4"
-        videoPoster="/assets/about-custom-poster-v3.jpg"
+        videoPoster="/assets/about-custom-poster-v3.webp"
         fullBackground={true}
         theme="dark"
         hudInfo={{

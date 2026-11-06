@@ -100,13 +100,6 @@ export const Stats: React.FC = () => {
       once: true,
     });
 
-    // Immediately trigger if already visible in viewport
-    const rect = sectionRef.current.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
-      setHasAnimated(true);
-      triggerStatsAnimation();
-    }
-
     return () => {
       st.kill();
     };

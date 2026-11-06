@@ -161,12 +161,12 @@ export const About: React.FC = () => {
               <video
                 ref={videoRef}
                 src="/assets/company-intro.mp4"
-                poster="/assets/about-visual-composition.png"
+                poster="/assets/about-visual-composition.webp"
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className="w-full h-auto object-contain rounded-2xl drop-shadow-[0_20px_45px_rgba(99,32,238,0.22)] transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
@@ -179,7 +179,7 @@ export const About: React.FC = () => {
           title="Where Strategic Vision Meets"
           highlightWord="Flawless Execution."
           description="At DE.RISEN, we unite brand strategy, innovative creative direction, and high-performance digital systems to build enduring competitive advantage for ambitious businesses."
-          imageSrc="/assets/banner-about-touch.jpg"
+          imageSrc="/assets/banner-about-touch.webp"
           pills={['Strategy-First Approach', 'Brand Identity Systems', 'Full-Spectrum Production', 'Creative Innovation']}
           stats={[
             { value: '96+', label: 'Delivered Projects' },

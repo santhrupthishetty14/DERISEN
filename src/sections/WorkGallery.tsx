@@ -7,37 +7,37 @@ import { ClientTestimonials } from '../components/ClientTestimonials';
 const CATEGORIES = ['All', 'Branding & Identity', 'IT & Web Development', 'Digital Marketing', 'Motion & Video'];
 
 const GALLERY_IMAGE_MAP: Record<string, string> = {
-  'Branding & Identity': '/assets/service-branding.jpg',
-  'IT & Web Development': '/assets/service-it-solutions.jpg',
-  'Digital Marketing': '/assets/service-marketing.jpg',
-  'Motion & Video': '/assets/service-creative-design.jpg',
+  'Branding & Identity': '/assets/service-branding.webp',
+  'IT & Web Development': '/assets/service-it-solutions.webp',
+  'Digital Marketing': '/assets/service-marketing.webp',
+  'Motion & Video': '/assets/service-creative-design.webp',
 };
 
 const BRAND_GUIDELINES_SLIDES = [
   {
     title: 'Brand Guidelines Cover System',
     description: '16:9 Presentation Format with high-contrast gradient cards & responsive visual hierarchy.',
-    image: '/assets/corporate-brand-identity.jpg',
+    image: '/assets/corporate-brand-identity.webp',
   },
   {
     title: 'Typography & Inter Scale',
     description: 'Structured typography scale using Inter Google Fonts with precise line-heights and contrast.',
-    image: '/assets/brand-guide-frame-1.jpg',
+    image: '/assets/brand-guide-frame-1.webp',
   },
   {
     title: '12×24 Precision Grid Layout',
     description: 'Unified grid architecture guaranteeing consistent alignment across presentation and stationery.',
-    image: '/assets/brand-guide-frame-2.jpg',
+    image: '/assets/brand-guide-frame-2.webp',
   },
   {
     title: 'Color Token Palette & Clear Space',
     description: 'Light and Dark mode variables, signature gradients, and strict logo protection clearances.',
-    image: '/assets/brand-guide-frame-3.jpg',
+    image: '/assets/brand-guide-frame-3.webp',
   },
   {
     title: 'Core Deliverables & Deck Master',
     description: 'Comprehensive brand manual, tone of voice, visual identity assets, and corporate toolkit.',
-    image: '/assets/brand-guide-frame-4.jpg',
+    image: '/assets/brand-guide-frame-4.webp',
   },
 ];
 
@@ -45,22 +45,22 @@ const PACKAGING_SLIDES = [
   {
     title: 'Embossed Rigid Box Architecture',
     description: 'Sculptural multi-level blind embossing on soft-touch matte stock with pedestal presentation.',
-    image: '/assets/luxury-packaging-clean-1.jpg',
+    image: '/assets/luxury-packaging-clean-1.webp',
   },
   {
     title: 'Tactile Typography & Rose Gold Foil',
     description: 'Warm metallic foil stamping layered with floral botanical illustrations on luxury paperboard.',
-    image: '/assets/luxury-packaging-clean-90.jpg',
+    image: '/assets/luxury-packaging-clean-90.webp',
   },
   {
     title: 'Fluted Crystal Bottle & Primary Pack',
     description: 'Bespoke cylindrical ribbed fluting with polished wooden cap and crystal-clear fragrance chamber.',
-    image: '/assets/luxury-packaging-clean-150.jpg',
+    image: '/assets/luxury-packaging-clean-150.webp',
   },
   {
     title: 'Precision Unboxing & Secondary Sleeve',
     description: 'Engineered magnetic lid opening mechanism with custom cut-to-measure protective insert.',
-    image: '/assets/luxury-packaging-clean-240.jpg',
+    image: '/assets/luxury-packaging-clean-240.webp',
   },
 ];
 
@@ -210,7 +210,8 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
         {/* Portfolio Grid Cards with Dynamic Showcase Pictures & Videos */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 mb-20">
           {filteredItems.map((item, idx) => {
-            const imgSrc = item.imageUrl || GALLERY_IMAGE_MAP[item.category] || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95';
+            const rawImg = item.imageUrl || GALLERY_IMAGE_MAP[item.category] || 'https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=2000&q=95';
+            const imgSrc = rawImg.startsWith('/assets/') ? rawImg.replace(/\.(jpe?g|png)$/, '.webp') : rawImg;
 
             return (
               <div
@@ -235,30 +236,35 @@ export const WorkGallery: React.FC<WorkGalleryProps> = ({ onOpenModal, onNavigat
                         if (el) {
                           el.defaultMuted = true;
                           el.muted = true;
-                          const p = el.play();
-                          if (p !== undefined) {
-                            p.catch(() => {
-                              el.muted = true;
-                              el.play().catch(() => {});
-                            });
-                          }
                         }
+                      }}
+                      onMouseEnter={(e) => {
+                        const target = e.currentTarget;
+                        target.play().catch(() => {});
+                      }}
+                      onMouseLeave={(e) => {
+                        const target = e.currentTarget;
+                        target.pause();
                       }}
                       src={item.videoUrl}
                       poster={imgSrc}
-                      autoPlay
+                      width="400"
+                      height="224"
                       loop
                       muted
                       playsInline
-                      preload="auto"
+                      preload="none"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
                     />
                   ) : (
                     <img
                       src={imgSrc}
                       alt={item.title}
+                      width="400"
+                      height="224"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 will-change-transform"
                       loading="lazy"
+                      decoding="async"
                     />
                   )}
 

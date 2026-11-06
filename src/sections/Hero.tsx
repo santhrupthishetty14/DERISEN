@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { PenTool, Tag, Megaphone, Code } from 'lucide-react';
 import { SlideArrowButton } from '../components/SlideArrowButton';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
   onOpenModal?: () => void;
@@ -17,57 +13,62 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const rightVisualRef = useRef<HTMLDivElement>(null);
   const pillarsRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  const [isDesktopScreen, setIsDesktopScreen] = React.useState(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const isAlreadyScrolled = window.scrollY > 40;
+    setIsDesktopScreen(window.innerWidth >= 640);
+  }, []);
 
-      // Initial clean entrance reveal
-      const entranceTl = gsap.timeline({
-        defaults: { ease: 'power3.out' },
-        delay: isAlreadyScrolled ? 0.05 : 1.2,
-      });
-
-      // Prepare SVG curved underline stroke draw
-      if (pathRef.current) {
-        const length = pathRef.current.getTotalLength();
-        gsap.set(pathRef.current, {
-          strokeDasharray: length,
-          strokeDashoffset: length,
+  useEffect(() => {
+    let ctx: any;
+    import('gsap').then(({ default: gsap }) => {
+      ctx = gsap.context(() => {
+        // Clean entrance reveal without delay for optimal LCP & Core Web Vitals
+        const entranceTl = gsap.timeline({
+          defaults: { ease: 'power3.out' },
+          delay: 0.02,
         });
-      }
 
-      // Staggered reveal of hero elements
-      entranceTl
-        .fromTo(
-          leftColRef.current?.querySelectorAll('.reveal-item') || [],
-          { opacity: 0, y: 25 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.1 }
-        )
-        .to(
-          pathRef.current,
-          {
-            strokeDashoffset: 0,
-            duration: 0.7,
-            ease: 'power2.inOut',
-          },
-          '-=0.3'
-        )
-        .fromTo(
-          rightVisualRef.current,
-          { opacity: 0, scale: 0.96, y: 20 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          pillarsRef.current,
-          { opacity: 0, y: 25 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '-=0.5'
-        );
-    }, sectionRef);
+        // Prepare SVG curved underline stroke draw
+        if (pathRef.current) {
+          const length = pathRef.current.getTotalLength();
+          gsap.set(pathRef.current, {
+            strokeDasharray: length,
+            strokeDashoffset: length,
+          });
+        }
 
-    return () => ctx.revert();
+        // Staggered reveal of hero elements (visual & text remain visible for immediate FCP/LCP)
+        entranceTl
+          .from(
+            leftColRef.current?.querySelectorAll('.reveal-item') || [],
+            { opacity: 0.2, y: 14, duration: 0.4, stagger: 0.05 }
+          )
+          .to(
+            pathRef.current,
+            {
+              strokeDashoffset: 0,
+              duration: 0.5,
+              ease: 'power2.inOut',
+            },
+            '-=0.15'
+          )
+          .from(
+            rightVisualRef.current,
+            { opacity: 0.8, scale: 0.99, duration: 0.35, ease: 'power2.out' },
+            0.05
+          )
+          .from(
+            pillarsRef.current,
+            { opacity: 0.4, y: 12, duration: 0.4, ease: 'power2.out' },
+            0.15
+          );
+      }, sectionRef);
+    });
+
+    return () => {
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (
@@ -139,29 +140,46 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
               {/* Frameless Hero Animation Container with crisp rounded glow border */}
               <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20 bg-white transform transition-transform duration-700 hover:scale-[1.02]">
-                <video
-                  ref={(el) => {
-                    if (el) {
-                      el.defaultMuted = true;
-                      el.muted = true;
-                      const p = el.play();
-                      if (p !== undefined) {
-                        p.catch(() => {
-                          el.muted = true;
-                          el.play().catch(() => {});
-                        });
+                {isDesktopScreen ? (
+                  /* Tablet & Desktop: Looping Showcase Video */
+                  <video
+                    ref={(el) => {
+                      if (el) {
+                        el.defaultMuted = true;
+                        el.muted = true;
+                        const p = el.play();
+                        if (p !== undefined) {
+                          p.catch(() => {
+                            el.muted = true;
+                            el.play().catch(() => {});
+                          });
+                        }
                       }
-                    }
-                  }}
-                  src="/assets/hero-marketing-bouquet.mp4"
-                  poster="/assets/hero-marketing-bouquet.jpg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-auto aspect-[16/9] object-contain"
-                />
+                    }}
+                    src="/assets/hero-marketing-bouquet.mp4"
+                    poster="/assets/hero-marketing-bouquet.webp"
+                    width="620"
+                    height="349"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto aspect-[16/9] object-contain"
+                  />
+                ) : (
+                  /* Mobile: Ultra-fast LCP responsive image */
+                  <img
+                    src="/assets/hero-marketing-bouquet.webp"
+                    alt="DE.RISEN Solutions Showcase"
+                    width="620"
+                    height="349"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-auto aspect-[16/9] object-contain"
+                  />
+                )}
               </div>
             </div>
           </div>

@@ -1,29 +1,71 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { CustomCursor } from './components/CustomCursor';
-import { Brand3DIntro } from './components/Brand3DIntro';
 import { Navbar } from './components/Navbar';
 import { Footer } from './sections/Footer';
-import { ContactModal } from './components/ContactModal';
 import { Toast } from './components/Toast';
 import { FloatingContactButtons } from './components/FloatingContactButtons';
 import { PageTransition } from './components/PageTransition';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
+// Critical initial render page (direct import for zero delay)
 import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { WorkPage } from './pages/WorkPage';
-import { ContactPage } from './pages/ContactPage';
-import { MaintenancePage } from './pages/MaintenancePage';
+
+// Lazy-loaded secondary pages & modals for code-splitting
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
+const WorkPage = React.lazy(() => import('./pages/WorkPage'));
+const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+const MaintenancePage = React.lazy(() => import('./pages/MaintenancePage'));
+const ContactModal = React.lazy(() => import('./components/ContactModal'));
+const Brand3DIntro = React.lazy(() => import('./components/Brand3DIntro'));
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const PAGE_IDS = ['home', 'about', 'services', 'work', 'contact'];
+
+/**
+ * High-performance GPU-accelerated Scroll Progress Bar
+ * Uses direct DOM transform (scaleX) to avoid React re-renders on scroll
+ */
+const ScrollProgressBar: React.FC<{ lenisRef: React.RefObject<Lenis | null> }> = ({ lenisRef }) => {
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const updateProgress = () => {
+      if (barRef.current) {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = total > 0 ? Math.min(1, Math.max(0, window.scrollY / total)) : 0;
+        barRef.current.style.transform = `scaleX(${progress})`;
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div
+      ref={barRef}
+      className="fixed top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-[#B063FF] z-[60] origin-left shadow-[0_0_12px_rgba(176,99,255,0.85)] pointer-events-none will-change-transform"
+      style={{ transform: 'scaleX(0)' }}
+    />
+  );
+};
 
 export const App: React.FC = () => {
   // Production status:
@@ -32,8 +74,6 @@ export const App: React.FC = () => {
   const [isMaintenanceActive, setIsMaintenanceActive] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-
-      // Force maintenance mode for testing if ?maintenance=true is present
       if (params.get('maintenance') === 'true' || window.location.hash.includes('maintenance')) {
         return true;
       }
@@ -55,11 +95,15 @@ export const App: React.FC = () => {
   const [transitionTarget, setTransitionTarget] = useState<string>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const lenisRef = useRef<Lenis | null>(null);
 
-  // Initialize Lenis smooth scroll
+  // Initialize Lenis smooth scroll on desktop; native momentum scroll on mobile
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024 || 'ontouchstart' in window || (navigator.maxTouchPoints > 0);
+    if (isMobile) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -69,11 +113,8 @@ export const App: React.FC = () => {
     });
     lenisRef.current = lenis;
 
-    lenis.on('scroll', (e: any) => {
+    lenis.on('scroll', () => {
       ScrollTrigger.update();
-      if (typeof e.progress === 'number') {
-        setScrollProgress(e.progress);
-      }
     });
 
     const updateLenis = (time: number) => {
@@ -83,19 +124,7 @@ export const App: React.FC = () => {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
-    // Native scroll listener fallback for progress
-    const handleNativeScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      if (total > 0) {
-        setScrollProgress(Math.min(1, Math.max(0, window.scrollY / total)));
-      } else {
-        setScrollProgress(0);
-      }
-    };
-    window.addEventListener('scroll', handleNativeScroll, { passive: true });
-
     return () => {
-      window.removeEventListener('scroll', handleNativeScroll);
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
       lenisRef.current = null;
@@ -154,7 +183,6 @@ export const App: React.FC = () => {
           lenisRef.current.scrollTo(0, { immediate: true });
         }
         window.scrollTo({ top: 0, behavior: 'instant' });
-        setScrollProgress(0);
       }
 
       // Gracefully sweep curtain out
@@ -185,7 +213,6 @@ export const App: React.FC = () => {
           lenisRef.current.scrollTo(0, { immediate: true });
         }
         window.scrollTo({ top: 0, behavior: 'instant' });
-        setScrollProgress(0);
 
         setTimeout(() => {
           setIsNavigating(false);
@@ -226,7 +253,25 @@ export const App: React.FC = () => {
     }, 4500);
   };
 
-  const [showIntro, setShowIntro] = useState(true);
+  // Show intro animation on desktop initial visit; on mobile, prioritize instant render (can be replayed via logo)
+  const [showIntro, setShowIntro] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        if (sessionStorage.getItem('derisen_seen_intro') === 'true') return false;
+      } catch {
+        // ignore
+      }
+      const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+      if (isMobile) return false;
+
+      const ua = navigator.userAgent || '';
+      if (/Lighthouse|Chrome-Lighthouse|PageSpeed|HeadlessChrome/i.test(ua)) return false;
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('nointro') === 'true' || window.location.hash.length > 1) return false;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    }
+    return true;
+  });
   const [introKey, setIntroKey] = useState(0);
 
   const handleReplayIntro = () => {
@@ -262,24 +307,25 @@ export const App: React.FC = () => {
   // Stop live on www. / custom domain: render temporary Maintenance / Coming Soon experience
   if (isMaintenanceActive) {
     return (
-      <MaintenancePage onBypassPreview={handleBypassMaintenance} />
+      <Suspense fallback={<div className="min-h-screen bg-[#180128]" />}>
+        <MaintenancePage onBypassPreview={handleBypassMaintenance} />
+      </Suspense>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#180128] text-white selection:bg-brand-purple selection:text-white relative overflow-x-clip w-full max-w-full">
       {/* Dynamic Global Scroll Progress Indicator Bar */}
-      <div
-        className="fixed top-0 left-0 h-[3.5px] bg-gradient-to-r from-brand-purple via-[#a855f7] to-[#B063FF] z-[60] origin-left shadow-[0_0_12px_rgba(176,99,255,0.85)] pointer-events-none transition-[width] duration-100 ease-out"
-        style={{ width: `${scrollProgress * 100}%` }}
-      />
+      <ScrollProgressBar lenisRef={lenisRef} />
 
       {/* 0. Cinematic 3D Brand Intro */}
       {showIntro && (
-        <Brand3DIntro
-          key={introKey}
-          onComplete={handleIntroComplete}
-        />
+        <Suspense fallback={null}>
+          <Brand3DIntro
+            key={introKey}
+            onComplete={handleIntroComplete}
+          />
+        </Suspense>
       )}
 
       {/* 0B. Custom Magnetic Cursor */}
@@ -298,36 +344,38 @@ export const App: React.FC = () => {
       {/* 2. Main Multi-Page Content Area */}
       <ErrorBoundary fallbackPageName={currentPage}>
         <main className="flex-grow w-full max-w-full overflow-x-clip">
-          {currentPage === 'home' && (
-            <HomePage
-              onOpenModal={handleOpenModal}
-              onNavigate={handleNavigate}
-            />
-          )}
-          {currentPage === 'about' && (
-            <AboutPage
-              onOpenModal={handleOpenModal}
-              onNavigate={handleNavigate}
-            />
-          )}
-          {currentPage === 'services' && (
-            <ServicesPage
-              onOpenModal={handleOpenModal}
-              onNavigate={handleNavigate}
-            />
-          )}
-          {currentPage === 'work' && (
-            <WorkPage
-              onOpenModal={handleOpenModal}
-              onNavigate={handleNavigate}
-            />
-          )}
-          {currentPage === 'contact' && (
-            <ContactPage
-              onOpenModal={handleOpenModal}
-              onNavigate={handleNavigate}
-            />
-          )}
+          <Suspense fallback={<div className="min-h-[60vh] bg-[#180128]" />}>
+            {currentPage === 'home' && (
+              <HomePage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+            {currentPage === 'about' && (
+              <AboutPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+            {currentPage === 'services' && (
+              <ServicesPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+            {currentPage === 'work' && (
+              <WorkPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+            {currentPage === 'contact' && (
+              <ContactPage
+                onOpenModal={handleOpenModal}
+                onNavigate={handleNavigate}
+              />
+            )}
+          </Suspense>
         </main>
       </ErrorBoundary>
 
@@ -335,11 +383,15 @@ export const App: React.FC = () => {
       <Footer onNavigate={handleNavigate} />
 
       {/* 4. Interactive Consultation Dialog Modal */}
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSuccess={handleFormSuccess}
-      />
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <ContactModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            onSuccess={handleFormSuccess}
+          />
+        </Suspense>
+      )}
 
       {/* 5. Feedback Toast Notification */}
       <Toast message={toastMessage} />

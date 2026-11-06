@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { PenTool, Tag, Megaphone, Code, LucideIcon } from 'lucide-react';
 import { OperatingModelService } from '../utils/types';
 
@@ -16,10 +16,10 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const serviceImageMap: Record<string, string> = {
-  'creative-design': '/assets/service-creative-design.jpg',
-  'branding': '/assets/service-branding.jpg',
-  'digital-marketing': '/assets/service-marketing.jpg',
-  'it-solutions': '/assets/service-it-solutions-poster.jpg',
+  'creative-design': '/assets/service-creative-design.webp',
+  'branding': '/assets/service-branding.webp',
+  'digital-marketing': '/assets/service-marketing.webp',
+  'it-solutions': '/assets/service-it-solutions-poster.webp',
 };
 
 const serviceVideoMap: Record<string, string> = {
@@ -31,15 +31,31 @@ const serviceVideoMap: Record<string, string> = {
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isRevealed }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const IconComponent = iconMap[service.iconName] || PenTool;
   const numString = `0${index + 1}`;
   const imageSrc = serviceImageMap[service.id];
   const videoSrc = serviceVideoMap[service.id];
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={{
         transitionDelay: `${index * 120}ms`,
       }}
@@ -64,12 +80,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, isReve
           <div className="relative w-full h-full overflow-hidden">
             {videoSrc ? (
               <video
+                ref={videoRef}
                 src={videoSrc}
                 poster={imageSrc}
-                autoPlay
                 loop
                 muted
                 playsInline
+                preload="none"
                 className={`w-full h-full object-cover object-center ${
                   isHovered ? 'scale-110' : 'scale-100'
                 } transition-transform duration-700 ease-out filter brightness-[1.05] contrast-[1.05]`}

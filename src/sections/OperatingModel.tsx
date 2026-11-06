@@ -15,10 +15,10 @@ const serviceIconMap: Record<string, any> = {
 };
 
 const serviceImageMap: Record<string, string> = {
-  'creative-design': '/assets/service-creative-design.jpg',
-  'branding': '/assets/service-branding.jpg',
-  'digital-marketing': '/assets/service-marketing.jpg',
-  'it-solutions': '/assets/service-it-solutions-poster.jpg',
+  'creative-design': '/assets/service-creative-design.webp',
+  'branding': '/assets/service-branding.webp',
+  'digital-marketing': '/assets/service-marketing.webp',
+  'it-solutions': '/assets/service-it-solutions-poster.webp',
 };
 
 const serviceVideoMap: Record<string, string> = {
@@ -257,8 +257,11 @@ export const OperatingModel: React.FC = () => {
                           />
                         ) : (
                           <img
-                            src={imageSrc}
+                            src={imageSrc.replace(/\.(jpe?g|png)$/, '.webp')}
                             alt={service.title}
+                            width="480"
+                            height="320"
+                            decoding="async"
                             className="card-parallax-image w-full h-full object-cover will-change-transform pointer-events-none"
                             loading="lazy"
                           />
@@ -400,8 +403,11 @@ export const OperatingModel: React.FC = () => {
                     />
                   ) : (
                     <img
-                      src={imageSrc}
+                      src={imageSrc.replace(/\.(jpe?g|png)$/, '.webp')}
                       alt={service.title}
+                      width="480"
+                      height="320"
+                      decoding="async"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />

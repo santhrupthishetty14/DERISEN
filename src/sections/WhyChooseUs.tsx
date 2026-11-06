@@ -99,33 +99,35 @@ export const WhyChooseUs: React.FC = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // ─── Set initial hidden states (no layout shift) ─────────────────────
-      gsap.set(
-        [headingLine1Ref.current, headingLine2Ref.current, headingLine3Ref.current],
-        { y: 48, opacity: 0 }
-      );
-      gsap.set(subtitleRef.current, { y: 24, opacity: 0 });
-      gsap.set(iconRefs.current.filter(Boolean), { scale: 0.8, opacity: 0 });
-      gsap.set(headingItemRefs.current.filter(Boolean), { y: 15, opacity: 0 });
-      gsap.set(descRefs.current.filter(Boolean), { opacity: 0 });
-      gsap.set(accentRefs.current.filter(Boolean), { scaleX: 0, transformOrigin: 'left center' });
+    let ctx: gsap.Context;
+    const timeoutId = setTimeout(() => {
+      ctx = gsap.context(() => {
+        // ─── Set initial hidden states (no layout shift) ─────────────────────
+        gsap.set(
+          [headingLine1Ref.current, headingLine2Ref.current, headingLine3Ref.current],
+          { y: 48, opacity: 0 }
+        );
+        gsap.set(subtitleRef.current, { y: 24, opacity: 0 });
+        gsap.set(iconRefs.current.filter(Boolean), { scale: 0.8, opacity: 0 });
+        gsap.set(headingItemRefs.current.filter(Boolean), { y: 15, opacity: 0 });
+        gsap.set(descRefs.current.filter(Boolean), { opacity: 0 });
+        gsap.set(accentRefs.current.filter(Boolean), { scaleX: 0, transformOrigin: 'left center' });
 
-      // ─── Section heading reveal ──────────────────────────────────────────
-      const headingTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top 82%',
-          once: true,
-        },
-        defaults: { ease: 'power4.out' },
-      });
+        // ─── Section heading reveal ──────────────────────────────────────────
+        const headingTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 82%',
+            once: true,
+          },
+          defaults: { ease: 'power4.out' },
+        });
 
-      headingTl
-        .to(headingLine1Ref.current, { y: 0, opacity: 1, duration: 0.8 }, 0)
-        .to(headingLine2Ref.current, { y: 0, opacity: 1, duration: 0.8 }, 0.14)
-        .to(headingLine3Ref.current, { y: 0, opacity: 1, duration: 0.85 }, 0.28)
-        .to(subtitleRef.current, { y: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, 0.46);
+        headingTl
+          .to(headingLine1Ref.current, { y: 0, opacity: 1, duration: 0.8 }, 0)
+          .to(headingLine2Ref.current, { y: 0, opacity: 1, duration: 0.8 }, 0.14)
+          .to(headingLine3Ref.current, { y: 0, opacity: 1, duration: 0.85 }, 0.28)
+          .to(subtitleRef.current, { y: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, 0.46);
 
       // ─── Feature cards: Staggered icon → heading → desc sequence ────────
       ScrollTrigger.create({
@@ -183,8 +185,12 @@ export const WhyChooseUs: React.FC = () => {
         },
       });
     }, sectionRef);
+    }, 100);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(timeoutId);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

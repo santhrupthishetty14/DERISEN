@@ -123,9 +123,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
             const drawX = Math.round((canvas.width - drawW) / 2);
             const drawY = Math.round((canvas.height - drawH) / 2);
 
-            ctx.filter = "contrast(1.18) brightness(1.09)";
             ctx.drawImage(video, drawX, drawY, drawW, drawH);
-            ctx.filter = "none";
           }
         }
       }
@@ -212,6 +210,7 @@ export const Brand3DIntro: React.FC<Brand3DIntroProps> = ({ onComplete }) => {
           height: "100%",
           display: "block",
           backgroundColor: "#FFFFFF",
+          filter: "contrast(1.18) brightness(1.09)",
         }}
       />
 
